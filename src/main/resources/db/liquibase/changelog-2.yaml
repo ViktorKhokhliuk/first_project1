@@ -1,0 +1,22 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2
+      author: Mykola_Hordieiev
+      changes:
+        - createTable:
+            tableName: client
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  constraints:
+                    primaryKey:  true
+                    nullable:  false
+
+        - addForeignKeyConstraint:
+            baseColumnNames: id
+            baseTableName: client
+            constraintName: fk_user_id
+            onDelete: CASCADE
+            referencedColumnNames: id
+            referencedTableName: user

@@ -1,0 +1,9 @@
+jdbc_url: jdbc:mysql://localhost:3306/tax_office?createDatabaseIfNotExist=true
+user_name: root
+password: root
+change_log_file: /db/liquibase/changelog-master.yaml
+servlet_name: baseServlet
+servlet_url_pattern: /service/*
+tomcat_port: 8080
+context_path: /tax-office
+base_dir: temp

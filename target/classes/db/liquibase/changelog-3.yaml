@@ -1,0 +1,30 @@
+databaseChangeLog:
+  - changeSet:
+      id: 3
+      author: Mykola_Hordieiev
+      changes:
+        - createTable:
+            tableName: report
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey:  true
+                    nullable:  false
+              - column:
+                  name: description
+                  type: VARCHAR(200)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: client_id
+                  type: BIGINT
+
+        - addForeignKeyConstraint:
+            baseColumnNames: client_id
+            baseTableName: report
+            constraintName: fk_client_id
+            referencedColumnNames: id
+            referencedTableName: client
