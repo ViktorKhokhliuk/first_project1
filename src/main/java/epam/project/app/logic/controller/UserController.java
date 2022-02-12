@@ -2,6 +2,7 @@ package epam.project.app.logic.controller;
 
 import epam.project.app.logic.entity.dto.UserDTO;
 import epam.project.app.logic.entity.user.User;
+import epam.project.app.logic.entity.user.UserRole;
 import epam.project.app.logic.service.UserService;
 import epam.project.app.infra.web.ModelAndView;
 import epam.project.app.infra.web.QueryParameterResolver;
@@ -20,7 +21,11 @@ public class UserController {
         User userByLogin = userService.getUserByLogin(userDTO);
 
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setView("/user/welcome.jsp");
+        if (userByLogin.getUserRole().toString().equals(UserRole.INSPECTOR.toString())) {
+            modelAndView.setView("/inspector/homePage.jsp");
+        } else {
+            modelAndView.setView("/client/homePage.jsp");
+        }
         modelAndView.setRedirect(true);
         HttpSession session = req.getSession(true);
         session.setAttribute("user", userByLogin);

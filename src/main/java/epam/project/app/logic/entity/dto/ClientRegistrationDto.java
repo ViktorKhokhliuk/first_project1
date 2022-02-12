@@ -5,11 +5,18 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
-public class UserDTO {
+public class ClientRegistrationDto {
     @Getter
     private String login;
     @Getter
     private String password;
     @Getter
-    private UserRole userRole;
+    private String name;
+    @Getter
+    private String surname;
+    @Getter
+    private String itn;
+    @Getter
+    private UserRole userRole = UserRole.CLIENT;
+
 }

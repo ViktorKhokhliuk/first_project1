@@ -14,13 +14,34 @@ databaseChangeLog:
                     primaryKey:  true
                     nullable:  false
               - column:
-                  name: description
+                  name: name
+                  type: VARCHAR(200)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: path
+                  type: VARCHAR(200)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: status
+                  type: VARCHAR(200)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: type
+                  type: VARCHAR(200)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: date
                   type: VARCHAR(200)
                   constraints:
                     nullable: false
               - column:
                   name: client_id
                   type: BIGINT
+
 
         - addForeignKeyConstraint:
             baseColumnNames: client_id

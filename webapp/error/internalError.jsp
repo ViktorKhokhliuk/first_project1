@@ -9,5 +9,8 @@
          <jsp:text>
             error: ${message}
          </jsp:text>
+         <form action = "/tax-office/index.jsp">
+         <input type = "submit" value = "login" />
+         </form>
     </body>
 </html>

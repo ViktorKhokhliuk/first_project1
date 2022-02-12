@@ -28,7 +28,7 @@ public class ConfigServer {
         servlets.entrySet().stream()
                 .iterator()
                 .forEachRemaining(entry -> registerServlet(context, entry));
-
+        context.setAllowCasualMultipartParsing(true);
         return server;
     }
 

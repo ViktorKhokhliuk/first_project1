@@ -9,7 +9,7 @@
          <jsp:text>
             Welcome: ${user.login}
          </jsp:text>
-          <form accept-charset="UTF-8" method="GET" action="/tax-office/service/logout">
+          <form accept-charset="UTF-8" method="POST" action="/tax-office/service/logout">
             <input type="submit" value='Logout'>
           </form>
     </body>

@@ -1,7 +1,7 @@
 databaseChangeLog:
   - changeSet:
       id: 2
-      author: Mykola_Hordieiev
+      author: Viktor_Khokhliuk
       changes:
         - createTable:
             tableName: client
@@ -12,7 +12,21 @@ databaseChangeLog:
                   constraints:
                     primaryKey:  true
                     nullable:  false
-
+              - column:
+                  name: name
+                  type: VARCHAR(60)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: surname
+                  type: VARCHAR(60)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: itn
+                  type: VARCHAR(60)
+                  constraints:
+                    nullable: false
         - addForeignKeyConstraint:
             baseColumnNames: id
             baseTableName: client

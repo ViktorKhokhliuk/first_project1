@@ -1,7 +1,7 @@
 databaseChangeLog:
   - changeSet:
       id: 4
-      author: Mykola_Hordieiev
+      author: Viktor_Khokhliuk
       changes:
         - insert:
             columns:
