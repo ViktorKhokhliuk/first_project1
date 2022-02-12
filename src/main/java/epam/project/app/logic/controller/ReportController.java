@@ -21,7 +21,7 @@ public class ReportController {
 
     public ModelAndView updateStatusOfReport(HttpServletRequest request) {
         ReportUpdateDto reportUpdateDto = queryParameterResolver.getObject(request, ReportUpdateDto.class);
-        Report updatedReport = reportService.updateStatusOfReport(reportUpdateDto);
+        reportService.updateStatusOfReport(reportUpdateDto);
         List<Report> reports = reportService.getAllReportsByClientId(reportUpdateDto.getClientId());
         ModelAndView modelAndView = new ModelAndView();
 //        modelAndView.setRedirect(true);
@@ -64,21 +64,29 @@ public class ReportController {
     }
 
     public ModelAndView getReportsByFilterParameters(HttpServletRequest request) {
+        User user = (User) request.getSession().getAttribute("user");
         Map<String, String> parameters = new HashMap<>();
         Enumeration<String> parameterNames = request.getParameterNames();
         while (parameterNames.hasMoreElements()) {
             String parameterName = parameterNames.nextElement();
             String parameter = request.getParameter(parameterName);
-            if (!parameter.equals("")) {
+            if (!parameter.equals("")&&!parameterName.equals("clientLogin")) {
                 parameters.put(parameterName, parameter);
             }
         }
         List<Report> reports = reportService.getReportsByFilterParameters(parameters);
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setView("/client/reports.jsp");
+        if (user.getUserRole().equals(UserRole.CLIENT)) {
+            modelAndView.setView("/client/reports.jsp");
+        } else {
+            String clientLogin = request.getParameter("clientLogin");
+            Long clientId = Long.parseLong(request.getParameter("client_id"));
+            modelAndView.setView("/inspector/reportsByClientId.jsp");
+            modelAndView.addAttribute("clientLogin", clientLogin);
+            modelAndView.addAttribute("clientId", clientId);
+        }
         modelAndView.addAttribute("reports", reports);
         return modelAndView;
     }
-
-
 }
+

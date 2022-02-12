@@ -4,9 +4,7 @@ import epam.project.app.infra.web.exception.AppException;
 import epam.project.app.logic.entity.report.Report;
 import epam.project.app.logic.entity.dto.ReportCreateDto;
 import epam.project.app.logic.entity.dto.ReportUpdateDto;
-import epam.project.app.logic.entity.user.Filter;
 import epam.project.app.logic.repository.ReportRepository;
-import liquibase.pro.packaged.S;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;

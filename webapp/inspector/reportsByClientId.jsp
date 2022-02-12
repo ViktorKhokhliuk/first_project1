@@ -70,3 +70,31 @@
 			</table>
 		</div>
 	</div>
+	<form action = "/tax-office/service/filterReports"  method="GET">
+                             <label for="name">Choose a date:</label><br>
+                             <input type="date" name="date"
+                              min="01-01-2010" max="12-31-2100"/><br><br>
+                              <label for="name">Choose a status:</label><br>
+                              <p><select  multiple name="status">
+                              <option value="SUBMITTED">SUBMITTED</option>
+                              <option value="ACCEPTED">ACCEPTED</option>
+                              <option value="UNACCEPTED">UNACCEPTED</option>
+                              </select></p>
+                              <label for="name">Choose a type:</label><br>
+                              <p><select size="3" multiple name="type">
+                              <option value="income statement">income statement</option>
+                              <option value="income tax">income tax</option>
+                              <option value="single tax">single tax</option>
+                              </select></p>
+                             <input type="hidden" name="client_id" value="${clientId}"/>
+                             <input type="hidden" name="clientLogin" value="${clientLogin}"/>
+                             <input type = "submit" value = "filter" />
+        </form>
+
+        <form action = "/tax-office/service/getAllReportsByClientId"  method="GET">
+                          <input type="hidden" name="clientId" value="${clientId}"/>
+                          <input type="hidden" name="clientLogin" value="${clientLogin}"/>
+                          <input type = "submit" value = "all reports" />
+        </form>
+    </body>
+    </html>

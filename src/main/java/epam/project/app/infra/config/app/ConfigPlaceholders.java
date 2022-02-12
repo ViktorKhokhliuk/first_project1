@@ -27,6 +27,7 @@ public class ConfigPlaceholders {
         ClientController clientController = createClientController(dataSource, queryParameterResolver);
         ReportController reportController = createReportController(dataSource, queryParameterResolver);
         ReportUploaderController reportUploaderController = createReportUploaderController(dataSource);
+
         placeholders.add(new Placeholder("POST", "login", userController::login));
         placeholders.add(new Placeholder("POST", "logout", userController::logout));
         placeholders.add(new Placeholder("POST", "registration", clientController::registration));

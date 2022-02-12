@@ -4,7 +4,6 @@ import epam.project.app.logic.entity.report.Report;
 import epam.project.app.logic.entity.report.ReportStatus;
 import epam.project.app.logic.entity.dto.ReportCreateDto;
 import epam.project.app.logic.entity.dto.ReportUpdateDto;
-import epam.project.app.logic.entity.user.Filter;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 
@@ -18,11 +17,8 @@ import java.util.Date;
 public class ReportRepository {
     private final DataSource dataSource;
     private static final String INSERT_REPORT = "INSERT INTO report (name, path, client_id, status, date, type) VALUES (?,?,?,?,?,?);";
-    private static final String UPDATE_STATUS_OF_REPORT = "update report set status = ?, date = ? where id = ?;";
+    private static final String UPDATE_STATUS_OF_REPORT = "update report set status = ? where id = ?;";
     private static final String SELECT_REPORT_BY_CLIENT_ID = "select * from report where client_id = ?;";
-    private static final String SELECT_REPORT_BY_DATE = "select * from report where client_id = ? and date = ?;";
-    private static final String SELECT_REPORT_BY_STATUS = "select * from report where client_id = ? and status = ?;";
-    private static final String SELECT_REPORT_BY_TYPE = "select * from report where client_id = ? and type = ?;";
     private static final String SELECT_REPORT_BY_ID = "select * from report where id = ?;";
     private static final String DELETE_REPORT_BY_ID = "delete from report where id = ?;";
     private static final String DATE = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
@@ -87,8 +83,7 @@ public class ReportRepository {
         try (Connection connection = dataSource.getConnection();
              PreparedStatement ps = connection.prepareStatement(UPDATE_STATUS_OF_REPORT)) {
             ps.setString(1, dto.getStatus());
-            ps.setString(2, DATE);
-            ps.setLong(3, dto.getId());
+            ps.setLong(2, dto.getId());
             ps.executeUpdate();
             updatedReport.setId(dto.getId());
             updatedReport.setStatus(dto.getStatus());
