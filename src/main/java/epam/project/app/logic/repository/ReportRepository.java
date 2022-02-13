@@ -40,8 +40,8 @@ public class ReportRepository {
         String sql = stringBuffer.toString();
         List<Report> reports = new ArrayList<>();
         try (Connection connection = dataSource.getConnection();
-             Statement statement = connection.createStatement()) {
-            ResultSet resultSet = statement.executeQuery(sql);
+             Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql)) {
             while (resultSet.next()) {
                 long id = resultSet.getLong("id");
                 String name = resultSet.getString("name");
@@ -78,19 +78,17 @@ public class ReportRepository {
         }
     }
 
+    @SneakyThrows
     public Optional<Report> updateStatusOfReport(ReportUpdateDto dto) {
-        Report updatedReport = new Report();
+        Report updatedReport = getReportById(dto.getId()).get();
         try (Connection connection = dataSource.getConnection();
-             PreparedStatement ps = connection.prepareStatement(UPDATE_STATUS_OF_REPORT)) {
-            ps.setString(1, dto.getStatus());
-            ps.setLong(2, dto.getId());
-            ps.executeUpdate();
-            updatedReport.setId(dto.getId());
-            updatedReport.setStatus(dto.getStatus());
-            return Optional.of(updatedReport);
-
-        } catch (SQLException e) {
-            e.printStackTrace();
+             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_STATUS_OF_REPORT)) {
+            preparedStatement.setString(1, dto.getStatus());
+            preparedStatement.setLong(2, dto.getId());
+            if(preparedStatement.executeUpdate()>0) {
+                updatedReport.setStatus(dto.getStatus());
+                return Optional.of(updatedReport);
+            }
         }
         return Optional.empty();
     }
@@ -101,16 +99,17 @@ public class ReportRepository {
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(SELECT_REPORT_BY_ID)) {
             preparedStatement.setLong(1, id);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
-                report.setId(id);
-                report.setName(resultSet.getString("name"));
-                report.setPath(resultSet.getString("path"));
-                report.setStatus(resultSet.getString("status"));
-                report.setDate(resultSet.getString("date"));
-                report.setType(resultSet.getString("type"));
-                report.setClientId(resultSet.getLong("client_id"));
-                return Optional.of(report);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    report.setId(id);
+                    report.setName(resultSet.getString("name"));
+                    report.setPath(resultSet.getString("path"));
+                    report.setStatus(resultSet.getString("status"));
+                    report.setDate(resultSet.getString("date"));
+                    report.setType(resultSet.getString("type"));
+                    report.setClientId(resultSet.getLong("client_id"));
+                    return Optional.of(report);
+                }
             }
             return Optional.empty();
         }
@@ -122,15 +121,16 @@ public class ReportRepository {
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(SELECT_REPORT_BY_CLIENT_ID)) {
             preparedStatement.setLong(1, clientId);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                long id = resultSet.getLong("id");
-                String name = resultSet.getString("name");
-                String path = resultSet.getString("path");
-                String status = resultSet.getString("status");
-                String date = resultSet.getString("date");
-                String type = resultSet.getString("type");
-                reports.add(new Report(id, name, path, status, date, type, clientId));
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    long id = resultSet.getLong("id");
+                    String name = resultSet.getString("name");
+                    String path = resultSet.getString("path");
+                    String status = resultSet.getString("status");
+                    String date = resultSet.getString("date");
+                    String type = resultSet.getString("type");
+                    reports.add(new Report(id, name, path, status, date, type, clientId));
+                }
             }
             return reports;
         }

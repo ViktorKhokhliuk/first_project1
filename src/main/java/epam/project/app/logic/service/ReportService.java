@@ -41,4 +41,5 @@ public class ReportService {
     public List<Report> getReportsByFilterParameters(Map<String, String> parameters) {
         return reportRepository.getReportsByParameter(parameters);
     }
+
 }

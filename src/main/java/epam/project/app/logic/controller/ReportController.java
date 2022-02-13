@@ -21,14 +21,10 @@ public class ReportController {
 
     public ModelAndView updateStatusOfReport(HttpServletRequest request) {
         ReportUpdateDto reportUpdateDto = queryParameterResolver.getObject(request, ReportUpdateDto.class);
-        reportService.updateStatusOfReport(reportUpdateDto);
-        List<Report> reports = reportService.getAllReportsByClientId(reportUpdateDto.getClientId());
+        reportService.updateStatusOfReport(reportUpdateDto);;
         ModelAndView modelAndView = new ModelAndView();
-//        modelAndView.setRedirect(true);
-        modelAndView.setView("/inspector/reportsByClientId.jsp");
-        modelAndView.addAttribute("reports", reports);
-        modelAndView.addAttribute("clientId", reportUpdateDto.getClientId());
-        modelAndView.addAttribute("clientLogin", reportUpdateDto.getClientLogin());
+        modelAndView.setRedirect(true);
+        modelAndView.setView("/service/getAllReportsByClientId?clientId="+reportUpdateDto.getClientId()+"&clientLogin="+reportUpdateDto.getClientLogin());
         return modelAndView;
     }
 
@@ -36,13 +32,9 @@ public class ReportController {
         Long reportId = Long.parseLong(request.getParameter("id"));
         reportService.deleteReportById(reportId);
         Long clientId = Long.parseLong(request.getParameter("clientId"));
-        List<Report> reports = reportService.getAllReportsByClientId(clientId);
         ModelAndView modelAndView = new ModelAndView();
-//        modelAndView.setRedirect(true);
-        modelAndView.setView("/inspector/reportsByClientId.jsp");
-        modelAndView.addAttribute("reports", reports);
-        modelAndView.addAttribute("clientId",clientId);
-        modelAndView.addAttribute("clientLogin",request.getParameter("clientLogin"));
+        modelAndView.setRedirect(true);
+        modelAndView.setView("/service/getAllReportsByClientId?clientId="+clientId+"&clientLogin="+request.getParameter("clientLogin"));
         return modelAndView;
     }
 
@@ -86,6 +78,16 @@ public class ReportController {
             modelAndView.addAttribute("clientId", clientId);
         }
         modelAndView.addAttribute("reports", reports);
+        return modelAndView;
+    }
+
+    public ModelAndView showReport(HttpServletRequest request) {
+        long clientId = Long.parseLong(request.getParameter("clientId"));
+        String name = request.getParameter("name");
+        String path = "/upload/id"+clientId+"/"+name;
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setView(path);
+        modelAndView.setRedirect(true);
         return modelAndView;
     }
 }

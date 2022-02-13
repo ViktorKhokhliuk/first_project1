@@ -2,6 +2,7 @@ package epam.project.app.logic.controller;
 
 import epam.project.app.infra.web.ModelAndView;
 import epam.project.app.infra.web.exception.AppException;
+import epam.project.app.logic.entity.report.Report;
 import epam.project.app.logic.entity.user.User;
 import epam.project.app.logic.service.ReportService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -13,6 +14,7 @@ import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.Level;
 
 import java.io.File;
+import java.util.List;
 
 @Log4j2
 @RequiredArgsConstructor
@@ -42,7 +44,10 @@ public class ReportUploaderController {
         String type = request.getParameter("type");
         log.log(Level.INFO, "File " + fileName + " has uploaded successfully!");
         reportService.uploadReport(fileName, uploadPath, userFromSession.getId(), type);
-        return ModelAndView.withView("/client/homePage.jsp");
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setRedirect(true);
+        modelAndView.setView("/service/getAllReportsByClientId?clientId="+userFromSession.getId());
+        return modelAndView;
     }
 
     private User getUserFromSession(HttpSession session) {

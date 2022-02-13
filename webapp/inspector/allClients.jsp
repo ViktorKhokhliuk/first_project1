@@ -15,7 +15,7 @@
 			style="background-color: black">
 			<div>
 				<a> <form accept-charset="UTF-8" method="POST" action="/tax-office/service/logout">
-                <input type="submit" value='Logout'>
+                <button type="submit" class="btn btn-primary">Logout</button>
                 </form></a>
 			</div>
 		</nav>
@@ -51,7 +51,7 @@
 							<td><c:out value="${client.itn}" /></td>
 							<td><a><form action="/tax-office/service/deleteClientById" method="POST">
                                    <input type="hidden" name="clientId" value="${client.id}"/>
-                                   <input type="submit" value='delete'></form></a>
+                                   <button type="submit" class="btn-outline-dark">Delete</button>
 							    <a href="getAllReportsByClientId?clientId=<c:out value='${client.id}'/>&clientLogin=<c:out value='${client.login}'/>">Reports</a></td>
 						</tr>
 					</c:forEach>
