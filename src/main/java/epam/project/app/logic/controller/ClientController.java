@@ -34,7 +34,7 @@ public class ClientController {
 
     public ModelAndView deleteClientById(HttpServletRequest request) {
         Long clientId = Long.parseLong(request.getParameter("clientId"));
-        Client client = clientService.deleteClientById(clientId);
+        clientService.deleteClientById(clientId);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setRedirect(true);
         modelAndView.setView("/service/getAllClients");

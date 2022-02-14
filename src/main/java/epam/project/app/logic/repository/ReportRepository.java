@@ -21,6 +21,7 @@ public class ReportRepository {
     private static final String SELECT_REPORT_BY_CLIENT_ID = "select * from report where client_id = ?;";
     private static final String SELECT_REPORT_BY_ID = "select * from report where id = ?;";
     private static final String DELETE_REPORT_BY_ID = "delete from report where id = ?;";
+    private static final String SELECT_ALL_REPORTS = "select * from report;";
     private static final String DATE = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 
     @SneakyThrows
@@ -124,6 +125,27 @@ public class ReportRepository {
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
                     long id = resultSet.getLong("id");
+                    String name = resultSet.getString("name");
+                    String path = resultSet.getString("path");
+                    String status = resultSet.getString("status");
+                    String date = resultSet.getString("date");
+                    String type = resultSet.getString("type");
+                    reports.add(new Report(id, name, path, status, date, type, clientId));
+                }
+            }
+            return reports;
+        }
+    }
+
+    @SneakyThrows
+    public List<Report> getAllReports() {
+        List<Report> reports = new ArrayList<>();
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_REPORTS)) {
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    long id = resultSet.getLong("id");
+                    long clientId = resultSet.getLong("client_id");
                     String name = resultSet.getString("name");
                     String path = resultSet.getString("path");
                     String status = resultSet.getString("status");

@@ -35,8 +35,10 @@ public class ConfigPlaceholders {
         placeholders.add(new Placeholder("POST", "updateStatusOfReport", reportController::updateStatusOfReport));
         placeholders.add(new Placeholder("POST", "deleteReportById", reportController::deleteReportById));
         placeholders.add(new Placeholder("POST", "deleteClientById", clientController::deleteClientById));
+        placeholders.add(new Placeholder("GET", "toHome", userController::toHome));
         placeholders.add(new Placeholder("GET", "getAllReportsByClientId", reportController::getAllReportsByClientId));
         placeholders.add(new Placeholder("GET", "getAllClients", clientController::getAllClients));
+        placeholders.add(new Placeholder("GET", "getAllReports", reportController::getAllReports));
         placeholders.add(new Placeholder("GET", "filterReports", reportController::getReportsByFilterParameters));
         placeholders.add(new Placeholder("GET", "showReport", reportController::showReport));
         return placeholders;

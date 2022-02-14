@@ -14,7 +14,7 @@
 </head>
 <body>
  <div class="container">
-  <h1>Authorization:</h1>
+  <h1>Please sign in:</h1>
   <div class="card">
    <div class="card-body">
     <form accept-charset="UTF-8" method="POST" action="/tax-office/service/login">

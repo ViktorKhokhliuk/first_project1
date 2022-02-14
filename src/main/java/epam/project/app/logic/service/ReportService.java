@@ -5,8 +5,11 @@ import epam.project.app.logic.entity.report.Report;
 import epam.project.app.logic.entity.dto.ReportCreateDto;
 import epam.project.app.logic.entity.dto.ReportUpdateDto;
 import epam.project.app.logic.repository.ReportRepository;
+import liquibase.pro.packaged.L;
 import lombok.RequiredArgsConstructor;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
@@ -24,10 +27,15 @@ public class ReportService {
 
     public List<Report> getAllReportsByClientId(Long clientId) {
         List<Report> reports = reportRepository.getAllReportsByClientId(clientId);
+        reports.sort((o1, o2) -> o2.getDate().compareTo(o1.getDate()));
         if (reports.isEmpty()) {
             throw new AppException("cannot found reports");
         }
         return reports;
+    }
+
+    public List<Report> getAllReports() {
+        return reportRepository.getAllReports();
     }
 
     public Report deleteReportById(Long id) {
@@ -41,5 +49,6 @@ public class ReportService {
     public List<Report> getReportsByFilterParameters(Map<String, String> parameters) {
         return reportRepository.getReportsByParameter(parameters);
     }
+
 
 }

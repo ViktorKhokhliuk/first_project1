@@ -4,6 +4,7 @@ import epam.project.app.infra.web.ModelAndView;
 import epam.project.app.infra.web.QueryParameterResolver;
 import epam.project.app.logic.entity.report.Report;
 import epam.project.app.logic.entity.dto.ReportUpdateDto;
+import epam.project.app.logic.entity.user.Client;
 import epam.project.app.logic.entity.user.User;
 import epam.project.app.logic.entity.user.UserRole;
 import epam.project.app.logic.service.ReportService;
@@ -24,19 +25,24 @@ public class ReportController {
         reportService.updateStatusOfReport(reportUpdateDto);;
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setRedirect(true);
-        modelAndView.setView("/service/getAllReportsByClientId?clientId="+reportUpdateDto.getClientId()+"&clientLogin="+reportUpdateDto.getClientLogin());
+        modelAndView.setView("/service/filterReports?date="+reportUpdateDto.getDate()+"&status="+reportUpdateDto.getStatusFilter()
+                +"&type="+reportUpdateDto.getType()+"&clientId="+reportUpdateDto.getClientId()+"&clientLogin="+reportUpdateDto.getClientLogin());
         return modelAndView;
     }
 
     public ModelAndView deleteReportById(HttpServletRequest request) {
-        Long reportId = Long.parseLong(request.getParameter("id"));
-        reportService.deleteReportById(reportId);
-        Long clientId = Long.parseLong(request.getParameter("clientId"));
+        ReportUpdateDto reportUpdateDto = queryParameterResolver.getObject(request, ReportUpdateDto.class);
+ //       Long reportId = Long.parseLong(request.getParameter("id"));
+        reportService.deleteReportById(reportUpdateDto.getId());
+//        Long clientId = Long.parseLong(request.getParameter("clientId"));
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setRedirect(true);
-        modelAndView.setView("/service/getAllReportsByClientId?clientId="+clientId+"&clientLogin="+request.getParameter("clientLogin"));
+        modelAndView.setView("/service/filterReports?date="+reportUpdateDto.getDate()+"&status="+reportUpdateDto.getStatusFilter()
+                +"&type="+reportUpdateDto.getType()+"&clientId="+reportUpdateDto.getClientId()+"&clientLogin="+reportUpdateDto.getClientLogin());
         return modelAndView;
     }
+
+
 
     public ModelAndView getAllReportsByClientId(HttpServletRequest request) {
         User user = (User) request.getSession().getAttribute("user");
@@ -55,27 +61,44 @@ public class ReportController {
         return modelAndView;
     }
 
+    public ModelAndView getAllReports(HttpServletRequest request) {
+        List<Report> reports = reportService.getAllReports();
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setView("/inspector/allReports.jsp");
+        modelAndView.addAttribute("reports",reports);
+        return modelAndView;
+    }
+
     public ModelAndView getReportsByFilterParameters(HttpServletRequest request) {
+        ModelAndView modelAndView = new ModelAndView();
         User user = (User) request.getSession().getAttribute("user");
         Map<String, String> parameters = new HashMap<>();
         Enumeration<String> parameterNames = request.getParameterNames();
         while (parameterNames.hasMoreElements()) {
             String parameterName = parameterNames.nextElement();
             String parameter = request.getParameter(parameterName);
+            modelAndView.addAttribute(parameterName,parameter);
             if (!parameter.equals("")&&!parameterName.equals("clientLogin")) {
+                if (parameterName.equals("clientId"))
+                    parameterName = "client_id";
                 parameters.put(parameterName, parameter);
             }
         }
         List<Report> reports = reportService.getReportsByFilterParameters(parameters);
-        ModelAndView modelAndView = new ModelAndView();
         if (user.getUserRole().equals(UserRole.CLIENT)) {
             modelAndView.setView("/client/reports.jsp");
         } else {
-            String clientLogin = request.getParameter("clientLogin");
-            Long clientId = Long.parseLong(request.getParameter("client_id"));
             modelAndView.setView("/inspector/reportsByClientId.jsp");
-            modelAndView.addAttribute("clientLogin", clientLogin);
-            modelAndView.addAttribute("clientId", clientId);
+//            String clientLogin = request.getParameter("clientLogin");
+//            Long clientId = Long.parseLong(request.getParameter("client_id"));
+//            String date = request.getParameter("date");
+//            String status = request.getParameter("status");
+//            String type = request.getParameter("type");
+//            modelAndView.addAttribute("date",date);
+//            modelAndView.addAttribute("status",status);
+//            modelAndView.addAttribute("type",type);
+//            modelAndView.addAttribute("clientLogin", clientLogin);
+//            modelAndView.addAttribute("clientId", clientId);
         }
         modelAndView.addAttribute("reports", reports);
         return modelAndView;

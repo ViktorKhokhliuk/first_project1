@@ -42,4 +42,13 @@ public class UserController {
         modelAndView.setRedirect(true);
         return modelAndView;
     }
+
+    public ModelAndView toHome(HttpServletRequest request) {
+        User user = (User) request.getSession().getAttribute("user");
+        if (user.getUserRole().equals(UserRole.CLIENT)){
+          return ModelAndView.withView("/client/homePage.jsp");
+        } else {
+            return ModelAndView.withView("/inspector/homePage.jsp");
+        }
+    }
 }
