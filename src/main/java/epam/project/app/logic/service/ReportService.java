@@ -5,11 +5,8 @@ import epam.project.app.logic.entity.report.Report;
 import epam.project.app.logic.entity.dto.ReportCreateDto;
 import epam.project.app.logic.entity.dto.ReportUpdateDto;
 import epam.project.app.logic.repository.ReportRepository;
-import liquibase.pro.packaged.L;
 import lombok.RequiredArgsConstructor;
 
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
@@ -46,8 +43,8 @@ public class ReportService {
         return insertReport(new ReportCreateDto(fileName, path, clientId, type));
     }
 
-    public List<Report> getReportsByFilterParameters(Map<String, String> parameters) {
-        return reportRepository.getReportsByParameter(parameters);
+    public List<Report> getClientReportsByFilterParameters(Map<String, String> parameters) {
+        return reportRepository.getClientReportsByParameter(parameters);
     }
 
 

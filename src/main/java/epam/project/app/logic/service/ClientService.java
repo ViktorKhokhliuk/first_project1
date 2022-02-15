@@ -8,6 +8,7 @@ import liquibase.pro.packaged.L;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
+import java.util.Map;
 
 
 @RequiredArgsConstructor
@@ -32,5 +33,9 @@ public class ClientService {
 
     public Client deleteClientById(Long id) {
         return clientRepository.deleteClientById(id).orElseThrow(() -> new AppException("cannot delete client"));
+    }
+
+    public List<Client> searchClientsByParameters(Map<String, String> parameters) {
+        return clientRepository.getClientsByParameter(parameters);
     }
 }

@@ -1,6 +1,7 @@
 package epam.project.app.logic.repository;
 
 import epam.project.app.logic.entity.dto.ClientRegistrationDto;
+import epam.project.app.logic.entity.report.Report;
 import epam.project.app.logic.entity.user.Client;
 import epam.project.app.logic.exception.ClientException;
 import lombok.RequiredArgsConstructor;
@@ -8,9 +9,7 @@ import lombok.SneakyThrows;
 
 import javax.sql.DataSource;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @RequiredArgsConstructor
 public class ClientRepository {
@@ -20,6 +19,8 @@ public class ClientRepository {
     private static final String SELECT_CLIENT_BY_ID = "select * from user join client on user.id=client.id where user.id= ?;";
     private static final String SELECT_CLIENT_BY_LOGIN = "select * from user join client on user.id=client.id where user.login= ?;";
     private static final String SELECT_ALL_CLIENTS = "select * from client join user on user.id=client.id;";
+    private static final String SELECT_CLIENTS_BY_PARAMETER = "select * from client join user on user.id=client.id where client.name = ? and client.surname = ?;";
+    private static final String DELETE_REPORTS_BY_CLIENT_ID = "delete from report where client_id = ? ;";
     private static final String DELETE_CLIENT_BY_ID = "delete from client where id = ?;";
     private static final String DELETE_USER_BY_ID = "delete from user where id = ?;";
 
@@ -38,8 +39,8 @@ public class ClientRepository {
                 client.setLogin(resultSet.getString("login"));
                 return Optional.of(client);
             }
-            return Optional.empty();
         }
+        return Optional.empty();
     }
 
     @SneakyThrows
@@ -57,16 +58,16 @@ public class ClientRepository {
                 client.setItn(resultSet.getString("itn"));
                 return Optional.of(client);
             }
-            return Optional.empty();
         }
+        return Optional.empty();
     }
 
     @SneakyThrows
     public List<Client> getAllClients() {
         List<Client> clients = new ArrayList<>();
         try (Connection connection = dataSource.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_CLIENTS)) {
-            ResultSet resultSet = preparedStatement.executeQuery();
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_CLIENTS);
+            ResultSet resultSet = preparedStatement.executeQuery()) {
             while (resultSet.next()) {
                 long id = resultSet.getLong("id");
                 String login = resultSet.getString("login");
@@ -78,9 +79,44 @@ public class ClientRepository {
                 client.setLogin(login);
                 clients.add(client);
             }
-            return clients;
         }
+        return clients;
     }
+
+    @SneakyThrows
+    public List<Client> getClientsByParameter(Map<String, String> parameters) {
+        Iterator<Map.Entry<String, String>> iterator = parameters.entrySet().iterator();
+        StringBuffer stringBuffer = new StringBuffer();
+        stringBuffer.append("select * from client join user on user.id=client.id where ");
+        while (iterator.hasNext()) {
+            Map.Entry<String, String> entry = iterator.next();
+            stringBuffer.append(entry.getKey()).append(" = ").append("'").append(entry.getValue()).append("'");
+            if (iterator.hasNext()) {
+                stringBuffer.append(" and ");
+            } else {
+                stringBuffer.append(";");
+            }
+        }
+        String sql = stringBuffer.toString();
+        List<Client> clients = new ArrayList<>();
+        try (Connection connection = dataSource.getConnection();
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(sql)) {
+                while (resultSet.next()) {
+                    long id = resultSet.getLong("id");
+                    String login = resultSet.getString("login");
+                    String name = resultSet.getString("name");
+                    String surname = resultSet.getString("surname");
+                    String itn = resultSet.getString("itn");
+                    Client client = new Client(name, surname, itn);
+                    client.setId(id);
+                    client.setLogin(login);
+                    clients.add(client);
+                }
+            }
+        return clients;
+    }
+
 
     public Optional<Client> insertClient(ClientRegistrationDto dto) {
         Connection connection = null;
@@ -126,7 +162,7 @@ public class ClientRepository {
         return Optional.empty();
     }
 
-    @SneakyThrows
+
     public Optional<Client> deleteClientById(Long id) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -134,16 +170,19 @@ public class ClientRepository {
         try{
             connection = dataSource.getConnection();
             connection.setAutoCommit(false);
-            preparedStatement = connection.prepareStatement(DELETE_CLIENT_BY_ID);
-            preparedStatement.setLong(1, id);
+            preparedStatement = connection.prepareStatement(DELETE_REPORTS_BY_CLIENT_ID);
+            preparedStatement.setLong(1,id);
             if (preparedStatement.executeUpdate() > 0) {
-                try (PreparedStatement preparedStatement1 = connection.prepareStatement(DELETE_USER_BY_ID)) {
+                try (PreparedStatement preparedStatement1 = connection.prepareStatement(DELETE_CLIENT_BY_ID)) {
                     preparedStatement1.setLong(1, id);
                     if (preparedStatement1.executeUpdate() > 0) {
-                        connection.commit();
-                        return client;
-                    } else {
-                        rollback(connection);
+                        try (PreparedStatement preparedStatement2 = connection.prepareStatement(DELETE_USER_BY_ID)) {
+                            preparedStatement2.setLong(1, id);
+                            if (preparedStatement2.executeUpdate() > 0) {
+                                connection.commit();
+                                return client;
+                            }
+                        }
                     }
                 }
             }

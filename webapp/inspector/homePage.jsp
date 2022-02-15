@@ -13,8 +13,14 @@
 </head>
    <body>
 	<style>
-    .reports {
-    margin: 1em;
+    form{
+      display:inline-block;
+    }
+    .box{
+    margin-left:500px;
+    }
+    .clients {
+    margin-right:260px;
     }
     </style>
 	<header>
@@ -31,12 +37,16 @@
           Welcome, ${user.login}
       </jsp:text>
     </h1>
+    <hr>
+    </hr>
  <p>
-     <form action = "/tax-office/service/getAllClients"  method="GET" align = "center">
-        <button type="submit" class="btn btn-primary">All clients</button>
+ <div class = "box">
+     <form action = "/tax-office/service/getAllClients"  method="GET"  class = "clients">
+        <button type="submit" class="btn btn-primary btn-lg">All clients</button>
      </form>
-     <form action = "/tax-office/service/getAllReports"  method="GET" align = "center" class = "reports">
-        <button type="submit" class="btn btn-primary">All reports</button>
+     <form action = "/tax-office/service/getAllReports"  method="GET" >
+        <button type="submit" class="btn btn-primary btn-lg">All reports</button>
      </form>
+ </div>
     </body>
 </html>

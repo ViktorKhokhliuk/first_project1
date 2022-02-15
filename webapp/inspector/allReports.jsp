@@ -39,7 +39,7 @@
 		</nav>
 	</header>
  <p>
-      <form action = "/tax-office/service/filterClientReports"  method="GET" class="form-horizontal" align="center">
+      <form action = "/tax-office/service/filterAllReports"  method="GET" class="form-horizontal" align="center">
       <h3>Filter</h3>
       <div class="form-group">
          <label for="name">Choose a date:</label>
@@ -59,19 +59,15 @@
               <option value="income tax">income tax</option>
               <option value="single tax">single tax</option>
             </select>
-         <input type="hidden" name="clientId" value="${clientId}"/>
-         <input type="hidden" name="clientLogin" value="${clientLogin}"/>
          <button type="submit" class="btn btn-outline-dark">Filter</button>
       </div>
       </form>
  <p>
-        <form action = "/tax-office/service/getAllReportsByClientId"  method="GET" class = "reports">
-            <input type="hidden" name="clientId" value="${clientId}"/>
-            <input type="hidden" name="clientLogin" value="${clientLogin}"/>
+        <form action = "/tax-office/service/getAllReports"  method="GET" class = "reports">
             <button type="submit" class="btn btn-primary">All reports</button>
         </form>
     <div class="container">
-		<h3 class="text-center">List of Reports by ${clientLogin}</h3>
+		<h3 class="text-center">List of Reports</h3>
 		<hr>
 		<div class="container text-left">
 		</div>
@@ -81,6 +77,8 @@
 					<tr>
 					    <th>№</th>
 						<th>Name</th>
+						<th>Client</th>
+						<th>ITN</th>
 						<th>Status</th>
 						<th>Date</th>
 						<th>Type</th>
@@ -89,12 +87,15 @@
 				</thead>
 				<tbody>
 					<c:forEach items="${reports}" var="report">
+					<c:set var = "client" value = "${clients[report.clientId]}"/>
 						<tr>
 						    <td class="counterCell"></td>
-							<td><a href="showReport?clientId=${clientId}&name=<c:out value='${report.name}'/>"target="_blank">${report.name}</a></td>
-							<td><c:out value="${report.status}" /></td>
-							<td><c:out value="${report.date}" /></td>
-							<td><c:out value="${report.type}" /></td>
+							<td><a href="showReport?clientId=${client.id}&name=<c:out value='${report.name}'/>"target="_blank">${report.name}</a></td>
+							<td><a href="getAllReportsByClientId?clientId=${client.id}&clientLogin=<c:out value='${client.login}'/>">${client.name} ${client.surname}</td>
+							<td>${client.itn}</td>
+							<td>${report.status}</td>
+							<td>${report.date}</td>
+							<td>${report.type}</td>
 							<td> <form action="/tax-office/service/updateStatusOfReport" method="POST">
 							        <select name="status" required>
 							          <option value="">status</option>
@@ -102,8 +103,7 @@
                                       <option value="UNACCEPTED">UNACCEPTED</option>
                                     </select>
                                     <input type="hidden" name="id" value="${report.id}"/>
-                                    <input type="hidden" name="clientId" value="${clientId}"/>
-                                    <input type="hidden" name="clientLogin" value="${clientLogin}"/>
+                                    <input type="hidden" name="clientId" value="${client.id}"/>
                                     <input type="hidden" name="date" value="${date}"/>
                                     <input type="hidden" name="statusFilter" value="${status}"/>
                                     <input type="hidden" name="type" value="${type}"/>
@@ -111,15 +111,14 @@
                                   </form>
                                   <form action="/tax-office/service/deleteReportById" method="POST" onSubmit='return confirm("Are you sure?");'>
                                       <input type="hidden" name="id" value="${report.id}"/>
-                                      <input type="hidden" name="clientId" value="${clientId}"/>
-                                      <input type="hidden" name="clientLogin" value="${clientLogin}"/>
+                                      <input type="hidden" name="clientId" value="${client.id}"/>
                                       <input type="hidden" name="name" value="${report.name}"/>
                                       <input type="hidden" name="date" value="${date}"/>
                                       <input type="hidden" name="statusFilter" value="${status}"/>
                                       <input type="hidden" name="type" value="${type}"/>
                                       <button type="submit" class="btn btn-outline-danger">Delete</button>
                                   </form>
-                                  <a href="showReport?clientId=${clientId}&name=<c:out value='${report.name}'/>" download >
+                                  <a href="showReport?clientId=${client.id}&name=<c:out value='${report.name}'/>" download >
                                   	 <button  class="btn btn-outline-primary">Download</button>
                                   </a>
 							</td>

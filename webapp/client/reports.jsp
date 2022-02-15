@@ -44,7 +44,7 @@
 		</nav>
 	</header>
  <p>
-      <form action = "/tax-office/service/filterReports"  method="GET" class="form-horizontal" align="center">
+      <form action = "/tax-office/service/filterClientReports"  method="GET" class="form-horizontal" align="center">
       <h3>Filter</h3>
       <div class="form-group">
          <label for="name">Choose a date:</label>
@@ -105,6 +105,7 @@
 							   <form action="/tax-office/service/deleteReportById" method="POST" onSubmit='return confirm("Are you sure?");'>
                                   <input type="hidden" name="id" value="${report.id}"/>
                                   <input type="hidden" name="clientId" value="${user.id}"/>
+                                  <input type="hidden" name="name" value="${report.name}"/>
                                   <input type="hidden" name="date" value="${date}"/>
                                   <input type="hidden" name="statusFilter" value="${status}"/>
                                   <input type="hidden" name="type" value="${type}"/>

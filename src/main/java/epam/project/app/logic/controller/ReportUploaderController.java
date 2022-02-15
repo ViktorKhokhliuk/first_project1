@@ -4,6 +4,7 @@ import epam.project.app.infra.web.ModelAndView;
 import epam.project.app.infra.web.exception.AppException;
 import epam.project.app.logic.entity.report.Report;
 import epam.project.app.logic.entity.user.User;
+import epam.project.app.logic.exception.ReportException;
 import epam.project.app.logic.service.ReportService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -34,6 +35,8 @@ public class ReportUploaderController {
         String fileName = "";
         for (Part part : request.getParts()) {
             fileName = getFileName(part);
+            if(new File(uploadPath+"/"+fileName).exists())
+                throw new ReportException("you already have a report with that name");
             if (fileName.endsWith(".xml") || fileName.endsWith(".json")) {
                 part.write(uploadPath + File.separator + fileName);
                 break;
@@ -46,7 +49,7 @@ public class ReportUploaderController {
         reportService.uploadReport(fileName, uploadPath, userFromSession.getId(), type);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setRedirect(true);
-        modelAndView.setView("/service/getAllReportsByClientId?clientId="+userFromSession.getId());
+        modelAndView.setView("/client/homePage.jsp");
         return modelAndView;
     }
 

@@ -16,6 +16,9 @@
 	.logout {
       margin-right:10px;
     }
+    .clients {
+        margin-left:185px;
+    }
     table {
        counter-reset: tableCount;
     }
@@ -36,6 +39,22 @@
 		</nav>
 	</header>
  <p>
+ <form action = "/tax-office/service/searchClients"  method="GET" class="form-horizontal" align="center">
+       <h3>Search</h3>
+       <div class="form-group">
+          <label for="name">Enter name:</label>
+          <input type="text" name="name" placeholder="Name"/>
+          <label for="name">Enter surname:</label>
+          <input type="text" name="surname" placeholder="Surname"/>
+          <label for="name">Enter ITN:</label>
+          <input type="text" name="itn"= placeholder="ITN"/>
+          <button type="submit" class="btn btn-outline-dark">Search</button>
+       </div>
+       </form>
+  <p>
+         <form action = "/tax-office/service/getAllClients"  method="GET" class = "clients">
+             <button type="submit" class="btn btn-primary">All clients</button>
+         </form>
 		<div class="container">
 			<h3 class="text-center">List of Clients</h3>
 			<hr>

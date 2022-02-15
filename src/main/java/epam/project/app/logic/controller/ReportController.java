@@ -2,15 +2,21 @@ package epam.project.app.logic.controller;
 
 import epam.project.app.infra.web.ModelAndView;
 import epam.project.app.infra.web.QueryParameterResolver;
+import epam.project.app.infra.web.exception.AppException;
 import epam.project.app.logic.entity.report.Report;
 import epam.project.app.logic.entity.dto.ReportUpdateDto;
-import epam.project.app.logic.entity.user.Client;
 import epam.project.app.logic.entity.user.User;
 import epam.project.app.logic.entity.user.UserRole;
 import epam.project.app.logic.service.ReportService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.io.FileUtils;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 
 
@@ -25,20 +31,32 @@ public class ReportController {
         reportService.updateStatusOfReport(reportUpdateDto);;
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setRedirect(true);
-        modelAndView.setView("/service/filterReports?date="+reportUpdateDto.getDate()+"&status="+reportUpdateDto.getStatusFilter()
-                +"&type="+reportUpdateDto.getType()+"&clientId="+reportUpdateDto.getClientId()+"&clientLogin="+reportUpdateDto.getClientLogin());
+        if (reportUpdateDto.getClientLogin()!=null) {
+            modelAndView.setView("/service/filterClientReports?date="+reportUpdateDto.getDate()+"&status="+reportUpdateDto.getStatusFilter()
+                    +"&type="+reportUpdateDto.getType()+"&clientId="+reportUpdateDto.getClientId()+"&clientLogin="+reportUpdateDto.getClientLogin());
+        } else {
+            modelAndView.setView("/service/filterAllReports?date="+reportUpdateDto.getDate()+"&status="+reportUpdateDto.getStatusFilter()
+                    +"&type="+reportUpdateDto.getType());
+        }
         return modelAndView;
     }
 
     public ModelAndView deleteReportById(HttpServletRequest request) {
+        User user = (User) request.getSession().getAttribute("user");
         ReportUpdateDto reportUpdateDto = queryParameterResolver.getObject(request, ReportUpdateDto.class);
- //       Long reportId = Long.parseLong(request.getParameter("id"));
+        String path = "webapp/upload/id"+reportUpdateDto.getClientId()+"/"+reportUpdateDto.getName();
+        File file = new File(path);
+        file.delete();
         reportService.deleteReportById(reportUpdateDto.getId());
-//        Long clientId = Long.parseLong(request.getParameter("clientId"));
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setRedirect(true);
-        modelAndView.setView("/service/filterReports?date="+reportUpdateDto.getDate()+"&status="+reportUpdateDto.getStatusFilter()
-                +"&type="+reportUpdateDto.getType()+"&clientId="+reportUpdateDto.getClientId()+"&clientLogin="+reportUpdateDto.getClientLogin());
+        if (reportUpdateDto.getClientLogin()!=null || user.getUserRole().equals(UserRole.CLIENT)) {
+            modelAndView.setView("/service/filterClientReports?date="+reportUpdateDto.getDate()+"&status="+reportUpdateDto.getStatusFilter()
+                    +"&type="+reportUpdateDto.getType()+"&clientId="+reportUpdateDto.getClientId()+"&clientLogin="+reportUpdateDto.getClientLogin());
+            return modelAndView;
+        }
+            modelAndView.setView("/service/filterAllReports?date="+reportUpdateDto.getDate()+"&status="+reportUpdateDto.getStatusFilter()
+                    +"&type="+reportUpdateDto.getType());
         return modelAndView;
     }
 
@@ -64,12 +82,12 @@ public class ReportController {
     public ModelAndView getAllReports(HttpServletRequest request) {
         List<Report> reports = reportService.getAllReports();
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setView("/inspector/allReports.jsp");
+        modelAndView.setView("/service/getAllClients");
         modelAndView.addAttribute("reports",reports);
         return modelAndView;
     }
 
-    public ModelAndView getReportsByFilterParameters(HttpServletRequest request) {
+    public ModelAndView getClientReportsByFilterParameters(HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
         User user = (User) request.getSession().getAttribute("user");
         Map<String, String> parameters = new HashMap<>();
@@ -84,22 +102,30 @@ public class ReportController {
                 parameters.put(parameterName, parameter);
             }
         }
-        List<Report> reports = reportService.getReportsByFilterParameters(parameters);
+        List<Report> reports = reportService.getClientReportsByFilterParameters(parameters);
         if (user.getUserRole().equals(UserRole.CLIENT)) {
             modelAndView.setView("/client/reports.jsp");
         } else {
             modelAndView.setView("/inspector/reportsByClientId.jsp");
-//            String clientLogin = request.getParameter("clientLogin");
-//            Long clientId = Long.parseLong(request.getParameter("client_id"));
-//            String date = request.getParameter("date");
-//            String status = request.getParameter("status");
-//            String type = request.getParameter("type");
-//            modelAndView.addAttribute("date",date);
-//            modelAndView.addAttribute("status",status);
-//            modelAndView.addAttribute("type",type);
-//            modelAndView.addAttribute("clientLogin", clientLogin);
-//            modelAndView.addAttribute("clientId", clientId);
         }
+        modelAndView.addAttribute("reports", reports);
+        return modelAndView;
+    }
+
+    public ModelAndView getAllReportsByFilterParameters(HttpServletRequest request) {
+        ModelAndView modelAndView = new ModelAndView();
+        Map<String, String> parameters = new HashMap<>();
+        Enumeration<String> parameterNames = request.getParameterNames();
+        while (parameterNames.hasMoreElements()) {
+            String parameterName = parameterNames.nextElement();
+            String parameter = request.getParameter(parameterName);
+            modelAndView.addAttribute(parameterName,parameter);
+            if (!parameter.equals("")) {
+                parameters.put(parameterName, parameter);
+            }
+        }
+        List<Report> reports = reportService.getClientReportsByFilterParameters(parameters);
+        modelAndView.setView("/service/getAllClients");
         modelAndView.addAttribute("reports", reports);
         return modelAndView;
     }

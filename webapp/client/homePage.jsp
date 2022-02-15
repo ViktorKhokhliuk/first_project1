@@ -13,6 +13,14 @@
 	crossorigin="anonymous">
 </head>
    <body>
+   <style>
+   .form-horizontal {
+         margin-left:620px;
+       }
+   .reports {
+         margin-left:620px;
+   }
+   </style>
          <header>
          		<nav class="navbar navbar-expand-md navbar-dark"
          			style="background-color: black">
@@ -29,8 +37,10 @@
           Welcome, ${user.name}
       </jsp:text>
     </h1>
+    <hr>
+    </hr>
  <p>
-             <form method="POST" action="/tax-office/service/upload" enctype="multipart/form-data" class="form-horizontal">
+             <form method="POST" action="/tax-office/service/upload" enctype="multipart/form-data" class="form-horizontal" >
                    <h3>Upload a report</h3>
                    <div class="form-group">
                      <label for="uploadFile" class="col-xs-2 control-label">Choose a file:</label>
@@ -52,7 +62,7 @@
                    </div>
              </form>
  <p>
-             <form action = "/tax-office/service/getAllReportsByClientId"  method="GET" align="center">
+             <form action = "/tax-office/service/getAllReportsByClientId"  method="GET" class = reports>
                 <input type="hidden" name="clientId" value="${user.id}"/><br><br>
                 <button type="submit" class="btn btn-primary">My Reports</button>
              </form>
