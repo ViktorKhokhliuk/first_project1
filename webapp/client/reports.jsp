@@ -18,7 +18,10 @@
       margin-right:10px;
     }
     .reports {
-    margin-left:185px;
+    margin-left:195px;
+    }
+    .filter{
+        margin-right:100px;
     }
     table {
         counter-reset: tableCount;
@@ -43,9 +46,11 @@
             </div>
 		</nav>
 	</header>
+ <br>
+	<h3 class="text-center">List of Reports</h3>
+    <hr>
  <p>
-      <form action = "/tax-office/service/filterClientReports"  method="GET" class="form-horizontal" align="center">
-      <h3>Filter</h3>
+      <form action = "/tax-office/service/filterClientReports" class = "filter" align="right">
       <div class="form-group">
          <label for="name">Choose a date:</label>
            <input type="date" name="date"
@@ -74,8 +79,6 @@
           <button type="submit" class="btn btn-primary">All my reports</button>
       </form>
 	<div class="container">
-		<h3 class="text-center">List of Reports</h3>
-		<hr>
 		<div class="container text-left">
 		</div>
 			<br>

@@ -4,6 +4,7 @@ import epam.project.app.infra.web.exception.AppException;
 import epam.project.app.logic.entity.report.Report;
 import epam.project.app.logic.entity.dto.ReportCreateDto;
 import epam.project.app.logic.entity.dto.ReportUpdateDto;
+import epam.project.app.logic.exception.ReportException;
 import epam.project.app.logic.repository.ReportRepository;
 import lombok.RequiredArgsConstructor;
 
@@ -15,19 +16,16 @@ public class ReportService {
     private final ReportRepository reportRepository;
 
     public Report insertReport(ReportCreateDto dto) {
-        return reportRepository.insertReport(dto).orElseThrow(() -> new AppException("cannot create new Report"));
+        return reportRepository.insertReport(dto).orElseThrow(() -> new ReportException("cannot create new Report"));
     }
 
     public Report updateStatusOfReport(ReportUpdateDto dto) {
-        return reportRepository.updateStatusOfReport(dto).orElseThrow(() -> new AppException("cannot update report"));
+        return reportRepository.updateStatusOfReport(dto).orElseThrow(() -> new ReportException("cannot update report"));
     }
 
     public List<Report> getAllReportsByClientId(Long clientId) {
         List<Report> reports = reportRepository.getAllReportsByClientId(clientId);
         reports.sort((o1, o2) -> o2.getDate().compareTo(o1.getDate()));
-        if (reports.isEmpty()) {
-            throw new AppException("cannot found reports");
-        }
         return reports;
     }
 
@@ -36,7 +34,7 @@ public class ReportService {
     }
 
     public Report deleteReportById(Long id) {
-        return reportRepository.deleteReportById(id).orElseThrow(() -> new AppException("cannot delete report"));
+        return reportRepository.deleteReportById(id).orElseThrow(() -> new ReportException("cannot delete report"));
     }
 
     public Report uploadReport(String fileName, String path, Long clientId, String type) {
@@ -48,4 +46,7 @@ public class ReportService {
     }
 
 
+    public List<Report> getAllReportsByFilterParameters(Map<String, String> parameters) {
+        return reportRepository.getAllReportsByFilterParameters(parameters);
+    }
 }

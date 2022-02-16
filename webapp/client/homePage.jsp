@@ -14,11 +14,14 @@
 </head>
    <body>
    <style>
-   .form-horizontal {
-         margin-left:620px;
-       }
    .reports {
-         margin-left:620px;
+      margin-left:100px;
+   }
+   .box{
+       margin-left:400px;
+   }
+   form{
+      display:inline-block;
    }
    </style>
          <header>
@@ -26,7 +29,7 @@
          			style="background-color: black">
          			<div>
          				 <form accept-charset="UTF-8" method="POST" action="/tax-office/service/logout">
-                         <button type="submit" class="btn btn-primary">Logout</button>
+                         <button type="submit" class="btn btn-primary ">Logout</button>
                          </form>
          			</div>
          		</nav>
@@ -38,8 +41,8 @@
       </jsp:text>
     </h1>
     <hr>
-    </hr>
  <p>
+          <div class = "box">
              <form method="POST" action="/tax-office/service/upload" enctype="multipart/form-data" class="form-horizontal" >
                    <h3>Upload a report</h3>
                    <div class="form-group">
@@ -61,10 +64,10 @@
                      </div>
                    </div>
              </form>
- <p>
              <form action = "/tax-office/service/getAllReportsByClientId"  method="GET" class = reports>
                 <input type="hidden" name="clientId" value="${user.id}"/><br><br>
-                <button type="submit" class="btn btn-primary">My Reports</button>
+                <button type="submit" class="btn btn-primary btn-lg">My Reports</button>
              </form>
+          </div>
     </body>
 </html>

@@ -16,8 +16,14 @@
 	.logout {
       margin-right:10px;
     }
+    .search{
+    margin-right:100px;
+    }
+    .filter{
+    margin-right:100px;
+    }
     .reports {
-    margin-left:185px;
+    margin-left:195px;
     }
     table {
        counter-reset: tableCount;
@@ -38,9 +44,21 @@
                 </form>
 		</nav>
 	</header>
- <p>
-      <form action = "/tax-office/service/filterAllReports"  method="GET" class="form-horizontal" align="center">
-      <h3>Filter</h3>
+ <br>
+ 		<h3 class="text-center">List of Reports</h3>
+ 		<hr>
+       <form action = "/tax-office/service/filterAllReports"  method="GET" class = "search" align = "right">
+              <div class="form-group">
+                 <label for="name">Enter name:</label>
+                 <input type="text" name="name" placeholder="Name"/>
+                 <label for="name">Enter surname:</label>
+                 <input type="text" name="surname" placeholder="Surname"/>
+                 <label for="name">Enter ITN:</label>
+                 <input type="text" name="itn"= placeholder="ITN"/>
+                 <button type="submit" class="btn btn-outline-dark">Search</button>
+              </div>
+       </form>
+      <form action = "/tax-office/service/filterAllReports"  method="GET" class="filter" align = "right">
       <div class="form-group">
          <label for="name">Choose a date:</label>
            <input type="date" name="date"
@@ -59,16 +77,16 @@
               <option value="income tax">income tax</option>
               <option value="single tax">single tax</option>
             </select>
+            <input type="hidden" name="name" value="${name}"/>
+            <input type="hidden" name="surname" value="${surname}"/>
+            <input type="hidden" name="itn" value="${itn}"/>
          <button type="submit" class="btn btn-outline-dark">Filter</button>
       </div>
       </form>
- <p>
-        <form action = "/tax-office/service/getAllReports"  method="GET" class = "reports">
-            <button type="submit" class="btn btn-primary">All reports</button>
-        </form>
-    <div class="container">
-		<h3 class="text-center">List of Reports</h3>
-		<hr>
+      <form action = "/tax-office/service/getAllReports"  method="GET" class = "reports">
+          <button type="submit" class="btn btn-primary">All reports</button>
+      </form>
+    <div class="container" >
 		<div class="container text-left">
 		</div>
 			<br>
@@ -94,7 +112,7 @@
 							<td><a href="getAllReportsByClientId?clientId=${client.id}&clientLogin=<c:out value='${client.login}'/>">${client.name} ${client.surname}</td>
 							<td>${client.itn}</td>
 							<td>${report.status}</td>
-							<td>${report.date}</td>
+							<td >${report.date}</td>
 							<td>${report.type}</td>
 							<td> <form action="/tax-office/service/updateStatusOfReport" method="POST">
 							        <select name="status" required>
@@ -107,8 +125,14 @@
                                     <input type="hidden" name="date" value="${date}"/>
                                     <input type="hidden" name="statusFilter" value="${status}"/>
                                     <input type="hidden" name="type" value="${type}"/>
-                                    <button type="submit" class="btn-outline-dark">Update</button>
+                                    <input type="hidden" name="clientName" value="${name}"/>
+                                    <input type="hidden" name="surname" value="${surname}"/>
+                                    <input type="hidden" name="itn" value="${itn}"/>
+                                    <button type="submit" class="btn btn-outline-dark">Update</button>
                                   </form>
+                                  <a href="showReport?clientId=${client.id}&name=<c:out value='${report.name}'/>" download >
+                                      <button  class="btn btn-outline-primary">Download</button>
+                                  </a>
                                   <form action="/tax-office/service/deleteReportById" method="POST" onSubmit='return confirm("Are you sure?");'>
                                       <input type="hidden" name="id" value="${report.id}"/>
                                       <input type="hidden" name="clientId" value="${client.id}"/>
@@ -116,11 +140,11 @@
                                       <input type="hidden" name="date" value="${date}"/>
                                       <input type="hidden" name="statusFilter" value="${status}"/>
                                       <input type="hidden" name="type" value="${type}"/>
+                                      <input type="hidden" name="clientName" value="${name}"/>
+                                      <input type="hidden" name="surname" value="${surname}"/>
+                                      <input type="hidden" name="itn" value="${itn}"/>
                                       <button type="submit" class="btn btn-outline-danger">Delete</button>
                                   </form>
-                                  <a href="showReport?clientId=${client.id}&name=<c:out value='${report.name}'/>" download >
-                                  	 <button  class="btn btn-outline-primary">Download</button>
-                                  </a>
 							</td>
 						</tr>
 					</c:forEach>

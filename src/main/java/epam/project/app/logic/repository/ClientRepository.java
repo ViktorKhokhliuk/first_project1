@@ -6,6 +6,8 @@ import epam.project.app.logic.entity.user.Client;
 import epam.project.app.logic.exception.ClientException;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.sql.DataSource;
 import java.sql.*;
@@ -13,6 +15,7 @@ import java.util.*;
 
 @RequiredArgsConstructor
 public class ClientRepository {
+    private static Logger logger = LogManager.getLogger(ClientRepository.class);
     private final DataSource dataSource;
     private static final String INSERT_CLIENT = "INSERT INTO client (id,name,surname,itn) VALUES (?,?,?,?);";
     private static final String INSERT_USER = "INSERT INTO user (login,password,role) VALUES (?,?,?);";
@@ -151,8 +154,8 @@ public class ClientRepository {
                    return Optional.of(client);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
             rollback(connection);
+            logger.error(e.getMessage());
             throw new ClientException("Cannot insert client");
         } finally {
             close(rs);

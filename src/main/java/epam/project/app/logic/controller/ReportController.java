@@ -2,7 +2,6 @@ package epam.project.app.logic.controller;
 
 import epam.project.app.infra.web.ModelAndView;
 import epam.project.app.infra.web.QueryParameterResolver;
-import epam.project.app.infra.web.exception.AppException;
 import epam.project.app.logic.entity.report.Report;
 import epam.project.app.logic.entity.dto.ReportUpdateDto;
 import epam.project.app.logic.entity.user.User;
@@ -10,13 +9,8 @@ import epam.project.app.logic.entity.user.UserRole;
 import epam.project.app.logic.service.ReportService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
-import org.apache.commons.io.FileUtils;
 
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.*;
 
 
@@ -32,12 +26,14 @@ public class ReportController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setRedirect(true);
         if (reportUpdateDto.getClientLogin()!=null) {
-            modelAndView.setView("/service/filterClientReports?date="+reportUpdateDto.getDate()+"&status="+reportUpdateDto.getStatusFilter()
-                    +"&type="+reportUpdateDto.getType()+"&clientId="+reportUpdateDto.getClientId()+"&clientLogin="+reportUpdateDto.getClientLogin());
-        } else {
-            modelAndView.setView("/service/filterAllReports?date="+reportUpdateDto.getDate()+"&status="+reportUpdateDto.getStatusFilter()
-                    +"&type="+reportUpdateDto.getType());
+            modelAndView.setView("/service/filterClientReports?date=" + reportUpdateDto.getDate() + "&status=" + reportUpdateDto.getStatusFilter()
+                    + "&type=" + reportUpdateDto.getType() + "&clientId=" + reportUpdateDto.getClientId() + "&clientLogin=" + reportUpdateDto.getClientLogin());
+            return modelAndView;
         }
+            modelAndView.setView("/service/filterAllReports?date="+reportUpdateDto.getDate()+"&status="+reportUpdateDto.getStatusFilter()
+                    +"&type="+reportUpdateDto.getType()+"&name="+reportUpdateDto.getClientName()+"&surname="+reportUpdateDto.getSurname()
+                    +"&itn="+reportUpdateDto.getItn());
+
         return modelAndView;
     }
 
@@ -56,11 +52,10 @@ public class ReportController {
             return modelAndView;
         }
             modelAndView.setView("/service/filterAllReports?date="+reportUpdateDto.getDate()+"&status="+reportUpdateDto.getStatusFilter()
-                    +"&type="+reportUpdateDto.getType());
+                    +"&type="+reportUpdateDto.getType()+"&name="+reportUpdateDto.getClientName()+"&surname="+reportUpdateDto.getSurname()
+                    +"&itn="+reportUpdateDto.getItn());
         return modelAndView;
     }
-
-
 
     public ModelAndView getAllReportsByClientId(HttpServletRequest request) {
         User user = (User) request.getSession().getAttribute("user");
@@ -86,6 +81,7 @@ public class ReportController {
         modelAndView.addAttribute("reports",reports);
         return modelAndView;
     }
+
 
     public ModelAndView getClientReportsByFilterParameters(HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
@@ -124,7 +120,7 @@ public class ReportController {
                 parameters.put(parameterName, parameter);
             }
         }
-        List<Report> reports = reportService.getClientReportsByFilterParameters(parameters);
+        List<Report> reports = reportService.getAllReportsByFilterParameters(parameters);
         modelAndView.setView("/service/getAllClients");
         modelAndView.addAttribute("reports", reports);
         return modelAndView;
@@ -136,7 +132,7 @@ public class ReportController {
         String path = "/upload/id"+clientId+"/"+name;
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setView(path);
-        modelAndView.setRedirect(true);
+        //modelAndView.setRedirect(true);
         return modelAndView;
     }
 }

@@ -24,5 +24,11 @@ public class ReportUpdateDto {
     private String date;
     @Getter
     private String type;
+    @Getter
+    private String clientName;
+    @Getter
+    private String surname;
+    @Getter
+    private String itn;
 
 }

@@ -31,7 +31,7 @@
                 </form>
 		</nav>
 	</header>
- <p>
+ <br>
     <h1 align = "center">
       <jsp:text>
           Welcome, ${user.login}

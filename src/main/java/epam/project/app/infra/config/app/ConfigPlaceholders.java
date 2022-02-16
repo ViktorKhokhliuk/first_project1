@@ -39,7 +39,9 @@ public class ConfigPlaceholders {
         placeholders.add(new Placeholder("GET", "getAllReportsByClientId", reportController::getAllReportsByClientId));
         placeholders.add(new Placeholder("GET", "searchClients", clientController::searchClientsByParameters));
         placeholders.add(new Placeholder("GET", "getAllClients", clientController::getAllClients));
+ //       placeholders.add(new Placeholder("GET", "searchClientsByParametersWithReports", clientController::searchClientsByParametersWithReports));
         placeholders.add(new Placeholder("GET", "getAllReports", reportController::getAllReports));
+//        placeholders.add(new Placeholder("GET", "getReportsByParametersSearch", reportController::getReportsByParametersSearch));
         placeholders.add(new Placeholder("GET", "filterClientReports", reportController::getClientReportsByFilterParameters));
         placeholders.add(new Placeholder("GET", "filterAllReports", reportController::getAllReportsByFilterParameters));
         placeholders.add(new Placeholder("GET", "showReport", reportController::showReport));

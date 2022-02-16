@@ -43,7 +43,7 @@ public class ReportRepository {
         List<Report> reports = new ArrayList<>();
         try (Connection connection = dataSource.getConnection();
              Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(sql)) {
+             ResultSet resultSet = statement.executeQuery(sql)) {
             while (resultSet.next()) {
                 long id = resultSet.getLong("id");
                 String name = resultSet.getString("name");
@@ -87,7 +87,7 @@ public class ReportRepository {
              PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_STATUS_OF_REPORT)) {
             preparedStatement.setString(1, dto.getStatus());
             preparedStatement.setLong(2, dto.getId());
-            if(preparedStatement.executeUpdate()>0) {
+            if (preparedStatement.executeUpdate() > 0) {
                 updatedReport.setStatus(dto.getStatus());
                 return Optional.of(updatedReport);
             }
@@ -181,6 +181,75 @@ public class ReportRepository {
             }
         }
     }
-
-
+//
+//    @SneakyThrows
+//    public List<Report> getReportsByParametersSearch(List<Client> clients) {
+//        StringBuffer stringBuffer = new StringBuffer();
+//        stringBuffer.append("select * from report");
+//        if (!clients.isEmpty()) {
+//            Iterator<Client> iterator = clients.iterator();
+//            stringBuffer.append(" where ");
+//            while (iterator.hasNext()) {
+//                stringBuffer.append("client_id").append(" = ").append("'").append(iterator.next().getId()).append("'");
+//                if (iterator.hasNext()) {
+//                    stringBuffer.append(" and ");
+//                }
+//            }
+//        }
+//        String sql = stringBuffer.append(";").toString();
+//        List<Report> reports = new ArrayList<>();
+//        try (Connection connection = dataSource.getConnection();
+//             Statement statement = connection.createStatement();
+//             ResultSet resultSet = statement.executeQuery(sql)) {
+//            while (resultSet.next()) {
+//                long id = resultSet.getLong("id");
+//                String name = resultSet.getString("name");
+//                String path = resultSet.getString("path");
+//                String status = resultSet.getString("status");
+//                String type = resultSet.getString("type");
+//                String date = resultSet.getString("date");
+//                long clientId = resultSet.getLong("client_id");
+//                reports.add(new Report(id, name, path, status, date, type, clientId));
+//            }
+//        }
+//        return reports;
+//    }
+    @SneakyThrows
+    public List<Report> getAllReportsByFilterParameters(Map<String, String> parameters) {
+        StringBuffer stringBuffer = new StringBuffer();
+        stringBuffer.append("select * from report");
+        if (!parameters.isEmpty()) {
+            stringBuffer.append(" join client on report.client_id=client.id where ");
+            Iterator<Map.Entry<String, String>> iterator = parameters.entrySet().iterator();
+            while (iterator.hasNext()) {
+                Map.Entry<String, String> entry = iterator.next();
+                if (entry.getKey().equals("status")||entry.getKey().equals("date")||entry.getKey().equals("type")){
+                    stringBuffer.append("report.");
+                } else {
+                    stringBuffer.append("client.");
+                }
+                stringBuffer.append(entry.getKey()).append(" = ").append("'").append(entry.getValue()).append("'");
+                if (iterator.hasNext()) {
+                    stringBuffer.append(" and ");
+                }
+            }
+        }
+        String sql = stringBuffer.append(";").toString();
+        List<Report> reports = new ArrayList<>();
+        try (Connection connection = dataSource.getConnection();
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(sql)) {
+            while (resultSet.next()) {
+                long id = resultSet.getLong("id");
+                String name = resultSet.getString("name");
+                String path = resultSet.getString("path");
+                String status = resultSet.getString("status");
+                String type = resultSet.getString("type");
+                String date = resultSet.getString("date");
+                long clientId = resultSet.getLong("client_id");
+                reports.add(new Report(id, name, path, status, date, type, clientId));
+            }
+        }
+        return reports;
+    }
 }
