@@ -12,6 +12,7 @@ public class Report {
     private String name;
     private String path;
     private String status;
+    private String info;
     private String date;
     private String type;
     private Long clientId;

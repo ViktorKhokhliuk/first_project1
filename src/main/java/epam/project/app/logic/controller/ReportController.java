@@ -22,7 +22,7 @@ public class ReportController {
 
     public ModelAndView updateStatusOfReport(HttpServletRequest request) {
         ReportUpdateDto reportUpdateDto = queryParameterResolver.getObject(request, ReportUpdateDto.class);
-        reportService.updateStatusOfReport(reportUpdateDto);;
+        reportService.updateStatusOfReport(reportUpdateDto);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setRedirect(true);
         if (reportUpdateDto.getClientLogin()!=null) {
@@ -132,7 +132,7 @@ public class ReportController {
         String path = "/upload/id"+clientId+"/"+name;
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setView(path);
-        //modelAndView.setRedirect(true);
+        modelAndView.setRedirect(true);
         return modelAndView;
     }
 }

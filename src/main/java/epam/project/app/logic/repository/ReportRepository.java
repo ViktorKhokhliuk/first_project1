@@ -16,8 +16,8 @@ import java.util.Date;
 @RequiredArgsConstructor
 public class ReportRepository {
     private final DataSource dataSource;
-    private static final String INSERT_REPORT = "INSERT INTO report (name, path, client_id, status, date, type) VALUES (?,?,?,?,?,?);";
-    private static final String UPDATE_STATUS_OF_REPORT = "update report set status = ? where id = ?;";
+    private static final String INSERT_REPORT = "INSERT INTO report (name, path, client_id, status, info, date, type) VALUES (?,?,?,?,?,?,?);";
+    private static final String UPDATE_STATUS_OF_REPORT = "update report set status = ?, info = ? where id = ?;";
     private static final String SELECT_REPORT_BY_CLIENT_ID = "select * from report where client_id = ?;";
     private static final String SELECT_REPORT_BY_ID = "select * from report where id = ?;";
     private static final String DELETE_REPORT_BY_ID = "delete from report where id = ?;";
@@ -49,10 +49,11 @@ public class ReportRepository {
                 String name = resultSet.getString("name");
                 String path = resultSet.getString("path");
                 String status = resultSet.getString("status");
+                String info = resultSet.getString("info");
                 String type = resultSet.getString("type");
                 String date = resultSet.getString("date");
                 long clientId = resultSet.getLong("client_id");
-                reports.add(new Report(id, name, path, status, date, type, clientId));
+                reports.add(new Report(id, name, path, status, info, date, type, clientId));
             }
         }
         return reports;
@@ -66,13 +67,14 @@ public class ReportRepository {
             preparedStatement.setString(2, dto.getPath());
             preparedStatement.setLong(3, dto.getClientId());
             preparedStatement.setString(4, ReportStatus.SUBMITTED.getTitle());
-            preparedStatement.setString(5, DATE);
-            preparedStatement.setString(6, dto.getType());
+            preparedStatement.setString(5, ReportStatus.PROCESS.getTitle());
+            preparedStatement.setString(6, DATE);
+            preparedStatement.setString(7, dto.getType());
             preparedStatement.execute();
             try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
                     long id = generatedKeys.getLong(1);
-                    return Optional.of(new Report(id, dto.getName(), dto.getPath(), ReportStatus.SUBMITTED.getTitle(), DATE, dto.getType(), dto.getClientId()));
+                    return Optional.of(new Report(id, dto.getName(), dto.getPath(), ReportStatus.SUBMITTED.getTitle(),ReportStatus.PROCESS.getTitle(), DATE, dto.getType(), dto.getClientId()));
                 }
 
             }
@@ -86,9 +88,11 @@ public class ReportRepository {
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_STATUS_OF_REPORT)) {
             preparedStatement.setString(1, dto.getStatus());
-            preparedStatement.setLong(2, dto.getId());
+            preparedStatement.setString(2, dto.getInfo());
+            preparedStatement.setLong(3, dto.getId());
             if (preparedStatement.executeUpdate() > 0) {
                 updatedReport.setStatus(dto.getStatus());
+                updatedReport.setInfo(dto.getInfo());
                 return Optional.of(updatedReport);
             }
         }
@@ -107,6 +111,7 @@ public class ReportRepository {
                     report.setName(resultSet.getString("name"));
                     report.setPath(resultSet.getString("path"));
                     report.setStatus(resultSet.getString("status"));
+                    report.setInfo(resultSet.getString("info"));
                     report.setDate(resultSet.getString("date"));
                     report.setType(resultSet.getString("type"));
                     report.setClientId(resultSet.getLong("client_id"));
@@ -129,9 +134,10 @@ public class ReportRepository {
                     String name = resultSet.getString("name");
                     String path = resultSet.getString("path");
                     String status = resultSet.getString("status");
+                    String info = resultSet.getString("info");
                     String date = resultSet.getString("date");
                     String type = resultSet.getString("type");
-                    reports.add(new Report(id, name, path, status, date, type, clientId));
+                    reports.add(new Report(id, name, path, status, info, date, type, clientId));
                 }
             }
         }
@@ -150,9 +156,10 @@ public class ReportRepository {
                 String name = resultSet.getString("name");
                 String path = resultSet.getString("path");
                 String status = resultSet.getString("status");
+                String info = resultSet.getString("info");
                 String date = resultSet.getString("date");
                 String type = resultSet.getString("type");
-                reports.add(new Report(id, name, path, status, date, type, clientId));
+                reports.add(new Report(id, name, path, status, info, date, type, clientId));
             }
         }
         return reports;
@@ -181,39 +188,7 @@ public class ReportRepository {
             }
         }
     }
-//
-//    @SneakyThrows
-//    public List<Report> getReportsByParametersSearch(List<Client> clients) {
-//        StringBuffer stringBuffer = new StringBuffer();
-//        stringBuffer.append("select * from report");
-//        if (!clients.isEmpty()) {
-//            Iterator<Client> iterator = clients.iterator();
-//            stringBuffer.append(" where ");
-//            while (iterator.hasNext()) {
-//                stringBuffer.append("client_id").append(" = ").append("'").append(iterator.next().getId()).append("'");
-//                if (iterator.hasNext()) {
-//                    stringBuffer.append(" and ");
-//                }
-//            }
-//        }
-//        String sql = stringBuffer.append(";").toString();
-//        List<Report> reports = new ArrayList<>();
-//        try (Connection connection = dataSource.getConnection();
-//             Statement statement = connection.createStatement();
-//             ResultSet resultSet = statement.executeQuery(sql)) {
-//            while (resultSet.next()) {
-//                long id = resultSet.getLong("id");
-//                String name = resultSet.getString("name");
-//                String path = resultSet.getString("path");
-//                String status = resultSet.getString("status");
-//                String type = resultSet.getString("type");
-//                String date = resultSet.getString("date");
-//                long clientId = resultSet.getLong("client_id");
-//                reports.add(new Report(id, name, path, status, date, type, clientId));
-//            }
-//        }
-//        return reports;
-//    }
+
     @SneakyThrows
     public List<Report> getAllReportsByFilterParameters(Map<String, String> parameters) {
         StringBuffer stringBuffer = new StringBuffer();
@@ -244,10 +219,11 @@ public class ReportRepository {
                 String name = resultSet.getString("name");
                 String path = resultSet.getString("path");
                 String status = resultSet.getString("status");
+                String info = resultSet.getString("info");
                 String type = resultSet.getString("type");
                 String date = resultSet.getString("date");
                 long clientId = resultSet.getLong("client_id");
-                reports.add(new Report(id, name, path, status, date, type, clientId));
+                reports.add(new Report(id, name, path, status, info, date, type, clientId));
             }
         }
         return reports;

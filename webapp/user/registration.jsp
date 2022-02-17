@@ -69,16 +69,6 @@
       </div>
      </div>
 
-     <div class="form-group row">
-           <label for="password" class="col-sm-2 col-form-label">Password</label>
-           <div class="col-sm-7">
-            <input type="password" class="form-control" name="password"
-            required pattern = "[a-z0-9]{3,20}"
-            title="The password must contain only lowercase letters or numbers, and have size 3-30 symbols"
-            placeholder="Enter Password">
-         </div>
-     </div>
-
      <button type="submit" class="btn btn-primary">Submit</button>
     </form>
    </div>

@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Home page</title>
+<title>List of Clients</title>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
@@ -20,10 +20,19 @@
         margin-right:100px;
     }
     .clients {
-        margin-left:195px;
+        margin-left:190px;
     }
     table {
        counter-reset: tableCount;
+       table-layout: fixed;
+        margin: auto;
+    }
+    td {
+        word-wrap:break-word;
+        text-align: center;
+    }
+    tr {
+       text-align: center;
     }
       .counterCell:before {
          content: counter(tableCount);
@@ -58,12 +67,12 @@
        <form action = "/tax-office/service/getAllClients"  method="GET" class = "clients">
            <button type="submit" class="btn btn-primary">All clients</button>
        </form>
-		<div class="container">
-			<div class="container text-left">
-			</div>
-			<br>
-			<table class="table table-bordered">
-				<thead>
+<br>
+    <div class="container">
+    <br>
+    			<table class="table table-bordered">
+    			<col style="width:4%">
+    				<thead>
 					<tr>
 					    <th>№</th>
 						<th>Login</th>
@@ -96,6 +105,6 @@
 					</c:forEach>
 				</tbody>
 			</table>
-		</div>
+	</div>
 </body>
 </html>

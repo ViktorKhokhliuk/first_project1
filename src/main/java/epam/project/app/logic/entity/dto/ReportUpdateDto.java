@@ -15,6 +15,8 @@ public class ReportUpdateDto {
     @Getter
     private String status;
     @Getter
+    private String info;
+    @Getter
     private String statusFilter;
     @Getter
     private Long clientId;

@@ -10,6 +10,9 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 	crossorigin="anonymous">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 </head>
    <body>
 	<style>
@@ -28,6 +31,15 @@
     }
     table {
        counter-reset: tableCount;
+       table-layout: fixed;
+       margin: auto;
+    }
+    td {
+            word-wrap:break-word;
+            text-align: center;
+    }
+    tr {
+           text-align: center;
     }
       .counterCell:before {
          content: counter(tableCount);
@@ -83,18 +95,20 @@
          <input type="hidden" name="clientLogin" value="${clientLogin}"/>
          <button type="submit" class="btn btn-primary">All reports</button>
      </form>
-            <p>
+ <br>
     <div class="container">
 		<div class="container text-left">
 		</div>
 			<table class="table table-bordered">
+			<col style="width:4%">
 				<thead>
 					<tr>
 					    <th>№</th>
 						<th>Name</th>
-						<th>Status</th>
 						<th>Date</th>
 						<th>Type</th>
+						<th>Status</th>
+						<th>Info</th>
 						<th>Actions</th>
 					</tr>
 				</thead>
@@ -103,22 +117,57 @@
 						<tr>
 						    <td class="counterCell"></td>
 							<td><a href="showReport?clientId=${clientId}&name=<c:out value='${report.name}'/>"target="_blank">${report.name}</a></td>
-							<td><c:out value="${report.status}" /></td>
 							<td><c:out value="${report.date}" /></td>
 							<td><c:out value="${report.type}" /></td>
-							<td> <form action="/tax-office/service/updateStatusOfReport" method="POST">
-							        <select name="status" required>
-							          <option value="">status</option>
-                                      <option value="ACCEPTED">ACCEPTED</option>
-                                      <option value="UNACCEPTED">UNACCEPTED</option>
-                                    </select>
-                                    <input type="hidden" name="id" value="${report.id}"/>
-                                    <input type="hidden" name="clientId" value="${clientId}"/>
-                                    <input type="hidden" name="clientLogin" value="${clientLogin}"/>
-                                    <input type="hidden" name="date" value="${date}"/>
-                                    <input type="hidden" name="statusFilter" value="${status}"/>
-                                    <input type="hidden" name="type" value="${type}"/>
-                                    <button type="submit" class="btn btn-outline-dark">Update</button>
+							<td><c:out value="${report.status}" /></td>
+							<td><c:out value="${report.info}" /></td>
+							<td> <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal">
+                                 UNACCEPTED
+                                </button>
+                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                  <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Reason for unaccepted</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                          <span aria-hidden="true">&times;</span>
+                                        </button>
+                                      </div>
+                                      <div class="modal-body">
+                                      <form action="/tax-office/service/updateStatusOfReport" method="POST">
+                                       <textarea rows="10" cols="45" name="info" required placeholder="Enter a reason"></textarea>
+                                       <input type="hidden" name="status" value="UNACCEPTED"/>
+                                       <input type="hidden" name="id" value="${report.id}"/>
+                                       <input type="hidden" name="clientId" value="${clientId}"/>
+                                       <input type="hidden" name="clientLogin" value="${clientLogin}"/>
+                                       <input type="hidden" name="date" value="${date}"/>
+                                       <input type="hidden" name="statusFilter" value="${status}"/>
+                                       <input type="hidden" name="type" value="${type}"/>
+                                       <input type="hidden" name="clientName" value="${name}"/>
+                                       <input type="hidden" name="surname" value="${surname}"/>
+                                       <input type="hidden" name="itn" value="${itn}"/>
+                                      </div>
+                                      <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-outline-dark">Submit</button>
+                                        </form>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                  <form action="/tax-office/service/updateStatusOfReport" method="POST">
+                                      <input type="hidden" name="status" value="ACCEPTED"/>
+                                      <input type="hidden" name="info" value="Report has been accepted"/>
+                                      <input type="hidden" name="id" value="${report.id}"/>
+                                      <input type="hidden" name="clientId" value="${clientId}"/>
+                                      <input type="hidden" name="clientLogin" value="${clientLogin}"/>
+                                      <input type="hidden" name="date" value="${date}"/>
+                                      <input type="hidden" name="statusFilter" value="${status}"/>
+                                      <input type="hidden" name="type" value="${type}"/>
+                                      <input type="hidden" name="clientName" value="${name}"/>
+                                      <input type="hidden" name="surname" value="${surname}"/>
+                                      <input type="hidden" name="itn" value="${itn}"/>
+                                      <button type="submit" class="btn btn-outline-dark">ACCEPTED</button>
                                   </form>
                                   <a href="showReport?clientId=${clientId}&name=<c:out value='${report.name}'/>" download >
                                       <button  class="btn btn-outline-primary">Download</button>
@@ -138,7 +187,6 @@
 					</c:forEach>
 				</tbody>
 			</table>
-		</div>
     </div>
   </body>
 </html>

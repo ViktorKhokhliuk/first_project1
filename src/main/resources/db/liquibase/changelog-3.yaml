@@ -29,6 +29,11 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
+                  name: info
+                  type: TEXT
+                  constraints:
+                    nullable: false
+              - column:
                   name: type
                   type: VARCHAR(200)
                   constraints:

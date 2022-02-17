@@ -25,6 +25,15 @@
     }
     table {
         counter-reset: tableCount;
+        table-layout: fixed;
+        margin: auto;
+    }
+    td {
+       word-wrap:break-word;
+       text-align: center;
+    }
+    tr {
+      text-align: center;
     }
     .counterCell:before {
         content: counter(tableCount);
@@ -83,14 +92,16 @@
 		</div>
 			<br>
 			<table class="table table-bordered">
+			<col style="width:4%">
 				<thead>
 					<tr>
 					    <th>№</th>
-						<th>Name</th>
-						<th>Status</th>
-						<th>Date</th>
-						<th>Type</th>
-						<th>Actions</th>
+                        <th>Name</th>
+                        <th>Date</th>
+                        <th>Type</th>
+                        <th>Status</th>
+                        <th>Info</th>
+                        <th>Actions</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -98,9 +109,10 @@
 						<tr>
 						    <td class="counterCell"></td>
 							<td><a href="showReport?clientId=${user.id}&name=<c:out value='${report.name}'/>"target="_blank">${report.name}</a></td>
-							<td><c:out value="${report.status}" /></td>
 							<td><c:out value="${report.date}" /></td>
-							<td><c:out value="${report.type}" /></td>
+                            <td><c:out value="${report.type}" /></td>
+                            <td><c:out value="${report.status}" /></td>
+                            <td><c:out value="${report.info}" /></td>
 							<td>
 							   <a href="showReport?clientId=${user.id}&name=<c:out value='${report.name}'/>" download >
 							   <button  class="btn btn-outline-primary">Download</button>
@@ -119,7 +131,6 @@
 					</c:forEach>
 				</tbody>
 			</table>
-		</div>
 	</div>
 </body>
 </html>
