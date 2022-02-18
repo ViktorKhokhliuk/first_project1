@@ -13,12 +13,18 @@
 	crossorigin="anonymous">
 </head>
     <body>
-          <form accept-charset="UTF-8" method="GET" action="/tax-office/service/saveReportChanges" align = "center">
-            <p><textarea name="report" cols="50" rows="50">
+          <form accept-charset="UTF-8" method="POST" action="/tax-office/service/saveReportChanges" align = "center">
+            <p><textarea name="report" cols="70" rows="35">
 ${report}
             </textarea></p>
-            <input type="hidden" name="clientId" value="${clientId}"/>
-            <input type="hidden" name="name" value="${name}"/>
+            <input type="hidden" name="id" value="${dto.id}"/>
+            <input type="hidden" name="date" value="${dto.date}"/>
+            <input type="hidden" name="statusFilter" value="${dto.statusFilter}"/>
+            <input type="hidden" name="type" value="${dto.type}"/>
+            <input type="hidden" name="clientId" value="${dto.clientId}"/>
+            <input type="hidden" name="name" value="${dto.name}"/>
+            <input type="hidden" name="status" value="EDITED"/>
+            <input type="hidden" name="info" value="Report has been edited"/>
             <button type="submit" class="btn btn-outline-primary">Submit</button>
             </form>
           <form accept-charset="UTF-8" method="POST" action="/tax-office/service/logout">

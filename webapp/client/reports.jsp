@@ -18,7 +18,7 @@
       margin-right:10px;
     }
     .reports {
-    margin-left:195px;
+    margin-left:150px;
     }
     .filter{
         margin-right:100px;
@@ -70,6 +70,7 @@
               <option value="SUBMITTED">SUBMITTED</option>
               <option value="ACCEPTED">ACCEPTED</option>
               <option value="UNACCEPTED">UNACCEPTED</option>
+              <option value="EDITED">EDITED</option>
             </select>
          <label for="name">Choose a type:</label>
             <select name="type">
@@ -87,11 +88,8 @@
           <input type="hidden" name="clientId" value="${user.id}"/>
           <button type="submit" class="btn btn-primary">All my reports</button>
       </form>
-	<div class="container">
-		<div class="container text-left">
-		</div>
-			<br>
-			<table class="table table-bordered">
+<br>
+			<table class=" table-bordered " width="1200">
 			<col style="width:4%">
 				<thead>
 					<tr>
@@ -114,9 +112,15 @@
                             <td><c:out value="${report.status}" /></td>
                             <td><c:out value="${report.info}" /></td>
 							<td>
-							<a href="editReport?clientId=${user.id}&name=<c:out value='${report.name}'/>" target="_blank">
-                                <button  class="btn btn-outline-primary">Edit</button>
-                            </a>
+							   <form action="/tax-office/service/editReport" method="GET" target="_blank">
+                                  <input type="hidden" name="id" value="${report.id}"/>
+                                  <input type="hidden" name="clientId" value="${user.id}"/>
+                                  <input type="hidden" name="name" value="${report.name}"/>
+                                  <input type="hidden" name="date" value="${date}"/>
+                                  <input type="hidden" name="statusFilter" value="${status}"/>
+                                  <input type="hidden" name="type" value="${type}"/>
+                                  <button type="submit" class="btn btn-outline-primary" >Edit</button>
+                               </form>
 							   <a href="showReport?clientId=${user.id}&name=<c:out value='${report.name}'/>" download >
 							   <button  class="btn btn-outline-primary">Download</button>
 							   </a>
@@ -134,6 +138,7 @@
 					</c:forEach>
 				</tbody>
 			</table>
+			<br>
 	</div>
 </body>
 </html>

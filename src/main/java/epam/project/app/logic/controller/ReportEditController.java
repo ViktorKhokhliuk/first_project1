@@ -2,6 +2,7 @@ package epam.project.app.logic.controller;
 
 import epam.project.app.infra.web.ModelAndView;
 import epam.project.app.infra.web.QueryParameterResolver;
+import epam.project.app.logic.entity.dto.ReportEditDto;
 import epam.project.app.logic.service.ReportService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -25,9 +26,20 @@ public class ReportEditController {
     private final ReportService reportService;
     private final QueryParameterResolver queryParameterResolver;
 
+    public ModelAndView updateStatusOfReportAfterEdit(HttpServletRequest request) {
+        ReportEditDto reportEditDto = queryParameterResolver.getObject(request, ReportEditDto.class);
+        reportService.updateStatusOfReportAfterEdit(reportEditDto);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setRedirect(true);
+        modelAndView.setView("/service/filterClientReports?date=" + reportEditDto.getDate() + "&status=" + reportEditDto.getStatusFilter()
+                    + "&type=" + reportEditDto.getType() + "&clientId=" + reportEditDto.getClientId());
+        return modelAndView;
+    }
+
     public ModelAndView editReport(HttpServletRequest request) {
-        long clientId = Long.parseLong(request.getParameter("clientId"));
-        String name = request.getParameter("name");
+        ReportEditDto reportEditDto =  queryParameterResolver.getObject(request, ReportEditDto.class);
+        long clientId = reportEditDto.getClientId();
+        String name = reportEditDto.getName();
         String path = "webapp/upload/id"+clientId+"/"+name;
         File file = new File(path);
         DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
@@ -42,17 +54,17 @@ public class ReportEditController {
 
         String report = documentToString(document);
         ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addAttribute("dto",reportEditDto);;
         modelAndView.addAttribute("report",report);
-        modelAndView.addAttribute("clientId",clientId);
-        modelAndView.addAttribute("name",name);
         modelAndView.setView("/client/edit.jsp");
         return modelAndView;
     }
 
     public ModelAndView saveReportChanges(HttpServletRequest request) {
-        long clientId = Long.parseLong(request.getParameter("clientId"));
-        String name = request.getParameter("name");
-        String report = request.getParameter("report").replaceAll("[\n\r]", "");
+        ReportEditDto reportEditDto = queryParameterResolver.getObject(request, ReportEditDto.class);
+        long clientId = reportEditDto.getClientId();
+        String name = reportEditDto.getName();
+        String report = reportEditDto.getReport();
         String path = "webapp/upload/id"+clientId+"/"+name;
         Document doc = stringToDocument(report);
         DOMSource source = new DOMSource(doc);
@@ -65,10 +77,7 @@ public class ReportEditController {
         } catch (IOException | TransformerException e) {
             e.printStackTrace();
         }
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setRedirect(true);
-        modelAndView.setView("/service/getAllReportsByClientId?clientId="+clientId);
-        return modelAndView;
+        return updateStatusOfReportAfterEdit(request);
     }
 
     private static Document stringToDocument(String xmlStr) {

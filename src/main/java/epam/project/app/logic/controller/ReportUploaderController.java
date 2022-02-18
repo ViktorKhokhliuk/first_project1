@@ -32,25 +32,35 @@ public class ReportUploaderController {
             uploadDir.mkdir();
         }
         String fileName = "";
-        for (Part part : request.getParts()) {
-            fileName = getFileName(part);
-            if(new File(uploadPath+"/"+fileName).exists())
-                throw new ReportException("you already have a report with that name");
-            if (fileName.endsWith(".xml") || fileName.endsWith(".json")) {
-                part.write(uploadPath + File.separator + fileName);
-                break;
-            } else {
-                throw new AppException("Please choose allowed file type: XML or JSON");
-            }
+//        for (Part part : request.getParts()) {
+//            fileName = getFileName(part);
+//            if(new File(uploadPath+"/"+fileName).exists())
+//                throw new ReportException("you already have a report with that name");
+//            if (fileName.endsWith(".xml") || fileName.endsWith(".json")) {
+//                part.write(uploadPath + File.separator + fileName);
+//                break;
+//            } else {
+//                throw new AppException("Please choose allowed file type: XML or JSON");
+//            }
+//        }
+
+        Part part = request.getPart("part");
+        fileName = getFileName(part);
+        if (new File(uploadPath + "/" + fileName).exists())
+            throw new ReportException("you already have a report with that name");
+        if (fileName.endsWith(".xml") || fileName.endsWith(".json")) {
+            part.write(uploadPath + File.separator + fileName);
+        } else {
+            throw new AppException("Please choose allowed file type: XML or JSON");
         }
-        String type = request.getParameter("type");
-        log.log(Level.INFO, "File " + fileName + " has uploaded successfully!");
-        reportService.uploadReport(fileName, uploadPath, userFromSession.getId(), type);
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setRedirect(true);
-        modelAndView.setView("/client/homePage.jsp");
-        return modelAndView;
-    }
+            String type = request.getParameter("type");
+            log.log(Level.INFO, "File " + fileName + " has uploaded successfully!");
+            reportService.uploadReport(fileName, uploadPath, userFromSession.getId(), type);
+            ModelAndView modelAndView = new ModelAndView();
+            modelAndView.setRedirect(true);
+            modelAndView.setView("/client/homePage.jsp");
+            return modelAndView;
+        }
 
     private User getUserFromSession(HttpSession session) {
         return (User) session.getAttribute("user");

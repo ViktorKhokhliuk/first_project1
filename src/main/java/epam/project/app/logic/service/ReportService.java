@@ -1,6 +1,6 @@
 package epam.project.app.logic.service;
 
-import epam.project.app.infra.web.exception.AppException;
+import epam.project.app.logic.entity.dto.ReportEditDto;
 import epam.project.app.logic.entity.report.Report;
 import epam.project.app.logic.entity.dto.ReportCreateDto;
 import epam.project.app.logic.entity.dto.ReportUpdateDto;
@@ -48,5 +48,9 @@ public class ReportService {
 
     public List<Report> getAllReportsByFilterParameters(Map<String, String> parameters) {
         return reportRepository.getAllReportsByFilterParameters(parameters);
+    }
+
+    public Report updateStatusOfReportAfterEdit(ReportEditDto reportEditDto) {
+        return reportRepository.updateStatusOfReportAfterEdit(reportEditDto).orElseThrow(() -> new ReportException("cannot update report"));
     }
 }

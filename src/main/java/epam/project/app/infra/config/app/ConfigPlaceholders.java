@@ -43,7 +43,7 @@ public class ConfigPlaceholders {
         placeholders.add(new Placeholder("GET", "filterAllReports", reportController::getAllReportsByFilterParameters));
         placeholders.add(new Placeholder("GET", "showReport", reportController::showReport));
         placeholders.add(new Placeholder("GET", "editReport", reportEditController::editReport));
-        placeholders.add(new Placeholder("GET", "saveReportChanges", reportEditController::saveReportChanges));
+        placeholders.add(new Placeholder("POST", "saveReportChanges", reportEditController::saveReportChanges));
         return placeholders;
     }
 

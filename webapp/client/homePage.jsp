@@ -47,7 +47,7 @@
                    <h3>Upload a report</h3>
                    <div class="form-group">
                      <label for="uploadFile" class="col-xs-2 control-label">Choose a file:</label>
-                       <input type="file" name="multiPartServlet" required/><br>
+                       <input type="file" name="part" required/><br>
                    </div>
                    <div class="form-group">
                      <label for="selectType" class="col-xs-2 control-label">Choose a type:</label>

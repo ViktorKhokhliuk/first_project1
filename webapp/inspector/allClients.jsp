@@ -10,6 +10,9 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 	crossorigin="anonymous">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 </head>
    <body>
 	<style>
@@ -20,7 +23,7 @@
         margin-right:100px;
     }
     .clients {
-        margin-left:190px;
+        margin-left:150px;
     }
     table {
        counter-reset: tableCount;
@@ -68,10 +71,8 @@
            <button type="submit" class="btn btn-primary">All clients</button>
        </form>
 <br>
-    <div class="container">
-    <br>
-    			<table class="table table-bordered">
-    			<col style="width:4%">
+			<table class=" table-bordered " width="1200">
+			<col style="width:4%">
     				<thead>
 					<tr>
 					    <th>№</th>
@@ -105,6 +106,7 @@
 					</c:forEach>
 				</tbody>
 			</table>
+			<br>
 	</div>
 </body>
 </html>

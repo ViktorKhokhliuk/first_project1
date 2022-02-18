@@ -1,5 +1,6 @@
 package epam.project.app.logic.repository;
 
+import epam.project.app.logic.entity.dto.ReportEditDto;
 import epam.project.app.logic.entity.report.Report;
 import epam.project.app.logic.entity.report.ReportStatus;
 import epam.project.app.logic.entity.dto.ReportCreateDto;
@@ -227,5 +228,22 @@ public class ReportRepository {
             }
         }
         return reports;
+    }
+
+    @SneakyThrows
+    public Optional<Report> updateStatusOfReportAfterEdit(ReportEditDto reportEditDto) {
+        Report updatedReport = getReportById(reportEditDto.getId()).get();
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_STATUS_OF_REPORT)) {
+            preparedStatement.setString(1, reportEditDto.getStatus());
+            preparedStatement.setString(2, reportEditDto.getInfo());
+            preparedStatement.setLong(3, reportEditDto.getId());
+            if (preparedStatement.executeUpdate() > 0) {
+                updatedReport.setStatus(reportEditDto.getStatus());
+                updatedReport.setInfo(reportEditDto.getInfo());
+                return Optional.of(updatedReport);
+            }
+        }
+        return Optional.empty();
     }
 }
