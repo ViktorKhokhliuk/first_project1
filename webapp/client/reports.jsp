@@ -114,10 +114,13 @@
                             <td><c:out value="${report.status}" /></td>
                             <td><c:out value="${report.info}" /></td>
 							<td>
+							<a href="editReport?clientId=${user.id}&name=<c:out value='${report.name}'/>" target="_blank">
+                                <button  class="btn btn-outline-primary">Edit</button>
+                            </a>
 							   <a href="showReport?clientId=${user.id}&name=<c:out value='${report.name}'/>" download >
 							   <button  class="btn btn-outline-primary">Download</button>
 							   </a>
-							   <form action="/tax-office/service/deleteReportById" method="POST" onSubmit='return confirm("Are you sure?");'>
+							   <form action="/tax-office/service/deleteReportByIdForClient" method="POST" onSubmit='return confirm("Are you sure?");'>
                                   <input type="hidden" name="id" value="${report.id}"/>
                                   <input type="hidden" name="clientId" value="${user.id}"/>
                                   <input type="hidden" name="name" value="${report.name}"/>

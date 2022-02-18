@@ -3,10 +3,7 @@ package epam.project.app.infra.config.app;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import epam.project.app.infra.web.Placeholder;
 import epam.project.app.infra.web.QueryParameterResolver;
-import epam.project.app.logic.controller.ClientController;
-import epam.project.app.logic.controller.ReportController;
-import epam.project.app.logic.controller.ReportUploaderController;
-import epam.project.app.logic.controller.UserController;
+import epam.project.app.logic.controller.*;
 import epam.project.app.logic.repository.ClientRepository;
 import epam.project.app.logic.repository.ReportRepository;
 import epam.project.app.logic.repository.UserRepository;
@@ -27,6 +24,7 @@ public class ConfigPlaceholders {
         ClientController clientController = createClientController(dataSource, queryParameterResolver);
         ReportController reportController = createReportController(dataSource, queryParameterResolver);
         ReportUploaderController reportUploaderController = createReportUploaderController(dataSource);
+        ReportEditController reportEditController = createReportEditController(dataSource, queryParameterResolver);
 
         placeholders.add(new Placeholder("POST", "login", userController::login));
         placeholders.add(new Placeholder("POST", "logout", userController::logout));
@@ -34,22 +32,27 @@ public class ConfigPlaceholders {
         placeholders.add(new Placeholder("POST", "upload", reportUploaderController::uploadFile));
         placeholders.add(new Placeholder("POST", "updateStatusOfReport", reportController::updateStatusOfReport));
         placeholders.add(new Placeholder("POST", "deleteReportById", reportController::deleteReportById));
+        placeholders.add(new Placeholder("POST", "deleteReportByIdForClient", reportController::deleteReportByIdForClient));
         placeholders.add(new Placeholder("POST", "deleteClientById", clientController::deleteClientById));
         placeholders.add(new Placeholder("GET", "toHome", userController::toHome));
         placeholders.add(new Placeholder("GET", "getAllReportsByClientId", reportController::getAllReportsByClientId));
         placeholders.add(new Placeholder("GET", "searchClients", clientController::searchClientsByParameters));
         placeholders.add(new Placeholder("GET", "getAllClients", clientController::getAllClients));
- //       placeholders.add(new Placeholder("GET", "searchClientsByParametersWithReports", clientController::searchClientsByParametersWithReports));
         placeholders.add(new Placeholder("GET", "getAllReports", reportController::getAllReports));
-//        placeholders.add(new Placeholder("GET", "getReportsByParametersSearch", reportController::getReportsByParametersSearch));
         placeholders.add(new Placeholder("GET", "filterClientReports", reportController::getClientReportsByFilterParameters));
         placeholders.add(new Placeholder("GET", "filterAllReports", reportController::getAllReportsByFilterParameters));
         placeholders.add(new Placeholder("GET", "showReport", reportController::showReport));
+        placeholders.add(new Placeholder("GET", "editReport", reportEditController::editReport));
+        placeholders.add(new Placeholder("GET", "saveReportChanges", reportEditController::saveReportChanges));
         return placeholders;
     }
 
     private ReportUploaderController createReportUploaderController(DataSource dataSource) {
         return new ReportUploaderController(new ReportService(new ReportRepository(dataSource)));
+    }
+
+    private ReportEditController createReportEditController(DataSource dataSource,QueryParameterResolver queryParameterResolver) {
+        return new ReportEditController(new ReportService(new ReportRepository(dataSource)),queryParameterResolver);
     }
 
     private ReportController createReportController(DataSource dataSource, QueryParameterResolver queryParameterResolver) {

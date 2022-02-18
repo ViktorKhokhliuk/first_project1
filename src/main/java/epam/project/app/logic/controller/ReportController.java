@@ -6,8 +6,9 @@ import epam.project.app.logic.entity.report.Report;
 import epam.project.app.logic.entity.dto.ReportUpdateDto;
 import epam.project.app.logic.entity.user.User;
 import epam.project.app.logic.entity.user.UserRole;
+import epam.project.app.logic.exception.ReportException;
 import epam.project.app.logic.service.ReportService;
-import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;;
 import lombok.RequiredArgsConstructor;
 
 import java.io.File;
@@ -38,23 +39,37 @@ public class ReportController {
     }
 
     public ModelAndView deleteReportById(HttpServletRequest request) {
-        User user = (User) request.getSession().getAttribute("user");
         ReportUpdateDto reportUpdateDto = queryParameterResolver.getObject(request, ReportUpdateDto.class);
         String path = "webapp/upload/id"+reportUpdateDto.getClientId()+"/"+reportUpdateDto.getName();
         File file = new File(path);
-        file.delete();
-        reportService.deleteReportById(reportUpdateDto.getId());
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setRedirect(true);
-        if (reportUpdateDto.getClientLogin()!=null || user.getUserRole().equals(UserRole.CLIENT)) {
-            modelAndView.setView("/service/filterClientReports?date="+reportUpdateDto.getDate()+"&status="+reportUpdateDto.getStatusFilter()
-                    +"&type="+reportUpdateDto.getType()+"&clientId="+reportUpdateDto.getClientId()+"&clientLogin="+reportUpdateDto.getClientLogin());
+        if (file.delete()) {
+            reportService.deleteReportById(reportUpdateDto.getId());
+            ModelAndView modelAndView = new ModelAndView();
+            modelAndView.setRedirect(true);
+            if (reportUpdateDto.getClientLogin() != null) {
+                modelAndView.setView("/service/filterClientReports?date=" + reportUpdateDto.getDate() + "&status=" + reportUpdateDto.getStatusFilter()
+                        + "&type=" + reportUpdateDto.getType() + "&clientId=" + reportUpdateDto.getClientId() + "&clientLogin=" + reportUpdateDto.getClientLogin());
+                return modelAndView;
+            }
+            modelAndView.setView("/service/filterAllReports?date=" + reportUpdateDto.getDate() + "&status=" + reportUpdateDto.getStatusFilter()
+                    + "&type=" + reportUpdateDto.getType() + "&name=" + reportUpdateDto.getClientName() + "&surname=" + reportUpdateDto.getSurname()
+                    + "&itn=" + reportUpdateDto.getItn());
             return modelAndView;
-        }
-            modelAndView.setView("/service/filterAllReports?date="+reportUpdateDto.getDate()+"&status="+reportUpdateDto.getStatusFilter()
-                    +"&type="+reportUpdateDto.getType()+"&name="+reportUpdateDto.getClientName()+"&surname="+reportUpdateDto.getSurname()
-                    +"&itn="+reportUpdateDto.getItn());
-        return modelAndView;
+        } throw new ReportException("cannot delete report");
+    }
+
+    public ModelAndView deleteReportByIdForClient(HttpServletRequest request) {
+        ReportUpdateDto reportUpdateDto = queryParameterResolver.getObject(request, ReportUpdateDto.class);
+        String path = "webapp/upload/id"+reportUpdateDto.getClientId()+"/"+reportUpdateDto.getName();
+        File file = new File(path);
+        if (file.delete()) {
+            reportService.deleteReportById(reportUpdateDto.getId());
+            ModelAndView modelAndView = new ModelAndView();
+            modelAndView.setRedirect(true);
+            modelAndView.setView("/service/filterClientReports?date=" + reportUpdateDto.getDate() + "&status=" + reportUpdateDto.getStatusFilter()
+                                  + "&type=" + reportUpdateDto.getType() + "&clientId=" + reportUpdateDto.getClientId());
+            return modelAndView;
+        } throw new ReportException("cannot delete report");
     }
 
     public ModelAndView getAllReportsByClientId(HttpServletRequest request) {

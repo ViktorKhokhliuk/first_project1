@@ -2,7 +2,6 @@ package epam.project.app.logic.controller;
 
 import epam.project.app.infra.web.ModelAndView;
 import epam.project.app.infra.web.exception.AppException;
-import epam.project.app.logic.entity.report.Report;
 import epam.project.app.logic.entity.user.User;
 import epam.project.app.logic.exception.ReportException;
 import epam.project.app.logic.service.ReportService;
