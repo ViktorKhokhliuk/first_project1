@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ReportCreateDto {
     @Getter
-    private String name;
+    private String title;
     @Getter
     private String path;
     @Getter

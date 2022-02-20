@@ -7,11 +7,14 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.util.Iterator;
+import java.util.Map;
 
 public class ProcessModelAndView {
     public void processModel(HttpServletRequest req, HttpServletResponse resp, ModelAndView modelAndView, HttpServlet servlet) throws IOException, ServletException {
         if (modelAndView.isRedirect()) {
-            resp.sendRedirect(req.getContextPath() + modelAndView.getView());
+            String request = buildRequest(modelAndView);
+            resp.sendRedirect(req.getContextPath() + request);
             return;
         }
         RequestDispatcher dispatcher = servlet.getServletContext().getRequestDispatcher(modelAndView.getView());
@@ -21,5 +24,24 @@ public class ProcessModelAndView {
 
     private void fillAttributes(HttpServletRequest request, ModelAndView modelAndView) {
         modelAndView.getAttributes().forEach(request::setAttribute);
+    }
+
+    private String buildRequest(ModelAndView modelAndView) {
+        String view = modelAndView.getView();
+        Map<String, Object> attributes = modelAndView.getAttributes();
+        if (!attributes.isEmpty()) {
+            StringBuilder stringBuilder = new StringBuilder(view);
+            stringBuilder.append("?");
+            Iterator<Map.Entry<String, Object>> iterator = attributes.entrySet().iterator();
+            while (iterator.hasNext()) {
+                Map.Entry<String, Object> entry = iterator.next();
+                stringBuilder.append(entry.getKey()).append("=").append(entry.getValue());
+                if (iterator.hasNext()) {
+                    stringBuilder.append("&");
+                }
+            }
+            return stringBuilder.toString();
+        }
+        return view;
     }
 }

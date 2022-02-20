@@ -4,10 +4,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import epam.project.app.Application;
 import epam.project.app.infra.web.DispatcherRequest;
 import epam.project.app.infra.web.Placeholder;
+import epam.project.app.infra.web.SecurityFilter;
 import epam.project.app.infra.web.Server;
 import epam.project.app.infra.config.db.ConfigDataSource;
 import epam.project.app.infra.config.db.ConfigLiquibase;
 import epam.project.app.infra.config.server.ConfigServer;
+import jakarta.servlet.Filter;
 import jakarta.servlet.http.HttpServlet;
 
 import javax.sql.DataSource;
@@ -32,10 +34,13 @@ public class ConfigApp {
         List<Placeholder> placeholders = configPlaceholders.config(dataSource, objectMapper);
 
         ConfigServlet configServlet = new ConfigServlet(new HashMap<>());
-        ConfigServer configServer = new ConfigServer();
-
         configServlet.configBaseServlet(propertyLoader, placeholders);
-        Server server = configServer.createServer(propertyLoader, configServlet.getServlets());
+
+        ConfigServer configServer = new ConfigServer();
+        Map<String, HttpServlet> servlets = configServlet.getServlets();
+        List<Filter> filters = List.of(new SecurityFilter());
+
+        Server server = configServer.createServer(propertyLoader, servlets, filters);
 
         return new Application(server);
     }

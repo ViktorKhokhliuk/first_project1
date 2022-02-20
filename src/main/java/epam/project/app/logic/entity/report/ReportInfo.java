@@ -1,12 +1,12 @@
 package epam.project.app.logic.entity.report;
 
-public enum ReportStatus {
-    SUBMITTED("SUBMITTED"),
-    EDITED("EDITED");
+public enum ReportInfo {
+    PROCESS("Report in processing"),
+    EDIT("Report was edited");
 
     private String title;
 
-    ReportStatus(String title) {
+    ReportInfo(String title) {
         this.title = title;
     }
 

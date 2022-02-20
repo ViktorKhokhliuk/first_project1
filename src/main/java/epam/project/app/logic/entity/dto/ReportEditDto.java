@@ -10,11 +10,7 @@ public class ReportEditDto {
     @Getter
     private Long id;
     @Getter
-    private String name;
-    @Getter
-    private String status;
-    @Getter
-    private String info;
+    private String title;
     @Getter
     private String statusFilter;
     @Getter
@@ -24,5 +20,19 @@ public class ReportEditDto {
     @Getter
     private String type;
     @Getter
-    private String report;
+    private String person;
+    @Getter
+    private String nationality;
+    @Getter
+    private String year;
+    @Getter
+    private String quarter;
+    @Getter
+    private String month;
+    @Getter
+    private String group;
+    @Getter
+    private String activity;
+    @Getter
+    private String income;
 }

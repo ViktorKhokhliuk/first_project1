@@ -13,7 +13,6 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 public class ClientController {
@@ -32,15 +31,8 @@ public class ClientController {
     public ModelAndView getAllClients(HttpServletRequest request) {
         List<Client> clients = clientService.getAllClients();
         ModelAndView modelAndView = new ModelAndView();
-        if (request.getAttribute("reports")!=null) {
-            modelAndView.setView("/inspector/allReports.jsp");
-            Map<Long,Client> clientMap = clients.stream().collect(Collectors.toMap(Client::getId,client->client));
-            modelAndView.addAttribute("clients",clientMap);
-            modelAndView.addAttribute("reports",request.getAttribute("reports"));
-        } else {
-            modelAndView.setView("/inspector/allClients.jsp");
-            modelAndView.addAttribute("clients",clients);
-        }
+        modelAndView.setView("/inspector/allClients.jsp");
+        modelAndView.addAttribute("clients",clients);
         return modelAndView;
     }
 

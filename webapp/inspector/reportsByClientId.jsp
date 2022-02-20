@@ -20,10 +20,8 @@
         $(".btn").click(
           function() {
             var reportId = $(this).attr('data-reportId');
-            var clientId = $(this).attr('data-clientId');
 
             $("#hide1").attr('value', reportId);
-            $("#hide2").attr('value', clientId);
           })
       });
    </script>
@@ -126,18 +124,18 @@
 					<c:forEach items="${reports}" var="report">
 						<tr>
 						    <td class="counterCell"></td>
-							<td><a href="showReport?clientId=${clientId}&name=<c:out value='${report.name}'/>"target="_blank">${report.name}</a></td>
+							<td><a href="showReport?clientId=${clientId}&title=<c:out value='${report.title}'/>"target="_blank">${report.title}</a></td>
 							<td><c:out value="${report.date}" /></td>
 							<td><c:out value="${report.type}" /></td>
 							<td><c:out value="${report.status}" /></td>
 							<td><c:out value="${report.info}" /></td>
 							<td>
-							<button type="button" class="btn btn-outline-dark" data-reportId="${report.id}" data-clientId="${client.id}"
+							<button type="button" class="btn btn-outline-dark" data-reportId="${report.id}"
                                 data-toggle="modal" data-target="#exampleModal">UNACCEPTED
                             </button>
                                   <form action="/tax-office/service/updateStatusOfReport" method="POST">
                                       <input type="hidden" name="status" value="ACCEPTED"/>
-                                      <input type="hidden" name="info" value="Report has been accepted"/>
+                                      <input type="hidden" name="info" value="Report was accepted"/>
                                       <input type="hidden" name="id" value="${report.id}"/>
                                       <input type="hidden" name="clientId" value="${clientId}"/>
                                       <input type="hidden" name="clientLogin" value="${clientLogin}"/>
@@ -146,14 +144,14 @@
                                       <input type="hidden" name="type" value="${type}"/>
                                       <button type="submit" class="btn btn-outline-dark">ACCEPTED</button>
                                   </form>
-                                  <a href="showReport?clientId=${clientId}&name=<c:out value='${report.name}'/>" download >
+                                  <a href="showReport?clientId=${clientId}&title=<c:out value='${report.title}'/>" download >
                                       <button  class="btn btn-outline-primary">Download</button>
                                   </a>
                                   <form action="/tax-office/service/deleteReportById" method="POST" onSubmit='return confirm("Are you sure?");'>
                                       <input type="hidden" name="id" value="${report.id}"/>
                                       <input type="hidden" name="clientId" value="${clientId}"/>
                                       <input type="hidden" name="clientLogin" value="${clientLogin}"/>
-                                      <input type="hidden" name="name" value="${report.name}"/>
+                                      <input type="hidden" name="title" value="${report.title}"/>
                                       <input type="hidden" name="date" value="${date}"/>
                                       <input type="hidden" name="statusFilter" value="${status}"/>
                                       <input type="hidden" name="type" value="${type}"/>
@@ -179,7 +177,8 @@
                       <textarea rows="10" cols="45" name="info" required placeholder="Enter a reason"></textarea>
                       <input type="hidden" name="status" value="UNACCEPTED"/>
                       <input id="hide1" type="hidden" name="id" value=""/>
-                      <input id="hide2" type="hidden" name="clientId" value=""/>
+                      <input type="hidden" name="clientId" value="${clientId}"/>
+                      <input type="hidden" name="clientLogin" value="${clientLogin}"/>
                       <input type="hidden" name="date" value="${date}"/>
                       <input type="hidden" name="statusFilter" value="${status}"/>
                       <input type="hidden" name="type" value="${type}"/>

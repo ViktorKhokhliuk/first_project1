@@ -2,16 +2,20 @@ package epam.project.app.infra.config.server;
 
 import epam.project.app.infra.config.app.PropertyLoader;
 import epam.project.app.infra.web.Server;
+import jakarta.servlet.Filter;
 import jakarta.servlet.http.HttpServlet;
 import org.apache.catalina.Context;
 import org.apache.catalina.startup.Tomcat;
+import org.apache.tomcat.util.descriptor.web.FilterDef;
+import org.apache.tomcat.util.descriptor.web.FilterMap;
 
 import java.io.File;
+import java.util.List;
 import java.util.Map;
 
 public class ConfigServer {
 
-    public Server createServer(PropertyLoader propertyLoader, Map<String, HttpServlet> servlets) {
+    public Server createServer(PropertyLoader propertyLoader, Map<String, HttpServlet> servlets, List<Filter> filters) {
         String port = propertyLoader.getConfigs().get("tomcat_port");
         String baseDir = propertyLoader.getConfigs().get("base_dir");
         String contextPath = propertyLoader.getConfigs().get("context_path");
@@ -24,7 +28,7 @@ public class ConfigServer {
         String docBase = new File("webapp").getAbsolutePath();
 
         Context context = tomcat.addWebapp(contextPath, docBase);
-
+        filters.stream().iterator().forEachRemaining(filter -> addFilter(context, filter));
         servlets.entrySet().stream()
                 .iterator()
                 .forEachRemaining(entry -> registerServlet(context, entry));
@@ -39,5 +43,18 @@ public class ConfigServer {
 
         Tomcat.addServlet(context, servletName, servlet);
         context.addServletMappingDecoded(urlPattern, servletName);
+    }
+
+    private void addFilter(Context context, Filter filter) {
+        FilterDef filterDef = new FilterDef();
+        filterDef.setFilterName(filter.getClass().getSimpleName());
+        filterDef.setFilterClass(filter.getClass().getName());
+
+        FilterMap filterMap = new FilterMap();
+        filterMap.setFilterName(filter.getClass().getSimpleName());
+        filterMap.addURLPattern("/*");
+
+        context.addFilterDef(filterDef);
+        context.addFilterMap(filterMap);
     }
 }

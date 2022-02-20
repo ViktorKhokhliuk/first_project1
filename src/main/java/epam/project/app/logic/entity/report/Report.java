@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Report {
     private Long id;
-    private String name;
+    private String title;
     private String path;
     private String status;
     private String info;

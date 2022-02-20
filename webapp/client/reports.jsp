@@ -106,28 +106,28 @@
 					<c:forEach items="${reports}" var="report">
 						<tr>
 						    <td class="counterCell"></td>
-							<td><a href="showReport?clientId=${user.id}&name=<c:out value='${report.name}'/>"target="_blank">${report.name}</a></td>
+							<td><a href="showReport?clientId=${user.id}&title=<c:out value='${report.title}'/>"target="_blank">${report.title}</a></td>
 							<td><c:out value="${report.date}" /></td>
                             <td><c:out value="${report.type}" /></td>
                             <td><c:out value="${report.status}" /></td>
                             <td><c:out value="${report.info}" /></td>
 							<td>
-							   <form action="/tax-office/service/editReport" method="GET" target="_blank">
+							   <form action="/tax-office/service/editReport" method="GET" >
                                   <input type="hidden" name="id" value="${report.id}"/>
                                   <input type="hidden" name="clientId" value="${user.id}"/>
-                                  <input type="hidden" name="name" value="${report.name}"/>
+                                  <input type="hidden" name="title" value="${report.title}"/>
                                   <input type="hidden" name="date" value="${date}"/>
                                   <input type="hidden" name="statusFilter" value="${status}"/>
                                   <input type="hidden" name="type" value="${type}"/>
                                   <button type="submit" class="btn btn-outline-primary" >Edit</button>
                                </form>
-							   <a href="showReport?clientId=${user.id}&name=<c:out value='${report.name}'/>" download >
+							   <a href="showReport?clientId=${user.id}&title=<c:out value='${report.title}'/>" download >
 							   <button  class="btn btn-outline-primary">Download</button>
 							   </a>
-							   <form action="/tax-office/service/deleteReportByIdForClient" method="POST" onSubmit='return confirm("Are you sure?");'>
+							   <form action="/tax-office/service/deleteReportById" method="POST" onSubmit='return confirm("Are you sure?");'>
                                   <input type="hidden" name="id" value="${report.id}"/>
                                   <input type="hidden" name="clientId" value="${user.id}"/>
-                                  <input type="hidden" name="name" value="${report.name}"/>
+                                  <input type="hidden" name="title" value="${report.title}"/>
                                   <input type="hidden" name="date" value="${date}"/>
                                   <input type="hidden" name="statusFilter" value="${status}"/>
                                   <input type="hidden" name="type" value="${type}"/>

@@ -54,7 +54,7 @@
       <div class="col-sm-7">
        <input type="text" class="form-control" name="login"
         required pattern = "[a-z_]{3,20}"
-        title="The login must contain only lowercase letters and underscore, and have size 3-30 symbols"
+        title="The login must contain only lowercase letters and underscore, and have size 3-20 symbols"
         placeholder="Enter Login">
       </div>
      </div>
@@ -64,7 +64,7 @@
       <div class="col-sm-7">
        <input type="password" class="form-control" name="password"
         required pattern = "[a-z0-9]{3,20}"
-        title="The password must contain only lowercase letters or numbers, and have size 3-30 symbols"
+        title="The password must contain only lowercase letters or numbers, and have size 3-20 symbols"
         placeholder="Enter Password">
       </div>
      </div>

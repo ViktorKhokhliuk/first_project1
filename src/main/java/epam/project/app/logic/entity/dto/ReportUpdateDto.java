@@ -11,7 +11,7 @@ public class ReportUpdateDto {
     @Getter
     private Long id;
     @Getter
-    private String name;
+    private String title;
     @Getter
     private String status;
     @Getter

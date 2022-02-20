@@ -14,7 +14,7 @@ databaseChangeLog:
                     primaryKey:  true
                     nullable:  false
               - column:
-                  name: name
+                  name: title
                   type: VARCHAR(200)
                   constraints:
                     nullable: false
@@ -44,13 +44,13 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: client_id
+                  name: clientId
                   type: BIGINT
 
 
         - addForeignKeyConstraint:
-            baseColumnNames: client_id
+            baseColumnNames: clientId
             baseTableName: report
-            constraintName: fk_client_id
+            constraintName: fk_clientId
             referencedColumnNames: id
             referencedTableName: client

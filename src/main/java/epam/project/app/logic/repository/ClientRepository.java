@@ -22,7 +22,6 @@ public class ClientRepository {
     private static final String SELECT_CLIENT_BY_ID = "select * from user join client on user.id=client.id where user.id= ?;";
     private static final String SELECT_CLIENT_BY_LOGIN = "select * from user join client on user.id=client.id where user.login= ?;";
     private static final String SELECT_ALL_CLIENTS = "select * from client join user on user.id=client.id;";
-    private static final String SELECT_CLIENTS_BY_PARAMETER = "select * from client join user on user.id=client.id where client.name = ? and client.surname = ?;";
     private static final String DELETE_REPORTS_BY_CLIENT_ID = "delete from report where client_id = ? ;";
     private static final String DELETE_CLIENT_BY_ID = "delete from client where id = ?;";
     private static final String DELETE_USER_BY_ID = "delete from user where id = ?;";
@@ -190,8 +189,8 @@ public class ClientRepository {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
             rollback(connection);
+            logger.error(e.getMessage());
             throw new ClientException("Cannot delete client");
         } finally {
             close(preparedStatement);
