@@ -1,21 +1,21 @@
 package epam.project.app.logic.repository;
 
 import epam.project.app.logic.entity.dto.ClientRegistrationDto;
-import epam.project.app.logic.entity.report.Report;
 import epam.project.app.logic.entity.user.Client;
 import epam.project.app.logic.exception.ClientException;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
+import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.sql.DataSource;
 import java.sql.*;
 import java.util.*;
-
+@Log4j2
 @RequiredArgsConstructor
 public class ClientRepository {
-    private static Logger logger = LogManager.getLogger(ClientRepository.class);
+
     private final DataSource dataSource;
     private static final String INSERT_CLIENT = "INSERT INTO client (id,name,surname,itn) VALUES (?,?,?,?);";
     private static final String INSERT_USER = "INSERT INTO user (login,password,role) VALUES (?,?,?);";
@@ -39,25 +39,6 @@ public class ClientRepository {
                 client.setSurname(resultSet.getString("surname"));
                 client.setItn(resultSet.getString("itn"));
                 client.setLogin(resultSet.getString("login"));
-                return Optional.of(client);
-            }
-        }
-        return Optional.empty();
-    }
-
-    @SneakyThrows
-    public Optional<Client> getClientByLogin(String login) {
-        Client client = new Client();
-        try (Connection connection = dataSource.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_CLIENT_BY_LOGIN)) {
-            preparedStatement.setString(1, login);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
-                client.setId(resultSet.getLong("id"));
-                client.setLogin(login);
-                client.setName(resultSet.getString("name"));
-                client.setSurname(resultSet.getString("surname"));
-                client.setItn(resultSet.getString("itn"));
                 return Optional.of(client);
             }
         }
@@ -123,7 +104,7 @@ public class ClientRepository {
     public Optional<Client> insertClient(ClientRegistrationDto dto) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-        ResultSet rs = null;
+        ResultSet resultSet = null;
         Client client = new Client();
         try {
             connection = dataSource.getConnection();
@@ -133,9 +114,9 @@ public class ClientRepository {
             preparedStatement.setString(2, dto.getPassword());
             preparedStatement.setString(3, dto.getUserRole().toString());
             preparedStatement.execute();
-            rs = preparedStatement.getGeneratedKeys();
-            if (rs.next()) {
-                long id = rs.getLong(1);
+            resultSet = preparedStatement.getGeneratedKeys();
+            if (resultSet.next()) {
+                long id = resultSet.getLong(1);
                try (PreparedStatement preparedStatement1 = connection.prepareStatement(INSERT_CLIENT)) {
                    preparedStatement1.setLong(1, id);
                    preparedStatement1.setString(2, dto.getName());
@@ -154,10 +135,10 @@ public class ClientRepository {
             }
         } catch (SQLException e) {
             rollback(connection);
-            logger.error(e.getMessage());
+            log.error(e.getMessage());
             throw new ClientException("Cannot insert client");
         } finally {
-            close(rs);
+            close(resultSet);
             close(preparedStatement);
             close(connection);
         }
@@ -190,7 +171,7 @@ public class ClientRepository {
             }
         } catch (SQLException e) {
             rollback(connection);
-            logger.error(e.getMessage());
+            log.error(e.getMessage());
             throw new ClientException("Cannot delete client");
         } finally {
             close(preparedStatement);

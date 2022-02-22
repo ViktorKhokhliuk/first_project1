@@ -4,6 +4,7 @@ import epam.project.app.logic.entity.dto.ReportEditDto;
 import epam.project.app.logic.entity.report.ReportTags;
 import epam.project.app.logic.exception.ReportException;
 import epam.project.app.logic.repository.ClientRepository;
+import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.w3c.dom.Document;
@@ -20,8 +21,8 @@ import javax.xml.transform.stream.StreamResult;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 
+@Log4j2
 public class XmlBuilder {
-    private static Logger logger = LogManager.getLogger(ClientRepository.class);
     private final DocumentBuilderFactory factory;
 
     public XmlBuilder() {
@@ -67,7 +68,7 @@ public class XmlBuilder {
             write(doc, xmlFile);
 
         } catch (Exception e) {
-            logger.error(e.getMessage());
+            log.error(e.getMessage());
             throw new ReportException("cannot edit report");
         }
     }

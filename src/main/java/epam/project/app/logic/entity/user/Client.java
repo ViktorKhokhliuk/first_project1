@@ -9,7 +9,7 @@ import java.util.List;
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class Client extends User {
-    private List<Report> reports;
+//    private List<Report> reports;
     private String name;
     private String surname;
     private String itn;

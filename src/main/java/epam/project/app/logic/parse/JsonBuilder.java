@@ -5,14 +5,14 @@ import epam.project.app.logic.entity.dto.ReportEditDto;
 import epam.project.app.logic.entity.report.ReportParameters;
 import epam.project.app.logic.exception.ReportException;
 import epam.project.app.logic.repository.ClientRepository;
+import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.FileWriter;
 import java.io.IOException;
-
+@Log4j2
 public class JsonBuilder {
-    private static Logger logger = LogManager.getLogger(ClientRepository.class);
     private final ObjectMapper objectMapper;
 
     public JsonBuilder(ObjectMapper objectMapper) {
@@ -33,7 +33,7 @@ public class JsonBuilder {
         try {
             objectMapper.writeValue(new FileWriter(jsonFileName), reportParameters);
         } catch (IOException e) {
-            logger.error(e.getMessage());
+            log.error(e.getMessage());
             throw new ReportException("cannot edit report");
         }
     }

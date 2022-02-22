@@ -1,6 +1,7 @@
 package epam.project.app.logic.parse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import epam.project.app.infra.web.exception.AppException;
 import epam.project.app.logic.entity.report.ReportParameters;
 import epam.project.app.logic.exception.ReportException;
 import lombok.RequiredArgsConstructor;

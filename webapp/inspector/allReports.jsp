@@ -117,7 +117,7 @@
 				<thead>
 					<tr>
 					    <th>№</th>
-						<th>Name</th>
+						<th>Title</th>
 						<th>Client</th>
 						<th>ITN</th>
 						<th>Date</th>
@@ -133,7 +133,7 @@
 						<tr>
 						    <td class="counterCell"></td>
 							<td><a href="showReport?clientId=${client.id}&title=<c:out value='${report.title}'/>"target="_blank">${report.title}</a></td>
-							<td><a href="getAllReportsByClientId?clientId=${client.id}&clientLogin=<c:out value='${client.login}'/>">${client.name} ${client.surname}</td>
+							<td><a href="allReportsByClient?clientId=${client.id}&clientLogin=<c:out value='${client.login}'/>">${client.name} ${client.surname}</td>
 							<td>${client.itn}</td>
 							<td>${report.date}</td>
 							<td>${report.type}</td>

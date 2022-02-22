@@ -41,10 +41,10 @@
     </hr>
  <p>
  <div class = "box">
-     <form action = "/tax-office/service/getAllClients"  method="GET"  class = "clients">
+     <form action = "/tax-office/service/allClients"  method="GET"  class = "clients">
         <button type="submit" class="btn btn-primary btn-lg">All clients</button>
      </form>
-     <form action = "/tax-office/service/getAllReports"  method="GET" >
+     <form action = "/tax-office/service/allReports"  method="GET" >
         <button type="submit" class="btn btn-primary btn-lg">All reports</button>
      </form>
  </div>

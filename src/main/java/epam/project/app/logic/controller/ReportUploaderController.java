@@ -1,8 +1,10 @@
 package epam.project.app.logic.controller;
 
+import com.oracle.wls.shaded.org.apache.xpath.operations.Bool;
 import epam.project.app.infra.web.ModelAndView;
 import epam.project.app.infra.web.exception.AppException;
 import epam.project.app.logic.entity.user.User;
+import epam.project.app.logic.exception.ReportException;
 import epam.project.app.logic.service.ReportService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -18,8 +20,9 @@ import java.io.File;
 @Log4j2
 @RequiredArgsConstructor
 public class ReportUploaderController {
-    public static final String UPLOAD_DIRECTORY = "upload\\id";
-    public static final String DEFAULT_FILENAME = "default.file";
+    private static final String UPLOAD_DIRECTORY = "upload\\id";
+    private static final String DEFAULT_FILENAME = "default.file";
+
     private final ReportService reportService;
 
     @SneakyThrows
@@ -32,20 +35,26 @@ public class ReportUploaderController {
         }
         String fileName;
         Part part = request.getPart("part");
-        fileName = getFileName(part,uploadPath);
-        if (fileName.endsWith(".xml") || fileName.endsWith(".json")) {
-            part.write(uploadPath + File.separator + fileName);
+        fileName = getFileName(part, uploadPath);
+        String path = uploadPath + File.separator + fileName;
+
+        if (fileName.endsWith(".xml")) {
+            part.write(path);
+            reportService.xmlValidation(path);
+        } else if (fileName.endsWith(".json")) {
+            part.write(path);
+            reportService.jsonValidation(path);
         } else {
             throw new AppException("Please choose allowed file type: XML or JSON");
         }
-            String type = request.getParameter("type");
-            log.log(Level.INFO, "File " + fileName + " has uploaded successfully!");
-            reportService.uploadReport(fileName, uploadPath, userFromSession.getId(), type);
-            ModelAndView modelAndView = new ModelAndView();
-            modelAndView.setRedirect(true);
-            modelAndView.setView("/client/homePage.jsp");
-            return modelAndView;
-        }
+        String type = request.getParameter("type");
+        log.log(Level.INFO, "File " + fileName + " has uploaded successfully!");
+        reportService.uploadReport(fileName, uploadPath, userFromSession.getId(), type);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setRedirect(true);
+        modelAndView.setView("/client/homePage.jsp");
+        return modelAndView;
+    }
 
     private User getUserFromSession(HttpSession session) {
         return (User) session.getAttribute("user");
@@ -59,7 +68,7 @@ public class ReportUploaderController {
                 int i = 1;
                 String name = fileName;
                 while (new File(uploadPath + "/" + fileName).exists()) {
-                    fileName = "("+i+")" + name;
+                    fileName = "(" + i + ")" + name;
                     i++;
                 }
                 return fileName;

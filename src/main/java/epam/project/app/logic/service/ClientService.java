@@ -17,13 +17,8 @@ public class ClientService {
         return clientRepository.insertClient(dto).orElseThrow(() -> new ClientException("cannot register new Client"));
     }
 
-    public Client getClientById(Long id) {
-        return clientRepository.getClientById(id).orElseThrow(() -> new ClientException("cannot get client"));
-    }
-
     public List<Client> getAllClients() {
-        List<Client> clients = clientRepository.getAllClients();
-        return clients;
+        return clientRepository.getAllClients();
     }
 
     public Client deleteClientById(Long id) {

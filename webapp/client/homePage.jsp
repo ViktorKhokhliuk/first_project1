@@ -64,7 +64,7 @@
                      </div>
                    </div>
              </form>
-             <form action = "/tax-office/service/getAllReportsByClientId"  method="GET" class = reports>
+             <form action = "/tax-office/service/allReportsByClient"  method="GET" class = reports>
                 <input type="hidden" name="clientId" value="${user.id}"/><br><br>
                 <button type="submit" class="btn btn-primary btn-lg">My Reports</button>
              </form>

@@ -92,7 +92,7 @@
 							<td><c:out value="${client.surname}" /></td>
 							<td><c:out value="${client.itn}" /></td>
 							<td>
-                               <form action = "/tax-office/service/getAllReportsByClientId" method = "GET">
+                               <form action = "/tax-office/service/allReportsByClient" method = "GET">
 							     <input type="hidden" name="clientId" value="${client.id}"/>
 							     <input type="hidden" name="clientLogin" value="<c:out value='${client.login}'/>"/>
 							     <button type="submit" class="btn btn-outline-info">Reports</button>

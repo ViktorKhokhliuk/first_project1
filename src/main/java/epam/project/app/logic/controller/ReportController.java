@@ -4,10 +4,10 @@ import epam.project.app.infra.web.ModelAndView;
 import epam.project.app.infra.web.QueryParameterResolver;
 import epam.project.app.logic.entity.report.Report;
 import epam.project.app.logic.entity.dto.ReportUpdateDto;
+import epam.project.app.logic.entity.report.ReportParameters;
 import epam.project.app.logic.entity.user.Client;
 import epam.project.app.logic.entity.user.User;
 import epam.project.app.logic.entity.user.UserRole;
-import epam.project.app.logic.exception.ReportException;
 import epam.project.app.logic.service.ReportService;
 import jakarta.servlet.http.HttpServletRequest;;
 import lombok.RequiredArgsConstructor;
@@ -33,11 +33,9 @@ public class ReportController {
         ReportUpdateDto reportUpdateDto = queryParameterResolver.getObject(request, ReportUpdateDto.class);
         String path = "webapp/upload/id" + reportUpdateDto.getClientId() + "/" + reportUpdateDto.getTitle();
         File file = new File(path);
-        if (file.delete()) {
+        file.delete();
             reportService.deleteReportById(reportUpdateDto.getId());
             return configuringModelAndViewAfterUpdate(reportUpdateDto, user);
-        }
-        throw new ReportException("cannot delete report");
     }
 
 
@@ -61,6 +59,7 @@ public class ReportController {
     public ModelAndView getAllReports(HttpServletRequest request) {
         Map<List<Report>, Map<Long, Client>> map = reportService.getAllReports();
         List<Report> reports = map.entrySet().iterator().next().getKey();
+        Collections.sort(reports);
         Map<Long, Client> clientMap = map.entrySet().iterator().next().getValue();
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setView("/inspector/allReports.jsp");
@@ -115,11 +114,18 @@ public class ReportController {
     }
 
     public ModelAndView showReport(HttpServletRequest request) {
+        ModelAndView modelAndView = new ModelAndView();
         long clientId = Long.parseLong(request.getParameter("clientId"));
         String title = request.getParameter("title");
-        String path = "/upload/id" + clientId + "/" + title;
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setView(path);
+        String path = "webapp/upload/id" + clientId + "/" + title;
+        ReportParameters reportParameters;
+        if (path.endsWith(".xml")) {
+            reportParameters = reportService.getReportParametersXml(path);
+        } else {
+            reportParameters = reportService.getReportParametersJson(path);
+        }
+        modelAndView.addAttribute("reportParameters", reportParameters);
+        modelAndView.setView("/user/report.jsp");
         return modelAndView;
     }
 

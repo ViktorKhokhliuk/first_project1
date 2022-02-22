@@ -101,7 +101,7 @@
                <button type="submit" class="btn btn-outline-dark">Filter</button>
             </div>
      </form>
-     <form action = "/tax-office/service/getAllReportsByClientId"  method="GET" class = "reports">
+     <form action = "/tax-office/service/allReportsByClient"  method="GET" class = "reports">
         <input type="hidden" name="clientId" value="${clientId}"/>
          <input type="hidden" name="clientLogin" value="${clientLogin}"/>
          <button type="submit" class="btn btn-primary">All reports</button>
@@ -112,7 +112,7 @@
 				<thead>
 					<tr>
 					    <th>№</th>
-						<th>Name</th>
+						<th>Title</th>
 						<th>Date</th>
 						<th>Type</th>
 						<th>Status</th>

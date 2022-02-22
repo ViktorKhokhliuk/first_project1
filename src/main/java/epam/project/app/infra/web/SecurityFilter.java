@@ -19,7 +19,27 @@ public class SecurityFilter implements Filter {
     public void init(FilterConfig filterConfig) throws ServletException {
         requestMatchers = new ArrayList<>();
 
-        requestMatchers.add(new RequestMatcher("inspector/homePage.jsp", UserRole.INSPECTOR));
+        requestMatchers.add(new RequestMatcher("/inspector/homePage.jsp", UserRole.INSPECTOR));
+        requestMatchers.add(new RequestMatcher("/inspector/allClients.jsp", UserRole.INSPECTOR));
+        requestMatchers.add(new RequestMatcher("/inspector/allReports.jsp", UserRole.INSPECTOR));
+        requestMatchers.add(new RequestMatcher("/inspector/reportsByClientId.jsp", UserRole.INSPECTOR));
+        requestMatchers.add(new RequestMatcher("/service/searchClients", UserRole.INSPECTOR));
+        requestMatchers.add(new RequestMatcher("/service/allClients", UserRole.INSPECTOR));
+        requestMatchers.add(new RequestMatcher("/service/allReports", UserRole.INSPECTOR));
+        requestMatchers.add(new RequestMatcher("/service/filterAllReports", UserRole.INSPECTOR));
+
+        requestMatchers.add(new RequestMatcher("/client/edit.jsp", UserRole.CLIENT));
+        requestMatchers.add(new RequestMatcher("/client/reports.jsp", UserRole.CLIENT));
+        requestMatchers.add(new RequestMatcher("/client/homePage.jsp", UserRole.CLIENT));
+        requestMatchers.add(new RequestMatcher("/service/upload", UserRole.CLIENT));
+        requestMatchers.add(new RequestMatcher("/service/editReport", UserRole.CLIENT));
+
+        requestMatchers.add(new RequestMatcher("/user/report.jsp", UserRole.CLIENT,UserRole.INSPECTOR));
+        requestMatchers.add(new RequestMatcher("/service/toHome", UserRole.CLIENT,UserRole.INSPECTOR));
+        requestMatchers.add(new RequestMatcher("/service/allReportsByClient", UserRole.CLIENT,UserRole.INSPECTOR));
+        requestMatchers.add(new RequestMatcher("/service/filterClientReports", UserRole.CLIENT,UserRole.INSPECTOR));
+        requestMatchers.add(new RequestMatcher("/service/showReport", UserRole.CLIENT,UserRole.INSPECTOR));
+
     }
 
     @Override
@@ -38,7 +58,7 @@ public class SecurityFilter implements Filter {
             filterChain.doFilter(servletRequest, servletResponse);
             return;
         }
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/error/forbiden.jsp");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/error/forbidden.jsp");
         requestDispatcher.forward(request, response);
     }
 

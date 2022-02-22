@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import epam.project.app.infra.web.Placeholder;
 import epam.project.app.infra.web.QueryParameterResolver;
 import epam.project.app.logic.controller.*;
+import epam.project.app.logic.entity.validate.FileValidator;
 import epam.project.app.logic.parse.JsonBuilder;
 import epam.project.app.logic.parse.JsonParser;
 import epam.project.app.logic.parse.XmlBuilder;
@@ -40,10 +41,10 @@ public class ConfigPlaceholders {
         placeholders.add(new Placeholder("POST", "deleteClientById", clientController::deleteClientById));
         placeholders.add(new Placeholder("POST", "saveReportChanges", reportEditController::saveReportChanges));
         placeholders.add(new Placeholder("GET", "toHome", userController::toHome));
-        placeholders.add(new Placeholder("GET", "getAllReportsByClientId", reportController::getAllReportsByClientId));
+        placeholders.add(new Placeholder("GET", "allReportsByClient", reportController::getAllReportsByClientId));
         placeholders.add(new Placeholder("GET", "searchClients", clientController::searchClientsByParameters));
-        placeholders.add(new Placeholder("GET", "getAllClients", clientController::getAllClients));
-        placeholders.add(new Placeholder("GET", "getAllReports", reportController::getAllReports));
+        placeholders.add(new Placeholder("GET", "allClients", clientController::getAllClients));
+        placeholders.add(new Placeholder("GET", "allReports", reportController::getAllReports));
         placeholders.add(new Placeholder("GET", "filterClientReports", reportController::getClientReportsByFilterParameters));
         placeholders.add(new Placeholder("GET", "filterAllReports", reportController::getAllReportsByFilterParameters));
         placeholders.add(new Placeholder("GET", "showReport", reportController::showReport));
@@ -52,7 +53,7 @@ public class ConfigPlaceholders {
     }
 
     private ReportService createReportService(DataSource dataSource, ObjectMapper objectMapper) {
-        return new ReportService(new ReportRepository(dataSource), new XmlParser(), new XmlBuilder(), new JsonParser(objectMapper), new JsonBuilder(objectMapper));
+        return new ReportService(new ReportRepository(dataSource),new FileValidator(objectMapper), new XmlParser(), new XmlBuilder(), new JsonParser(objectMapper), new JsonBuilder(objectMapper));
     }
 
     private ClientController createClientController(DataSource dataSource, QueryParameterResolver queryParameterResolver) {

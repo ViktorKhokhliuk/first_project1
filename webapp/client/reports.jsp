@@ -84,7 +84,7 @@
       </div>
       </form>
  <p>
-      <form action = "/tax-office/service/getAllReportsByClientId"  method="GET" align="left" class = "reports">
+      <form action = "/tax-office/service/allReportsByClient"  method="GET" align="left" class = "reports">
           <input type="hidden" name="clientId" value="${user.id}"/>
           <button type="submit" class="btn btn-primary">All my reports</button>
       </form>
@@ -94,7 +94,7 @@
 				<thead>
 					<tr>
 					    <th>№</th>
-                        <th>Name</th>
+                        <th>Title</th>
                         <th>Date</th>
                         <th>Type</th>
                         <th>Status</th>
