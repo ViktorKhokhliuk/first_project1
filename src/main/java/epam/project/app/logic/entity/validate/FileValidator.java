@@ -31,7 +31,7 @@ public class FileValidator {
             validator.validate(new StreamSource(file));
         } catch (SAXException | IOException e) {
             file.delete();
-            log.error(e.getMessage());
+            log.error("invalid xml file",e);
             throw new AppException("invalid file");
         }
     }
@@ -43,7 +43,7 @@ public class FileValidator {
             objectMapper.readValue(new File(path), ReportParameters.class);
         } catch (Exception e) {
             file.delete();
-            log.error(e.getMessage());
+            log.error("invalid json file",e);
             throw new AppException("invalid file");
         }
     }

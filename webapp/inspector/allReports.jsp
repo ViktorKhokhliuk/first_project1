@@ -156,7 +156,7 @@
                                       <input type="hidden" name="itn" value="${itn}"/>
                                       <button type="submit" class="btn btn-outline-dark">ACCEPTED</button>
                                   </form>
-                                  <a href="showReport?clientId=${client.id}&title=<c:out value='${report.title}'/>" download >
+                                  <a href="upload/id${client.id}/${report.title}" download >
                                       <button  class="btn btn-outline-primary">Download</button>
                                   </a>
                                   <form action="/tax-office/service/deleteReportById" method="POST" onSubmit='return confirm("Are you sure?");'>
@@ -189,7 +189,7 @@
                </div>
                <div class="modal-body">
                    <form action="/tax-office/service/updateStatusOfReport" method="POST">
-                      <textarea rows="10" cols="45" name="info" required placeholder="Enter a reason"></textarea>
+                      <textarea rows="10" cols="45" name="info" maxlength="100" required placeholder="Enter a reason"></textarea>
                       <input type="hidden" name="status" value="UNACCEPTED"/>
                       <input id="hide1" type="hidden" name="id" value=""/>
                       <input id="hide2" type="hidden" name="clientId" value=""/>

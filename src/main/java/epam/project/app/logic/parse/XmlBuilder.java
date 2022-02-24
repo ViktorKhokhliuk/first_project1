@@ -68,7 +68,7 @@ public class XmlBuilder {
             write(doc, xmlFile);
 
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.error("cannot build xml file",e);
             throw new ReportException("cannot edit report");
         }
     }

@@ -16,10 +16,12 @@
         <meta charset="UTF-8">
     </head>
     <body>
-         <jsp:text>
-            <h3 align = "center">error: ${message}</h3>
-         </jsp:text>
-         <form action = "/tax-office/index.jsp">
+    <h3 style="color:red">
+     <center>
+            error: ${message}
+     </center>
+    </h3>
+         <form action = "/tax-office/index.jsp"  align = "center">
          <input type="button" class="btn btn-secondary" onclick="history.back();" value="Back"/>
          </form>
     </body>

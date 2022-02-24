@@ -9,10 +9,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 
 import java.io.File;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RequiredArgsConstructor
 public class ClientController {
@@ -60,8 +57,8 @@ public class ClientController {
     public ModelAndView deleteClientById(HttpServletRequest request) {
         Long clientId = Long.parseLong(request.getParameter("clientId"));
         String path = "webapp/upload/id"+clientId;
-        deleteFiles(new File(path));
         clientService.deleteClientById(clientId);
+        deleteFiles(new File(path));
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setRedirect(true);
         modelAndView.setView("/service/getAllClients");
@@ -72,7 +69,7 @@ public class ClientController {
         if (!file.exists())
             return;
         if (file.isDirectory()) {
-            for (File f : file.listFiles()) {
+            for (File f : Objects.requireNonNull(file.listFiles())) {
                 deleteFiles(f);
             }
         }

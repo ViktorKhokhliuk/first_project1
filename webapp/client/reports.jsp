@@ -121,7 +121,7 @@
                                   <input type="hidden" name="type" value="${type}"/>
                                   <button type="submit" class="btn btn-outline-primary" >Edit</button>
                                </form>
-							   <a href="showReport?clientId=${user.id}&title=<c:out value='${report.title}'/>" download >
+							   <a href="upload/id${user.id}/${report.title}" download >
 							   <button  class="btn btn-outline-primary">Download</button>
 							   </a>
 							   <form action="/tax-office/service/deleteReportById" method="POST" onSubmit='return confirm("Are you sure?");'>

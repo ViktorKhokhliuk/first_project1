@@ -14,7 +14,7 @@ public class ClientService {
     private final ClientRepository clientRepository;
 
     public Client registration(ClientRegistrationDto dto) {
-        return clientRepository.insertClient(dto).orElseThrow(() -> new ClientException("cannot register new Client"));
+        return clientRepository.insertClient(dto).orElseThrow(() -> new ClientException("user with this login already exists"));
     }
 
     public List<Client> getAllClients() {

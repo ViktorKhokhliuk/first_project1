@@ -59,6 +59,7 @@ public class SecurityFilter implements Filter {
             return;
         }
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/error/forbidden.jsp");
+        request.setAttribute("message","Access to the page is forbidden");
         requestDispatcher.forward(request, response);
     }
 

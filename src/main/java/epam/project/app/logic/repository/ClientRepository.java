@@ -20,7 +20,6 @@ public class ClientRepository {
     private static final String INSERT_CLIENT = "INSERT INTO client (id,name,surname,itn) VALUES (?,?,?,?);";
     private static final String INSERT_USER = "INSERT INTO user (login,password,role) VALUES (?,?,?);";
     private static final String SELECT_CLIENT_BY_ID = "select * from user join client on user.id=client.id where user.id= ?;";
-    private static final String SELECT_CLIENT_BY_LOGIN = "select * from user join client on user.id=client.id where user.login= ?;";
     private static final String SELECT_ALL_CLIENTS = "select * from client join user on user.id=client.id;";
     private static final String DELETE_REPORTS_BY_CLIENT_ID = "delete from report where client_id = ? ;";
     private static final String DELETE_CLIENT_BY_ID = "delete from client where id = ?;";
@@ -187,7 +186,8 @@ public class ClientRepository {
             try {
                 autoCloseable.close();
             } catch (Exception e) {
-                e.printStackTrace();
+                log.error(e.getMessage());
+                throw new ClientException("");
             }
         }
     }
@@ -197,7 +197,8 @@ public class ClientRepository {
             try {
                 connection.rollback();
             } catch (SQLException e) {
-                e.printStackTrace();
+                log.error(e.getMessage());
+                throw new ClientException("");
             }
         }
     }

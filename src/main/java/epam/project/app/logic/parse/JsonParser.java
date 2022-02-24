@@ -9,6 +9,7 @@ import lombok.extern.log4j.Log4j2;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Optional;
 
 @Log4j2
 @RequiredArgsConstructor
@@ -19,10 +20,10 @@ public class JsonParser {
         ReportParameters reportParameters;
         try {
             reportParameters = mapper.readValue(new File(jsonFileName), ReportParameters.class);
+            return reportParameters;
         } catch (IOException e) {
-            log.error(e.getMessage());
+            log.error("cannot parse json file",e);
             throw new ReportException("cannot edit report");
         }
-        return reportParameters;
     }
 }

@@ -33,7 +33,7 @@ public class JsonBuilder {
         try {
             objectMapper.writeValue(new FileWriter(jsonFileName), reportParameters);
         } catch (IOException e) {
-            log.error(e.getMessage());
+            log.error("cannot build json file",e);
             throw new ReportException("cannot edit report");
         }
     }

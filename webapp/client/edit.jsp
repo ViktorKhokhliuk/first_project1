@@ -21,7 +21,7 @@
     <form action="/tax-office/service/saveReportChanges" method="POST">
 
      <div class="form-group row">
-      <label for="Name" class="col-sm-2 col-form-label">Name</label>
+      <label for="name" class="col-sm-2 col-form-label">Name</label>
       <div class="col-sm-7">
        <input type="text" value = "${user.name}" class="form-control" name="name"
         readonly disabled>
@@ -54,15 +54,15 @@
      </div>
 
      <div class="form-group row">
-      <label for="password" class="col-sm-2 col-form-label">Nationality</label>
+      <label for="nationality" class="col-sm-2 col-form-label">Nationality</label>
       <div class="col-sm-7">
-       <input type="text" value = "${reportParameters.nationality}" class="form-control" name="nationality"
+       <input type="text" value = "${reportParameters.nationality}" maxlength="20" class="form-control" name="nationality"
         required>
       </div>
      </div>
 
      <div class="form-group row">
-      <label for="password" class="col-sm-2 col-form-label">Year</label>
+      <label for="year" class="col-sm-2 col-form-label">Year</label>
       <div class="col-sm-7">
        <input type="text" value = "${reportParameters.year}" class="form-control" name="year"
         required  required pattern = "^[1-9][0-9]{3}$"
@@ -71,7 +71,7 @@
      </div>
 
      <div class="form-group row">
-      <label for="password" class="col-sm-2 col-form-label">Quarter(1,2,3,4)</label>
+      <label for="quarter" class="col-sm-2 col-form-label">Quarter(1,2,3,4)</label>
       <div class="col-sm-7">
        <input type="number" min = "1" max = "4" value = "${reportParameters.quarter}" class="form-control" name="quarter"
         required >
@@ -79,7 +79,7 @@
      </div>
 
      <div class="form-group row">
-      <label for="password" class="col-sm-2 col-form-label">Number of Month</label>
+      <label for="month" class="col-sm-2 col-form-label">Number of Month</label>
       <div class="col-sm-7">
        <input type="number" min = "1" max = "12" value = "${reportParameters.month}" class="form-control" name="month"
         required >
@@ -87,7 +87,7 @@
      </div>
 
      <div class="form-group row">
-      <label for="surname" class="col-sm-2 col-form-label">Group(I,II,III,IV)</label>
+      <label for="group" class="col-sm-2 col-form-label">Group(I,II,III,IV)</label>
       <div class="col-sm-7">
        <input type="text" value = "${reportParameters.group}" class="form-control" name="group"
         required pattern = "(I){1}|(II){1}|(III){1}|(IV){1}"
@@ -96,18 +96,18 @@
      </div>
 
      <div class=" form-group row">
-      <label for="itn" class="col-sm-2 col-form-label">Activity</label>
+      <label for="activity" class="col-sm-2 col-form-label">Activity</label>
       <div class="col-sm-7">
-       <input type="text" value = "${reportParameters.activity}" class="form-control" name="activity"
+       <input type="text" value = "${reportParameters.activity}" maxlength="30" class="form-control" name="activity"
         required >
       </div>
      </div>
 
      <div class="form-group row">
-      <label for="login" class="col-sm-2 col-form-label">Income</label>
+      <label for="income" class="col-sm-2 col-form-label">Income</label>
       <div class="col-sm-7">
-       <input type="text" value = "${reportParameters.income}" class="form-control" name="income"
-        required pattern = "\d+"
+       <input type="text" value = "${reportParameters.income}"  maxlength="20" class="form-control" name="income"
+        required pattern = "\d"
         title="The income must contain only numbers">
       </div>
      </div>
