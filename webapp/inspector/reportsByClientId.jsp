@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
  pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib uri="/WEB-INF/tag/language.tld" prefix="lan" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,8 +12,8 @@
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 	crossorigin="anonymous">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
-          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 </head>
    <body>
    <script>
@@ -65,10 +66,10 @@
                 <form action="/tax-office/service/toHome" method="GET">
                    <button type="submit" class="btn btn-primary">Home</button>
                 </form>
-                <form action = "/tax-office/service/getAllClients"  method="GET"  class = "clients">
+                <form action = "/tax-office/service/allClients"  method="GET"  class = "clients">
                    <button type="submit" class="btn btn-primary">All clients</button>
                 </form>
-                <form action = "/tax-office/service/getAllReports"  method="GET" >
+                <form action = "/tax-office/service/allReports"  method="GET" >
                    <button type="submit" class="btn btn-primary">All reports</button>
                 </form>
 		</nav>

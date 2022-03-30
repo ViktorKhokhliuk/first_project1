@@ -11,13 +11,15 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
+import java.util.Locale;
+
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
     private final QueryParameterResolver parameterResolver;
 
-    public ModelAndView login(HttpServletRequest req) {
-        UserDTO userDTO = parameterResolver.getObject(req, UserDTO.class);
+    public ModelAndView login(HttpServletRequest request) {
+        UserDTO userDTO = parameterResolver.getObject(request, UserDTO.class);
         User userByLogin = userService.getUserByLogin(userDTO);
 
         ModelAndView modelAndView = new ModelAndView();
@@ -27,18 +29,30 @@ public class UserController {
             modelAndView.setView("/client/homePage.jsp");
         }
         modelAndView.setRedirect(true);
-        HttpSession session = req.getSession(true);
+        HttpSession session = request.getSession(true);
         session.setAttribute("user", userByLogin);
         return modelAndView;
     }
 
-    public ModelAndView logout(HttpServletRequest req) {
-        HttpSession session = req.getSession(false);
+    public ModelAndView logout(HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
         if (session != null) {
             session.invalidate();
         }
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setView("/index.jsp");
+        modelAndView.setRedirect(true);
+        return modelAndView;
+    }
+
+    public ModelAndView changeLocale(HttpServletRequest request) {
+        String selectedLocale = request.getParameter("selectedLocale");
+        String view = request.getParameter("view");
+        Locale locale = new Locale(selectedLocale);
+        HttpSession session = request.getSession(false);
+        session.setAttribute("selectedLocale", locale);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setView(view);
         modelAndView.setRedirect(true);
         return modelAndView;
     }

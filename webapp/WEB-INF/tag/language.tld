@@ -10,7 +10,7 @@
 
     <tag>
         <name>print</name>
-        <tag-class>org.test.project.infra.web.tag.LanguageTag</tag-class>
+        <tag-class>epam.project.app.infra.web.tag.LanguageTag</tag-class>
         <body-content>empty</body-content>
         <attribute>
             <name>message</name>

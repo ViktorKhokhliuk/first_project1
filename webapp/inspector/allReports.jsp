@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
  pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib uri="/WEB-INF/tag/language.tld" prefix="lan" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,6 +31,9 @@
 	<style>
 	.logout {
       margin-right:10px;
+    }
+    .locale {
+     margin-right:10px;
     }
     .search{
     margin-right:100px;
@@ -69,7 +73,7 @@
 		</nav>
 	</header>
  <br>
- 		<h3 class="text-center">List of Reports</h3>
+ 		<h3 class="text-center"><lan:print message="list_reports"/></h3>
  		<hr>
        <form action = "/tax-office/service/filterAllReports"  method="GET" class = "search" align = "right">
               <div class="form-group">

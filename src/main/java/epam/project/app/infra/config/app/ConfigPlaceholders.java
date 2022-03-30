@@ -34,6 +34,7 @@ public class ConfigPlaceholders {
 
         placeholders.add(new Placeholder("POST", "login", userController::login));
         placeholders.add(new Placeholder("POST", "logout", userController::logout));
+        placeholders.add(new Placeholder("POST", "changeLocale", userController::changeLocale));
         placeholders.add(new Placeholder("POST", "registration", clientController::registration));
         placeholders.add(new Placeholder("POST", "upload", reportUploaderController::uploadFile));
         placeholders.add(new Placeholder("POST", "updateStatusOfReport", reportController::updateStatusOfReport));

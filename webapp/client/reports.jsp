@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
  pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@taglib uri="/WEB-INF/tag/language.tld" prefix="lan" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,48 +45,48 @@
 			style="background-color: black">
 			<div>
 				<form accept-charset="UTF-8" method="POST" action="/tax-office/service/logout" class = "logout">
-                <button type="submit" class="btn btn-primary">Logout</button>
+                <button type="submit" class="btn btn-primary"><lan:print message="logout"/></button>
                 </form>
             </div>
             <div>
                 <form action="/tax-office/service/toHome" method="GET">
-                <button type="submit" class="btn btn-primary">Home</button>
+                <button type="submit" class="btn btn-primary"><lan:print message="home"/></button>
                 </form>
             </div>
 		</nav>
 	</header>
  <br>
-	<h3 class="text-center">List of Reports</h3>
+	<h3 class="text-center"><lan:print message="list_reports"/></h3>
     <hr>
  <p>
       <form action = "/tax-office/service/filterClientReports" class = "filter" align="right">
       <div class="form-group">
-         <label for="name">Choose a date:</label>
+         <label for="name"><lan:print message="choose_date"/>:</label>
            <input type="date" name="date"
             min="01-01-2010" max="12-31-2100"/>
-         <label for="name">Choose a status:</label>
+         <label for="name"><lan:print message="choose_status"/>:</label>
             <select name="status">
-              <option value="">status</option>
-              <option value="SUBMITTED">SUBMITTED</option>
-              <option value="ACCEPTED">ACCEPTED</option>
-              <option value="UNACCEPTED">UNACCEPTED</option>
-              <option value="EDITED">EDITED</option>
+              <option value=""><lan:print message="status"/></option>
+              <option value="SUBMITTED"><lan:print message="submitted"/></option>
+              <option value="ACCEPTED"><lan:print message="accepted"/></option>
+              <option value="UNACCEPTED"><lan:print message="unaccepted"/></option>
+              <option value="EDITED"><lan:print message="edited"/></option>
             </select>
-         <label for="name">Choose a type:</label>
+         <label for="name"><lan:print message="choose_type"/>:</label>
             <select name="type">
-              <option value="">type</option>
-              <option value="income statement">income statement</option>
-              <option value="income tax">income tax</option>
-              <option value="single tax">single tax</option>
+              <option value=""><lan:print message="type"/></option>
+              <option value="income statement"><lan:print message="income_statement"/></option>
+              <option value="income tax"><lan:print message="income_tax"/></option>
+              <option value="single tax"><lan:print message="single_tax"/></option>
             </select>
          <input type="hidden" name="clientId" value="${user.id}"/>
-         <button type="submit" class="btn btn-outline-dark">Filter</button>
+         <button type="submit" class="btn btn-outline-dark"><lan:print message="filter"/></button>
       </div>
       </form>
  <p>
       <form action = "/tax-office/service/allReportsByClient"  method="GET" align="left" class = "reports">
           <input type="hidden" name="clientId" value="${user.id}"/>
-          <button type="submit" class="btn btn-primary">All my reports</button>
+          <button type="submit" class="btn btn-primary"><lan:print message="all_my_reports"/></button>
       </form>
 <br>
 			<table class=" table-bordered " width="1200">
@@ -94,12 +94,12 @@
 				<thead>
 					<tr>
 					    <th>№</th>
-                        <th>Title</th>
-                        <th>Date</th>
-                        <th>Type</th>
-                        <th>Status</th>
-                        <th>Info</th>
-                        <th>Actions</th>
+                        <th><lan:print message="title"/></th>
+                        <th><lan:print message="date"/></th>
+                        <th><lan:print message="type_table"/></th>
+                        <th><lan:print message="status_table"/></th>
+                        <th><lan:print message="info"/></th>
+                        <th><lan:print message="actions"/></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -119,19 +119,19 @@
                                   <input type="hidden" name="date" value="${date}"/>
                                   <input type="hidden" name="statusFilter" value="${status}"/>
                                   <input type="hidden" name="type" value="${type}"/>
-                                  <button type="submit" class="btn btn-outline-primary" >Edit</button>
+                                  <button type="submit" class="btn btn-outline-primary" ><lan:print message="edit"/></button>
                                </form>
 							   <a href="upload/id${user.id}/${report.title}" download >
-							   <button  class="btn btn-outline-primary">Download</button>
+							   <button  class="btn btn-outline-primary"><lan:print message="download"/></button>
 							   </a>
-							   <form action="/tax-office/service/deleteReportById" method="POST" onSubmit='return confirm("Are you sure?");'>
+							   <form action="/tax-office/service/deleteReportById" method="POST" onSubmit='return confirm("<lan:print message="are_you_sure"/>");'>
                                   <input type="hidden" name="id" value="${report.id}"/>
                                   <input type="hidden" name="clientId" value="${user.id}"/>
                                   <input type="hidden" name="title" value="${report.title}"/>
                                   <input type="hidden" name="date" value="${date}"/>
                                   <input type="hidden" name="statusFilter" value="${status}"/>
                                   <input type="hidden" name="type" value="${type}"/>
-                                  <button type="submit" class="btn btn-outline-danger">Delete</button>
+                                  <button type="submit" class="btn btn-outline-danger"><lan:print message="delete"/></button>
                                </form>
 							</td>
 						</tr>

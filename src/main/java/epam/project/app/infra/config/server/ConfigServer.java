@@ -1,6 +1,7 @@
 package epam.project.app.infra.config.server;
 
 import epam.project.app.infra.config.app.PropertyLoader;
+import epam.project.app.infra.web.LocaleSessionListener;
 import epam.project.app.infra.web.Server;
 import jakarta.servlet.Filter;
 import jakarta.servlet.http.HttpServlet;
@@ -11,6 +12,7 @@ import org.apache.tomcat.util.descriptor.web.FilterMap;
 
 import java.io.File;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public class ConfigServer {
@@ -28,24 +30,32 @@ public class ConfigServer {
         String docBase = new File("webapp").getAbsolutePath();
 
         Context context = tomcat.addWebapp(contextPath, docBase);
-        filters.stream().iterator().forEachRemaining(filter -> addFilter(context, filter));
+        server.setContext(context);
+
+        filters.stream().iterator().forEachRemaining(filter -> addFilter(server, filter));
         servlets.entrySet().stream()
                 .iterator()
-                .forEachRemaining(entry -> registerServlet(context, entry));
+                .forEachRemaining(entry -> registerServlet(server, entry));
+        registerSessionListeners(server, propertyLoader);
         context.setAllowCasualMultipartParsing(true);
         return server;
     }
 
-    private void registerServlet(Context context, Map.Entry<String, HttpServlet> entry) {
+    private void registerSessionListeners(Server server, PropertyLoader propertyLoader) {
+        Locale selectedLocale = new Locale("en");
+        LocaleSessionListener localeSessionListener = new LocaleSessionListener(List.of(new Locale("en"), new Locale("ru")),selectedLocale);
+        server.addListener(List.of(localeSessionListener));
+    }
+
+    private void registerServlet(Server server, Map.Entry<String, HttpServlet> entry) {
         String urlPattern = entry.getKey();
         HttpServlet servlet = entry.getValue();
         String servletName = entry.getValue().getServletName();
 
-        Tomcat.addServlet(context, servletName, servlet);
-        context.addServletMappingDecoded(urlPattern, servletName);
+        server.addServlet(servletName, urlPattern, servlet);
     }
 
-    private void addFilter(Context context, Filter filter) {
+    private void addFilter(Server server, Filter filter) {
         FilterDef filterDef = new FilterDef();
         filterDef.setFilterName(filter.getClass().getSimpleName());
         filterDef.setFilterClass(filter.getClass().getName());
@@ -54,7 +64,6 @@ public class ConfigServer {
         filterMap.setFilterName(filter.getClass().getSimpleName());
         filterMap.addURLPattern("/*");
 
-        context.addFilterDef(filterDef);
-        context.addFilterMap(filterMap);
+        server.addFilter(filterDef, filterMap);
     }
 }

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
  pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@taglib uri="/WEB-INF/tag/language.tld" prefix="lan" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,13 +22,13 @@
     </script>
     <p>
 <div class="container">
-  <h1>Report info:</h1>
+  <h1><lan:print message="report_info"/>:</h1>
   <div class="card">
    <div class="card-body">
     <form>
 
      <div class="form-group row">
-      <label for="person" class="col-sm-2 col-form-label">Person(natural,legal)</label>
+      <label for="person" class="col-sm-2 col-form-label"><lan:print message="person"/></label>
       <div class="col-sm-7">
        <input type="text" value = "${reportParameters.person}" class="form-control" name="person"
          readonly disabled>
@@ -36,7 +36,7 @@
      </div>
 
      <div class="form-group row">
-      <label for="nationality" class="col-sm-2 col-form-label">Nationality</label>
+      <label for="nationality" class="col-sm-2 col-form-label"><lan:print message="nationality"/></label>
       <div class="col-sm-7">
        <input type="text" value = "${reportParameters.nationality}" class="form-control" name="nationality"
          readonly disabled>
@@ -44,7 +44,7 @@
      </div>
 
      <div class="form-group row">
-      <label for="year" class="col-sm-2 col-form-label">Year</label>
+      <label for="year" class="col-sm-2 col-form-label"><lan:print message="year"/></label>
       <div class="col-sm-7">
        <input type="text" value = "${reportParameters.year}" class="form-control" name="year"
          readonly disabled>
@@ -52,7 +52,7 @@
      </div>
 
      <div class="form-group row">
-      <label for="quarter" class="col-sm-2 col-form-label">Quarter(1,2,3,4)</label>
+      <label for="quarter" class="col-sm-2 col-form-label"><lan:print message="quarter"/></label>
       <div class="col-sm-7">
        <input type="number" min = "1" max = "4" value = "${reportParameters.quarter}" class="form-control" name="quarter"
          readonly disabled>
@@ -60,7 +60,7 @@
      </div>
 
      <div class="form-group row">
-      <label for="month" class="col-sm-2 col-form-label">Number of Month</label>
+      <label for="month" class="col-sm-2 col-form-label"><lan:print message="month"/></label>
       <div class="col-sm-7">
        <input type="number" min = "1" max = "12" value = "${reportParameters.month}" class="form-control" name="month"
          readonly disabled>
@@ -68,7 +68,7 @@
      </div>
 
      <div class="form-group row">
-      <label for="group" class="col-sm-2 col-form-label">Group(I,II,III,IV)</label>
+      <label for="group" class="col-sm-2 col-form-label"><lan:print message="group"/></label>
       <div class="col-sm-7">
        <input type="text" value = "${reportParameters.group}" class="form-control" name="group"
          readonly disabled>
@@ -76,7 +76,7 @@
      </div>
 
      <div class=" form-group row">
-      <label for="activity" class="col-sm-2 col-form-label">Activity</label>
+      <label for="activity" class="col-sm-2 col-form-label"><lan:print message="activity"/></label>
       <div class="col-sm-7">
        <input type="text" value = "${reportParameters.activity}" class="form-control" name="activity"
          readonly disabled>
@@ -84,7 +84,7 @@
      </div>
 
      <div class="form-group row">
-      <label for="income" class="col-sm-2 col-form-label">Income</label>
+      <label for="income" class="col-sm-2 col-form-label"><lan:print message="income"/></label>
       <div class="col-sm-7">
        <input type="text" value = "${reportParameters.income}" class="form-control" name="income"
          readonly disabled>
@@ -92,7 +92,7 @@
      </div>
     </form>
     <br>
-    <input type="button" class="btn btn-secondary" onclick="close_window();return false;" value="Back"/>
+    <input type="button" class="btn btn-secondary" onclick="close_window();return false;" value=<lan:print message="back"/>>
    </div>
   </div>
  </div>

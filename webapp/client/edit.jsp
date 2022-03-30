@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
  pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@taglib uri="/WEB-INF/tag/language.tld" prefix="lan" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -107,7 +107,7 @@
       <label for="income" class="col-sm-2 col-form-label">Income</label>
       <div class="col-sm-7">
        <input type="text" value = "${reportParameters.income}"  maxlength="20" class="form-control" name="income"
-        required pattern = "\d"
+        required pattern = "[0-9]*"
         title="The income must contain only numbers">
       </div>
      </div>
