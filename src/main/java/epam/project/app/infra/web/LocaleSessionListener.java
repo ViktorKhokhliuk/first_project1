@@ -19,8 +19,11 @@ public class LocaleSessionListener implements HttpSessionListener {
     @Override
     public void sessionCreated(HttpSessionEvent httpSessionEvent) {
         HttpSession session = httpSessionEvent.getSession();
+        log.info("Session created");
         session.setAttribute("locales", locales);
+        log.info("Set session locales --> " + locales);
         session.setAttribute("selectedLocale", selectedLocale);
+        log.info("Set session selected locale --> " + selectedLocale);
     }
 
     @Override

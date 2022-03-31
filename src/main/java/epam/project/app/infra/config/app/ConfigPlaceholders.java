@@ -15,13 +15,15 @@ import epam.project.app.logic.repository.UserRepository;
 import epam.project.app.logic.service.ClientService;
 import epam.project.app.logic.service.ReportService;
 import epam.project.app.logic.service.UserService;
+import lombok.extern.log4j.Log4j2;
 
 import javax.sql.DataSource;
 import java.util.ArrayList;
 import java.util.List;
-
+@Log4j2
 public class ConfigPlaceholders {
     public List<Placeholder> config(DataSource dataSource, ObjectMapper objectMapper) {
+        log.info("start configure placeholders");
         List<Placeholder> placeholders = new ArrayList<>();
         QueryParameterResolver queryParameterResolver = new QueryParameterResolver(objectMapper);
 

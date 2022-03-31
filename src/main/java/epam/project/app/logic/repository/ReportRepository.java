@@ -1,6 +1,5 @@
 package epam.project.app.logic.repository;
 
-import epam.project.app.logic.entity.dto.ReportEditDto;
 import epam.project.app.logic.entity.report.Report;
 import epam.project.app.logic.entity.report.ReportInfo;
 import epam.project.app.logic.entity.report.ReportStatus;
@@ -258,15 +257,5 @@ public class ReportRepository {
             }
         }
         return Optional.empty();
-    }
-
-    private void close(AutoCloseable autoCloseable) {
-        if (autoCloseable != null) {
-            try {
-                autoCloseable.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
     }
 }

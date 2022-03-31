@@ -2,7 +2,6 @@ package epam.project.app.infra.config.app;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import epam.project.app.Application;
-import epam.project.app.infra.web.DispatcherRequest;
 import epam.project.app.infra.web.Placeholder;
 import epam.project.app.infra.web.SecurityFilter;
 import epam.project.app.infra.web.Server;
@@ -25,12 +24,14 @@ public class ConfigApp {
         log.info("start config");
         PropertyLoader propertyLoader = new PropertyLoader();
         propertyLoader.loadConfig("app.yaml");
-        //set connection to db
+
         ConfigDataSource configDataSource = new ConfigDataSource();
         DataSource dataSource = configDataSource.createDataSource(propertyLoader);
-        //update database
+        log.info("set connection to db");
+
         ConfigLiquibase configLiquibase = new ConfigLiquibase(dataSource);
         configLiquibase.updateDatabase(propertyLoader);
+        log.info("update database");
 
         ConfigPlaceholders configPlaceholders = new ConfigPlaceholders();
         ObjectMapper objectMapper = new ObjectMapper();

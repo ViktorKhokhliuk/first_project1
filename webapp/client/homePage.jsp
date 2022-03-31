@@ -65,9 +65,9 @@
                      <label for="selectType" class="col-xs-2 control-label"><lan:print message="choose_type"/>:</label>
                         <select name="type" required>
                         <option value=""><lan:print message="type"/></option>
-                        <option value="income statement"><lan:print message="income_statement"/></option>
-                        <option value="income tax"><lan:print message="income_tax"/></option>
-                        <option value="single tax"><lan:print message="single_tax"/></option>
+                        <option value="income statement">income statement(Справка о доходах)</option>
+                        <option value="income tax">income tax(Подоходный налог)</option>
+                        <option value="single tax">single tax(Единый налог)</option>
                         </select>
                    </div>
                    <div class="form-group">

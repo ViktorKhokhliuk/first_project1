@@ -15,13 +15,13 @@
     <body>
     <p>
 <div class="container">
-  <h1>Edit form:</h1>
+  <h1><lan:print message="edit_form"/>:</h1>
   <div class="card">
    <div class="card-body">
     <form action="/tax-office/service/saveReportChanges" method="POST">
 
      <div class="form-group row">
-      <label for="name" class="col-sm-2 col-form-label">Name</label>
+      <label for="name" class="col-sm-2 col-form-label"><lan:print message="name"/></label>
       <div class="col-sm-7">
        <input type="text" value = "${user.name}" class="form-control" name="name"
         readonly disabled>
@@ -29,7 +29,7 @@
      </div>
 
      <div class="form-group row">
-      <label for="surname" class="col-sm-2 col-form-label">Surname</label>
+      <label for="surname" class="col-sm-2 col-form-label"><lan:print message="surname"/></label>
       <div class="col-sm-7">
        <input type="text" value = "${user.surname}" class="form-control" name="surname"
         readonly disabled>
@@ -37,7 +37,7 @@
      </div>
 
      <div class=" form-group row">
-      <label for="itn" class="col-sm-2 col-form-label">ITN</label>
+      <label for="itn" class="col-sm-2 col-form-label"><lan:print message="itn"/></label>
       <div class="col-sm-7">
        <input type="text" value = "${user.itn}" class="form-control" name="itn"
         readonly disabled>
@@ -45,16 +45,16 @@
      </div>
 
      <div class="form-group row">
-      <label for="login" class="col-sm-2 col-form-label">Person(natural,legal)</label>
+      <label for="login" class="col-sm-2 col-form-label"><lan:print message="person"/></label>
       <div class="col-sm-7">
        <input type="text" value = "${reportParameters.person}" class="form-control" name="person"
-        required pattern = "(natural){1}|(legal){1}"
-        title="natural or legal">
+        required pattern = "(natural){1}|(legal){1}|(физическое){1}|(юридическое){1}"
+        title="<lan:print message="person_pattern"/>">
       </div>
      </div>
 
      <div class="form-group row">
-      <label for="nationality" class="col-sm-2 col-form-label">Nationality</label>
+      <label for="nationality" class="col-sm-2 col-form-label"><lan:print message="nationality"/></label>
       <div class="col-sm-7">
        <input type="text" value = "${reportParameters.nationality}" maxlength="20" class="form-control" name="nationality"
         required>
@@ -62,16 +62,16 @@
      </div>
 
      <div class="form-group row">
-      <label for="year" class="col-sm-2 col-form-label">Year</label>
+      <label for="year" class="col-sm-2 col-form-label"><lan:print message="year"/></label>
       <div class="col-sm-7">
        <input type="text" value = "${reportParameters.year}" class="form-control" name="year"
         required  required pattern = "^[1-9][0-9]{3}$"
-        title="example: 2022">
+        title="<lan:print message="year_pattern"/>">
       </div>
      </div>
 
      <div class="form-group row">
-      <label for="quarter" class="col-sm-2 col-form-label">Quarter(1,2,3,4)</label>
+      <label for="quarter" class="col-sm-2 col-form-label"><lan:print message="quarter"/></label>
       <div class="col-sm-7">
        <input type="number" min = "1" max = "4" value = "${reportParameters.quarter}" class="form-control" name="quarter"
         required >
@@ -79,7 +79,7 @@
      </div>
 
      <div class="form-group row">
-      <label for="month" class="col-sm-2 col-form-label">Number of Month</label>
+      <label for="month" class="col-sm-2 col-form-label"><lan:print message="month"/></label>
       <div class="col-sm-7">
        <input type="number" min = "1" max = "12" value = "${reportParameters.month}" class="form-control" name="month"
         required >
@@ -87,16 +87,16 @@
      </div>
 
      <div class="form-group row">
-      <label for="group" class="col-sm-2 col-form-label">Group(I,II,III,IV)</label>
+      <label for="group" class="col-sm-2 col-form-label"><lan:print message="group"/></label>
       <div class="col-sm-7">
        <input type="text" value = "${reportParameters.group}" class="form-control" name="group"
         required pattern = "(I){1}|(II){1}|(III){1}|(IV){1}"
-        title="I or II or III or IV group">
+        title="<lan:print message="group_pattern"/>">
       </div>
      </div>
 
      <div class=" form-group row">
-      <label for="activity" class="col-sm-2 col-form-label">Activity</label>
+      <label for="activity" class="col-sm-2 col-form-label"><lan:print message="activity"/></label>
       <div class="col-sm-7">
        <input type="text" value = "${reportParameters.activity}" maxlength="30" class="form-control" name="activity"
         required >
@@ -104,11 +104,11 @@
      </div>
 
      <div class="form-group row">
-      <label for="income" class="col-sm-2 col-form-label">Income</label>
+      <label for="income" class="col-sm-2 col-form-label"><lan:print message="income"/></label>
       <div class="col-sm-7">
        <input type="text" value = "${reportParameters.income}"  maxlength="20" class="form-control" name="income"
         required pattern = "[0-9]*"
-        title="The income must contain only numbers">
+        title="<lan:print message="income_pattern"/>">
       </div>
      </div>
      <input type="hidden" name="id" value="${dto.id}"/>
@@ -117,10 +117,10 @@
      <input type="hidden" name="date" value="${dto.date}"/>
      <input type="hidden" name="statusFilter" value="${dto.statusFilter}"/>
      <input type="hidden" name="type" value="${dto.type}"/>
-     <button type="submit" class="btn btn-primary">Submit</button>
+     <button type="submit" class="btn btn-primary"><lan:print message="edit"/></button>
     </form>
     <br>
-    <input type="button" class="btn btn-secondary" onclick="history.back();" value="Back"/>
+    <input type="button" class="btn btn-secondary" onclick="history.back();" value=<lan:print message="back"/>>
    </div>
   </div>
  </div>

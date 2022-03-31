@@ -68,7 +68,7 @@
           <button type="submit" class="btn btn-outline-dark"><lan:print message="search"/></button>
        </div>
        </form>
-       <form action = "/tax-office/service/getAllClients"  method="GET" class = "clients">
+       <form action = "/tax-office/service/allClients"  method="GET" class = "clients">
            <button type="submit" class="btn btn-primary"><lan:print message="all_clients"/></button>
        </form>
 <br>
@@ -98,7 +98,7 @@
 							     <input type="hidden" name="clientLogin" value="<c:out value='${client.login}'/>"/>
 							     <button type="submit" class="btn btn-outline-info"><lan:print message="reports"/></button>
 							   </form>
-							   <form action="/tax-office/service/deleteClientById" method="POST" onSubmit='return confirm("Are you sure?");'>
+							   <form action="/tax-office/service/deleteClientById" method="POST" onSubmit='return confirm("<lan:print message="are_you_sure"/>");'>
                                  <input type="hidden" name="clientId" value="${client.id}"/>
                                  <button type="submit" class="btn btn-outline-danger"><lan:print message="delete"/></button>
                                </form>

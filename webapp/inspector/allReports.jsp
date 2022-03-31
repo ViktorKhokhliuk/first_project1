@@ -65,10 +65,10 @@
 		<nav class="navbar navbar-expand-md navbar-dark"
 			style="background-color: black">
 				<form accept-charset="UTF-8" method="POST" action="/tax-office/service/logout" class = "logout">
-                <button type="submit" class="btn btn-primary">Logout</button>
+                <button type="submit" class="btn btn-primary"><lan:print message="logout"/></button>
                 </form>
                 <form action="/tax-office/service/toHome" method="GET">
-                <button type="submit" class="btn btn-primary">Home</button>
+                <button type="submit" class="btn btn-primary"><lan:print message="home"/></button>
                 </form>
 		</nav>
 	</header>
@@ -77,43 +77,43 @@
  		<hr>
        <form action = "/tax-office/service/filterAllReports"  method="GET" class = "search" align = "right">
               <div class="form-group">
-                 <label for="name">Enter name:</label>
-                 <input type="text" name="name" placeholder="Name"/>
-                 <label for="name">Enter surname:</label>
-                 <input type="text" name="surname" placeholder="Surname"/>
-                 <label for="name">Enter ITN:</label>
-                 <input type="text" name="itn"= placeholder="ITN"/>
-                 <button type="submit" class="btn btn-outline-dark">Search</button>
+                 <label for="name"><lan:print message="name"/>:</label>
+                 <input type="text" name="name" placeholder="<lan:print message="enter_name"/>"/>
+                 <label for="name"><lan:print message="surname"/>:</label>
+                 <input type="text" name="surname" placeholder="<lan:print message="enter_surname"/>"/>
+                 <label for="name"><lan:print message="itn"/>:</label>
+                 <input type="text" name="itn"= placeholder="<lan:print message="enter_itn"/>"/>
+                 <button type="submit" class="btn btn-outline-dark"><lan:print message="search"/></button>
               </div>
        </form>
       <form action = "/tax-office/service/filterAllReports"  method="GET" class="filter" align = "right">
       <div class="form-group">
-         <label for="name">Choose a date:</label>
+         <label for="name"><lan:print message="choose_date"/>:</label>
            <input type="date" name="date"
             min="01-01-2010" max="12-31-2100"/>
-         <label for="name">Choose a status:</label>
+         <label for="name"><lan:print message="choose_status"/>:</label>
             <select name="status">
-              <option value="">status</option>
-              <option value="SUBMITTED">SUBMITTED</option>
-              <option value="ACCEPTED">ACCEPTED</option>
-              <option value="UNACCEPTED">UNACCEPTED</option>
-              <option value="EDITED">EDITED</option>
+              <option value=""><lan:print message="status"/></option>
+              <option value="SUBMITTED">SUBMITTED(ПОДАННЫЙ)</option>
+              <option value="ACCEPTED">ACCEPTED(ПРИНЯТЫЙ)</option>
+              <option value="UNACCEPTED">UNACCEPTED(НЕПРИНЯТЫЙ)</option>
+              <option value="EDITED">EDITED(ОТРЕДАКТИРОВАННЫЙ)</option>
             </select>
-         <label for="name">Choose a type:</label>
+         <label for="name"><lan:print message="choose_type"/>:</label>
             <select name="type">
-              <option value="">type</option>
-              <option value="income statement">income statement</option>
-              <option value="income tax">income tax</option>
-              <option value="single tax">single tax</option>
+              <option value=""><lan:print message="type"/></option>
+              <option value="income statement">income statement(Справка о доходах)</option>
+              <option value="income tax">income tax(Подоходный налог)</option>
+              <option value="single tax">single tax(Единый налог)</option>
             </select>
             <input type="hidden" name="name" value="${name}"/>
             <input type="hidden" name="surname" value="${surname}"/>
             <input type="hidden" name="itn" value="${itn}"/>
-         <button type="submit" class="btn btn-outline-dark">Filter</button>
+         <button type="submit" class="btn btn-outline-dark"><lan:print message="filter"/></button>
       </div>
       </form>
-      <form action = "/tax-office/service/getAllReports"  method="GET" class = "reports">
-          <button type="submit" class="btn btn-primary">All reports</button>
+      <form action = "/tax-office/service/allReports"  method="GET" class = "reports">
+          <button type="submit" class="btn btn-primary"><lan:print message="all_reports"/></button>
       </form>
 <br>
 			<table class=" table-bordered " width="1400">
@@ -121,14 +121,14 @@
 				<thead>
 					<tr>
 					    <th>№</th>
-						<th>Title</th>
-						<th>Client</th>
-						<th>ITN</th>
-						<th>Date</th>
-						<th>Type</th>
-						<th>Status</th>
-						<th>Info</th>
-						<th>Actions</th>
+						<th><lan:print message="title"/></th>
+						<th><lan:print message="client"/></th>
+						<th><lan:print message="itn"/></th>
+						<th><lan:print message="date"/></th>
+						<th><lan:print message="type_table"/></th>
+						<th><lan:print message="status_table"/></th>
+						<th><lan:print message="info"/></th>
+						<th><lan:print message="actions"/></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -145,7 +145,7 @@
 							<td>${report.info}</td>
 							<td>
 							<button type="button" class="btn btn-outline-dark" data-reportId="${report.id}" data-clientId="${client.id}"
-							data-toggle="modal" data-target="#exampleModal">UNACCEPTED
+							data-toggle="modal" data-target="#exampleModal"><lan:print message="not_to_accept"/>
 							</button>
                                   <form action="/tax-office/service/updateStatusOfReport" method="POST">
                                       <input type="hidden" name="status" value="ACCEPTED"/>
@@ -158,12 +158,12 @@
                                       <input type="hidden" name="clientName" value="${name}"/>
                                       <input type="hidden" name="surname" value="${surname}"/>
                                       <input type="hidden" name="itn" value="${itn}"/>
-                                      <button type="submit" class="btn btn-outline-dark">ACCEPTED</button>
+                                      <button type="submit" class="btn btn-outline-dark"><lan:print message="accept"/></button>
                                   </form>
                                   <a href="upload/id${client.id}/${report.title}" download >
-                                      <button  class="btn btn-outline-primary">Download</button>
+                                      <button  class="btn btn-outline-primary"><lan:print message="download"/></button>
                                   </a>
-                                  <form action="/tax-office/service/deleteReportById" method="POST" onSubmit='return confirm("Are you sure?");'>
+                                  <form action="/tax-office/service/deleteReportById" method="POST" onSubmit='return confirm("<lan:print message="are_you_sure"/>");'>
                                       <input type="hidden" name="id" value="${report.id}"/>
                                       <input type="hidden" name="clientId" value="${client.id}"/>
                                       <input type="hidden" name="title" value="${report.title}"/>
@@ -173,7 +173,7 @@
                                       <input type="hidden" name="clientName" value="${name}"/>
                                       <input type="hidden" name="surname" value="${surname}"/>
                                       <input type="hidden" name="itn" value="${itn}"/>
-                                      <button type="submit" class="btn btn-outline-danger">Delete</button>
+                                      <button type="submit" class="btn btn-outline-danger"><lan:print message="delete"/></button>
                                   </form>
 							</td>
 						</tr>
@@ -186,14 +186,14 @@
        <div class="modal-dialog" role="document">
            <div class="modal-content">
                <div class="modal-header">
-                   <h5 class="modal-title" id="exampleModalLabel">Reason for unaccepted</h5>
+                   <h5 class="modal-title" id="exampleModalLabel"><lan:print message="reason_for_unaccepted"/></h5>
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                          <span aria-hidden="true">&times;</span>
                       </button>
                </div>
                <div class="modal-body">
                    <form action="/tax-office/service/updateStatusOfReport" method="POST">
-                      <textarea rows="10" cols="45" name="info" maxlength="100" required placeholder="Enter a reason"></textarea>
+                      <textarea rows="10" cols="45" name="info" maxlength="100" required placeholder="<lan:print message="enter_reason"/>"></textarea>
                       <input type="hidden" name="status" value="UNACCEPTED"/>
                       <input id="hide1" type="hidden" name="id" value=""/>
                       <input id="hide2" type="hidden" name="clientId" value=""/>
@@ -205,8 +205,8 @@
                       <input type="hidden" name="itn" value="${itn}"/>
                </div>
                    <div class="modal-footer">
-                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                       <button type="submit" class="btn btn-outline-primary">Submit</button>
+                       <button type="button" class="btn btn-secondary" data-dismiss="modal"><lan:print message="close"/></button>
+                       <button type="submit" class="btn btn-outline-primary"><lan:print message="submit"/></button>
                    </form>
            </div>
        </div>
