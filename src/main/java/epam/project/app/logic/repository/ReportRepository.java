@@ -152,8 +152,8 @@ public class ReportRepository {
         Map<Long,Client> clientMap = new HashMap<>();
         List<Report> reports = new ArrayList<>();
         try (Connection connection = dataSource.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_REPORTS);
-             ResultSet resultSet = preparedStatement.executeQuery()) {
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(SELECT_ALL_REPORTS)) {
             while (resultSet.next()) {
                 long reportId = resultSet.getLong("id");
                 long clientId = resultSet.getLong("clientId");

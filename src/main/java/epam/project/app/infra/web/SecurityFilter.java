@@ -16,7 +16,7 @@ public class SecurityFilter implements Filter {
     private List<RequestMatcher> requestMatchers;
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
+    public void init(FilterConfig filterConfig) {
         requestMatchers = new ArrayList<>();
 
         requestMatchers.add(new RequestMatcher("/inspector/homePage.jsp", UserRole.INSPECTOR));

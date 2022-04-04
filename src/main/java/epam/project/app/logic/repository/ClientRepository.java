@@ -48,8 +48,8 @@ public class ClientRepository {
     public List<Client> getAllClients() {
         List<Client> clients = new ArrayList<>();
         try (Connection connection = dataSource.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_CLIENTS);
-            ResultSet resultSet = preparedStatement.executeQuery()) {
+             Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(SELECT_ALL_CLIENTS)) {
             while (resultSet.next()) {
                 long id = resultSet.getLong("id");
                 String login = resultSet.getString("login");

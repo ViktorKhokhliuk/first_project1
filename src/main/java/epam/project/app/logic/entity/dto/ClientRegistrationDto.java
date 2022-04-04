@@ -1,9 +1,11 @@
 package epam.project.app.logic.entity.dto;
 
 import epam.project.app.logic.entity.user.UserRole;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+@AllArgsConstructor
 @NoArgsConstructor
 public class ClientRegistrationDto {
     @Getter
