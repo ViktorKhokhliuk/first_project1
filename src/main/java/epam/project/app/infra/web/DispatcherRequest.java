@@ -17,7 +17,7 @@ public class DispatcherRequest {
                 .findFirst()
                 .map(Placeholder::getProcess)
                 .map(function -> function.apply(req))
-                .orElseThrow(() -> new AppException("cannot process request: " + req.getRequestURL()));
+                .orElseThrow(() -> new AppException("page not found: " + req.getRequestURL()));
     }
 
 }

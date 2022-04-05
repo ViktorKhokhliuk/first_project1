@@ -45,7 +45,7 @@
      </div>
 
      <div class="form-group row">
-      <label for="login" class="col-sm-2 col-form-label"><lan:print message="person"/></label>
+      <label for="person" class="col-sm-2 col-form-label"><lan:print message="person"/></label>
       <div class="col-sm-7">
        <input type="text" value = "${reportParameters.person}" class="form-control" name="person"
         required pattern = "(natural){1}|(legal){1}|(физическое){1}|(юридическое){1}"
@@ -57,7 +57,8 @@
       <label for="nationality" class="col-sm-2 col-form-label"><lan:print message="nationality"/></label>
       <div class="col-sm-7">
        <input type="text" value = "${reportParameters.nationality}" maxlength="20" class="form-control" name="nationality"
-        required>
+         required pattern = "[A-Za-z]{2,30}|[А-Яа-яЁё]{2,30}"
+         title="<lan:print message="nationality_pattern"/>">
       </div>
      </div>
 
@@ -99,7 +100,8 @@
       <label for="activity" class="col-sm-2 col-form-label"><lan:print message="activity"/></label>
       <div class="col-sm-7">
        <input type="text" value = "${reportParameters.activity}" maxlength="30" class="form-control" name="activity"
-        required >
+         required pattern = "[A-Za-z]{2,30}|[А-Яа-яЁё]{2,30}"
+         title="<lan:print message="activity_pattern"/>">
       </div>
      </div>
 

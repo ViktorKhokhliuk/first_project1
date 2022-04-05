@@ -1,10 +1,8 @@
 package epam.project.app.logic.controller;
 
-import com.oracle.wls.shaded.org.apache.xpath.operations.Bool;
 import epam.project.app.infra.web.ModelAndView;
 import epam.project.app.infra.web.exception.AppException;
 import epam.project.app.logic.entity.user.User;
-import epam.project.app.logic.exception.ReportException;
 import epam.project.app.logic.service.ReportService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -19,7 +17,7 @@ import java.io.File;
 
 @Log4j2
 @RequiredArgsConstructor
-public class ReportUploaderController {
+public class ReportUploadController {
     private static final String UPLOAD_DIRECTORY = "upload\\id";
     private static final String DEFAULT_FILENAME = "default.file";
 

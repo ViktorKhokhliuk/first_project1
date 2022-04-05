@@ -31,14 +31,14 @@ public class ConfigPlaceholders {
         ClientController clientController = createClientController(dataSource, queryParameterResolver);
         ReportService reportService = createReportService(dataSource, objectMapper);
         ReportController reportController = new ReportController(reportService, queryParameterResolver);
-        ReportUploaderController reportUploaderController = new ReportUploaderController(reportService);
+        ReportUploadController reportUploadController = new ReportUploadController(reportService);
         ReportEditController reportEditController = new ReportEditController(reportService, queryParameterResolver);
 
         placeholders.add(new Placeholder("POST", "login", userController::login));
         placeholders.add(new Placeholder("POST", "logout", userController::logout));
         placeholders.add(new Placeholder("POST", "changeLocale", userController::changeLocale));
         placeholders.add(new Placeholder("POST", "registration", clientController::registration));
-        placeholders.add(new Placeholder("POST", "upload", reportUploaderController::uploadFile));
+        placeholders.add(new Placeholder("POST", "upload", reportUploadController::uploadFile));
         placeholders.add(new Placeholder("POST", "updateStatusOfReport", reportController::updateStatusOfReport));
         placeholders.add(new Placeholder("POST", "deleteReportById", reportController::deleteReportById));
         placeholders.add(new Placeholder("POST", "deleteClientById", clientController::deleteClientById));

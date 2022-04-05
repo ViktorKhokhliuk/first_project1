@@ -12,13 +12,13 @@
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 	crossorigin="anonymous">
 </head>
-        <title>Error page</title>
+        <title>Error page.</title>
         <meta charset="UTF-8">
     </head>
     <body>
     <h3 style="color:red">
      <center>
-            <lan:print message="internal_error"/>
+            <lan:print message="error"/>: ${message}
      </center>
     </h3>
          <form action = "/tax-office/index.jsp"  align = "center">
