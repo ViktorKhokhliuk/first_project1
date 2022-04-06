@@ -7,7 +7,6 @@ import epam.project.app.logic.service.UserService;
 import epam.project.app.infra.web.ModelAndView;
 import epam.project.app.infra.web.QueryParameterResolver;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
@@ -58,11 +57,13 @@ public class UserController {
     }
 
     public ModelAndView toHome(HttpServletRequest request) {
-        User user = (User) request.getSession().getAttribute("user");
-        if (user.getUserRole().equals(UserRole.CLIENT)){
-          return ModelAndView.withView("/client/homePage.jsp");
-        } else {
-            return ModelAndView.withView("/inspector/homePage.jsp");
+        User user = (User) request.getSession(false).getAttribute("user");
+        ModelAndView modelAndView = new ModelAndView();
+        if (user.getUserRole().equals(UserRole.CLIENT))
+            modelAndView.setView("/client/homePage.jsp");
+        else
+            modelAndView.setView("/inspector/homePage.jsp");
+        modelAndView.setRedirect(true);
+        return modelAndView;
         }
     }
-}
