@@ -65,10 +65,12 @@
           <input type="text" name="surname" placeholder="<lan:print message="enter_surname"/>"/>
           <label for="name"><lan:print message="itn"/>:</label>
           <input type="text" name="itn"= placeholder="<lan:print message="enter_itn"/>"/>
+          <input type="hidden" name="page" value="1">
           <button type="submit" class="btn btn-outline-dark"><lan:print message="search"/></button>
        </div>
        </form>
        <form action = "/tax-office/service/allClients"  method="GET" class = "clients">
+           <input type="hidden" name="page" value="1">
            <button type="submit" class="btn btn-primary"><lan:print message="all_clients"/></button>
        </form>
 <br>
@@ -100,6 +102,7 @@
 							   </form>
 							   <form action="/tax-office/service/deleteClientById" method="POST" onSubmit='return confirm("<lan:print message="are_you_sure"/>");'>
                                  <input type="hidden" name="clientId" value="${client.id}"/>
+                                 <input type="hidden" name="page" value="${page}">
                                  <button type="submit" class="btn btn-outline-danger"><lan:print message="delete"/></button>
                                </form>
 							</td>
@@ -109,5 +112,10 @@
 			</table>
 			<br>
 	</div>
+	<c:if test = "${countOfPage != 0}">
+         <c:forEach var = "i" begin = "1" end = "${countOfPage}">
+             <a href="/tax-office/service/allClients?page=${i}" > ${i} </a>
+         </c:forEach>
+    </c:if>
 </body>
 </html>

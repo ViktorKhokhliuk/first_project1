@@ -26,10 +26,14 @@ public class ClientController {
     }
 
     public ModelAndView getAllClients(HttpServletRequest request) {
-        List<Client> clients = clientService.getAllClients();
+        int page = Integer.parseInt(request.getParameter("page"));
+        List<Client> clients = clientService.getAllClients(page);
+        double countOfPage = clientService.getCountOfPage();
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setView("/inspector/allClients.jsp");
         modelAndView.addAttribute("clients",clients);
+        modelAndView.addAttribute("page",page);
+        modelAndView.addAttribute("countOfPage",countOfPage);
         return modelAndView;
     }
 
@@ -41,7 +45,7 @@ public class ClientController {
             String parameterName = parameterNames.nextElement();
             String parameter = request.getParameter(parameterName);
             modelAndView.addAttribute(parameterName,parameter);
-            if (!parameter.equals("")) {
+            if (!parameter.equals("")&&!parameterName.equals("page")) {
                 parameters.put(parameterName, parameter);
             }
         }
@@ -55,17 +59,18 @@ public class ClientController {
     }
 
     public ModelAndView deleteClientById(HttpServletRequest request) {
+        int page = Integer.parseInt(request.getParameter("page"));
         Long clientId = Long.parseLong(request.getParameter("clientId"));
         String path = "webapp/upload/id"+clientId;
         clientService.deleteClientById(clientId);
         deleteFiles(new File(path));
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setRedirect(true);
-        modelAndView.setView("/service/getAllClients");
+        modelAndView.setView("/service/allClients?page="+page);
         return modelAndView;
     }
 
-    private static void deleteFiles(File file) {
+    private void deleteFiles(File file) {
         if (!file.exists())
             return;
         if (file.isDirectory()) {

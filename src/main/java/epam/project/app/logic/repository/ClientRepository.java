@@ -20,10 +20,11 @@ public class ClientRepository {
     private static final String INSERT_CLIENT = "INSERT INTO client (id,name,surname,itn) VALUES (?,?,?,?);";
     private static final String INSERT_USER = "INSERT INTO user (login,password,role) VALUES (?,?,?);";
     private static final String SELECT_CLIENT_BY_ID = "select * from user join client on user.id=client.id where user.id= ?;";
-    private static final String SELECT_ALL_CLIENTS = "select * from client join user on user.id=client.id;";
-    private static final String DELETE_REPORTS_BY_CLIENT_ID = "delete from report where client_id = ? ;";
+    private static final String SELECT_ALL_CLIENTS = "select * from client join user on user.id=client.id limit ?, 5;";
+    private static final String DELETE_REPORTS_BY_CLIENT_ID = "delete from report where clientId = ?;";
     private static final String DELETE_CLIENT_BY_ID = "delete from client where id = ?;";
     private static final String DELETE_USER_BY_ID = "delete from user where id = ?;";
+    private static final String SELECT_COUNT = "select count(*) from client join user on user.id=client.id;";
 
     @SneakyThrows
     public Optional<Client> getClientById(Long id) {
@@ -45,24 +46,37 @@ public class ClientRepository {
     }
 
     @SneakyThrows
-    public List<Client> getAllClients() {
+    public List<Client> getAllClients(int index) {
         List<Client> clients = new ArrayList<>();
         try (Connection connection = dataSource.getConnection();
-             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(SELECT_ALL_CLIENTS)) {
-            while (resultSet.next()) {
-                long id = resultSet.getLong("id");
-                String login = resultSet.getString("login");
-                String name = resultSet.getString("name");
-                String surname = resultSet.getString("surname");
-                String itn = resultSet.getString("itn");
-                Client client = new Client(name,surname,itn);
-                client.setId(id);
-                client.setLogin(login);
-                clients.add(client);
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_CLIENTS)) {
+            preparedStatement.setInt(1, index);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    long id = resultSet.getLong("id");
+                    String login = resultSet.getString("login");
+                    String name = resultSet.getString("name");
+                    String surname = resultSet.getString("surname");
+                    String itn = resultSet.getString("itn");
+                    Client client = new Client(name, surname, itn);
+                    client.setId(id);
+                    client.setLogin(login);
+                    clients.add(client);
+                }
             }
         }
         return clients;
+    }
+
+    @SneakyThrows
+    public double getCountOfPage() {
+        try (Connection connection = dataSource.getConnection();
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(SELECT_COUNT)) {
+            if (resultSet.next())
+                return resultSet.getDouble(1);
+        }
+        return 0;
     }
 
     @SneakyThrows
@@ -135,7 +149,7 @@ public class ClientRepository {
         } catch (SQLException e) {
             rollback(connection);
             log.error(e.getMessage());
-            throw new ClientException("Cannot insert client");
+            throw new ClientException("user with this login already exists");
         } finally {
             close(resultSet);
             close(preparedStatement);
@@ -154,7 +168,7 @@ public class ClientRepository {
             connection.setAutoCommit(false);
             preparedStatement = connection.prepareStatement(DELETE_REPORTS_BY_CLIENT_ID);
             preparedStatement.setLong(1,id);
-            if (preparedStatement.executeUpdate() > 0) {
+            preparedStatement.executeUpdate();
                 try (PreparedStatement preparedStatement1 = connection.prepareStatement(DELETE_CLIENT_BY_ID)) {
                     preparedStatement1.setLong(1, id);
                     if (preparedStatement1.executeUpdate() > 0) {
@@ -167,7 +181,6 @@ public class ClientRepository {
                         }
                     }
                 }
-            }
         } catch (SQLException e) {
             rollback(connection);
             log.error(e.getMessage());

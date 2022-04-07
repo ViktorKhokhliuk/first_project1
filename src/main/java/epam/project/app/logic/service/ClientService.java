@@ -17,8 +17,9 @@ public class ClientService {
         return clientRepository.insertClient(dto).orElseThrow(() -> new ClientException("user with this login already exists"));
     }
 
-    public List<Client> getAllClients() {
-        return clientRepository.getAllClients();
+    public List<Client> getAllClients(int page) {
+        int index = (page - 1) * 5;
+        return clientRepository.getAllClients(index);
     }
 
     public Client deleteClientById(Long id) {
@@ -27,5 +28,10 @@ public class ClientService {
 
     public List<Client> searchClientsByParameters(Map<String, String> parameters) {
         return clientRepository.getClientsByParameter(parameters);
+    }
+
+    public double getCountOfPage() {
+        double countOfPage = clientRepository.getCountOfPage();
+        return Math.ceil(countOfPage / 5);
     }
 }

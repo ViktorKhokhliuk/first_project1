@@ -67,6 +67,7 @@
                    <button type="submit" class="btn btn-primary"><lan:print message="home"/></button>
                 </form>
                 <form action = "/tax-office/service/allClients"  method="GET"  class = "clients">
+                   <input type="hidden" name="page" value="1">
                    <button type="submit" class="btn btn-primary"><lan:print message="all_clients"/></button>
                 </form>
                 <form action = "/tax-office/service/allReports"  method="GET" >
