@@ -13,8 +13,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.*;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -87,22 +86,17 @@ public class ClientServiceTest {
 
     @Test
     public void  deleteClientById() {
-        Client expectedClient = new Client();
-        expectedClient.setId(ID);
-        expectedClient.setLogin(LOGIN);
-        expectedClient.setPassword(PASSWORD);
+        when(clientRepository.deleteClientById(ID)).thenReturn(true);
+        boolean result = clientService.deleteClientById(ID);
 
-        when(clientRepository.deleteClientById(ID)).thenReturn(Optional.of(expectedClient));
-        Client resultClient = clientService.deleteClientById(ID);
+        assertTrue(result);
 
-        assertNotNull(resultClient);
-        assertEquals(expectedClient, resultClient);
         verify(clientRepository).deleteClientById(ID);
     }
 
     @Test(expected = ClientException.class)
-    public void deleteClientByIdThrowExceptionWhenRepositoryReturnOptionalEmpty() {
-        when(clientRepository.deleteClientById(ID)).thenReturn(Optional.empty());
+    public void deleteClientByIdThrowExceptionWhenRepositoryReturnFalse() {
+        when(clientRepository.deleteClientById(ID)).thenReturn(false);
         clientService.deleteClientById(ID);
     }
 

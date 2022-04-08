@@ -22,8 +22,10 @@ public class ClientService {
         return clientRepository.getAllClients(index);
     }
 
-    public Client deleteClientById(Long id) {
-        return clientRepository.deleteClientById(id).orElseThrow(() -> new ClientException("cannot delete client"));
+    public boolean deleteClientById(Long id) {
+        if(clientRepository.deleteClientById(id))
+            return true;
+        throw new ClientException("Cannot delete client");
     }
 
     public List<Client> searchClientsByParameters(Map<String, String> parameters) {

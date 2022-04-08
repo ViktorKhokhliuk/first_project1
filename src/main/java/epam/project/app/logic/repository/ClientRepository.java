@@ -149,7 +149,7 @@ public class ClientRepository {
         } catch (SQLException e) {
             rollback(connection);
             log.error(e.getMessage());
-            throw new ClientException("user with this login already exists");
+            throw new ClientException("transaction failed");
         } finally {
             close(resultSet);
             close(preparedStatement);
@@ -159,10 +159,9 @@ public class ClientRepository {
     }
 
 
-    public Optional<Client> deleteClientById(Long id) {
+    public boolean deleteClientById(Long id) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-        Optional<Client> client = getClientById(id);
         try{
             connection = dataSource.getConnection();
             connection.setAutoCommit(false);
@@ -176,7 +175,7 @@ public class ClientRepository {
                             preparedStatement2.setLong(1, id);
                             if (preparedStatement2.executeUpdate() > 0) {
                                 connection.commit();
-                                return client;
+                                return true;
                             }
                         }
                     }
@@ -184,35 +183,27 @@ public class ClientRepository {
         } catch (SQLException e) {
             rollback(connection);
             log.error(e.getMessage());
-            throw new ClientException("Cannot delete client");
+            throw new ClientException("transaction failed");
         } finally {
             close(preparedStatement);
             close(connection);
         }
-        return Optional.empty();
+        return false;
     }
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
+@SneakyThrows
     private void close(AutoCloseable autoCloseable) {
         if (autoCloseable != null) {
-            try {
                 autoCloseable.close();
-            } catch (Exception e) {
-                log.error(e.getMessage());
-                throw new ClientException("");
-            }
+
         }
     }
 
+    @SneakyThrows
     private void rollback(Connection connection) {
         if (connection != null) {
-            try {
                 connection.rollback();
-            } catch (SQLException e) {
-                log.error(e.getMessage());
-                throw new ClientException("");
-            }
         }
     }
 }

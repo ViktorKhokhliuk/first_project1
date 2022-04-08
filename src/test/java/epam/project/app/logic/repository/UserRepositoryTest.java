@@ -36,7 +36,7 @@ public class UserRepositoryTest {
     private PreparedStatement preparedStatement;
 
     @InjectMocks
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
     private static final String LOGIN = "tony";
     private static final String PASSWORD = "tony123";
