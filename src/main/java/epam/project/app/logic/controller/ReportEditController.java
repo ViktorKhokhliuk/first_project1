@@ -42,6 +42,7 @@ public class ReportEditController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setRedirect(true);
         modelAndView.addAttribute("date", reportEditDto.getDate());
+        modelAndView.addAttribute("page", reportEditDto.getPage());
         modelAndView.addAttribute("status", reportEditDto.getStatusFilter());
         modelAndView.addAttribute("type", reportEditDto.getType());
         modelAndView.addAttribute("clientId", reportEditDto.getClientId());

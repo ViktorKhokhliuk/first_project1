@@ -4,7 +4,6 @@ import epam.project.app.logic.entity.dto.UserDTO;
 import epam.project.app.logic.entity.user.User;
 import epam.project.app.logic.exception.UserException;
 import epam.project.app.logic.repository.UserRepository;
-import epam.project.app.infra.web.exception.AppException;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor

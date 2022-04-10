@@ -2,6 +2,7 @@ package epam.project.app.logic.controller;
 
 import epam.project.app.infra.web.ModelAndView;
 import epam.project.app.infra.web.exception.AppException;
+import epam.project.app.logic.entity.dto.ReportCreateDto;
 import epam.project.app.logic.entity.user.User;
 import epam.project.app.logic.service.ReportService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -47,7 +48,7 @@ public class ReportUploadController {
         }
         String type = request.getParameter("type");
         log.log(Level.INFO, "File " + fileName + " has uploaded successfully!");
-        reportService.uploadReport(fileName, uploadPath, userFromSession.getId(), type);
+        reportService.uploadReport(new ReportCreateDto(fileName, path, userFromSession.getId(), type));
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setRedirect(true);
         modelAndView.setView("/client/homePage.jsp");

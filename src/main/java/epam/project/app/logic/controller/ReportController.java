@@ -9,7 +9,7 @@ import epam.project.app.logic.entity.user.Client;
 import epam.project.app.logic.entity.user.User;
 import epam.project.app.logic.entity.user.UserRole;
 import epam.project.app.logic.service.ReportService;
-import jakarta.servlet.http.HttpServletRequest;;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 
 import java.io.File;
@@ -34,16 +34,18 @@ public class ReportController {
         String path = "webapp/upload/id" + reportUpdateDto.getClientId() + "/" + reportUpdateDto.getTitle();
         File file = new File(path);
         file.delete();
-            reportService.deleteReportById(reportUpdateDto.getId());
-            return configuringModelAndViewAfterUpdate(reportUpdateDto, user);
+        reportService.deleteReportById(reportUpdateDto.getId());
+        return configuringModelAndViewAfterUpdate(reportUpdateDto, user);
     }
 
 
     public ModelAndView getAllReportsByClientId(HttpServletRequest request) {
-        User user = (User) request.getSession().getAttribute("user");
+        User user = (User) request.getSession(false).getAttribute("user");
+        int page = Integer.parseInt(request.getParameter("page"));
         Long clientId = Long.parseLong(request.getParameter("clientId"));
         String clientLogin = request.getParameter("clientLogin");
-        List<Report> reports = reportService.getAllReportsByClientId(clientId);
+        List<Report> reports = reportService.getAllReportsByClientId(clientId, page);
+        double countOfPage = reportService.getCountOfPageForAllClientReports(clientId);
         ModelAndView modelAndView = new ModelAndView();
         if (user.getUserRole().equals(UserRole.CLIENT)) {
             modelAndView.setView("/client/reports.jsp");
@@ -53,16 +55,22 @@ public class ReportController {
             modelAndView.addAttribute("clientId", clientId);
         }
         modelAndView.addAttribute("reports", reports);
+        modelAndView.addAttribute("countOfPage", countOfPage);
+        modelAndView.addAttribute("page", page);
         return modelAndView;
     }
 
     public ModelAndView getAllReports(HttpServletRequest request) {
-        Map<List<Report>, Map<Long, Client>> map = reportService.getAllReports();
+        int page = Integer.parseInt(request.getParameter("page"));
+        Map<List<Report>, Map<Long, Client>> map = reportService.getAllReports(page);
+        double countOfPage = reportService.getCountOfPageForAllReports();
         List<Report> reports = map.entrySet().iterator().next().getKey();
         Collections.sort(reports);
         Map<Long, Client> clientMap = map.entrySet().iterator().next().getValue();
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setView("/inspector/allReports.jsp");
+        modelAndView.addAttribute("page", page);
+        modelAndView.addAttribute("countOfPage", countOfPage);
         modelAndView.addAttribute("reports", reports);
         modelAndView.addAttribute("clients", clientMap);
         return modelAndView;
@@ -71,28 +79,33 @@ public class ReportController {
 
     public ModelAndView getClientReportsByFilterParameters(HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
-        User user = (User) request.getSession().getAttribute("user");
+        User user = (User) request.getSession(false).getAttribute("user");
+        int page = Integer.parseInt(request.getParameter("page"));
         Map<String, String> parameters = new HashMap<>();
         Enumeration<String> parameterNames = request.getParameterNames();
         while (parameterNames.hasMoreElements()) {
             String parameterName = parameterNames.nextElement();
             String parameter = request.getParameter(parameterName);
             modelAndView.addAttribute(parameterName, parameter);
-            if (!parameter.equals("") && !parameterName.equals("clientLogin")) {
+            if (!parameter.equals("") && !parameterName.equals("clientLogin") && !parameterName.equals("page")) {
                 parameters.put(parameterName, parameter);
             }
         }
-        List<Report> reports = reportService.getClientReportsByFilterParameters(parameters);
+        List<Report> reports = reportService.getClientReportsByFilterParameters(parameters, page);
+        double countOfPage = reportService.getCountOfPageForFilterClientReports(parameters);
         if (user.getUserRole().equals(UserRole.CLIENT)) {
             modelAndView.setView("/client/reports.jsp");
         } else {
             modelAndView.setView("/inspector/reportsByClientId.jsp");
         }
         modelAndView.addAttribute("reports", reports);
+        modelAndView.addAttribute("countOfPage", countOfPage);
+        modelAndView.addAttribute("page", page);
         return modelAndView;
     }
 
     public ModelAndView getAllReportsByFilterParameters(HttpServletRequest request) {
+        int page = Integer.parseInt(request.getParameter("page"));
         ModelAndView modelAndView = new ModelAndView();
         Map<String, String> parameters = new HashMap<>();
         Enumeration<String> parameterNames = request.getParameterNames();
@@ -100,16 +113,19 @@ public class ReportController {
             String parameterName = parameterNames.nextElement();
             String parameter = request.getParameter(parameterName);
             modelAndView.addAttribute(parameterName, parameter);
-            if (!parameter.equals("")) {
+            if (!parameter.equals("") && !parameterName.equals("page")) {
                 parameters.put(parameterName, parameter);
             }
         }
-        Map<List<Report>, Map<Long, Client>> map = reportService.getAllReportsByFilterParameters(parameters);
+        Map<List<Report>, Map<Long, Client>> map = reportService.getAllReportsByFilterParameters(parameters, page);
+        double countOfPage = reportService.getCountOfPageForFilterReports(parameters);
         List<Report> reports = map.entrySet().iterator().next().getKey();
         Map<Long, Client> clientMap = map.entrySet().iterator().next().getValue();
         modelAndView.setView("/inspector/allReports.jsp");
         modelAndView.addAttribute("reports", reports);
         modelAndView.addAttribute("clients", clientMap);
+        modelAndView.addAttribute("page", page);
+        modelAndView.addAttribute("countOfPage", countOfPage);
         return modelAndView;
     }
 
@@ -135,6 +151,7 @@ public class ReportController {
         modelAndView.addAttribute("date", reportUpdateDto.getDate());
         modelAndView.addAttribute("status", reportUpdateDto.getStatusFilter());
         modelAndView.addAttribute("type", reportUpdateDto.getType());
+        modelAndView.addAttribute("page", reportUpdateDto.getPage());
 
         if (reportUpdateDto.getClientLogin() != null || user.getUserRole().equals(UserRole.CLIENT)) {
             modelAndView.addAttribute("clientId", reportUpdateDto.getClientId());

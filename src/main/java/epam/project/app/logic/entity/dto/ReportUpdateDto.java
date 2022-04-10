@@ -11,6 +11,8 @@ public class ReportUpdateDto {
     @Getter
     private Long id;
     @Getter
+    private Integer page;
+    @Getter
     private String title;
     @Getter
     private String status;

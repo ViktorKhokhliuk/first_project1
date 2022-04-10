@@ -28,12 +28,8 @@ public class ReportService {
     private final JsonParser jsonParser;
     private final JsonBuilder jsonBuilder;
 
-    public Report uploadReport(String fileName, String path, Long clientId, String type) {
-        return insertReport(new ReportCreateDto(fileName, path, clientId, type));
-    }
-
-    public Report insertReport(ReportCreateDto dto) {
-        return reportRepository.insertReport(dto).orElseThrow(() -> new ReportException("cannot create new Report"));
+    public Report uploadReport(ReportCreateDto reportCreateDto) {
+        return reportRepository.insertReport(reportCreateDto).orElseThrow(() -> new ReportException("cannot create new Report"));
     }
 
     public Report updateStatusOfReport(ReportUpdateDto dto) {
@@ -48,20 +44,23 @@ public class ReportService {
         return reportRepository.deleteReportById(id).orElseThrow(() -> new ReportException("cannot delete report"));
     }
 
-    public List<Report> getAllReportsByClientId(Long clientId) {
-        List<Report> reports = reportRepository.getAllReportsByClientId(clientId);
+    public List<Report> getAllReportsByClientId(Long clientId,int page) {
+        int index = (page - 1) * 5;
+        List<Report> reports = reportRepository.getAllReportsByClientId(clientId,index);
         Collections.sort(reports);
         return reports;
     }
 
-    public List<Report> getClientReportsByFilterParameters(Map<String, String> parameters) {
-        List<Report> reports = reportRepository.getClientReportsByParameter(parameters);
+    public List<Report> getClientReportsByFilterParameters(Map<String, String> parameters,int page) {
+        int index = (page - 1) * 5;
+        List<Report> reports = reportRepository.getClientReportsByParameter(parameters,index);
         Collections.sort(reports);
         return reports;
     }
 
-    public Map<List<Report>, Map<Long, Client>> getAllReports() {
-        return reportRepository.getAllReports();
+    public Map<List<Report>, Map<Long, Client>> getAllReports(int page) {
+        int index = (page - 1) * 5;
+        return reportRepository.getAllReports(index);
     }
 
     public void xmlValidation(String path) {
@@ -72,8 +71,9 @@ public class ReportService {
         fileValidator.jsonFileValidation(path);
     }
 
-    public Map<List<Report>, Map<Long, Client>> getAllReportsByFilterParameters(Map<String, String> parameters) {
-        return reportRepository.getAllReportsByFilterParameters(parameters);
+    public Map<List<Report>, Map<Long, Client>> getAllReportsByFilterParameters(Map<String, String> parameters,int page) {
+        int index = (page - 1) * 5;
+        return reportRepository.getAllReportsByFilterParameters(parameters,index);
     }
 
     public ReportParameters getReportParametersXml(String path) {
@@ -90,5 +90,25 @@ public class ReportService {
 
     public void saveReportChangesJson(ReportEditDto reportEditDto, String path) {
         jsonBuilder.buildJson(reportEditDto, path);
+    }
+
+    public double getCountOfPageForAllClientReports(Long clientId) {
+        double countOfPage = reportRepository.getCountOfPageForAllClientReports(clientId);
+        return Math.ceil(countOfPage / 5);
+    }
+
+    public double getCountOfPageForFilterClientReports(Map<String, String> parameters) {
+        double countOfPage = reportRepository.getCountOfPageForFilterClientReports(parameters);
+        return  Math.ceil(countOfPage / 5);
+    }
+
+    public double getCountOfPageForAllReports() {
+        double countOfPage = reportRepository.getCountOfPageForAllReports();
+        return Math.ceil(countOfPage/5);
+    }
+
+    public double getCountOfPageForFilterReports(Map<String, String> parameters) {
+        double countOfPage = reportRepository.getCountOfPageForFilterReports(parameters);
+        return Math.ceil(countOfPage/5);
     }
 }

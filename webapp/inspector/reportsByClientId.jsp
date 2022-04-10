@@ -71,6 +71,7 @@
                    <button type="submit" class="btn btn-primary"><lan:print message="all_clients"/></button>
                 </form>
                 <form action = "/tax-office/service/allReports"  method="GET" >
+                <input type="hidden" name="page" value="1"/>
                    <button type="submit" class="btn btn-primary"><lan:print message="all_reports"/></button>
                 </form>
 		</nav>
@@ -100,11 +101,13 @@
                   </select>
                <input type="hidden" name="clientId" value="${clientId}"/>
                <input type="hidden" name="clientLogin" value="${clientLogin}"/>
+               <input type="hidden" name="page" value="1"/>
                <button type="submit" class="btn btn-outline-dark"><lan:print message="filter"/></button>
             </div>
      </form>
      <form action = "/tax-office/service/allReportsByClient"  method="GET" class = "reports">
         <input type="hidden" name="clientId" value="${clientId}"/>
+        <input type="hidden" name="page" value="1"/>
          <input type="hidden" name="clientLogin" value="${clientLogin}"/>
          <button type="submit" class="btn btn-primary"><lan:print message="all_reports_client"/></button>
      </form>
@@ -138,6 +141,7 @@
                                   <form action="/tax-office/service/updateStatusOfReport" method="POST">
                                       <input type="hidden" name="status" value="ACCEPTED"/>
                                       <input type="hidden" name="info" value="Report was accepted"/>
+                                      <input type="hidden" name="page" value="${page}"/>
                                       <input type="hidden" name="id" value="${report.id}"/>
                                       <input type="hidden" name="clientId" value="${clientId}"/>
                                       <input type="hidden" name="clientLogin" value="${clientLogin}"/>
@@ -152,6 +156,7 @@
                                   <form action="/tax-office/service/deleteReportById" method="POST" onSubmit='return confirm("<lan:print message="are_you_sure"/>");'>
                                       <input type="hidden" name="id" value="${report.id}"/>
                                       <input type="hidden" name="clientId" value="${clientId}"/>
+                                      <input type="hidden" name="page" value="${page}"/>
                                       <input type="hidden" name="clientLogin" value="${clientLogin}"/>
                                       <input type="hidden" name="title" value="${report.title}"/>
                                       <input type="hidden" name="date" value="${date}"/>
@@ -164,6 +169,18 @@
 					</c:forEach>
 				</tbody>
 			</table>
+			<c:if test = "${countOfPage != 0}">
+               <c:forEach var = "i" begin = "1" end = "${countOfPage}">
+                 <form action = "/tax-office/service/filterClientReports"  method="GET" class = page style="float:left">
+                    <input type="hidden" name="clientId" value="${clientId}"/><br><br>
+                    <input type="hidden" name="page" value="${i}"/>
+                    <input type="hidden" name="date" value="${date}"/>
+                    <input type="hidden" name="status" value="${status}"/>
+                    <input type="hidden" name="type" value="${type}"/>
+                    <button type="submit" class="btn btn-link" >${i}</button>
+                 </form>
+               </c:forEach>
+            </c:if>
 			<br>
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
        <div class="modal-dialog" role="document">
@@ -180,6 +197,7 @@
                       <input type="hidden" name="status" value="UNACCEPTED"/>
                       <input id="hide1" type="hidden" name="id" value=""/>
                       <input type="hidden" name="clientId" value="${clientId}"/>
+                      <input type="hidden" name="page" value="${page}"/>
                       <input type="hidden" name="clientLogin" value="${clientLogin}"/>
                       <input type="hidden" name="date" value="${date}"/>
                       <input type="hidden" name="statusFilter" value="${status}"/>

@@ -10,6 +10,8 @@ public class ReportEditDto {
     @Getter
     private Long id;
     @Getter
+    private Integer page;
+    @Getter
     private String title;
     @Getter
     private String statusFilter;

@@ -55,11 +55,11 @@
  <p>
  <div class = "box">
      <form action = "/tax-office/service/allClients"  method="GET"  class = "clients">
-        <input type="hidden" name="page" value="1">
+        <input type="hidden" name="page" value="1"/>
         <button type="submit" class="btn btn-primary btn-lg"><lan:print message="all_clients"/></button>
      </form>
      <form action = "/tax-office/service/allReports"  method="GET" >
-        <input type="hidden" name="page" value="1">
+        <input type="hidden" name="page" value="1"/>
         <button type="submit" class="btn btn-primary btn-lg"><lan:print message="all_reports"/></button>
      </form>
  </div>

@@ -83,6 +83,7 @@
                  <input type="text" name="surname" placeholder="<lan:print message="enter_surname"/>"/>
                  <label for="name"><lan:print message="itn"/>:</label>
                  <input type="text" name="itn"= placeholder="<lan:print message="enter_itn"/>"/>
+                 <input type="hidden" name="page" value="1"/>
                  <button type="submit" class="btn btn-outline-dark"><lan:print message="search"/></button>
               </div>
        </form>
@@ -109,10 +110,12 @@
             <input type="hidden" name="name" value="${name}"/>
             <input type="hidden" name="surname" value="${surname}"/>
             <input type="hidden" name="itn" value="${itn}"/>
+            <input type="hidden" name="page" value="1"/>
          <button type="submit" class="btn btn-outline-dark"><lan:print message="filter"/></button>
       </div>
       </form>
       <form action = "/tax-office/service/allReports"  method="GET" class = "reports">
+          <input type="hidden" name="page" value="1"/>
           <button type="submit" class="btn btn-primary"><lan:print message="all_reports"/></button>
       </form>
 <br>
@@ -137,7 +140,7 @@
 						<tr>
 						    <td class="counterCell"></td>
 							<td><a href="showReport?clientId=${client.id}&title=<c:out value='${report.title}'/>"target="_blank">${report.title}</a></td>
-							<td><a href="allReportsByClient?clientId=${client.id}&clientLogin=<c:out value='${client.login}'/>">${client.name} ${client.surname} (${client.login})</td>
+							<td><a href="allReportsByClient?clientId=${client.id}&page=1&clientLogin=<c:out value='${client.login}'/>">${client.name} ${client.surname} (${client.login})</td>
 							<td>${client.itn}</td>
 							<td>${report.date}</td>
 							<td>${report.type}</td>
@@ -158,6 +161,7 @@
                                       <input type="hidden" name="clientName" value="${name}"/>
                                       <input type="hidden" name="surname" value="${surname}"/>
                                       <input type="hidden" name="itn" value="${itn}"/>
+                                      <input type="hidden" name="page" value="${page}"/>
                                       <button type="submit" class="btn btn-outline-dark"><lan:print message="accept"/></button>
                                   </form>
                                   <a href="upload/id${client.id}/${report.title}" download >
@@ -173,6 +177,7 @@
                                       <input type="hidden" name="clientName" value="${name}"/>
                                       <input type="hidden" name="surname" value="${surname}"/>
                                       <input type="hidden" name="itn" value="${itn}"/>
+                                      <input type="hidden" name="page" value="${page}"/>
                                       <button type="submit" class="btn btn-outline-danger"><lan:print message="delete"/></button>
                                   </form>
 							</td>
@@ -180,6 +185,21 @@
 					</c:forEach>
 				</tbody>
 			</table>
+	<c:if test = "${countOfPage != 0}">
+       <c:forEach var = "i" begin = "1" end = "${countOfPage}">
+       <form action = "/tax-office/service/filterAllReports"  method="GET" class = page style="float:left">
+           <input type="hidden" name="clientId" value="${clientId}"/><br><br>
+           <input type="hidden" name="page" value="${i}"/>
+           <input type="hidden" name="date" value="${date}"/>
+           <input type="hidden" name="status" value="${status}"/>
+           <input type="hidden" name="type" value="${type}"/>
+           <input type="hidden" name="clientName" value="${name}"/>
+           <input type="hidden" name="surname" value="${surname}"/>
+           <input type="hidden" name="itn" value="${itn}"/>
+           <button type="submit" class="btn btn-link" >${i}</button>
+       </form>
+       </c:forEach>
+    </c:if>
 			<br>
     </div>
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -203,6 +223,8 @@
                       <input type="hidden" name="clientName" value="${name}"/>
                       <input type="hidden" name="surname" value="${surname}"/>
                       <input type="hidden" name="itn" value="${itn}"/>
+                      <input type="hidden" name="page" value="${page}"/>
+
                </div>
                    <div class="modal-footer">
                        <button type="button" class="btn btn-secondary" data-dismiss="modal"><lan:print message="close"/></button>

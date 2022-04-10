@@ -17,6 +17,9 @@
 	.logout {
       margin-right:10px;
     }
+    .page {
+
+    }
     .reports {
     margin-left:150px;
     }
@@ -80,12 +83,14 @@
               <option value="single tax">single tax(Единый налог)</option>
             </select>
          <input type="hidden" name="clientId" value="${user.id}"/>
+         <input type="hidden" name="page" value="1"/>
          <button type="submit" class="btn btn-outline-dark"><lan:print message="filter"/></button>
       </div>
       </form>
  <p>
       <form action = "/tax-office/service/allReportsByClient"  method="GET" align="left" class = "reports">
           <input type="hidden" name="clientId" value="${user.id}"/>
+          <input type="hidden" name="page" value="1">
           <button type="submit" class="btn btn-primary"><lan:print message="all_my_reports"/></button>
       </form>
 <br>
@@ -114,6 +119,7 @@
 							<td>
 							   <form action="/tax-office/service/editReport" method="GET" >
                                   <input type="hidden" name="id" value="${report.id}"/>
+                                  <input type="hidden" name="page" value="${page}"/>
                                   <input type="hidden" name="clientId" value="${user.id}"/>
                                   <input type="hidden" name="title" value="${report.title}"/>
                                   <input type="hidden" name="date" value="${date}"/>
@@ -126,6 +132,7 @@
 							   </a>
 							   <form action="/tax-office/service/deleteReportById" method="POST" onSubmit='return confirm("<lan:print message="are_you_sure"/>");'>
                                   <input type="hidden" name="id" value="${report.id}"/>
+                                  <input type="hidden" name="page" value="${page}"/>
                                   <input type="hidden" name="clientId" value="${user.id}"/>
                                   <input type="hidden" name="title" value="${report.title}"/>
                                   <input type="hidden" name="date" value="${date}"/>
@@ -140,5 +147,17 @@
 			</table>
 			<br>
 	</div>
+	<c:if test = "${countOfPage != 0}">
+       <c:forEach var = "i" begin = "1" end = "${countOfPage}">
+       <form action = "/tax-office/service/filterClientReports"  method="GET" class = page style="float:left">
+           <input type="hidden" name="clientId" value="${user.id}"/><br><br>
+           <input type="hidden" name="page" value="${i}"/>
+           <input type="hidden" name="date" value="${date}"/>
+           <input type="hidden" name="status" value="${status}"/>
+           <input type="hidden" name="type" value="${type}"/>
+           <button type="submit" class="btn btn-link" >${i}</button>
+       </form>
+       </c:forEach>
+    </c:if>
 </body>
 </html>

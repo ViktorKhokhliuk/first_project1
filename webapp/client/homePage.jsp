@@ -78,6 +78,7 @@
              </form>
              <form action = "/tax-office/service/allReportsByClient"  method="GET" class = reports>
                 <input type="hidden" name="clientId" value="${user.id}"/><br><br>
+                <input type="hidden" name="page" value="1">
                 <button type="submit" class="btn btn-primary btn-lg"><lan:print message="my_reports"/></button>
              </form>
           </div>

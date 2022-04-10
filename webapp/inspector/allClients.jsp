@@ -97,6 +97,7 @@
 							<td>
                                <form action = "/tax-office/service/allReportsByClient" method = "GET">
 							     <input type="hidden" name="clientId" value="${client.id}"/>
+							     <input type="hidden" name="page" value="1">
 							     <input type="hidden" name="clientLogin" value="<c:out value='${client.login}'/>"/>
 							     <button type="submit" class="btn btn-outline-info"><lan:print message="reports"/></button>
 							   </form>

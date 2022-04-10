@@ -2,6 +2,7 @@ package epam.project.app.logic.entity.report;
 
 public enum ReportStatus {
     SUBMITTED("SUBMITTED"),
+    ACCEPTED("ACCEPTED"),
     EDITED("EDITED");
 
     private String title;

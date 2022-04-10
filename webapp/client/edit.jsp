@@ -115,6 +115,7 @@
      </div>
      <input type="hidden" name="id" value="${dto.id}"/>
      <input type="hidden" name="clientId" value="${dto.clientId}"/>
+     <input type="hidden" name="page" value="${dto.page}"/>
      <input type="hidden" name="title" value="${dto.title}"/>
      <input type="hidden" name="date" value="${dto.date}"/>
      <input type="hidden" name="statusFilter" value="${dto.statusFilter}"/>
