@@ -3,10 +3,7 @@ package epam.project.app.logic.parse;
 import epam.project.app.logic.entity.dto.ReportEditDto;
 import epam.project.app.logic.entity.report.ReportTags;
 import epam.project.app.logic.exception.ReportException;
-import epam.project.app.logic.repository.ClientRepository;
 import lombok.extern.log4j.Log4j2;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -29,7 +26,7 @@ public class XmlBuilder {
         factory = DocumentBuilderFactory.newInstance();
     }
 
-    public void buildXml(ReportEditDto reportEditDto, String xmlFile) {
+    public boolean buildXml(ReportEditDto reportEditDto, String xmlFile) {
         try {
             factory.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
             DocumentBuilder builder = factory.newDocumentBuilder();
@@ -37,7 +34,7 @@ public class XmlBuilder {
             Element root = doc.createElement(ReportTags.REPORT.getValue());
             root.setAttribute("xmlns:ns", "http://www.w3.org/2001/XMLSchema-instance");
             root.setAttribute("xmlns", "http://report.com/report");
-            root.setAttribute("ns:schemaLocation", "http://report.com/report report.xsd");
+            root.setAttribute("ns:schemaLocation", "http://report.com/report");
             doc.appendChild(root);
             Element person = doc.createElement(ReportTags.PERSON.getValue());
             person.appendChild(doc.createTextNode(reportEditDto.getPerson()));
@@ -66,7 +63,7 @@ public class XmlBuilder {
             root.appendChild(income);
 
             write(doc, xmlFile);
-
+            return true;
         } catch (Exception e) {
             log.error("cannot build xml file",e);
             throw new ReportException("cannot edit report");

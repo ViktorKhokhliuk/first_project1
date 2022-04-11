@@ -21,7 +21,7 @@ public class FileValidator {
     private final ObjectMapper objectMapper;
     private static final String XSD_SCHEMA_PATH = "webapp/upload/report.xsd";
 
-    public void xmlFileValidation(String path) {
+    public boolean xmlFileValidation(String path) {
         File file = new File(path);
         SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
         Schema schema;
@@ -29,6 +29,7 @@ public class FileValidator {
             schema = factory.newSchema(new StreamSource(XSD_SCHEMA_PATH));
             Validator validator = schema.newValidator();
             validator.validate(new StreamSource(file));
+            return true;
         } catch (SAXException | IOException e) {
             file.delete();
             log.error("invalid xml file",e);
@@ -37,10 +38,11 @@ public class FileValidator {
     }
 
 
-    public void jsonFileValidation(String path) {
+    public boolean jsonFileValidation(String path) {
         File file = new File(path);
         try {
             objectMapper.readValue(new File(path), ReportParameters.class);
+            return true;
         } catch (Exception e) {
             file.delete();
             log.error("invalid json file",e);

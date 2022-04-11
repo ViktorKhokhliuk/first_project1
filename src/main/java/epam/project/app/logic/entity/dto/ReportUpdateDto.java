@@ -1,38 +1,27 @@
 package epam.project.app.logic.entity.dto;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class ReportUpdateDto {
-    @Getter
+
     private Long id;
-    @Getter
     private Integer page;
-    @Getter
     private String title;
-    @Getter
     private String status;
-    @Getter
     private String info;
-    @Getter
     private String statusFilter;
-    @Getter
     private Long clientId;
-    @Getter
     private String clientLogin;
-    @Getter
     private String date;
-    @Getter
     private String type;
-    @Getter
     private String clientName;
-    @Getter
     private String surname;
-    @Getter
     private String itn;
 
 }

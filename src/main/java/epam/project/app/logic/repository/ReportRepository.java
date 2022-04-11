@@ -29,7 +29,7 @@ public class ReportRepository {
     private static final String DATE = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 
     @SneakyThrows
-    public List<Report> getClientReportsByParameter(Map<String, String> parameters,int index) {
+    public List<Report> getClientReportsByFilterParameters(Map<String, String> parameters, int index) {
         StringBuffer stringBuffer = new StringBuffer();
         stringBuffer.append("select * ").append(getSqlQueryClientReportsByParameter(parameters)).append(" limit ?, 5;");
         String sql = stringBuffer.toString();

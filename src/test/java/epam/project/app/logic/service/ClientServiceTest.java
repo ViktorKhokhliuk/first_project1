@@ -60,7 +60,7 @@ public class ClientServiceTest {
     }
 
     @Test
-    public void getCountOfHref() {
+    public void getCountOfPage() {
         double expected = 3.0;
 
         when(clientRepository.getCountOfPage()).thenReturn(11.0);

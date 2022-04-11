@@ -53,7 +53,7 @@ public class ReportService {
 
     public List<Report> getClientReportsByFilterParameters(Map<String, String> parameters,int page) {
         int index = (page - 1) * 5;
-        List<Report> reports = reportRepository.getClientReportsByParameter(parameters,index);
+        List<Report> reports = reportRepository.getClientReportsByFilterParameters(parameters,index);
         Collections.sort(reports);
         return reports;
     }
@@ -63,33 +63,33 @@ public class ReportService {
         return reportRepository.getAllReports(index);
     }
 
-    public void xmlValidation(String path) {
-        fileValidator.xmlFileValidation(path);
-    }
-
-    public void jsonValidation(String path) {
-        fileValidator.jsonFileValidation(path);
-    }
-
     public Map<List<Report>, Map<Long, Client>> getAllReportsByFilterParameters(Map<String, String> parameters,int page) {
         int index = (page - 1) * 5;
         return reportRepository.getAllReportsByFilterParameters(parameters,index);
+    }
+
+    public boolean xmlValidation(String path) {
+        return fileValidator.xmlFileValidation(path);
+    }
+
+    public boolean jsonValidation(String path) {
+        return fileValidator.jsonFileValidation(path);
     }
 
     public ReportParameters getReportParametersXml(String path) {
         return xmlParser.parse(path);
     }
 
-    public void saveReportChangesXml(ReportEditDto reportEditDto, String path) {
-        xmlBuilder.buildXml(reportEditDto, path);
-    }
-
     public ReportParameters getReportParametersJson(String path) {
         return jsonParser.parse(path);
     }
 
-    public void saveReportChangesJson(ReportEditDto reportEditDto, String path) {
-        jsonBuilder.buildJson(reportEditDto, path);
+    public boolean saveReportChangesXml(ReportEditDto reportEditDto, String path) {
+       return xmlBuilder.buildXml(reportEditDto, path);
+    }
+
+    public boolean saveReportChangesJson(ReportEditDto reportEditDto, String path) {
+       return jsonBuilder.buildJson(reportEditDto, path);
     }
 
     public double getCountOfPageForAllClientReports(Long clientId) {

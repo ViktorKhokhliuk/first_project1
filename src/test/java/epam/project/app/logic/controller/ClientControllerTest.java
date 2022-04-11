@@ -110,6 +110,7 @@ public class ClientControllerTest {
 
         verify(clientService).getAllClients(anyInt());
         verify(clientService).getCountOfPage();
+        verify(request).getParameterNames();
     }
 
     @Test
@@ -141,6 +142,7 @@ public class ClientControllerTest {
         assertEquals("/inspector/allClients.jsp",modelAndView.getView());
 
         verify(clientService).searchClientsByParameters(parameters);
+        verify(request).getParameterNames();
     }
 
 }

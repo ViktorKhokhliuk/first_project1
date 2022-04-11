@@ -43,11 +43,9 @@ public class UserControllerTest {
     private static final String SELECTED_LOCALE = "en";
     private static final String VIEW = "/index.jsp";
     private static final Long ID = 1L;
-    private static UserDTO userDTO = new UserDTO(LOGIN,PASSWORD);
 
     @Before
     public void init() {
-        when(parameterResolver.getObject(request, UserDTO.class)).thenReturn(userDTO);
         when(request.getSession(true)).thenReturn(session);
         when(request.getSession(false)).thenReturn(session);
     }
@@ -55,8 +53,10 @@ public class UserControllerTest {
     @Test
     public void loginWhenServiceReturnClient() {
         User user = getClient();
+        UserDTO userDTO = new UserDTO(LOGIN,PASSWORD);
 
         when(userService.getUserByLogin(userDTO)).thenReturn(user);
+        when(parameterResolver.getObject(request, UserDTO.class)).thenReturn(userDTO);
 
         ModelAndView modelAndView = userController.login(request);
         assertNotNull(modelAndView);
@@ -70,8 +70,10 @@ public class UserControllerTest {
     @Test
     public void loginWhenServiceReturnInspector() {
         User user = getInspector();
+        UserDTO userDTO = new UserDTO(LOGIN,PASSWORD);
 
         when(userService.getUserByLogin(userDTO)).thenReturn(user);
+        when(parameterResolver.getObject(request, UserDTO.class)).thenReturn(userDTO);
 
         ModelAndView modelAndView = userController.login(request);
         assertNotNull(modelAndView);
