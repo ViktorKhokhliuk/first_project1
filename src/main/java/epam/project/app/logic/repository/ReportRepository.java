@@ -66,12 +66,11 @@ public class ReportRepository {
             preparedStatement.setString(6, DATE);
             preparedStatement.setString(7, dto.getType());
             preparedStatement.execute();
-            try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
-                if (generatedKeys.next()) {
-                    long id = generatedKeys.getLong(1);
+            try (ResultSet resultSet = preparedStatement.getGeneratedKeys()) {
+                if (resultSet.next()) {
+                    long id = resultSet.getLong(1);
                     return Optional.of(new Report(id, dto.getTitle(), dto.getPath(), ReportStatus.SUBMITTED.getTitle(),ReportInfo.PROCESS.getTitle(), DATE, dto.getType(), dto.getClientId()));
                 }
-
             }
         }
         return Optional.empty();
@@ -143,7 +142,7 @@ public class ReportRepository {
     @SneakyThrows
     public  Map<List<Report>,Map<Long,Client>> getAllReports(int index) {
         Map<List<Report>,Map<Long,Client>> map = new LinkedHashMap<>();
-        Map<Long,Client> clientMap = new HashMap<>();
+        Map<Long,Client> clientMap = new LinkedHashMap<>();
         List<Report> reports = new ArrayList<>();
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_REPORTS)) {

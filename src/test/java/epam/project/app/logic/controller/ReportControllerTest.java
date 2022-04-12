@@ -37,7 +37,7 @@ public class ReportControllerTest {
     private HttpSession session;
 
     @InjectMocks
-    ReportController reportController;
+    private ReportController reportController;
 
     private static final Long ID = 0L;
     private static final Long CLIENT_ID = 0L;

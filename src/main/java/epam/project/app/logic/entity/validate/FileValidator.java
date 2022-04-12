@@ -19,7 +19,7 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class FileValidator {
     private final ObjectMapper objectMapper;
-    private static final String XSD_SCHEMA_PATH = "webapp/upload/report.xsd";
+    private static final String XSD_SCHEMA_PATH = "webapp/report.xsd";
 
     public boolean xmlFileValidation(String path) {
         File file = new File(path);
