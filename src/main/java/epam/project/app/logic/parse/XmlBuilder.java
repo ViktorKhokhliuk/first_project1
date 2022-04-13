@@ -17,6 +17,8 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 
 @Log4j2
 public class XmlBuilder {
@@ -63,20 +65,22 @@ public class XmlBuilder {
             root.appendChild(income);
 
             write(doc, xmlFile);
-            return true;
         } catch (Exception e) {
             log.error("cannot build xml file",e);
             throw new ReportException("cannot edit report");
         }
+        return true;
     }
 
-    private void write(Document doc, String xmlFile) throws TransformerException, FileNotFoundException {
+    private void write(Document doc, String xmlFile) throws TransformerException, IOException {
+        OutputStream outputStream = new FileOutputStream(xmlFile);
         TransformerFactory factory = TransformerFactory.newInstance();
         factory.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, "");
         factory.setAttribute(XMLConstants.ACCESS_EXTERNAL_STYLESHEET, "");
         Transformer tr = factory.newTransformer();
         DOMSource source = new DOMSource(doc);
-        StreamResult result = new StreamResult(new FileOutputStream(xmlFile));
+        StreamResult result = new StreamResult(outputStream);
         tr.transform(source, result);
+        outputStream.close();
     }
 }

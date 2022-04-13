@@ -29,12 +29,12 @@ public class FileValidator {
             schema = factory.newSchema(new StreamSource(XSD_SCHEMA_PATH));
             Validator validator = schema.newValidator();
             validator.validate(new StreamSource(file));
-            return true;
         } catch (SAXException | IOException e) {
             file.delete();
             log.error("invalid xml file",e);
             throw new AppException("invalid file");
         }
+        return true;
     }
 
 
@@ -42,12 +42,11 @@ public class FileValidator {
         File file = new File(path);
         try {
             objectMapper.readValue(new File(path), ReportParameters.class);
-            return true;
         } catch (Exception e) {
             file.delete();
             log.error("invalid json file",e);
             throw new AppException("invalid file");
         }
+        return true;
     }
-
 }

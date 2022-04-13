@@ -29,10 +29,10 @@ public class JsonBuilder {
 
         try {
             objectMapper.writeValue(new FileWriter(jsonFileName), reportParameters);
-            return true;
         } catch (IOException e) {
             log.error("cannot build json file",e);
             throw new ReportException("cannot edit report");
         }
+        return true;
     }
 }

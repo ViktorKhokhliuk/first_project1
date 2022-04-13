@@ -21,7 +21,7 @@ public class JsonParser {
             return reportParameters;
         } catch (IOException e) {
             log.error("cannot parse json file",e);
-            throw new ReportException("cannot edit report");
+            throw new ReportException("cannot show report");
         }
     }
 }

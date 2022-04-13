@@ -31,7 +31,7 @@ public class XmlParser {
             reportParameters = buildReportParameters(root);
         } catch (Exception e) {
             log.error("cannot parse xml file",e);
-            throw new ReportException("cannot edit report");
+            throw new ReportException("cannot show report");
         }
         return reportParameters;
     }
