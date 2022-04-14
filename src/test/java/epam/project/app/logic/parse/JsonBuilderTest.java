@@ -3,14 +3,12 @@ package epam.project.app.logic.parse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import epam.project.app.logic.entity.dto.ReportEditDto;
 import epam.project.app.logic.exception.ReportException;
-import org.junit.After;
+import org.apache.commons.io.FileUtils;
+import org.junit.AfterClass;
 import org.junit.Test;
 
 
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -27,12 +25,12 @@ public class JsonBuilderTest {
     private static final String GROUP = "IV";
     private static final String ACTIVITY = "Programmer";
     private static final String INCOME = "10000";
+    private static final String PATH = "src/test/resources/testBuildJson.json";
 
     @Test
     public void buildJson() {
         boolean expected = true;
-        String fileName = "webapp/testBuildJson.json";
-        File file = new File(fileName);
+        File file = new File(PATH);
         ReportEditDto reportEditDto = new ReportEditDto();
         reportEditDto.setPerson(PERSON);
         reportEditDto.setNationality(NATIONALITY);
@@ -43,7 +41,7 @@ public class JsonBuilderTest {
         reportEditDto.setActivity(ACTIVITY);
         reportEditDto.setIncome(INCOME);
 
-        boolean result = jsonBuilder.buildJson(reportEditDto,fileName);
+        boolean result = jsonBuilder.buildJson(reportEditDto, PATH);
         assertEquals(expected, result);
         assertTrue(file.isFile());
     }
@@ -51,15 +49,11 @@ public class JsonBuilderTest {
     @Test(expected = ReportException.class)
     public void buildJsonThrowException() {
         ReportEditDto reportEditDto = new ReportEditDto();
-        jsonBuilder.buildJson(reportEditDto,"");
+        jsonBuilder.buildJson(reportEditDto, "");
     }
 
-    @After
-    public void deleteFile() {
-        try {
-            Files.deleteIfExists(Paths.get("webapp/testBuildJson.json"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    @AfterClass
+    public static void deleteFile() {
+        FileUtils.deleteQuietly(new File(PATH));
     }
 }

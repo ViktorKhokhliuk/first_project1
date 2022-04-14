@@ -2,7 +2,6 @@ package epam.project.app.logic.entity.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Data

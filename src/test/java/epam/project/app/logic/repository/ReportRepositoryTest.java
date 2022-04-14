@@ -72,10 +72,10 @@ public class ReportRepositoryTest {
 
     @Test
     public void getClientReportsByFilterParameters() throws SQLException {
-        List<Report> expectedList = Arrays.asList(new Report(ID,TITLE,PATH,STATUS,INFO,DATE,TYPE, CLIENT_ID1), new Report(ID,TITLE,PATH,STATUS,INFO,DATE,TYPE, CLIENT_ID1));
+        List<Report> expectedList = Arrays.asList(new Report(ID, TITLE, PATH, STATUS, INFO, DATE, TYPE, CLIENT_ID1), new Report(ID, TITLE, PATH, STATUS, INFO, DATE, TYPE, CLIENT_ID1));
         Map<String, String> parameters = new LinkedHashMap<>();
         parameters.put("clientId", CLIENT_ID1.toString());
-        parameters.put("type",TYPE);
+        parameters.put("type", TYPE);
         String sql = "select * from report where clientId = '" + parameters.get("clientId") + "' and type = '" + parameters.get("type") + "' limit ?, 5;";
 
         when(connection.prepareStatement(sql)).thenReturn(preparedStatement);
@@ -89,25 +89,25 @@ public class ReportRepositoryTest {
         when(resultSet.getString("date")).thenReturn(DATE);
         when(resultSet.getLong("clientId")).thenReturn(CLIENT_ID1);
 
-        List<Report> resultList = reportRepository.getClientReportsByFilterParameters(parameters,INDEX);
+        List<Report> resultList = reportRepository.getClientReportsByFilterParameters(parameters, INDEX);
         assertNotNull(resultList);
         assertEquals(expectedList, resultList);
 
-        verify(resultSet,times(3)).next();
+        verify(resultSet, times(3)).next();
         verify(connection).prepareStatement(sql);
         verify(connection).close();
     }
 
     @Test
     public void insertReport() throws SQLException {
-        ReportCreateDto reportCreateDto = new ReportCreateDto(TITLE,PATH, CLIENT_ID1,TYPE);
-        Report expectedReport = new Report(ID,TITLE,PATH,STATUS,INFO,DATE,TYPE, CLIENT_ID1);
+        ReportCreateDto reportCreateDto = new ReportCreateDto(TITLE, PATH, CLIENT_ID1, TYPE);
+        Report expectedReport = new Report(ID, TITLE, PATH, STATUS, INFO, DATE, TYPE, CLIENT_ID1);
 
-        when(connection.prepareStatement(INSERT_REPORT,Statement.RETURN_GENERATED_KEYS)).thenReturn(preparedStatement);
+        when(connection.prepareStatement(INSERT_REPORT, Statement.RETURN_GENERATED_KEYS)).thenReturn(preparedStatement);
         when(preparedStatement.execute()).thenReturn(true);
         when(preparedStatement.getGeneratedKeys()).thenReturn(resultSet);
         when(resultSet.next()).thenReturn(true);
-        when( resultSet.getLong(1)).thenReturn(ID);
+        when(resultSet.getLong(1)).thenReturn(ID);
 
         Optional<Report> resultReport = reportRepository.insertReport(reportCreateDto);
         assertNotNull(resultReport);
@@ -115,7 +115,7 @@ public class ReportRepositoryTest {
         assertEquals(expectedReport, resultReport.get());
 
         verify(resultSet).next();
-        verify(connection).prepareStatement(INSERT_REPORT,Statement.RETURN_GENERATED_KEYS);
+        verify(connection).prepareStatement(INSERT_REPORT, Statement.RETURN_GENERATED_KEYS);
         verify(connection).close();
     }
 
@@ -125,7 +125,7 @@ public class ReportRepositoryTest {
         reportUpdateDto.setId(ID);
         reportUpdateDto.setStatus(ReportStatus.ACCEPTED.getTitle());
         reportUpdateDto.setInfo(ReportInfo.ACCEPT.getTitle());
-        Report expectedReport = new Report(ID,TITLE,PATH,reportUpdateDto.getStatus(),reportUpdateDto.getInfo(),DATE,TYPE, CLIENT_ID1);
+        Report expectedReport = new Report(ID, TITLE, PATH, reportUpdateDto.getStatus(), reportUpdateDto.getInfo(), DATE, TYPE, CLIENT_ID1);
 
         when(connection.prepareStatement(SELECT_REPORT_BY_ID)).thenReturn(preparedStatement);
         when(preparedStatement.executeQuery()).thenReturn(resultSet);
@@ -148,12 +148,12 @@ public class ReportRepositoryTest {
         verify(resultSet).next();
         verify(connection).prepareStatement(UPDATE_STATUS_OF_REPORT);
         verify(connection).prepareStatement(SELECT_REPORT_BY_ID);
-        verify(connection,times(2)).close();
+        verify(connection, times(2)).close();
     }
 
     @Test
     public void getReportByIdWhenFoundReport() throws SQLException {
-        Report expectedReport = new Report(ID,TITLE,PATH,STATUS,INFO,DATE,TYPE, CLIENT_ID1);
+        Report expectedReport = new Report(ID, TITLE, PATH, STATUS, INFO, DATE, TYPE, CLIENT_ID1);
 
         when(connection.prepareStatement(SELECT_REPORT_BY_ID)).thenReturn(preparedStatement);
         when(resultSet.next()).thenReturn(true);
@@ -191,7 +191,7 @@ public class ReportRepositoryTest {
 
     @Test
     public void getAllReportsByClientIdWhenFoundReports() throws SQLException {
-        List<Report> expectedList = Arrays.asList(new Report(ID,TITLE,PATH,STATUS,INFO,DATE,TYPE, CLIENT_ID1), new Report(ID,TITLE,PATH,STATUS,INFO,DATE,TYPE, CLIENT_ID1));
+        List<Report> expectedList = Arrays.asList(new Report(ID, TITLE, PATH, STATUS, INFO, DATE, TYPE, CLIENT_ID1), new Report(ID, TITLE, PATH, STATUS, INFO, DATE, TYPE, CLIENT_ID1));
 
         when(connection.prepareStatement(SELECT_REPORT_BY_CLIENT_ID)).thenReturn(preparedStatement);
         when(resultSet.next()).thenReturn(true).thenReturn(true).thenReturn(false);
@@ -203,11 +203,11 @@ public class ReportRepositoryTest {
         when(resultSet.getString("type")).thenReturn(TYPE);
         when(resultSet.getString("date")).thenReturn(DATE);
 
-        List<Report> resultList = reportRepository.getAllReportsByClientId(CLIENT_ID1,INDEX);
+        List<Report> resultList = reportRepository.getAllReportsByClientId(CLIENT_ID1, INDEX);
         assertNotNull(resultList);
         assertEquals(expectedList, resultList);
 
-        verify(resultSet,times(3)).next();
+        verify(resultSet, times(3)).next();
         verify(connection).prepareStatement(SELECT_REPORT_BY_CLIENT_ID);
         verify(connection).close();
     }
@@ -219,7 +219,7 @@ public class ReportRepositoryTest {
         when(connection.prepareStatement(SELECT_REPORT_BY_CLIENT_ID)).thenReturn(preparedStatement);
         when(resultSet.next()).thenReturn(false);
 
-        List<Report> resultList = reportRepository.getAllReportsByClientId(CLIENT_ID1,INDEX);
+        List<Report> resultList = reportRepository.getAllReportsByClientId(CLIENT_ID1, INDEX);
         assertNotNull(resultList);
         assertEquals(expectedList, resultList);
         assertTrue(resultList.isEmpty());
@@ -231,18 +231,18 @@ public class ReportRepositoryTest {
 
     @Test
     public void getAllReports() throws SQLException {
-        Report report1 = new Report(ID,TITLE,PATH,STATUS,INFO,DATE,TYPE, CLIENT_ID1);
-        Report report2 = new Report(ID,TITLE,PATH,STATUS,INFO,DATE,TYPE, CLIENT_ID1);
-        Report report3 = new Report(ID,TITLE,PATH,STATUS,INFO,DATE,TYPE, CLIENT_ID2);
-        Client client1 = new Client(NAME,SURNAME,ITN);
+        Report report1 = new Report(ID, TITLE, PATH, STATUS, INFO, DATE, TYPE, CLIENT_ID1);
+        Report report2 = new Report(ID, TITLE, PATH, STATUS, INFO, DATE, TYPE, CLIENT_ID1);
+        Report report3 = new Report(ID, TITLE, PATH, STATUS, INFO, DATE, TYPE, CLIENT_ID2);
+        Client client1 = new Client(NAME, SURNAME, ITN);
         client1.setLogin(LOGIN);
         client1.setId(CLIENT_ID1);
-        Client client2 = new Client(NAME,SURNAME,ITN);
+        Client client2 = new Client(NAME, SURNAME, ITN);
         client2.setLogin(LOGIN);
         client2.setId(CLIENT_ID2);
-        List<Report> expectedReports = Arrays.asList(report1,report2,report3);
-        Map<Long, Client> expectedClients = Map.of(CLIENT_ID1,client1,CLIENT_ID2,client2);
-        Map<List<Report>, Map<Long, Client>> expectedMap = Map.of(expectedReports,expectedClients);
+        List<Report> expectedReports = Arrays.asList(report1, report2, report3);
+        Map<Long, Client> expectedClients = Map.of(CLIENT_ID1, client1, CLIENT_ID2, client2);
+        Map<List<Report>, Map<Long, Client>> expectedMap = Map.of(expectedReports, expectedClients);
 
         when(connection.prepareStatement(SELECT_ALL_REPORTS)).thenReturn(preparedStatement);
         when(resultSet.next()).thenReturn(true).thenReturn(true).thenReturn(true).thenReturn(false);
@@ -261,10 +261,10 @@ public class ReportRepositoryTest {
 
         Map<List<Report>, Map<Long, Client>> resultMap = reportRepository.getAllReports(INDEX);
         assertNotNull(resultMap);
-        assertEquals(expectedMap,resultMap);
+        assertEquals(expectedMap, resultMap);
 
         verify(connection).prepareStatement(SELECT_ALL_REPORTS);
-        verify(resultSet,times(4)).next();
+        verify(resultSet, times(4)).next();
         verify(connection).close();
     }
 
@@ -272,14 +272,14 @@ public class ReportRepositoryTest {
     public void getAllReportsWhenNotFoundReports() throws SQLException {
         List<Report> expectedReports = Collections.emptyList();
         Map<Long, Client> expectedClients = Collections.emptyMap();
-        Map<List<Report>, Map<Long, Client>> expectedMap = Map.of(expectedReports,expectedClients);
+        Map<List<Report>, Map<Long, Client>> expectedMap = Map.of(expectedReports, expectedClients);
 
         when(connection.prepareStatement(SELECT_ALL_REPORTS)).thenReturn(preparedStatement);
         when(resultSet.next()).thenReturn(false);
 
         Map<List<Report>, Map<Long, Client>> resultMap = reportRepository.getAllReports(INDEX);
         assertNotNull(resultMap);
-        assertEquals(expectedMap,resultMap);
+        assertEquals(expectedMap, resultMap);
         assertTrue(resultMap.entrySet().iterator().next().getValue().isEmpty());
         assertTrue(resultMap.entrySet().iterator().next().getKey().isEmpty());
 
@@ -290,23 +290,23 @@ public class ReportRepositoryTest {
 
     @Test
     public void getAllReportsByFilterParameters() throws SQLException {
-        Report report1 = new Report(ID,TITLE,PATH,STATUS,INFO,DATE,TYPE, CLIENT_ID1);
-        Report report3 = new Report(ID,TITLE,PATH,STATUS,INFO,DATE,TYPE, CLIENT_ID2);
-        Client client1 = new Client(NAME,SURNAME,ITN);
+        Report report1 = new Report(ID, TITLE, PATH, STATUS, INFO, DATE, TYPE, CLIENT_ID1);
+        Report report3 = new Report(ID, TITLE, PATH, STATUS, INFO, DATE, TYPE, CLIENT_ID2);
+        Client client1 = new Client(NAME, SURNAME, ITN);
         client1.setLogin(LOGIN);
         client1.setId(CLIENT_ID1);
-        Client client2 = new Client(NAME,SURNAME,ITN);
+        Client client2 = new Client(NAME, SURNAME, ITN);
         client2.setLogin(LOGIN);
         client2.setId(CLIENT_ID2);
-        List<Report> expectedReports = Arrays.asList(report1,report3);
-        Map<Long, Client> expectedClients = Map.of(CLIENT_ID1,client1,CLIENT_ID2,client2);
-        Map<List<Report>, Map<Long, Client>> expectedMap = Map.of(expectedReports,expectedClients);
+        List<Report> expectedReports = Arrays.asList(report1, report3);
+        Map<Long, Client> expectedClients = Map.of(CLIENT_ID1, client1, CLIENT_ID2, client2);
+        Map<List<Report>, Map<Long, Client>> expectedMap = Map.of(expectedReports, expectedClients);
 
         Map<String, String> parameters = new LinkedHashMap<>();
-        parameters.put("type",TYPE);
-        parameters.put("name",NAME);
+        parameters.put("type", TYPE);
+        parameters.put("name", NAME);
         String sql = "select * from report join client on report.clientId=client.id join user on client.id=user.id where report.type = '"
-                                 + parameters.get("type") + "' and client.name = '" + parameters.get("name") + "' limit ?, 5;";
+                + parameters.get("type") + "' and client.name = '" + parameters.get("name") + "' limit ?, 5;";
 
         when(connection.prepareStatement(sql)).thenReturn(preparedStatement);
         when(resultSet.next()).thenReturn(true).thenReturn(true).thenReturn(false);
@@ -323,20 +323,20 @@ public class ReportRepositoryTest {
         when(resultSet.getString("surname")).thenReturn(SURNAME);
         when(resultSet.getString("itn")).thenReturn(ITN);
 
-        Map<List<Report>, Map<Long, Client>> resultMap = reportRepository.getAllReportsByFilterParameters(parameters,INDEX);
+        Map<List<Report>, Map<Long, Client>> resultMap = reportRepository.getAllReportsByFilterParameters(parameters, INDEX);
         assertNotNull(resultMap);
-        assertEquals(expectedMap,resultMap);
-        assertEquals(expectedMap.entrySet().iterator().next().getKey(),resultMap.entrySet().iterator().next().getKey());
-        assertEquals(expectedMap.entrySet().iterator().next().getValue(),resultMap.entrySet().iterator().next().getValue());
+        assertEquals(expectedMap, resultMap);
+        assertEquals(expectedMap.entrySet().iterator().next().getKey(), resultMap.entrySet().iterator().next().getKey());
+        assertEquals(expectedMap.entrySet().iterator().next().getValue(), resultMap.entrySet().iterator().next().getValue());
 
         verify(connection).prepareStatement(sql);
-        verify(resultSet,times(3)).next();
+        verify(resultSet, times(3)).next();
         verify(connection).close();
     }
 
     @Test
     public void updateStatusOfReportAfterEdit() throws SQLException {
-        Report expectedReport = new Report(ID,TITLE,PATH,ReportStatus.EDITED.getTitle(),ReportInfo.EDIT.getTitle(),DATE,TYPE, CLIENT_ID1);
+        Report expectedReport = new Report(ID, TITLE, PATH, ReportStatus.EDITED.getTitle(), ReportInfo.EDIT.getTitle(), DATE, TYPE, CLIENT_ID1);
 
         when(connection.prepareStatement(SELECT_REPORT_BY_ID)).thenReturn(preparedStatement);
         when(resultSet.next()).thenReturn(true);
@@ -358,12 +358,12 @@ public class ReportRepositoryTest {
         verify(connection).prepareStatement(SELECT_REPORT_BY_ID);
         verify(connection).prepareStatement(UPDATE_STATUS_OF_REPORT);
         verify(resultSet).next();
-        verify(connection,times(2)).close();
+        verify(connection, times(2)).close();
     }
 
     @Test
     public void deleteReportById() throws SQLException {
-        Report expectedReport = new Report(ID,TITLE,PATH,STATUS,INFO,DATE,TYPE, CLIENT_ID1);
+        Report expectedReport = new Report(ID, TITLE, PATH, STATUS, INFO, DATE, TYPE, CLIENT_ID1);
 
         when(connection.prepareStatement(SELECT_REPORT_BY_ID)).thenReturn(preparedStatement);
         when(resultSet.next()).thenReturn(true);
@@ -385,7 +385,7 @@ public class ReportRepositoryTest {
         verify(connection).prepareStatement(SELECT_REPORT_BY_ID);
         verify(connection).prepareStatement(DELETE_REPORT_BY_ID);
         verify(resultSet).next();
-        verify(connection,times(2)).close();
+        verify(connection, times(2)).close();
     }
 
     @Test
@@ -406,8 +406,8 @@ public class ReportRepositoryTest {
     public void getCountOfPageForFilterReports() throws SQLException {
         double expected = 11.0;
         Map<String, String> parameters = new LinkedHashMap<>();
-        parameters.put("type",TYPE);
-        parameters.put("name",NAME);
+        parameters.put("type", TYPE);
+        parameters.put("name", NAME);
         String sql = "select count(*) from report join client on report.clientId=client.id join user on client.id=user.id where report.type = '"
                 + parameters.get("type") + "' and client.name = '" + parameters.get("name") + "';";
 
@@ -441,7 +441,7 @@ public class ReportRepositoryTest {
         double expected = 11.0;
         Map<String, String> parameters = new LinkedHashMap<>();
         parameters.put("clientId", CLIENT_ID1.toString());
-        parameters.put("type",TYPE);
+        parameters.put("type", TYPE);
         String sql = "select count(*) from report where clientId = '" + parameters.get("clientId") + "' and type = '" + parameters.get("type") + "';";
 
         when(statement.executeQuery(sql)).thenReturn(resultSet);
@@ -453,5 +453,4 @@ public class ReportRepositoryTest {
 
         verify(connection).close();
     }
-
 }

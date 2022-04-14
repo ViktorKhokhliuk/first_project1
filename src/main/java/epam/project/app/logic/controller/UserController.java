@@ -65,5 +65,5 @@ public class UserController {
             modelAndView.setView("/inspector/homePage.jsp");
         modelAndView.setRedirect(true);
         return modelAndView;
-        }
     }
+}

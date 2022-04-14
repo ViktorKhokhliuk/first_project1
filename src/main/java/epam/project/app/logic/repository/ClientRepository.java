@@ -10,6 +10,7 @@ import lombok.extern.log4j.Log4j2;
 import javax.sql.DataSource;
 import java.sql.*;
 import java.util.*;
+
 @Log4j2
 @RequiredArgsConstructor
 public class ClientRepository {
@@ -47,7 +48,7 @@ public class ClientRepository {
     public List<Client> getAllClients(int index) {
         List<Client> clients = new ArrayList<>();
         try (Connection connection = dataSource.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_CLIENTS)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_CLIENTS)) {
             preparedStatement.setInt(1, index);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
@@ -96,18 +97,18 @@ public class ClientRepository {
         try (Connection connection = dataSource.getConnection();
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(sql)) {
-                while (resultSet.next()) {
-                    long id = resultSet.getLong("id");
-                    String login = resultSet.getString("login");
-                    String name = resultSet.getString("name");
-                    String surname = resultSet.getString("surname");
-                    String itn = resultSet.getString("itn");
-                    Client client = new Client(name, surname, itn);
-                    client.setId(id);
-                    client.setLogin(login);
-                    clients.add(client);
-                }
+            while (resultSet.next()) {
+                long id = resultSet.getLong("id");
+                String login = resultSet.getString("login");
+                String name = resultSet.getString("name");
+                String surname = resultSet.getString("surname");
+                String itn = resultSet.getString("itn");
+                Client client = new Client(name, surname, itn);
+                client.setId(id);
+                client.setLogin(login);
+                clients.add(client);
             }
+        }
         return clients;
     }
 
@@ -128,21 +129,21 @@ public class ClientRepository {
             resultSet = preparedStatement.getGeneratedKeys();
             if (resultSet.next()) {
                 long id = resultSet.getLong(1);
-               try (PreparedStatement preparedStatement1 = connection.prepareStatement(INSERT_CLIENT)) {
-                   preparedStatement1.setLong(1, id);
-                   preparedStatement1.setString(2, dto.getName());
-                   preparedStatement1.setString(3, dto.getSurname());
-                   preparedStatement1.setString(4, dto.getItn());
-                   preparedStatement1.execute();
-                   connection.commit();
-               }
-                   client.setId(id);
-                   client.setLogin(dto.getLogin());
-                   client.setPassword(dto.getPassword());
-                   client.setName(dto.getName());
-                   client.setSurname(dto.getSurname());
-                   client.setItn(dto.getItn());
-                   return Optional.of(client);
+                try (PreparedStatement preparedStatement1 = connection.prepareStatement(INSERT_CLIENT)) {
+                    preparedStatement1.setLong(1, id);
+                    preparedStatement1.setString(2, dto.getName());
+                    preparedStatement1.setString(3, dto.getSurname());
+                    preparedStatement1.setString(4, dto.getItn());
+                    preparedStatement1.execute();
+                    connection.commit();
+                }
+                client.setId(id);
+                client.setLogin(dto.getLogin());
+                client.setPassword(dto.getPassword());
+                client.setName(dto.getName());
+                client.setSurname(dto.getSurname());
+                client.setItn(dto.getItn());
+                return Optional.of(client);
             }
         } catch (SQLException e) {
             rollback(connection);
@@ -160,24 +161,24 @@ public class ClientRepository {
     public boolean deleteClientById(Long id) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-        try{
+        try {
             connection = dataSource.getConnection();
             connection.setAutoCommit(false);
             preparedStatement = connection.prepareStatement(DELETE_REPORTS_BY_CLIENT_ID);
-            preparedStatement.setLong(1,id);
+            preparedStatement.setLong(1, id);
             preparedStatement.executeUpdate();
-                try (PreparedStatement preparedStatement1 = connection.prepareStatement(DELETE_CLIENT_BY_ID)) {
-                    preparedStatement1.setLong(1, id);
-                    if (preparedStatement1.executeUpdate() > 0) {
-                        try (PreparedStatement preparedStatement2 = connection.prepareStatement(DELETE_USER_BY_ID)) {
-                            preparedStatement2.setLong(1, id);
-                            if (preparedStatement2.executeUpdate() > 0) {
-                                connection.commit();
-                                return true;
-                            }
+            try (PreparedStatement preparedStatement1 = connection.prepareStatement(DELETE_CLIENT_BY_ID)) {
+                preparedStatement1.setLong(1, id);
+                if (preparedStatement1.executeUpdate() > 0) {
+                    try (PreparedStatement preparedStatement2 = connection.prepareStatement(DELETE_USER_BY_ID)) {
+                        preparedStatement2.setLong(1, id);
+                        if (preparedStatement2.executeUpdate() > 0) {
+                            connection.commit();
+                            return true;
                         }
                     }
                 }
+            }
         } catch (SQLException e) {
             rollback(connection);
             log.error(e.getMessage());
@@ -189,11 +190,11 @@ public class ClientRepository {
         return false;
     }
 
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-@SneakyThrows
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    @SneakyThrows
     private void close(AutoCloseable autoCloseable) {
         if (autoCloseable != null) {
-                autoCloseable.close();
+            autoCloseable.close();
 
         }
     }
@@ -201,7 +202,7 @@ public class ClientRepository {
     @SneakyThrows
     private void rollback(Connection connection) {
         if (connection != null) {
-                connection.rollback();
+            connection.rollback();
         }
     }
 }

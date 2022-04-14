@@ -11,6 +11,7 @@ import epam.project.app.logic.entity.user.UserRole;
 import epam.project.app.logic.service.ReportService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.util.*;
@@ -32,8 +33,7 @@ public class ReportController {
         User user = (User) request.getSession(false).getAttribute("user");
         ReportUpdateDto reportUpdateDto = queryParameterResolver.getObject(request, ReportUpdateDto.class);
         String path = "webapp/upload/id" + reportUpdateDto.getClientId() + "/" + reportUpdateDto.getTitle();
-        File file = new File(path);
-        file.delete();
+        FileUtils.deleteQuietly(new File(path));
         reportService.deleteReportById(reportUpdateDto.getId());
         return configuringModelAndViewAfterUpdate(reportUpdateDto, user);
     }

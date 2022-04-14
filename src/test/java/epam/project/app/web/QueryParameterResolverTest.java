@@ -52,13 +52,11 @@ public class QueryParameterResolverTest {
         when(request.getParameter("login")).thenReturn(LOGIN);
         when(request.getParameter("password")).thenReturn(PASSWORD);
         when(objectMapper.convertValue(parameters, UserDTO.class)).thenReturn(userDTO);
-
-
     }
 
     @Test
     public void getObject() {
-        UserDTO result = queryParameterResolver.getObject(request,UserDTO.class);
+        UserDTO result = queryParameterResolver.getObject(request, UserDTO.class);
         assertEquals(userDTO, result);
     }
 }

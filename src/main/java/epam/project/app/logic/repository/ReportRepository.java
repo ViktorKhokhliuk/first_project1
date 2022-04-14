@@ -69,7 +69,7 @@ public class ReportRepository {
             try (ResultSet resultSet = preparedStatement.getGeneratedKeys()) {
                 if (resultSet.next()) {
                     long id = resultSet.getLong(1);
-                    return Optional.of(new Report(id, dto.getTitle(), dto.getPath(), ReportStatus.SUBMITTED.getTitle(),ReportInfo.PROCESS.getTitle(), DATE, dto.getType(), dto.getClientId()));
+                    return Optional.of(new Report(id, dto.getTitle(), dto.getPath(), ReportStatus.SUBMITTED.getTitle(), ReportInfo.PROCESS.getTitle(), DATE, dto.getType(), dto.getClientId()));
                 }
             }
         }
@@ -117,7 +117,7 @@ public class ReportRepository {
     }
 
     @SneakyThrows
-    public List<Report> getAllReportsByClientId(Long clientId,int index) {
+    public List<Report> getAllReportsByClientId(Long clientId, int index) {
         List<Report> reports = new ArrayList<>();
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(SELECT_REPORT_BY_CLIENT_ID)) {
@@ -140,9 +140,9 @@ public class ReportRepository {
     }
 
     @SneakyThrows
-    public  Map<List<Report>,Map<Long,Client>> getAllReports(int index) {
-        Map<List<Report>,Map<Long,Client>> map = new LinkedHashMap<>();
-        Map<Long,Client> clientMap = new LinkedHashMap<>();
+    public Map<List<Report>, Map<Long, Client>> getAllReports(int index) {
+        Map<List<Report>, Map<Long, Client>> map = new LinkedHashMap<>();
+        Map<Long, Client> clientMap = new LinkedHashMap<>();
         List<Report> reports = new ArrayList<>();
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_REPORTS)) {
@@ -169,17 +169,17 @@ public class ReportRepository {
                 }
             }
         }
-        map.put(reports,clientMap);
+        map.put(reports, clientMap);
         return map;
     }
 
     @SneakyThrows
-    public  Map<List<Report>,Map<Long,Client>> getAllReportsByFilterParameters(Map<String, String> parameters,int index) {
+    public Map<List<Report>, Map<Long, Client>> getAllReportsByFilterParameters(Map<String, String> parameters, int index) {
         StringBuffer stringBuffer = new StringBuffer();
         stringBuffer.append("select * ").append(getSqlQueryAllReportsByParameter(parameters)).append(" limit ?, 5;");
         String sql = stringBuffer.toString();
-        Map<List<Report>,Map<Long,Client>> map = new LinkedHashMap<>();
-        Map<Long,Client> clientMap = new HashMap<>();
+        Map<List<Report>, Map<Long, Client>> map = new LinkedHashMap<>();
+        Map<Long, Client> clientMap = new HashMap<>();
         List<Report> reports = new ArrayList<>();
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
@@ -206,7 +206,7 @@ public class ReportRepository {
                 }
             }
         }
-        map.put(reports,clientMap);
+        map.put(reports, clientMap);
         return map;
     }
 
@@ -282,9 +282,9 @@ public class ReportRepository {
         try (Connection connection = dataSource.getConnection();
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(sql)) {
-                if (resultSet.next())
-                    return resultSet.getDouble(1);
-            }
+            if (resultSet.next())
+                return resultSet.getDouble(1);
+        }
         return 0;
     }
 
@@ -314,7 +314,7 @@ public class ReportRepository {
             Iterator<Map.Entry<String, String>> iterator = parameters.entrySet().iterator();
             while (iterator.hasNext()) {
                 Map.Entry<String, String> entry = iterator.next();
-                if (entry.getKey().equals("status")||entry.getKey().equals("date")||entry.getKey().equals("type")){
+                if (entry.getKey().equals("status") || entry.getKey().equals("date") || entry.getKey().equals("type")) {
                     stringBuffer.append("report.");
                 } else {
                     stringBuffer.append("client.");

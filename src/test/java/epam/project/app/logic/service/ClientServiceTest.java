@@ -41,7 +41,7 @@ public class ClientServiceTest {
         expectedClient.setLogin(LOGIN);
         expectedClient.setPassword(PASSWORD);
 
-        ClientRegistrationDto clientRegistrationDto = new ClientRegistrationDto(LOGIN,PASSWORD,NAME,SURNAME,ITN, UserRole.CLIENT);
+        ClientRegistrationDto clientRegistrationDto = new ClientRegistrationDto(LOGIN, PASSWORD, NAME, SURNAME, ITN, UserRole.CLIENT);
 
         when(clientRepository.insertClient(clientRegistrationDto)).thenReturn(Optional.of(expectedClient));
         Client resultClient = clientService.registration(clientRegistrationDto);
@@ -53,7 +53,7 @@ public class ClientServiceTest {
 
     @Test(expected = ClientException.class)
     public void registrationThrowExceptionWhenRepositoryReturnOptionalEmpty() {
-        ClientRegistrationDto clientRegistrationDto = new ClientRegistrationDto(LOGIN,PASSWORD,NAME,SURNAME,ITN, UserRole.CLIENT);
+        ClientRegistrationDto clientRegistrationDto = new ClientRegistrationDto(LOGIN, PASSWORD, NAME, SURNAME, ITN, UserRole.CLIENT);
 
         when(clientRepository.insertClient(clientRegistrationDto)).thenReturn(Optional.empty());
         clientService.registration(clientRegistrationDto);
@@ -73,19 +73,19 @@ public class ClientServiceTest {
 
     @Test
     public void getAllClients() {
-        List<Client> expectedClients = Arrays.asList(new Client(),new Client());
+        List<Client> expectedClients = Arrays.asList(new Client(), new Client());
 
         when(clientRepository.getAllClients(anyInt())).thenReturn(expectedClients);
 
         List<Client> resultClients = clientService.getAllClients(anyInt());
         assertNotNull(resultClients);
-        assertEquals(expectedClients,resultClients);
+        assertEquals(expectedClients, resultClients);
 
         verify(clientRepository).getAllClients(anyInt());
     }
 
     @Test
-    public void  deleteClientById() {
+    public void deleteClientById() {
         when(clientRepository.deleteClientById(ID)).thenReturn(true);
         boolean result = clientService.deleteClientById(ID);
 
@@ -102,14 +102,14 @@ public class ClientServiceTest {
 
     @Test
     public void searchClientsByParameters() {
-        Map<String,String> parameters = Map.of("name", NAME, "surname", SURNAME);
-        List<Client> expectedClients = Arrays.asList(new Client(),new Client());
+        Map<String, String> parameters = Map.of("name", NAME, "surname", SURNAME);
+        List<Client> expectedClients = Arrays.asList(new Client(), new Client());
 
         when(clientRepository.getClientsByParameter(parameters)).thenReturn(expectedClients);
 
         List<Client> resultClients = clientService.searchClientsByParameters(parameters);
         assertNotNull(resultClients);
-        assertEquals(expectedClients,resultClients);
+        assertEquals(expectedClients, resultClients);
 
         verify(clientRepository).getClientsByParameter(parameters);
     }

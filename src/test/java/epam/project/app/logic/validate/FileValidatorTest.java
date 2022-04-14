@@ -14,10 +14,10 @@ public class FileValidatorTest {
     @Test
     public void xmlFileValidationWhenValidFile() {
         boolean expected = true;
-        String path = "webapp/testValidXml.xml";
+        String path = "src/test/resources/testValidXml.xml";
 
         boolean result = fileValidator.xmlFileValidation(path);
-        assertEquals(expected,result);
+        assertEquals(expected, result);
     }
 
 //    @Test(expected = AppException.class)
@@ -29,10 +29,10 @@ public class FileValidatorTest {
     @Test
     public void jsonFileValidationWhenValidFile() {
         boolean expected = true;
-        String path = "webapp/testValidJson.json";
+        String path = "src/test/resources/testValidJson.json";
 
         boolean result = fileValidator.jsonFileValidation(path);
-        assertEquals(expected,result);
+        assertEquals(expected, result);
     }
 
 //    @Test(expected = AppException.class)

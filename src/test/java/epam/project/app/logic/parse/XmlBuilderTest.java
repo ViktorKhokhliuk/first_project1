@@ -2,6 +2,8 @@ package epam.project.app.logic.parse;
 
 import epam.project.app.logic.entity.dto.ReportEditDto;
 import epam.project.app.logic.exception.ReportException;
+import lombok.SneakyThrows;
+import org.apache.commons.io.FileUtils;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,7 +11,6 @@ import org.mockito.InjectMocks;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.io.File;
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
@@ -30,12 +31,12 @@ public class XmlBuilderTest {
     private static final String GROUP = "IV";
     private static final String ACTIVITY = "Programmer";
     private static final String INCOME = "10000";
+    private static final String PATH = "src/test/resources/testBuildXml.xml";
 
     @Test
     public void buildXml() {
         boolean expected = true;
-        String fileName = "webapp/testBuildXml.xml";
-        File file = new File(fileName);
+        File file = new File(PATH);
         ReportEditDto reportEditDto = new ReportEditDto();
         reportEditDto.setPerson(PERSON);
         reportEditDto.setNationality(NATIONALITY);
@@ -46,7 +47,7 @@ public class XmlBuilderTest {
         reportEditDto.setActivity(ACTIVITY);
         reportEditDto.setIncome(INCOME);
 
-        boolean result = xmlBuilder.buildXml(reportEditDto, fileName);
+        boolean result = xmlBuilder.buildXml(reportEditDto, PATH);
         assertEquals(expected, result);
         assertTrue(file.isFile());
     }
@@ -59,10 +60,6 @@ public class XmlBuilderTest {
 
     @After
     public void deleteFile() {
-        try {
-            Files.deleteIfExists(Paths.get("webapp/testBuildXml.xml"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        FileUtils.deleteQuietly(new File(PATH));
     }
 }

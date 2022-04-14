@@ -45,7 +45,7 @@ public class UserRepositoryTest {
     private static final String ITN = "123456789";
     private static final String SELECT_USER_BY_LOGIN = "select * from user left join client on user.id=client.id where user.login= ?;";
     private static final Long ID = 1L;
-    private static UserDTO userDTO = new UserDTO(LOGIN, PASSWORD);
+    private static final UserDTO userDTO = new UserDTO(LOGIN, PASSWORD);
 
     @Before
     public void init() throws SQLException {
@@ -58,7 +58,7 @@ public class UserRepositoryTest {
 
     @Test
     public void getUserByLoginReturnClient() throws SQLException {
-        User expectedClient = new Client(NAME,SURNAME,ITN);
+        User expectedClient = new Client(NAME, SURNAME, ITN);
         expectedClient.setId(ID);
         expectedClient.setLogin(LOGIN);
         expectedClient.setPassword(PASSWORD);
@@ -73,9 +73,9 @@ public class UserRepositoryTest {
         Optional<User> resultClient = userRepository.getUserByLogin(userDTO.getLogin());
         assertNotNull(resultClient);
         assertTrue(resultClient.isPresent());
-        assertEquals(expectedClient,resultClient.get());
+        assertEquals(expectedClient, resultClient.get());
 
-        verify(preparedStatement).setString(1,LOGIN);
+        verify(preparedStatement).setString(1, LOGIN);
         verify(connection).prepareStatement(SELECT_USER_BY_LOGIN);
     }
 
@@ -93,9 +93,9 @@ public class UserRepositoryTest {
         Optional<User> resultInspector = userRepository.getUserByLogin(userDTO.getLogin());
         assertNotNull(resultInspector);
         assertTrue(resultInspector.isPresent());
-        assertEquals(expectedInspector,resultInspector.get());
+        assertEquals(expectedInspector, resultInspector.get());
 
-        verify(preparedStatement).setString(1,LOGIN);
+        verify(preparedStatement).setString(1, LOGIN);
         verify(connection).prepareStatement(SELECT_USER_BY_LOGIN);
     }
 
@@ -107,7 +107,7 @@ public class UserRepositoryTest {
         assertNotNull(resultUser);
         assertFalse(resultUser.isPresent());
 
-        verify(preparedStatement).setString(1,LOGIN);
+        verify(preparedStatement).setString(1, LOGIN);
         verify(connection).prepareStatement(SELECT_USER_BY_LOGIN);
     }
 }

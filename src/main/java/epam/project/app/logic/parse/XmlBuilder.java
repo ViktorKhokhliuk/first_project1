@@ -15,7 +15,6 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -66,7 +65,7 @@ public class XmlBuilder {
 
             write(doc, xmlFile);
         } catch (Exception e) {
-            log.error("cannot build xml file",e);
+            log.error("cannot build xml file", e);
             throw new ReportException("cannot edit report");
         }
         return true;

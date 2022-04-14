@@ -15,6 +15,7 @@ import java.io.File;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+
 @Log4j2
 public class ConfigServer {
 
@@ -46,7 +47,7 @@ public class ConfigServer {
     private void registerSessionListeners(Server server) {
         log.info("start register session listener");
         Locale selectedLocale = new Locale("en");
-        LocaleSessionListener localeSessionListener = new LocaleSessionListener(List.of(new Locale("en"), new Locale("ru")),selectedLocale);
+        LocaleSessionListener localeSessionListener = new LocaleSessionListener(List.of(new Locale("en"), new Locale("ru")), selectedLocale);
         server.addListener(List.of(localeSessionListener));
     }
 

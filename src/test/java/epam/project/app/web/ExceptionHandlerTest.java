@@ -29,7 +29,7 @@ public class ExceptionHandlerTest {
         assertFalse(modelAndView.isRedirect());
 
         ModelAndView modelAndView2 = exceptionHandler.processingException(new ReportException("some message"));
-        assertEquals("/error/exception.jsp", modelAndView1.getView());
+        assertEquals("/error/exception.jsp", modelAndView2.getView());
         assertFalse(modelAndView.isRedirect());
     }
 }

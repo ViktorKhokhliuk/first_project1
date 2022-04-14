@@ -26,7 +26,7 @@ public class XmlParserTest {
 
     @Test
     public void parseWhenValidFile() {
-        String xmlFileName = "webapp/testValidXml.xml";
+        String xmlFileName = "src/test/resources/testValidXml.xml";
         ReportParameters expectedReportParameters = new ReportParameters(PERSON, NATIONALITY, YEAR, QUARTER, MONTH, GROUP, ACTIVITY, INCOME);
 
         ReportParameters resultReportParameters = xmlParser.parse(xmlFileName);
@@ -35,7 +35,7 @@ public class XmlParserTest {
 
     @Test(expected = ReportException.class)
     public void parseWhenInvalidFile() {
-        String xmlFileName = "webapp/testInvalidXml.xml";
+        String xmlFileName = "src/test/resources/testInvalidXml.xml";
         xmlParser.parse(xmlFileName);
     }
 }

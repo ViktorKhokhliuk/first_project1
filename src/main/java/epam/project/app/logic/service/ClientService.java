@@ -1,4 +1,5 @@
 package epam.project.app.logic.service;
+
 import epam.project.app.logic.entity.dto.ClientRegistrationDto;
 import epam.project.app.logic.entity.user.Client;
 import epam.project.app.logic.exception.ClientException;
@@ -23,7 +24,7 @@ public class ClientService {
     }
 
     public boolean deleteClientById(Long id) {
-        if(clientRepository.deleteClientById(id))
+        if (clientRepository.deleteClientById(id))
             return true;
         throw new ClientException("Cannot delete client");
     }

@@ -7,6 +7,7 @@ import epam.project.app.logic.entity.user.Client;
 import epam.project.app.logic.service.ClientService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.util.*;
@@ -31,9 +32,9 @@ public class ClientController {
         double countOfPage = clientService.getCountOfPage();
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setView("/inspector/allClients.jsp");
-        modelAndView.addAttribute("clients",clients);
-        modelAndView.addAttribute("page",page);
-        modelAndView.addAttribute("countOfPage",countOfPage);
+        modelAndView.addAttribute("clients", clients);
+        modelAndView.addAttribute("page", page);
+        modelAndView.addAttribute("countOfPage", countOfPage);
         return modelAndView;
     }
 
@@ -44,8 +45,8 @@ public class ClientController {
         while (parameterNames.hasMoreElements()) {
             String parameterName = parameterNames.nextElement();
             String parameter = request.getParameter(parameterName);
-            modelAndView.addAttribute(parameterName,parameter);
-            if (!parameter.equals("")&&!parameterName.equals("page")) {
+            modelAndView.addAttribute(parameterName, parameter);
+            if (!parameter.equals("") && !parameterName.equals("page")) {
                 parameters.put(parameterName, parameter);
             }
         }
@@ -54,30 +55,33 @@ public class ClientController {
 
         List<Client> clients = clientService.searchClientsByParameters(parameters);
         modelAndView.setView("/inspector/allClients.jsp");
-        modelAndView.addAttribute("clients",clients);
+        modelAndView.addAttribute("clients", clients);
         return modelAndView;
     }
 
     public ModelAndView deleteClientById(HttpServletRequest request) {
         int page = Integer.parseInt(request.getParameter("page"));
         Long clientId = Long.parseLong(request.getParameter("clientId"));
-        String path = "webapp/upload/id"+clientId;
+        String path = "webapp/upload/id" + clientId;
         clientService.deleteClientById(clientId);
         deleteFiles(new File(path));
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setRedirect(true);
-        modelAndView.setView("/service/allClients?page="+page);
+        modelAndView.setView("/service/allClients?page=" + page);
         return modelAndView;
     }
 
     private void deleteFiles(File file) {
         if (!file.exists())
             return;
-        if (file.isDirectory()) {
-            for (File f : Objects.requireNonNull(file.listFiles())) {
-                deleteFiles(f);
-            }
-        }
-        file.delete();
+//        if (file.isDirectory()) {
+//            for (File f : Objects.requireNonNull(file.listFiles())) {
+//                deleteFiles(f);
+//            }
+//        }
+//        file.delete();
+//    }
+        Arrays.stream(Objects.requireNonNull(file.listFiles())).forEach(FileUtils::deleteQuietly);
+        FileUtils.deleteQuietly(file);
     }
 }

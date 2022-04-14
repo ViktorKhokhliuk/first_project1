@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ns:schema xmlns:ns="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://report.com/report"
+           elementFormDefault="qualified">
+    <ns:element name="report">
+        <ns:complexType>
+            <ns:sequence>
+                            <ns:element name="person" type="ns:string"/>
+                            <ns:element name="nationality" type="ns:string"/>
+                            <ns:element name="year" type="ns:string"/>
+                            <ns:element name="quarter" type="ns:string"/>
+                            <ns:element name="month" type="ns:string"/>
+                            <ns:element name="group" type="ns:string"/>
+                            <ns:element name="activity" type="ns:string"/>
+                            <ns:element name="income" type="ns:string"/>
+            </ns:sequence>
+        </ns:complexType>
+    </ns:element>
+</ns:schema>

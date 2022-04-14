@@ -42,7 +42,7 @@ public class ConfigApp {
 
         ConfigServer configServer = new ConfigServer();
         Map<String, HttpServlet> servlets = configServlet.getServlets();
-        List<Filter> filters = List.of(new SecurityFilter(),new EncodingFilter());
+        List<Filter> filters = List.of(new SecurityFilter(), new EncodingFilter());
 
         Server server = configServer.createServer(propertyLoader, servlets, filters);
 

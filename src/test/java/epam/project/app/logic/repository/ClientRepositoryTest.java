@@ -283,7 +283,7 @@ public class ClientRepositoryTest {
         parameters.put("name", NAME);
         parameters.put("surname", SURNAME);
         String sql = "select * from client join user on user.id=client.id where name = '"
-                     + parameters.get("name") + "' and surname = '" + parameters.get("surname") + "';";
+                + parameters.get("name") + "' and surname = '" + parameters.get("surname") + "';";
 
 
         when(statement.executeQuery(sql)).thenReturn(resultSet);
@@ -325,5 +325,4 @@ public class ClientRepositoryTest {
         verify(statement).executeQuery(sql);
         verify(resultSet).next();
     }
-
 }

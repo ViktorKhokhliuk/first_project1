@@ -22,7 +22,7 @@ public class JsonParserTest {
 
     @Test
     public void parseWhenValidFile() {
-        String jsonFileName = "webapp/testValidJson.json";
+        String jsonFileName = "src/test/resources/testValidJson.json";
         ReportParameters expectedReportParameters = new ReportParameters(PERSON, NATIONALITY, YEAR, QUARTER, MONTH, GROUP, ACTIVITY, INCOME);
 
         ReportParameters resultReportParameters = jsonParser.parse(jsonFileName);
@@ -31,7 +31,7 @@ public class JsonParserTest {
 
     @Test(expected = ReportException.class)
     public void parseWhenInvalidFile() {
-        String jsonFileName = "webapp/testInvalidJson.json";
+        String jsonFileName = "src/test/resources/testInvalidJson.json";
         jsonParser.parse(jsonFileName);
     }
 }

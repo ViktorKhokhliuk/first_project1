@@ -1,7 +1,9 @@
 package epam.project.app.logic.service;
 
 import epam.project.app.logic.entity.dto.UserDTO;
+
 import static org.junit.Assert.*;
+
 import epam.project.app.logic.entity.user.Client;
 import epam.project.app.logic.entity.user.Inspector;
 import epam.project.app.logic.entity.user.User;
@@ -28,7 +30,7 @@ public class UserServiceTest {
 
     private static final String LOGIN = "tony";
     private static final String PASSWORD = "tony123";
-    private static UserDTO userDTO = new UserDTO(LOGIN, PASSWORD);
+    private static final UserDTO userDTO = new UserDTO(LOGIN, PASSWORD);
 
     @Test
     public void getUserByLoginReturnClient() {

@@ -20,6 +20,7 @@ import lombok.extern.log4j.Log4j2;
 import javax.sql.DataSource;
 import java.util.ArrayList;
 import java.util.List;
+
 @Log4j2
 public class ConfigPlaceholders {
     public List<Placeholder> config(DataSource dataSource, ObjectMapper objectMapper) {
@@ -56,7 +57,7 @@ public class ConfigPlaceholders {
     }
 
     private ReportService createReportService(DataSource dataSource, ObjectMapper objectMapper) {
-        return new ReportService(new ReportRepository(dataSource),new FileValidator(objectMapper), new XmlParser(), new XmlBuilder(), new JsonParser(objectMapper), new JsonBuilder(objectMapper));
+        return new ReportService(new ReportRepository(dataSource), new FileValidator(objectMapper), new XmlParser(), new XmlBuilder(), new JsonParser(objectMapper), new JsonBuilder(objectMapper));
     }
 
     private ClientController createClientController(DataSource dataSource, QueryParameterResolver queryParameterResolver) {

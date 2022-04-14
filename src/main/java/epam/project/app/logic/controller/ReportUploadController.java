@@ -26,7 +26,7 @@ public class ReportUploadController {
 
     @SneakyThrows
     public ModelAndView uploadFile(HttpServletRequest request) {
-        User userFromSession = getUserFromSession(request.getSession());
+        User userFromSession = getUserFromSession(request.getSession(false));
         String uploadPath = request.getServletContext().getRealPath("") + UPLOAD_DIRECTORY + userFromSession.getId().toString();
         File uploadDir = new File(uploadPath);
         if (!uploadDir.exists()) {

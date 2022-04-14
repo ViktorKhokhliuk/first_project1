@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding ="UTF-8" ?>
+    <report xmlns="http://report.com/report"
+        xmlns:ns="http://www.w3.org/2001/XMLSchema-instance"
+        ns:schemaLocation="http://report.com/report">
+        <person>natural</person>
+        <nationality>ukrainian</nationality>
+        <year>2022</year>
+        <quarter>2</quarter>
+        <month>10</month>
+        <group>IV</group>
+        <activity>Programmer</activity>
+        <income>10000</income>
+    </report>

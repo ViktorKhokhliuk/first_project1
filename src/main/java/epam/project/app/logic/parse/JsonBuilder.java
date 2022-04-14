@@ -8,6 +8,7 @@ import lombok.extern.log4j.Log4j2;
 
 import java.io.FileWriter;
 import java.io.IOException;
+
 @Log4j2
 public class JsonBuilder {
     private final ObjectMapper objectMapper;
@@ -30,7 +31,7 @@ public class JsonBuilder {
         try {
             objectMapper.writeValue(new FileWriter(jsonFileName), reportParameters);
         } catch (IOException e) {
-            log.error("cannot build json file",e);
+            log.error("cannot build json file", e);
             throw new ReportException("cannot edit report");
         }
         return true;

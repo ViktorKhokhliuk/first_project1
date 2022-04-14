@@ -20,7 +20,7 @@ public class JsonParser {
             reportParameters = mapper.readValue(new File(jsonFileName), ReportParameters.class);
             return reportParameters;
         } catch (IOException e) {
-            log.error("cannot parse json file",e);
+            log.error("cannot parse json file", e);
             throw new ReportException("cannot show report");
         }
     }

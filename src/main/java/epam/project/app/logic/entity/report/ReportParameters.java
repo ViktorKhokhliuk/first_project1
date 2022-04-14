@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ReportParameters {
+
     private String person;
     private String nationality;
     private String year;
@@ -16,4 +17,5 @@ public class ReportParameters {
     private String group;
     private String activity;
     private String income;
+
 }

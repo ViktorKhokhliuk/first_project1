@@ -10,7 +10,9 @@ import epam.project.app.logic.entity.user.UserRole;
 import epam.project.app.logic.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+
 import static org.junit.Assert.*;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -53,7 +55,7 @@ public class UserControllerTest {
     @Test
     public void loginWhenServiceReturnClient() {
         User user = getClient();
-        UserDTO userDTO = new UserDTO(LOGIN,PASSWORD);
+        UserDTO userDTO = new UserDTO(LOGIN, PASSWORD);
 
         when(userService.getUserByLogin(userDTO)).thenReturn(user);
         when(parameterResolver.getObject(request, UserDTO.class)).thenReturn(userDTO);
@@ -70,7 +72,7 @@ public class UserControllerTest {
     @Test
     public void loginWhenServiceReturnInspector() {
         User user = getInspector();
-        UserDTO userDTO = new UserDTO(LOGIN,PASSWORD);
+        UserDTO userDTO = new UserDTO(LOGIN, PASSWORD);
 
         when(userService.getUserByLogin(userDTO)).thenReturn(user);
         when(parameterResolver.getObject(request, UserDTO.class)).thenReturn(userDTO);
@@ -114,7 +116,7 @@ public class UserControllerTest {
 
         ModelAndView modelAndView = userController.toHome(request);
         assertNotNull(modelAndView);
-        assertEquals("/client/homePage.jsp",modelAndView.getView());
+        assertEquals("/client/homePage.jsp", modelAndView.getView());
         assertTrue(modelAndView.isRedirect());
 
         verify(session).getAttribute("user");
@@ -130,7 +132,7 @@ public class UserControllerTest {
 
         ModelAndView modelAndView = userController.toHome(request);
         assertNotNull(modelAndView);
-        assertEquals("/inspector/homePage.jsp",modelAndView.getView());
+        assertEquals("/inspector/homePage.jsp", modelAndView.getView());
         assertTrue(modelAndView.isRedirect());
 
         verify(session).getAttribute("user");

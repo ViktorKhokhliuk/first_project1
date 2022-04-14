@@ -44,16 +44,16 @@ public class ReportService {
         return reportRepository.deleteReportById(id).orElseThrow(() -> new ReportException("cannot delete report"));
     }
 
-    public List<Report> getAllReportsByClientId(Long clientId,int page) {
+    public List<Report> getAllReportsByClientId(Long clientId, int page) {
         int index = (page - 1) * 5;
-        List<Report> reports = reportRepository.getAllReportsByClientId(clientId,index);
+        List<Report> reports = reportRepository.getAllReportsByClientId(clientId, index);
         Collections.sort(reports);
         return reports;
     }
 
-    public List<Report> getClientReportsByFilterParameters(Map<String, String> parameters,int page) {
+    public List<Report> getClientReportsByFilterParameters(Map<String, String> parameters, int page) {
         int index = (page - 1) * 5;
-        List<Report> reports = reportRepository.getClientReportsByFilterParameters(parameters,index);
+        List<Report> reports = reportRepository.getClientReportsByFilterParameters(parameters, index);
         Collections.sort(reports);
         return reports;
     }
@@ -63,9 +63,9 @@ public class ReportService {
         return reportRepository.getAllReports(index);
     }
 
-    public Map<List<Report>, Map<Long, Client>> getAllReportsByFilterParameters(Map<String, String> parameters,int page) {
+    public Map<List<Report>, Map<Long, Client>> getAllReportsByFilterParameters(Map<String, String> parameters, int page) {
         int index = (page - 1) * 5;
-        return reportRepository.getAllReportsByFilterParameters(parameters,index);
+        return reportRepository.getAllReportsByFilterParameters(parameters, index);
     }
 
     public boolean xmlValidation(String path) {
@@ -85,11 +85,11 @@ public class ReportService {
     }
 
     public boolean saveReportChangesXml(ReportEditDto reportEditDto, String path) {
-       return xmlBuilder.buildXml(reportEditDto, path);
+        return xmlBuilder.buildXml(reportEditDto, path);
     }
 
     public boolean saveReportChangesJson(ReportEditDto reportEditDto, String path) {
-       return jsonBuilder.buildJson(reportEditDto, path);
+        return jsonBuilder.buildJson(reportEditDto, path);
     }
 
     public double getCountOfPageForAllClientReports(Long clientId) {
@@ -99,16 +99,16 @@ public class ReportService {
 
     public double getCountOfPageForFilterClientReports(Map<String, String> parameters) {
         double countOfPage = reportRepository.getCountOfPageForFilterClientReports(parameters);
-        return  Math.ceil(countOfPage / 5);
+        return Math.ceil(countOfPage / 5);
     }
 
     public double getCountOfPageForAllReports() {
         double countOfPage = reportRepository.getCountOfPageForAllReports();
-        return Math.ceil(countOfPage/5);
+        return Math.ceil(countOfPage / 5);
     }
 
     public double getCountOfPageForFilterReports(Map<String, String> parameters) {
         double countOfPage = reportRepository.getCountOfPageForFilterReports(parameters);
-        return Math.ceil(countOfPage/5);
+        return Math.ceil(countOfPage / 5);
     }
 }

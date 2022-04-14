@@ -48,7 +48,7 @@ public class ClientControllerTest {
 
         ModelAndView modelAndView = clientController.registration(request);
         assertNotNull(modelAndView);
-        assertEquals("/index.jsp",modelAndView.getView());
+        assertEquals("/index.jsp", modelAndView.getView());
         assertTrue(modelAndView.isRedirect());
 
         verify(clientService).registration(registrationDto);
@@ -58,7 +58,7 @@ public class ClientControllerTest {
     public void getAllClients() {
         double countOfPage = 1.0;
         int page = 1;
-        List<Client> expectedClients = Arrays.asList(new Client(),new Client());
+        List<Client> expectedClients = Arrays.asList(new Client(), new Client());
 
         when(request.getParameter("page")).thenReturn("1");
         when(clientService.getAllClients(anyInt())).thenReturn(expectedClients);
@@ -66,10 +66,10 @@ public class ClientControllerTest {
 
         ModelAndView modelAndView = clientController.getAllClients(request);
         assertNotNull(modelAndView);
-        assertEquals(expectedClients,modelAndView.getAttributes().get("clients"));
-        assertEquals(page,modelAndView.getAttributes().get("page"));
-        assertEquals(countOfPage,modelAndView.getAttributes().get("countOfPage"));
-        assertEquals("/inspector/allClients.jsp",modelAndView.getView());
+        assertEquals(expectedClients, modelAndView.getAttributes().get("clients"));
+        assertEquals(page, modelAndView.getAttributes().get("page"));
+        assertEquals(countOfPage, modelAndView.getAttributes().get("countOfPage"));
+        assertEquals("/inspector/allClients.jsp", modelAndView.getView());
 
         verify(clientService).getAllClients(anyInt());
         verify(clientService).getCountOfPage();
@@ -83,7 +83,7 @@ public class ClientControllerTest {
         when(request.getParameter("clientId")).thenReturn(ID.toString());
 
         ModelAndView modelAndView = clientController.deleteClientById(request);
-        assertEquals("/service/allClients?page="+page,modelAndView.getView());
+        assertEquals("/service/allClients?page=" + page, modelAndView.getView());
         assertTrue(modelAndView.isRedirect());
 
         verify(clientService).deleteClientById(ID);
@@ -93,7 +93,7 @@ public class ClientControllerTest {
     public void searchClientsByParametersWhenNoParameters() {
         double countOfPage = 1.0;
         int page = 1;
-        List<Client> expectedClients = Arrays.asList(new Client(),new Client());
+        List<Client> expectedClients = Arrays.asList(new Client(), new Client());
         Enumeration<String> parameterNames = new Vector<String>().elements();
 
         when(request.getParameterNames()).thenReturn(parameterNames);
@@ -103,10 +103,10 @@ public class ClientControllerTest {
 
         ModelAndView modelAndView = clientController.searchClientsByParameters(request);
         assertNotNull(modelAndView);
-        assertEquals(expectedClients,modelAndView.getAttributes().get("clients"));
-        assertEquals(page,modelAndView.getAttributes().get("page"));
-        assertEquals(countOfPage,modelAndView.getAttributes().get("countOfPage"));
-        assertEquals("/inspector/allClients.jsp",modelAndView.getView());
+        assertEquals(expectedClients, modelAndView.getAttributes().get("clients"));
+        assertEquals(page, modelAndView.getAttributes().get("page"));
+        assertEquals(countOfPage, modelAndView.getAttributes().get("countOfPage"));
+        assertEquals("/inspector/allClients.jsp", modelAndView.getView());
 
         verify(clientService).getAllClients(anyInt());
         verify(clientService).getCountOfPage();
@@ -115,7 +115,7 @@ public class ClientControllerTest {
 
     @Test
     public void searchClientsByParameters() {
-        Client client = new Client("Tony","Smith","123456789");
+        Client client = new Client("Tony", "Smith", "123456789");
         client.setId(ID);
         client.setLogin(LOGIN);
         client.setPassword(PASSWORD);
@@ -127,9 +127,9 @@ public class ClientControllerTest {
 
         Enumeration<String> parameterNames = names.elements();
 
-        Map<String,String> parameters = new HashMap<>();
-        parameters.put(names.get(0),client.getName());
-        parameters.put(names.get(1),client.getSurname());
+        Map<String, String> parameters = new HashMap<>();
+        parameters.put(names.get(0), client.getName());
+        parameters.put(names.get(1), client.getSurname());
 
         when(request.getParameterNames()).thenReturn(parameterNames);
         when(request.getParameter("name")).thenReturn(client.getName());
@@ -138,11 +138,10 @@ public class ClientControllerTest {
 
         ModelAndView modelAndView = clientController.searchClientsByParameters(request);
         assertNotNull(modelAndView);
-        assertEquals(expectedClients,modelAndView.getAttributes().get("clients"));
-        assertEquals("/inspector/allClients.jsp",modelAndView.getView());
+        assertEquals(expectedClients, modelAndView.getAttributes().get("clients"));
+        assertEquals("/inspector/allClients.jsp", modelAndView.getView());
 
         verify(clientService).searchClientsByParameters(parameters);
         verify(request).getParameterNames();
     }
-
 }

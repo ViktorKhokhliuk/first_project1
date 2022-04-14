@@ -6,6 +6,7 @@ import epam.project.app.infra.config.app.PropertyLoader;
 import lombok.extern.log4j.Log4j2;
 
 import javax.sql.DataSource;
+
 @Log4j2
 public class ConfigDataSource {
 

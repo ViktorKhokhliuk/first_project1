@@ -5,7 +5,7 @@ public enum ReportStatus {
     ACCEPTED("ACCEPTED"),
     EDITED("EDITED");
 
-    private String title;
+    private final String title;
 
     ReportStatus(String title) {
         this.title = title;

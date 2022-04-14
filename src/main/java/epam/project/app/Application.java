@@ -16,6 +16,6 @@ public class Application {
     }
 
     private void run() {
-       server.start();
+        server.start();
     }
 }

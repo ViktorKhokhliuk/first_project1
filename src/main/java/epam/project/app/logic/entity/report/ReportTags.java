@@ -11,7 +11,7 @@ public enum ReportTags {
     ACTIVITY("activity"),
     INCOME("income");
 
-    private String parameter;
+    private final String parameter;
 
     ReportTags(String value) {
         this.parameter = value;

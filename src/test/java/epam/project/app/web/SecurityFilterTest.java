@@ -64,24 +64,24 @@ public class SecurityFilterTest {
         User client = new Client();
         when(session.getAttribute("user")).thenReturn(client);
         when(request.getRequestDispatcher("/error/forbidden.jsp")).thenReturn(requestDispatcher);
-        securityFilter.doFilter(request,response,filterChain);
-        verify(requestDispatcher).forward(request,response);
+        securityFilter.doFilter(request, response, filterChain);
+        verify(requestDispatcher).forward(request, response);
     }
 
     @Test
     public void doFilterWhenUserIsNull() throws ServletException, IOException {
         when(session.getAttribute("user")).thenReturn(null);
         when(request.getRequestDispatcher("/error/forbidden.jsp")).thenReturn(requestDispatcher);
-        securityFilter.doFilter(request,response,filterChain);
-        verify(requestDispatcher).forward(request,response);
+        securityFilter.doFilter(request, response, filterChain);
+        verify(requestDispatcher).forward(request, response);
     }
 
     @Test
-    public void doFilterWhenPathNoMath()throws ServletException, IOException {
+    public void doFilterWhenPathNoMath() throws ServletException, IOException {
         User client = new Client();
         lenient().when(session.getAttribute("user")).thenReturn(client);
         when(request.getRequestURI()).thenReturn("/tax-office/service/allClients.jsp");
-        securityFilter.doFilter(request,response,filterChain);
-        verify(filterChain).doFilter(request,response);
+        securityFilter.doFilter(request, response, filterChain);
+        verify(filterChain).doFilter(request, response);
     }
 }

@@ -5,6 +5,7 @@ import epam.project.app.infra.web.exception.AppException;
 import epam.project.app.logic.entity.report.ReportParameters;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.apache.commons.io.FileUtils;
 import org.xml.sax.SAXException;
 
 import javax.xml.XMLConstants;
@@ -30,7 +31,7 @@ public class FileValidator {
             Validator validator = schema.newValidator();
             validator.validate(new StreamSource(file));
         } catch (SAXException | IOException e) {
-            file.delete();
+            FileUtils.deleteQuietly(file);
             log.error("invalid xml file",e);
             throw new AppException("invalid file");
         }
@@ -43,7 +44,7 @@ public class FileValidator {
         try {
             objectMapper.readValue(new File(path), ReportParameters.class);
         } catch (Exception e) {
-            file.delete();
+            FileUtils.deleteQuietly(file);
             log.error("invalid json file",e);
             throw new AppException("invalid file");
         }

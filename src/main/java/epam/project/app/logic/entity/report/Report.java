@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Comparator;
 
 @Data
 @NoArgsConstructor
@@ -18,7 +17,6 @@ public class Report implements Comparable<Report> {
     private String date;
     private String type;
     private Long clientId;
-
 
     @Override
     public int compareTo(Report report) {

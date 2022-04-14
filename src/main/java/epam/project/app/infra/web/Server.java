@@ -1,6 +1,6 @@
 package epam.project.app.infra.web;
 
-import jakarta.servlet.Filter;
+
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpSessionListener;
 import lombok.Getter;
@@ -12,8 +12,9 @@ import org.apache.catalina.startup.Tomcat;
 import org.apache.tomcat.util.descriptor.web.FilterDef;
 import org.apache.tomcat.util.descriptor.web.FilterMap;
 
-import java.io.File;
+
 import java.util.List;
+
 @Log4j2
 public class Server {
     @Getter

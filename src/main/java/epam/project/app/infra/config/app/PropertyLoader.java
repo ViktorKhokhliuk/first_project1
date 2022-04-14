@@ -1,7 +1,6 @@
 package epam.project.app.infra.config.app;
 
 import lombok.Getter;
-import lombok.extern.log4j.Log4j;
 import lombok.extern.log4j.Log4j2;
 
 import java.io.IOException;
