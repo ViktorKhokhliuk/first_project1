@@ -15,7 +15,6 @@ public class ConfigDataSource {
         HikariConfig config = new HikariConfig();
 
         config.setJdbcUrl(properties.getConfigs().get("jdbc_url"));
-        log.info("Start config DataSource");
         config.setUsername(properties.getConfigs().get("user_name"));
         log.info("Set userName - " + properties.getConfigs().get("user_name"));
         config.setPassword(properties.getConfigs().get("password"));

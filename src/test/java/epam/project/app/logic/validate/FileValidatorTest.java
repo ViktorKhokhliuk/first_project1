@@ -3,10 +3,12 @@ package epam.project.app.logic.validate;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import epam.project.app.logic.entity.validate.FileValidator;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.junit.MockitoJUnitRunner;
 
 
 import static org.junit.Assert.assertEquals;
-
+@RunWith(MockitoJUnitRunner.class)
 public class FileValidatorTest {
 
     private static final FileValidator fileValidator = new FileValidator(new ObjectMapper());

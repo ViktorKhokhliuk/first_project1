@@ -38,7 +38,6 @@ public class FileValidator {
         return true;
     }
 
-
     public boolean jsonFileValidation(String path) {
         File file = new File(path);
         try {

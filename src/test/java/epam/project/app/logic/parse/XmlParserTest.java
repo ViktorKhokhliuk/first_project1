@@ -3,17 +3,13 @@ package epam.project.app.logic.parse;
 import epam.project.app.logic.entity.report.ReportParameters;
 import epam.project.app.logic.exception.ReportException;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.junit.MockitoJUnitRunner;
 
 import static org.junit.Assert.assertEquals;
 
-@RunWith(MockitoJUnitRunner.class)
+
 public class XmlParserTest {
 
-    @InjectMocks
-    private XmlParser xmlParser;
+    private final XmlParser xmlParser = new XmlParser();
 
     private static final String PERSON = "natural";
     private static final String NATIONALITY = "ukrainian";

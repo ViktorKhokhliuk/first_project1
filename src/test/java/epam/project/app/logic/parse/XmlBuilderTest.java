@@ -2,26 +2,18 @@ package epam.project.app.logic.parse;
 
 import epam.project.app.logic.entity.dto.ReportEditDto;
 import epam.project.app.logic.exception.ReportException;
-import lombok.SneakyThrows;
+
 import org.apache.commons.io.FileUtils;
 import org.junit.After;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.junit.MockitoJUnitRunner;
-
 import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-@RunWith(MockitoJUnitRunner.class)
 public class XmlBuilderTest {
 
-    @InjectMocks
-    private XmlBuilder xmlBuilder;
+    private final XmlBuilder xmlBuilder = new XmlBuilder();
 
     private static final String PERSON = "natural";
     private static final String NATIONALITY = "ukrainian";

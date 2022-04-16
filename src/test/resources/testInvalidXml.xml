@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding ="UTF-8" ?>
     <report xmlns="http://report.com/report"
         xmlns:ns="http://www.w3.org/2001/XMLSchema-instance"
-        ns:schemaLocation="http://report.com/report ../../../webapp/report.xsd">
+        ns:schemaLocation="http://report.com/report">
         <person>natural</person>
         <nationality>ukrainian</nationality>
         <year>2022</year>
