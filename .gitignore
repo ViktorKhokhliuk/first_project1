@@ -1,4 +1,5 @@
 target/
+.idea
+temp/
+webapp/upload/
 *.class
-.idea/
-temp/*
