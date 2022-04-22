@@ -1,19 +1,19 @@
 package epam.project.app.logic.service;
 
+import epam.project.app.logic.builder.Building;
 import epam.project.app.logic.entity.dto.ReportEditDto;
 import epam.project.app.logic.entity.report.Report;
 import epam.project.app.logic.entity.dto.ReportCreateDto;
 import epam.project.app.logic.entity.dto.ReportUpdateDto;
 import epam.project.app.logic.entity.report.ReportParameters;
 import epam.project.app.logic.entity.user.Client;
-import epam.project.app.logic.entity.validate.FileValidator;
+import epam.project.app.logic.parser.Parsing;
+import epam.project.app.logic.validator.Validating;
 import epam.project.app.logic.exception.ReportException;
-import epam.project.app.logic.parse.JsonBuilder;
-import epam.project.app.logic.parse.JsonParser;
-import epam.project.app.logic.parse.XmlBuilder;
-import epam.project.app.logic.parse.XmlParser;
 import epam.project.app.logic.repository.ReportRepository;
+import jakarta.servlet.http.Part;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 
 import java.util.Collections;
 import java.util.List;
@@ -22,11 +22,9 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class ReportService {
     private final ReportRepository reportRepository;
-    private final FileValidator fileValidator;
-    private final XmlParser xmlParser;
-    private final XmlBuilder xmlBuilder;
-    private final JsonParser jsonParser;
-    private final JsonBuilder jsonBuilder;
+    private final Map<String, Validating> validators;
+    private final Map<String, Parsing> parsers;
+    private final Map<String, Building> builders;
 
     public Report uploadReport(ReportCreateDto reportCreateDto) {
         return reportRepository.insertReport(reportCreateDto).orElseThrow(() -> new ReportException("cannot create new Report"));
@@ -68,28 +66,29 @@ public class ReportService {
         return reportRepository.getAllReportsByFilterParameters(parameters, index);
     }
 
-    public boolean xmlValidation(String path) {
-        return fileValidator.xmlFileValidation(path);
+    @SneakyThrows
+    public boolean validateFile(Part part, String path) {
+        String fileExtension = getFileExtension(path);
+
+        Map.Entry<String, Validating> stringValidatingEntry = validators
+                .entrySet()
+                .stream()
+                .filter(entry -> entry.getKey()
+                .equals(fileExtension)).findFirst()
+                .orElseThrow(() -> new ReportException("Please choose allowed file type: XML or JSON"));
+
+        part.write(path);
+        return stringValidatingEntry.getValue().validate(path);
     }
 
-    public boolean jsonValidation(String path) {
-        return fileValidator.jsonFileValidation(path);
+    public ReportParameters getReportParameters(String path) {
+        String fileExtension = getFileExtension(path);
+        return parsers.get(fileExtension).parse(path);
     }
 
-    public ReportParameters getReportParametersXml(String path) {
-        return xmlParser.parse(path);
-    }
-
-    public ReportParameters getReportParametersJson(String path) {
-        return jsonParser.parse(path);
-    }
-
-    public boolean saveReportChangesXml(ReportEditDto reportEditDto, String path) {
-        return xmlBuilder.buildXml(reportEditDto, path);
-    }
-
-    public boolean saveReportChangesJson(ReportEditDto reportEditDto, String path) {
-        return jsonBuilder.buildJson(reportEditDto, path);
+    public boolean saveReportChanges(ReportEditDto reportEditDto, String path) {
+        String fileExtension = getFileExtension(path);
+        return builders.get(fileExtension).build(reportEditDto, path);
     }
 
     public double getCountOfPageForAllClientReports(Long clientId) {
@@ -110,5 +109,10 @@ public class ReportService {
     public double getCountOfPageForFilterReports(Map<String, String> parameters) {
         double countOfPage = reportRepository.getCountOfPageForFilterReports(parameters);
         return Math.ceil(countOfPage / 5);
+    }
+
+    private String getFileExtension(String path) {
+        int index = path.lastIndexOf(".");
+        return path.substring(index);
     }
 }

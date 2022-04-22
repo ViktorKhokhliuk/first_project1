@@ -3,12 +3,16 @@ package epam.project.app.infra.config.app;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import epam.project.app.infra.web.Placeholder;
 import epam.project.app.infra.web.QueryParameterResolver;
+import epam.project.app.logic.builder.Building;
 import epam.project.app.logic.controller.*;
-import epam.project.app.logic.entity.validate.FileValidator;
-import epam.project.app.logic.parse.JsonBuilder;
-import epam.project.app.logic.parse.JsonParser;
-import epam.project.app.logic.parse.XmlBuilder;
-import epam.project.app.logic.parse.XmlParser;
+import epam.project.app.logic.parser.Parsing;
+import epam.project.app.logic.validator.JsonValidator;
+import epam.project.app.logic.validator.Validating;
+import epam.project.app.logic.validator.XmlValidator;
+import epam.project.app.logic.builder.JsonBuilder;
+import epam.project.app.logic.parser.JsonParser;
+import epam.project.app.logic.builder.XmlBuilder;
+import epam.project.app.logic.parser.XmlParser;
 import epam.project.app.logic.repository.ClientRepository;
 import epam.project.app.logic.repository.ReportRepository;
 import epam.project.app.logic.repository.UserRepository;
@@ -20,6 +24,7 @@ import lombok.extern.log4j.Log4j2;
 import javax.sql.DataSource;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Log4j2
 public class ConfigPlaceholders {
@@ -57,7 +62,12 @@ public class ConfigPlaceholders {
     }
 
     private ReportService createReportService(DataSource dataSource, ObjectMapper objectMapper) {
-        return new ReportService(new ReportRepository(dataSource), new FileValidator(objectMapper), new XmlParser(), new XmlBuilder(), new JsonParser(objectMapper), new JsonBuilder(objectMapper));
+
+        Map<String,Validating> validators = Map.of(".xml",new XmlValidator(),".json",new JsonValidator(objectMapper));
+        Map<String,Parsing> parsers = Map.of(".xml",new XmlParser(),".json",new JsonParser(objectMapper));
+        Map<String,Building> builders = Map.of(".xml",new XmlBuilder(),".json",new JsonBuilder(objectMapper));
+
+        return new ReportService(new ReportRepository(dataSource), validators, parsers, builders);
     }
 
     private ClientController createClientController(DataSource dataSource, QueryParameterResolver queryParameterResolver) {

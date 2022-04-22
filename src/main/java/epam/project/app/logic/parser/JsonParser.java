@@ -1,4 +1,4 @@
-package epam.project.app.logic.parse;
+package epam.project.app.logic.parser;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import epam.project.app.logic.entity.report.ReportParameters;
@@ -11,13 +11,14 @@ import java.io.IOException;
 
 @Log4j2
 @RequiredArgsConstructor
-public class JsonParser {
+public class JsonParser implements Parsing {
     private final ObjectMapper mapper;
 
-    public ReportParameters parse(String jsonFileName) {
+    @Override
+    public ReportParameters parse(String path) {
         ReportParameters reportParameters;
         try {
-            reportParameters = mapper.readValue(new File(jsonFileName), ReportParameters.class);
+            reportParameters = mapper.readValue(new File(path), ReportParameters.class);
             return reportParameters;
         } catch (IOException e) {
             log.error("cannot parse json file", e);

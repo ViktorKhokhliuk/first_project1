@@ -1,7 +1,6 @@
 package epam.project.app.logic.controller;
 
 import epam.project.app.infra.web.ModelAndView;
-import epam.project.app.infra.web.exception.AppException;
 import epam.project.app.logic.entity.dto.ReportCreateDto;
 import epam.project.app.logic.entity.report.Report;
 import epam.project.app.logic.entity.user.Client;
@@ -51,7 +50,6 @@ public class ReportUploadControllerTest {
     private static final String TYPE = "single tax";
     private static final String FILE_NAME_XML = "XmlFile.xml";
     private static final String FILE_NAME_JSON = "JsonFile.json";
-    private static final String WRONG_FILE_NAME = "File.txt";
     private static final String REAL_PATH = "D:\\Projects\\My\\tax-office\\webapp\\";
     private static final String PATH = "D:\\Projects\\My\\tax-office\\webapp\\upload\\id0";
 
@@ -70,11 +68,11 @@ public class ReportUploadControllerTest {
     }
 
     @Test
-    public void uploadFileXml() throws IOException {
+    public void uploadFileXml() {
         String path = PATH + File.separator + FILE_NAME_XML;
 
-        when(part.getHeader("content-disposition")).thenReturn("form-data; name=\"part\"; filename=\"" + FILE_NAME_XML + "\"");
-        when(reportService.xmlValidation(path)).thenReturn(true);
+        when(part.getSubmittedFileName()).thenReturn(FILE_NAME_XML);
+        when(reportService.validateFile(part,path)).thenReturn(true);
 
         ModelAndView modelAndView = reportUploadController.uploadFile(request);
         assertNotNull(modelAndView);
@@ -82,16 +80,15 @@ public class ReportUploadControllerTest {
         assertTrue(modelAndView.isRedirect());
 
         verify(reportService).uploadReport(any(ReportCreateDto.class));
-        verify(reportService).xmlValidation(path);
-        verify(part).write(path);
+        verify(reportService).validateFile(part,path);
     }
 
     @Test
-    public void uploadFileJson() throws IOException {
+    public void uploadFileJson() {
         String path = PATH + File.separator + FILE_NAME_JSON;
 
-        when(part.getHeader("content-disposition")).thenReturn("form-data; name=\"part\"; filename=\"" + FILE_NAME_JSON + "\"");
-        when(reportService.jsonValidation(path)).thenReturn(true);
+        when(part.getSubmittedFileName()).thenReturn(FILE_NAME_JSON);
+        when(reportService.validateFile(part,path)).thenReturn(true);
 
         ModelAndView modelAndView = reportUploadController.uploadFile(request);
         assertNotNull(modelAndView);
@@ -99,15 +96,7 @@ public class ReportUploadControllerTest {
         assertTrue(modelAndView.isRedirect());
 
         verify(reportService).uploadReport(any(ReportCreateDto.class));
-        verify(reportService).jsonValidation(path);
-        verify(part).write(path);
-    }
-
-    @Test(expected = AppException.class)
-    public void uploadFileThrowExceptionWhenUnallowableFileType() {
-
-        when(part.getHeader("content-disposition")).thenReturn("form-data; name=\"part\"; filename=\"" + WRONG_FILE_NAME + "\"");
-        reportUploadController.uploadFile(request);
+        verify(reportService).validateFile(part,path);
     }
 
     @AfterClass

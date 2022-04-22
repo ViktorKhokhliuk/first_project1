@@ -70,17 +70,17 @@
          <label for="name"><lan:print message="choose_status"/>:</label>
             <select name="status">
               <option value=""><lan:print message="status"/></option>
-              <option value="SUBMITTED">SUBMITTED(ПОДАННЫЙ)</option>
-              <option value="ACCEPTED">ACCEPTED(ПРИНЯТЫЙ)</option>
-              <option value="UNACCEPTED">UNACCEPTED(НЕПРИНЯТЫЙ)</option>
-              <option value="EDITED">EDITED(ОТРЕДАКТИРОВАННЫЙ)</option>
+              <option value="SUBMITTED"><lan:print message="submitted"/></option>
+              <option value="ACCEPTED"><lan:print message="accepted"/></option>
+              <option value="UNACCEPTED"><lan:print message="unaccepted"/></option>
+              <option value="EDITED"><lan:print message="edited"/></option>
             </select>
          <label for="name"><lan:print message="choose_type"/>:</label>
             <select name="type">
               <option value=""><lan:print message="type"/></option>
-              <option value="income statement">income statement(Справка о доходах)</option>
-              <option value="income tax">income tax(Подоходный налог)</option>
-              <option value="single tax">single tax(Единый налог)</option>
+              <option value="income statement"><lan:print message="income_statement"/></option>
+              <option value="income tax"><lan:print message="income_tax"/></option>
+              <option value="single tax"><lan:print message="single_tax"/></option>
             </select>
          <input type="hidden" name="clientId" value="${user.id}"/>
          <input type="hidden" name="page" value="1"/>

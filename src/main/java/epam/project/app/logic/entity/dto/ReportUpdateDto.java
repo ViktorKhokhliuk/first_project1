@@ -19,7 +19,7 @@ public class ReportUpdateDto {
     private String clientLogin;
     private String date;
     private String type;
-    private String clientName;
+    private String name;
     private String surname;
     private String itn;
 

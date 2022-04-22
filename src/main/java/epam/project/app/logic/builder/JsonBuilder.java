@@ -1,4 +1,4 @@
-package epam.project.app.logic.parse;
+package epam.project.app.logic.builder;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import epam.project.app.logic.entity.dto.ReportEditDto;
@@ -10,14 +10,15 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 @Log4j2
-public class JsonBuilder {
+public class JsonBuilder implements Building {
     private final ObjectMapper objectMapper;
 
     public JsonBuilder(ObjectMapper objectMapper) {
         this.objectMapper = objectMapper;
     }
 
-    public boolean buildJson(ReportEditDto reportEditDto, String jsonFileName) {
+    @Override
+    public boolean build(ReportEditDto reportEditDto, String path) {
         ReportParameters reportParameters = new ReportParameters();
         reportParameters.setPerson(reportEditDto.getPerson());
         reportParameters.setNationality(reportEditDto.getNationality());
@@ -29,7 +30,7 @@ public class JsonBuilder {
         reportParameters.setIncome(reportEditDto.getIncome());
 
         try {
-            objectMapper.writeValue(new FileWriter(jsonFileName), reportParameters);
+            objectMapper.writeValue(new FileWriter(path), reportParameters);
         } catch (IOException e) {
             log.error("cannot build json file", e);
             throw new ReportException("cannot edit report");

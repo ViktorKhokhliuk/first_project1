@@ -1,5 +1,6 @@
 package epam.project.app.logic.service;
 
+import epam.project.app.logic.builder.Building;
 import epam.project.app.logic.entity.dto.ReportCreateDto;
 import epam.project.app.logic.entity.dto.ReportEditDto;
 import epam.project.app.logic.entity.dto.ReportUpdateDto;
@@ -8,49 +9,35 @@ import epam.project.app.logic.entity.report.ReportInfo;
 import epam.project.app.logic.entity.report.ReportParameters;
 import epam.project.app.logic.entity.report.ReportStatus;
 import epam.project.app.logic.entity.user.Client;
-import epam.project.app.logic.entity.validate.FileValidator;
 import epam.project.app.logic.exception.ReportException;
-import epam.project.app.logic.parse.JsonBuilder;
-import epam.project.app.logic.parse.JsonParser;
-import epam.project.app.logic.parse.XmlBuilder;
-import epam.project.app.logic.parse.XmlParser;
+import epam.project.app.logic.parser.Parsing;
 import epam.project.app.logic.repository.ReportRepository;
+import epam.project.app.logic.validator.Validating;
+import jakarta.servlet.http.Part;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.io.File;
+import java.io.IOException;
+import java.util.*;
 
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ReportServiceTest {
 
-    @Mock
-    private ReportRepository reportRepository;
-    @Mock
-    private FileValidator fileValidator;
-    @Mock
-    private XmlParser xmlParser;
-    @Mock
-    private XmlBuilder xmlBuilder;
-    @Mock
-    private JsonParser jsonParser;
-    @Mock
-    private JsonBuilder jsonBuilder;
+    private final ReportRepository reportRepository = mock(ReportRepository.class);
+    private final Map<String, Validating> validators = Map.of(".xml", mock(Validating.class));
+    private final Map<String, Parsing> parsers = Map.of(".xml", mock(Parsing.class));
+    private final Map<String, Building> builders = Map.of(".xml", mock(Building.class));
 
-    @InjectMocks
-    private ReportService reportService;
+    private final ReportService reportService = new ReportService(reportRepository, validators, parsers, builders);
 
     private static final String TITLE = "report.xml";
-    private static final String PATH = "tax-office\\\\webapp\\\\upload\\\\id0";
+    private static final String WRONG_FILE_EXTENSION = "report.txt";
+    private static final String PATH = "tax-office\\webapp\\upload\\id0";
     private static final Long CLIENT_ID = 1L;
     private static final Long ID = 1L;
     private static final String TYPE = "income tax";
@@ -203,75 +190,47 @@ public class ReportServiceTest {
     }
 
     @Test
-    public void xmlValidation() {
+    public void validateFile() throws IOException {
+        String path = PATH + File.separator + TITLE;
+        Part part = mock(Part.class);
         boolean expected = true;
-        when(fileValidator.xmlFileValidation(PATH)).thenReturn(expected);
+        when(validators.get(".xml").validate(path)).thenReturn(expected);
 
-        boolean result = reportService.xmlValidation(PATH);
+        boolean result = reportService.validateFile(part, path);
 
         assertEquals(expected, result);
-        verify(fileValidator).xmlFileValidation(PATH);
+        verify(part).write(path);
+    }
+
+    @Test(expected = ReportException.class)
+    public void validateFileThrowExceptionWhenWrongFileExtension() {
+        String path = PATH + File.separator + WRONG_FILE_EXTENSION;
+        Part part = mock(Part.class);
+
+        reportService.validateFile(part, path);
     }
 
     @Test
-    public void jsonValidation() {
-        boolean expected = true;
-        when(fileValidator.jsonFileValidation(PATH)).thenReturn(expected);
+    public void getReportParameters() {
+        String path = PATH + File.separator + TITLE;
+        ReportParameters expectedReportParameters = new ReportParameters("natural", "ukrainian", "2022", "2", "10", "IV", "Programmer", "10000");
+        when(parsers.get(".xml").parse(path)).thenReturn(expectedReportParameters);
 
-        boolean result = reportService.jsonValidation(PATH);
-
-        assertEquals(expected, result);
-        verify(fileValidator).jsonFileValidation(PATH);
-    }
-
-    @Test
-    public void getReportParametersXml() {
-        ReportParameters expectedReportParameters = new ReportParameters("natural", "ukrainian", "2022", "2", "10", "II", "programmer", "2000");
-
-        when(xmlParser.parse(PATH)).thenReturn(expectedReportParameters);
-
-        ReportParameters resultReportParameters = reportService.getReportParametersXml(PATH);
+        ReportParameters resultReportParameters = reportService.getReportParameters(path);
         assertNotNull(resultReportParameters);
         assertEquals(expectedReportParameters, resultReportParameters);
-
-        verify(xmlParser).parse(PATH);
-    }
-
-    @Test
-    public void getReportParametersJson() {
-        ReportParameters expectedReportParameters = new ReportParameters("natural", "ukrainian", "2022", "2", "10", "II", "programmer", "2000");
-
-        when(jsonParser.parse(PATH)).thenReturn(expectedReportParameters);
-
-        ReportParameters resultReportParameters = reportService.getReportParametersJson(PATH);
-        assertNotNull(resultReportParameters);
-        assertEquals(expectedReportParameters, resultReportParameters);
-
-        verify(jsonParser).parse(PATH);
     }
 
     @Test
     public void saveReportChangesXml() {
+        String path = PATH + File.separator + TITLE;
         ReportEditDto reportEditDto = new ReportEditDto();
         boolean expected = true;
 
-        when(xmlBuilder.buildXml(reportEditDto, PATH)).thenReturn(true);
+        when(builders.get(".xml").build(reportEditDto, path)).thenReturn(true);
 
-        boolean result = reportService.saveReportChangesXml(reportEditDto, PATH);
+        boolean result = reportService.saveReportChanges(reportEditDto, path);
         assertEquals(expected, result);
-        verify(xmlBuilder).buildXml(reportEditDto, PATH);
-    }
-
-    @Test
-    public void saveReportChangesJson() {
-        ReportEditDto reportEditDto = new ReportEditDto();
-        boolean expected = true;
-
-        when(jsonBuilder.buildJson(reportEditDto, PATH)).thenReturn(true);
-
-        boolean result = reportService.saveReportChangesJson(reportEditDto, PATH);
-        assertEquals(expected, result);
-        verify(jsonBuilder).buildJson(reportEditDto, PATH);
     }
 
     @Test

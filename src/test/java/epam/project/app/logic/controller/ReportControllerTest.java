@@ -42,7 +42,6 @@ public class ReportControllerTest {
     private static final Long ID = 0L;
     private static final Long CLIENT_ID = 0L;
     private static final String TITLE_XML = "report.xml";
-    private static final String TITLE_JSON = "report.json";
     private static final Integer PAGE = 1;
     private static final String CLIENT_LOGIN = "tony";
     private static final String DATE = "2022-01-01";
@@ -241,12 +240,12 @@ public class ReportControllerTest {
     }
 
     @Test
-    public void showReportWhenXmlFile() {
+    public void showReport() {
         ReportParameters expectedReportParameters = new ReportParameters("natural", "ukrainian", "2022", "2", "10", "II", "programmer", "2000");
         String path = "webapp/upload/id" + CLIENT_ID + "/" + TITLE_XML;
         when(request.getParameter("clientId")).thenReturn(CLIENT_ID.toString());
         when(request.getParameter("title")).thenReturn(TITLE_XML);
-        when(reportService.getReportParametersXml(path)).thenReturn(expectedReportParameters);
+        when(reportService.getReportParameters(path)).thenReturn(expectedReportParameters);
 
         ModelAndView modelAndView = reportController.showReport(request);
         assertNotNull(modelAndView);
@@ -254,25 +253,6 @@ public class ReportControllerTest {
         assertEquals("/user/report.jsp", modelAndView.getView());
         assertEquals(expectedReportParameters, modelAndView.getAttributes().get("reportParameters"));
 
-        verify(reportService).getReportParametersXml(path);
-        verify(reportService, times(0)).getReportParametersJson(path);
-    }
-
-    @Test
-    public void showReportWhenJsonFile() {
-        ReportParameters expectedReportParameters = new ReportParameters("natural", "ukrainian", "2022", "2", "10", "II", "programmer", "2000");
-        String path = "webapp/upload/id" + CLIENT_ID + "/" + TITLE_JSON;
-        when(request.getParameter("clientId")).thenReturn(CLIENT_ID.toString());
-        when(request.getParameter("title")).thenReturn(TITLE_JSON);
-        when(reportService.getReportParametersJson(path)).thenReturn(expectedReportParameters);
-
-        ModelAndView modelAndView = reportController.showReport(request);
-        assertNotNull(modelAndView);
-        assertFalse(modelAndView.isRedirect());
-        assertEquals("/user/report.jsp", modelAndView.getView());
-        assertEquals(expectedReportParameters, modelAndView.getAttributes().get("reportParameters"));
-
-        verify(reportService).getReportParametersJson(path);
-        verify(reportService, times(0)).getReportParametersXml(path);
+        verify(reportService).getReportParameters(path);
     }
 }

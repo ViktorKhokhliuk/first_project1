@@ -1,21 +1,19 @@
-package epam.project.app.logic.parse;
+package epam.project.app.logic.builder;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import epam.project.app.logic.entity.dto.ReportEditDto;
 import epam.project.app.logic.exception.ReportException;
+
 import org.apache.commons.io.FileUtils;
-import org.junit.AfterClass;
+import org.junit.After;
 import org.junit.Test;
-
-
 import java.io.File;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class JsonBuilderTest {
+public class XmlBuilderTest {
 
-    private final JsonBuilder jsonBuilder = new JsonBuilder(new ObjectMapper());
+    private final XmlBuilder xmlBuilder = new XmlBuilder();
 
     private static final String PERSON = "natural";
     private static final String NATIONALITY = "ukrainian";
@@ -25,10 +23,10 @@ public class JsonBuilderTest {
     private static final String GROUP = "IV";
     private static final String ACTIVITY = "Programmer";
     private static final String INCOME = "10000";
-    private static final String PATH = "src/test/resources/testBuildJson.json";
+    private static final String PATH = "src/test/resources/testBuildXml.xml";
 
     @Test
-    public void buildJson() {
+    public void buildXml() {
         boolean expected = true;
         File file = new File(PATH);
         ReportEditDto reportEditDto = new ReportEditDto();
@@ -41,19 +39,19 @@ public class JsonBuilderTest {
         reportEditDto.setActivity(ACTIVITY);
         reportEditDto.setIncome(INCOME);
 
-        boolean result = jsonBuilder.buildJson(reportEditDto, PATH);
+        boolean result = xmlBuilder.build(reportEditDto, PATH);
         assertEquals(expected, result);
         assertTrue(file.isFile());
     }
 
     @Test(expected = ReportException.class)
-    public void buildJsonThrowException() {
+    public void buildXmlThrowException() {
         ReportEditDto reportEditDto = new ReportEditDto();
-        jsonBuilder.buildJson(reportEditDto, "");
+        xmlBuilder.build(reportEditDto, "");
     }
 
-    @AfterClass
-    public static void deleteFile() {
+    @After
+    public void deleteFile() {
         FileUtils.deleteQuietly(new File(PATH));
     }
 }

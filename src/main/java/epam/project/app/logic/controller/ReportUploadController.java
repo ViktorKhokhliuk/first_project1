@@ -1,7 +1,6 @@
 package epam.project.app.logic.controller;
 
 import epam.project.app.infra.web.ModelAndView;
-import epam.project.app.infra.web.exception.AppException;
 import epam.project.app.logic.entity.dto.ReportCreateDto;
 import epam.project.app.logic.entity.user.User;
 import epam.project.app.logic.service.ReportService;
@@ -32,23 +31,13 @@ public class ReportUploadController {
         if (!uploadDir.exists()) {
             uploadDir.mkdir();
         }
-        String fileName;
         Part part = request.getPart("part");
-        fileName = getFileName(part, uploadPath);
+        String fileName = getFileName(part, uploadPath);
         String path = uploadPath + File.separator + fileName;
-
-        if (fileName.endsWith(".xml")) {
-            part.write(path);
-            reportService.xmlValidation(path);
-        } else if (fileName.endsWith(".json")) {
-            part.write(path);
-            reportService.jsonValidation(path);
-        } else {
-            throw new AppException("Please choose allowed file type: XML or JSON");
-        }
+        reportService.validateFile(part,path);
         String type = request.getParameter("type");
-        log.log(Level.INFO, "File " + fileName + " has uploaded successfully!");
         reportService.uploadReport(new ReportCreateDto(fileName, path, userFromSession.getId(), type));
+        log.log(Level.INFO, "File " + fileName + " has uploaded successfully!");
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setRedirect(true);
         modelAndView.setView("/client/homePage.jsp");
@@ -60,19 +49,13 @@ public class ReportUploadController {
     }
 
     private String getFileName(Part part, String uploadPath) {
-        String fileName;
-        for (String content : part.getHeader("content-disposition").split(";")) {
-            if (content.trim().startsWith("filename")) {
-                fileName = content.substring(content.indexOf("=") + 2, content.length() - 1);
-                int i = 1;
-                String name = fileName;
-                while (new File(uploadPath + "/" + fileName).exists()) {
-                    fileName = "(" + i + ")" + name;
-                    i++;
-                }
-                return fileName;
-            }
+        String fileName = part.getSubmittedFileName();
+        int i = 1;
+        String name = fileName;
+        while (new File(uploadPath + "/" + fileName).exists()) {
+            fileName = "(" + i + ")" + name;
+            i++;
         }
-        return DEFAULT_FILENAME;
+        return fileName.isEmpty() ? DEFAULT_FILENAME : fileName;
     }
 }

@@ -1,4 +1,4 @@
-package epam.project.app.logic.parse;
+package epam.project.app.logic.parser;
 
 import epam.project.app.logic.entity.report.ReportParameters;
 import epam.project.app.logic.entity.report.ReportTags;
@@ -13,20 +13,21 @@ import javax.xml.parsers.DocumentBuilderFactory;
 
 
 @Log4j2
-public class XmlParser {
+public class XmlParser implements Parsing {
     private final DocumentBuilderFactory factory;
 
     public XmlParser() {
          factory = DocumentBuilderFactory.newInstance();
     }
 
-    public ReportParameters parse(String xmlFileName) {
+    @Override
+    public ReportParameters parse(String path) {
         Document document;
         ReportParameters reportParameters;
         try {
             factory.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
             DocumentBuilder documentBuilder = factory.newDocumentBuilder();
-            document = documentBuilder.parse(xmlFileName);
+            document = documentBuilder.parse(path);
             Element root = document.getDocumentElement();
             reportParameters = buildReportParameters(root);
         } catch (Exception e) {

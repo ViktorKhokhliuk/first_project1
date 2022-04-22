@@ -1,4 +1,4 @@
-package epam.project.app.logic.parse;
+package epam.project.app.logic.builder;
 
 import epam.project.app.logic.entity.dto.ReportEditDto;
 import epam.project.app.logic.entity.report.ReportTags;
@@ -20,14 +20,15 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 @Log4j2
-public class XmlBuilder {
+public class XmlBuilder implements Building {
     private final DocumentBuilderFactory factory;
 
     public XmlBuilder() {
         factory = DocumentBuilderFactory.newInstance();
     }
 
-    public boolean buildXml(ReportEditDto reportEditDto, String xmlFile) {
+    @Override
+    public boolean build(ReportEditDto reportEditDto, String path) {
         try {
             factory.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
             DocumentBuilder builder = factory.newDocumentBuilder();
@@ -63,7 +64,7 @@ public class XmlBuilder {
             root.appendChild(activity);
             root.appendChild(income);
 
-            write(doc, xmlFile);
+            write(doc, path);
         } catch (Exception e) {
             log.error("cannot build xml file", e);
             throw new ReportException("cannot edit report");

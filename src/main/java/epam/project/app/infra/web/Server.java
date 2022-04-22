@@ -28,7 +28,6 @@ public class Server {
 
     public void addFilter(FilterDef filterDef, FilterMap filterMap) {
         context.addFilterDef(filterDef);
-        log.info("Add filter --> " + filterDef.getFilterName());
         context.addFilterMap(filterMap);
         log.info("Add filter --> " + filterMap.getFilterName());
     }

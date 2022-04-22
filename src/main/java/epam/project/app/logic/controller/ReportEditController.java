@@ -7,8 +7,9 @@ import epam.project.app.logic.entity.report.ReportParameters;
 import epam.project.app.logic.service.ReportService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 
-
+@Log4j2
 @RequiredArgsConstructor
 public class ReportEditController {
     private final ReportService reportService;
@@ -17,12 +18,7 @@ public class ReportEditController {
     public ModelAndView editReport(HttpServletRequest request) {
         ReportEditDto reportEditDto = queryParameterResolver.getObject(request, ReportEditDto.class);
         String path = "webapp/upload/id" + reportEditDto.getClientId() + "/" + reportEditDto.getTitle();
-        ReportParameters reportParameters;
-        if (path.endsWith(".xml")) {
-            reportParameters = reportService.getReportParametersXml(path);
-        } else {
-            reportParameters = reportService.getReportParametersJson(path);
-        }
+        ReportParameters reportParameters = reportService.getReportParameters(path);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addAttribute("dto", reportEditDto);
         modelAndView.addAttribute("reportParameters", reportParameters);
@@ -33,12 +29,9 @@ public class ReportEditController {
     public ModelAndView saveReportChanges(HttpServletRequest request) {
         ReportEditDto reportEditDto = queryParameterResolver.getObject(request, ReportEditDto.class);
         String path = "webapp/upload/id" + reportEditDto.getClientId() + "/" + reportEditDto.getTitle();
-        if (path.endsWith(".xml")) {
-            reportService.saveReportChangesXml(reportEditDto, path);
-        } else {
-            reportService.saveReportChangesJson(reportEditDto, path);
-        }
+        reportService.saveReportChanges(reportEditDto,path);
         reportService.updateStatusOfReportAfterEdit(reportEditDto.getId());
+        log.info("File " + reportEditDto.getTitle() + " has edited successfully");
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setRedirect(true);
         modelAndView.addAttribute("date", reportEditDto.getDate());

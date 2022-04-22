@@ -11,12 +11,13 @@ import epam.project.app.logic.entity.user.UserRole;
 import epam.project.app.logic.service.ReportService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.util.*;
 
-
+@Log4j2
 @RequiredArgsConstructor
 public class ReportController {
     private final ReportService reportService;
@@ -33,8 +34,9 @@ public class ReportController {
         User user = (User) request.getSession(false).getAttribute("user");
         ReportUpdateDto reportUpdateDto = queryParameterResolver.getObject(request, ReportUpdateDto.class);
         String path = "webapp/upload/id" + reportUpdateDto.getClientId() + "/" + reportUpdateDto.getTitle();
-        FileUtils.deleteQuietly(new File(path));
         reportService.deleteReportById(reportUpdateDto.getId());
+        FileUtils.deleteQuietly(new File(path));
+        log.info("File " + reportUpdateDto.getTitle() + " has deleted successfully");
         return configuringModelAndViewAfterUpdate(reportUpdateDto, user);
     }
 
@@ -134,12 +136,7 @@ public class ReportController {
         long clientId = Long.parseLong(request.getParameter("clientId"));
         String title = request.getParameter("title");
         String path = "webapp/upload/id" + clientId + "/" + title;
-        ReportParameters reportParameters;
-        if (path.endsWith(".xml")) {
-            reportParameters = reportService.getReportParametersXml(path);
-        } else {
-            reportParameters = reportService.getReportParametersJson(path);
-        }
+        ReportParameters reportParameters = reportService.getReportParameters(path);
         modelAndView.addAttribute("reportParameters", reportParameters);
         modelAndView.setView("/user/report.jsp");
         return modelAndView;
@@ -159,7 +156,7 @@ public class ReportController {
             modelAndView.setView("/service/filterClientReports");
             return modelAndView;
         }
-        modelAndView.addAttribute("name", reportUpdateDto.getClientName());
+        modelAndView.addAttribute("name", reportUpdateDto.getName());
         modelAndView.addAttribute("surname", reportUpdateDto.getSurname());
         modelAndView.addAttribute("itn", reportUpdateDto.getItn());
         modelAndView.setView("/service/filterAllReports");

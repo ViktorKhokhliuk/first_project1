@@ -1,9 +1,6 @@
-package epam.project.app.logic.entity.validate;
+package epam.project.app.logic.validator;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import epam.project.app.infra.web.exception.AppException;
-import epam.project.app.logic.entity.report.ReportParameters;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.apache.commons.io.FileUtils;
 import org.xml.sax.SAXException;
@@ -17,12 +14,12 @@ import java.io.File;
 import java.io.IOException;
 
 @Log4j2
-@RequiredArgsConstructor
-public class FileValidator {
-    private final ObjectMapper objectMapper;
+public class XmlValidator implements Validating {
+
     private static final String XSD_SCHEMA_PATH = "webapp/report.xsd";
 
-    public boolean xmlFileValidation(String path) {
+    @Override
+    public boolean validate(String path) {
         File file = new File(path);
         SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
         Schema schema;
@@ -33,18 +30,6 @@ public class FileValidator {
         } catch (SAXException | IOException e) {
             FileUtils.deleteQuietly(file);
             log.error("invalid xml file",e);
-            throw new AppException("invalid file");
-        }
-        return true;
-    }
-
-    public boolean jsonFileValidation(String path) {
-        File file = new File(path);
-        try {
-            objectMapper.readValue(new File(path), ReportParameters.class);
-        } catch (Exception e) {
-            FileUtils.deleteQuietly(file);
-            log.error("invalid json file",e);
             throw new AppException("invalid file");
         }
         return true;

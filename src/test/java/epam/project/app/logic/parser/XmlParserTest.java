@@ -1,4 +1,4 @@
-package epam.project.app.logic.parse;
+package epam.project.app.logic.parser;
 
 import epam.project.app.logic.entity.report.ReportParameters;
 import epam.project.app.logic.exception.ReportException;
