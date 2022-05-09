@@ -237,12 +237,12 @@ public class ReportServiceTest {
     public void getCountOfPageForAllClientReports() {
         double expected = 3.0;
 
-        when(reportRepository.getCountOfPageForAllClientReports(CLIENT_ID)).thenReturn(11.0);
+        when(reportRepository.getCountOfFieldForAllClientReports(CLIENT_ID)).thenReturn(11.0);
 
         double result = reportService.getCountOfPageForAllClientReports(CLIENT_ID);
         assertEquals(expected, result, 0.0);
 
-        verify(reportRepository).getCountOfPageForAllClientReports(CLIENT_ID);
+        verify(reportRepository).getCountOfFieldForAllClientReports(CLIENT_ID);
     }
 
     @Test
@@ -250,12 +250,12 @@ public class ReportServiceTest {
         Map<String, String> parameters = Map.of("type", TYPE, "clientId", CLIENT_ID.toString());
         double expected = 3.0;
 
-        when(reportRepository.getCountOfPageForFilterClientReports(parameters)).thenReturn(11.0);
+        when(reportRepository.getCountOfFieldForFilterClientReports(parameters)).thenReturn(11.0);
 
         double result = reportService.getCountOfPageForFilterClientReports(parameters);
         assertEquals(expected, result, 0.0);
 
-        verify(reportRepository).getCountOfPageForFilterClientReports(parameters);
+        verify(reportRepository).getCountOfFieldForFilterClientReports(parameters);
 
     }
 
@@ -263,12 +263,12 @@ public class ReportServiceTest {
     public void getCountOfPageForAllReports() {
         double expected = 4.0;
 
-        when(reportRepository.getCountOfPageForAllReports()).thenReturn(17.0);
+        when(reportRepository.getCountOfFieldForAllReports()).thenReturn(17.0);
 
         double result = reportService.getCountOfPageForAllReports();
         assertEquals(expected, result, 0.0);
 
-        verify(reportRepository).getCountOfPageForAllReports();
+        verify(reportRepository).getCountOfFieldForAllReports();
 
     }
 
@@ -277,11 +277,11 @@ public class ReportServiceTest {
         Map<String, String> parameters = Map.of("type", TYPE, "date", DATE);
         double expected = 4.0;
 
-        when(reportRepository.getCountOfPageForFilterReports(parameters)).thenReturn(17.0);
+        when(reportRepository.getCountOfFieldForFilterReports(parameters)).thenReturn(17.0);
 
         double result = reportService.getCountOfPageForFilterReports(parameters);
         assertEquals(expected, result, 0.0);
 
-        verify(reportRepository).getCountOfPageForFilterReports(parameters);
+        verify(reportRepository).getCountOfFieldForFilterReports(parameters);
     }
 }

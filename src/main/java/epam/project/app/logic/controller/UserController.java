@@ -9,9 +9,10 @@ import epam.project.app.infra.web.QueryParameterResolver;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 
 import java.util.Locale;
-
+@Log4j2
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
@@ -50,6 +51,7 @@ public class UserController {
         Locale locale = new Locale(selectedLocale);
         HttpSession session = request.getSession(false);
         session.setAttribute("selectedLocale", locale);
+        log.info("Set session selected locale --> " + selectedLocale);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setView(view);
         modelAndView.setRedirect(true);

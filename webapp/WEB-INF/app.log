@@ -8725,3 +8725,962 @@ org.xml.sax.SAXParseException: Element type "mon" must be followed by either att
 2022-04-22 16:58:19,285 INFO e.p.a.i.w.Server [main] Add servlet mapping: url --> /service/*
 2022-04-22 16:58:19,285 INFO e.p.a.i.c.s.ConfigServer [main] start register session listener
 2022-04-22 16:58:19,285 INFO e.p.a.i.w.Server [main] Set session listeners 
+2022-04-23 17:52:15,494 INFO e.p.a.l.c.ReportController [main] File report.xml has deleted successfully
+2022-04-23 17:52:15,838 ERROR e.p.a.l.p.JsonParser [main] cannot parse json file
+com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException: Unrecognized field "qwerrq" (class epam.project.app.logic.entity.report.ReportParameters), not marked as ignorable (8 known properties: "month", "person", "income", "nationality", "year", "group", "quarter", "activity"])
+ at [Source: (File); line: 1, column: 111] (through reference chain: epam.project.app.logic.entity.report.ReportParameters["qwerrq"])
+	at com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException.from(UnrecognizedPropertyException.java:61) ~[jackson-databind-2.13.1.jar:2.13.1]
+	at com.fasterxml.jackson.databind.DeserializationContext.handleUnknownProperty(DeserializationContext.java:1127) ~[jackson-databind-2.13.1.jar:2.13.1]
+	at com.fasterxml.jackson.databind.deser.std.StdDeserializer.handleUnknownProperty(StdDeserializer.java:1989) ~[jackson-databind-2.13.1.jar:2.13.1]
+	at com.fasterxml.jackson.databind.deser.BeanDeserializerBase.handleUnknownProperty(BeanDeserializerBase.java:1700) ~[jackson-databind-2.13.1.jar:2.13.1]
+	at com.fasterxml.jackson.databind.deser.BeanDeserializerBase.handleUnknownVanilla(BeanDeserializerBase.java:1678) ~[jackson-databind-2.13.1.jar:2.13.1]
+	at com.fasterxml.jackson.databind.deser.BeanDeserializer.vanillaDeserialize(BeanDeserializer.java:319) ~[jackson-databind-2.13.1.jar:2.13.1]
+	at com.fasterxml.jackson.databind.deser.BeanDeserializer.deserialize(BeanDeserializer.java:176) ~[jackson-databind-2.13.1.jar:2.13.1]
+	at com.fasterxml.jackson.databind.deser.DefaultDeserializationContext.readRootValue(DefaultDeserializationContext.java:322) ~[jackson-databind-2.13.1.jar:2.13.1]
+	at com.fasterxml.jackson.databind.ObjectMapper._readMapAndClose(ObjectMapper.java:4674) ~[jackson-databind-2.13.1.jar:2.13.1]
+	at com.fasterxml.jackson.databind.ObjectMapper.readValue(ObjectMapper.java:3494) ~[jackson-databind-2.13.1.jar:2.13.1]
+	at epam.project.app.logic.parser.JsonParser.parse(JsonParser.java:21) ~[classes/:?]
+	at epam.project.app.logic.parser.JsonParserTest.parseWhenInvalidFile(JsonParserTest.java:35) ~[test-classes/:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:?]
+	at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:?]
+	at java.lang.reflect.Method.invoke(Method.java:566) ~[?:?]
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.internal.runners.statements.ExpectException.evaluate(ExpectException.java:19) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:115) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.vintage.engine.execution.RunnerExecutor.execute(RunnerExecutor.java:42) ~[junit-vintage-engine-5.8.2.jar:5.8.2]
+	at org.junit.vintage.engine.VintageTestEngine.executeAllChildren(VintageTestEngine.java:80) ~[junit-vintage-engine-5.8.2.jar:5.8.2]
+	at org.junit.vintage.engine.VintageTestEngine.execute(VintageTestEngine.java:72) ~[junit-vintage-engine-5.8.2.jar:5.8.2]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:107) ~[junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:88) ~[junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:54) ~[junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:67) [junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:52) [junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:114) [junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:86) [junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.DefaultLauncherSession$DelegatingLauncher.execute(DefaultLauncherSession.java:86) [junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.SessionPerRequestLauncher.execute(SessionPerRequestLauncher.java:53) [junit-platform-launcher-1.8.2.jar:1.8.2]
+	at com.intellij.junit5.JUnit5IdeaTestRunner.startRunnerWithArgs(JUnit5IdeaTestRunner.java:71) [junit5-rt.jar:?]
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater$1.execute(IdeaTestRunner.java:38) [junit-rt.jar:?]
+	at com.intellij.rt.execution.junit.TestsRepeater.repeat(TestsRepeater.java:11) [idea_rt.jar:?]
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:35) [junit-rt.jar:?]
+	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:235) [junit-rt.jar:?]
+	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:54) [junit-rt.jar:?]
+2022-04-23 17:52:15,979 INFO e.p.a.l.c.ReportEditController [main] File report.xml has edited successfully
+2022-04-23 17:52:16,041 ERROR e.p.a.l.b.JsonBuilder [main] cannot build json file
+java.io.FileNotFoundException:  (Системе не удается найти указанный путь)
+	at java.io.FileOutputStream.open0(Native Method) ~[?:?]
+	at java.io.FileOutputStream.open(FileOutputStream.java:298) ~[?:?]
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:237) ~[?:?]
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:126) ~[?:?]
+	at java.io.FileWriter.<init>(FileWriter.java:66) ~[?:?]
+	at epam.project.app.logic.builder.JsonBuilder.build(JsonBuilder.java:33) ~[classes/:?]
+	at epam.project.app.logic.builder.JsonBuilderTest.buildJsonThrowException(JsonBuilderTest.java:53) ~[test-classes/:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:?]
+	at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:?]
+	at java.lang.reflect.Method.invoke(Method.java:566) ~[?:?]
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.internal.runners.statements.ExpectException.evaluate(ExpectException.java:19) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:115) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.vintage.engine.execution.RunnerExecutor.execute(RunnerExecutor.java:42) ~[junit-vintage-engine-5.8.2.jar:5.8.2]
+	at org.junit.vintage.engine.VintageTestEngine.executeAllChildren(VintageTestEngine.java:80) ~[junit-vintage-engine-5.8.2.jar:5.8.2]
+	at org.junit.vintage.engine.VintageTestEngine.execute(VintageTestEngine.java:72) ~[junit-vintage-engine-5.8.2.jar:5.8.2]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:107) ~[junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:88) ~[junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:54) ~[junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:67) [junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:52) [junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:114) [junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:86) [junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.DefaultLauncherSession$DelegatingLauncher.execute(DefaultLauncherSession.java:86) [junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.SessionPerRequestLauncher.execute(SessionPerRequestLauncher.java:53) [junit-platform-launcher-1.8.2.jar:1.8.2]
+	at com.intellij.junit5.JUnit5IdeaTestRunner.startRunnerWithArgs(JUnit5IdeaTestRunner.java:71) [junit5-rt.jar:?]
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater$1.execute(IdeaTestRunner.java:38) [junit-rt.jar:?]
+	at com.intellij.rt.execution.junit.TestsRepeater.repeat(TestsRepeater.java:11) [idea_rt.jar:?]
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:35) [junit-rt.jar:?]
+	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:235) [junit-rt.jar:?]
+	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:54) [junit-rt.jar:?]
+2022-04-23 17:52:16,073 INFO e.p.a.l.c.ClientController [main] Client has registered successfully
+2022-04-23 17:52:16,088 INFO e.p.a.l.c.ClientController [main] Client has deleted successfully
+2022-04-23 17:52:16,979 ERROR e.p.a.l.r.ClientRepository [main] null
+2022-04-23 17:52:17,011 ERROR e.p.a.l.r.ClientRepository [main] null
+2022-04-23 17:52:17,190 INFO e.p.a.l.c.ReportUploadController [main] File JsonFile.json has uploaded successfully!
+2022-04-23 17:52:17,199 INFO e.p.a.l.c.ReportUploadController [main] File XmlFile.xml has uploaded successfully!
+2022-04-23 17:52:17,214 ERROR e.p.a.l.p.XmlParser [main] cannot parse xml file
+java.lang.NullPointerException: null
+	at epam.project.app.logic.parser.XmlParser.getTextContext(XmlParser.java:56) ~[classes/:?]
+	at epam.project.app.logic.parser.XmlParser.buildReportParameters(XmlParser.java:47) ~[classes/:?]
+	at epam.project.app.logic.parser.XmlParser.parse(XmlParser.java:32) ~[classes/:?]
+	at epam.project.app.logic.parser.XmlParserTest.parseWhenInvalidFile(XmlParserTest.java:35) ~[test-classes/:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:?]
+	at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:?]
+	at java.lang.reflect.Method.invoke(Method.java:566) ~[?:?]
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.internal.runners.statements.ExpectException.evaluate(ExpectException.java:19) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:115) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.vintage.engine.execution.RunnerExecutor.execute(RunnerExecutor.java:42) ~[junit-vintage-engine-5.8.2.jar:5.8.2]
+	at org.junit.vintage.engine.VintageTestEngine.executeAllChildren(VintageTestEngine.java:80) ~[junit-vintage-engine-5.8.2.jar:5.8.2]
+	at org.junit.vintage.engine.VintageTestEngine.execute(VintageTestEngine.java:72) ~[junit-vintage-engine-5.8.2.jar:5.8.2]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:107) ~[junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:88) ~[junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:54) ~[junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:67) [junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:52) [junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:114) [junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:86) [junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.DefaultLauncherSession$DelegatingLauncher.execute(DefaultLauncherSession.java:86) [junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.SessionPerRequestLauncher.execute(SessionPerRequestLauncher.java:53) [junit-platform-launcher-1.8.2.jar:1.8.2]
+	at com.intellij.junit5.JUnit5IdeaTestRunner.startRunnerWithArgs(JUnit5IdeaTestRunner.java:71) [junit5-rt.jar:?]
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater$1.execute(IdeaTestRunner.java:38) [junit-rt.jar:?]
+	at com.intellij.rt.execution.junit.TestsRepeater.repeat(TestsRepeater.java:11) [idea_rt.jar:?]
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:35) [junit-rt.jar:?]
+	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:235) [junit-rt.jar:?]
+	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:54) [junit-rt.jar:?]
+2022-04-23 17:52:17,386 ERROR e.p.a.l.b.XmlBuilder [main] cannot build xml file
+java.io.FileNotFoundException:  (Системе не удается найти указанный путь)
+	at java.io.FileOutputStream.open0(Native Method) ~[?:?]
+	at java.io.FileOutputStream.open(FileOutputStream.java:298) ~[?:?]
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:237) ~[?:?]
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:126) ~[?:?]
+	at epam.project.app.logic.builder.XmlBuilder.write(XmlBuilder.java:76) ~[classes/:?]
+	at epam.project.app.logic.builder.XmlBuilder.build(XmlBuilder.java:67) ~[classes/:?]
+	at epam.project.app.logic.builder.XmlBuilderTest.buildXmlThrowException(XmlBuilderTest.java:50) ~[test-classes/:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:?]
+	at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:?]
+	at java.lang.reflect.Method.invoke(Method.java:566) ~[?:?]
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.internal.runners.statements.ExpectException.evaluate(ExpectException.java:19) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:115) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.vintage.engine.execution.RunnerExecutor.execute(RunnerExecutor.java:42) ~[junit-vintage-engine-5.8.2.jar:5.8.2]
+	at org.junit.vintage.engine.VintageTestEngine.executeAllChildren(VintageTestEngine.java:80) ~[junit-vintage-engine-5.8.2.jar:5.8.2]
+	at org.junit.vintage.engine.VintageTestEngine.execute(VintageTestEngine.java:72) ~[junit-vintage-engine-5.8.2.jar:5.8.2]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:107) ~[junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:88) ~[junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:54) ~[junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:67) [junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:52) [junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:114) [junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:86) [junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.DefaultLauncherSession$DelegatingLauncher.execute(DefaultLauncherSession.java:86) [junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.SessionPerRequestLauncher.execute(SessionPerRequestLauncher.java:53) [junit-platform-launcher-1.8.2.jar:1.8.2]
+	at com.intellij.junit5.JUnit5IdeaTestRunner.startRunnerWithArgs(JUnit5IdeaTestRunner.java:71) [junit5-rt.jar:?]
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater$1.execute(IdeaTestRunner.java:38) [junit-rt.jar:?]
+	at com.intellij.rt.execution.junit.TestsRepeater.repeat(TestsRepeater.java:11) [idea_rt.jar:?]
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:35) [junit-rt.jar:?]
+	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:235) [junit-rt.jar:?]
+	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:54) [junit-rt.jar:?]
+2022-04-23 17:53:22,032 INFO e.p.a.i.c.a.ConfigApp [main] start config
+2022-04-23 17:53:22,032 INFO e.p.a.i.c.d.ConfigDataSource [main] Start config DataSource
+2022-04-23 17:53:22,048 INFO e.p.a.i.c.d.ConfigDataSource [main] Set userName - root
+2022-04-23 17:53:22,048 INFO e.p.a.i.c.d.ConfigDataSource [main] Set userPassword - root
+2022-04-23 17:53:22,923 INFO e.p.a.i.c.a.ConfigApp [main] set connection to db
+2022-04-23 17:53:24,408 INFO e.p.a.i.c.a.ConfigApp [main] update database
+2022-04-23 17:53:24,564 INFO e.p.a.i.c.a.ConfigPlaceholders [main] start configure placeholders
+2022-04-23 17:53:24,596 INFO e.p.a.i.c.a.ConfigServlet [main] start configure servlet
+2022-04-23 17:53:24,596 INFO e.p.a.i.c.s.ConfigServer [main] start creating server
+2022-04-23 17:53:24,721 INFO e.p.a.i.c.s.ConfigServer [main] Start configure encoding filter and security
+2022-04-23 17:53:24,736 INFO e.p.a.i.w.Server [main] Add filter --> SecurityFilter
+2022-04-23 17:53:24,736 INFO e.p.a.i.c.s.ConfigServer [main] Start configure encoding filter and security
+2022-04-23 17:53:24,736 INFO e.p.a.i.w.Server [main] Add filter --> EncodingFilter
+2022-04-23 17:53:24,736 INFO e.p.a.i.c.s.ConfigServer [main] start register servlet
+2022-04-23 17:53:24,736 INFO e.p.a.i.w.Server [main] Add servlet: servlet name --> baseServlet
+2022-04-23 17:53:24,736 INFO e.p.a.i.w.Server [main] Add servlet mapping: url --> /service/*
+2022-04-23 17:53:24,736 INFO e.p.a.i.c.s.ConfigServer [main] start register session listener
+2022-04-23 17:53:24,736 INFO e.p.a.i.w.Server [main] Set session listeners 
+2022-04-23 17:57:41,401 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-1] Session created
+2022-04-23 17:57:41,402 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-1] Set session locales --> [en, ru]
+2022-04-23 17:57:41,402 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-1] Set session selected locale --> en
+2022-04-23 17:58:39,203 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-1] session destroyed
+2022-04-23 17:58:39,219 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-2] Session created
+2022-04-23 17:58:39,219 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-2] Set session locales --> [en, ru]
+2022-04-23 17:58:39,219 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-2] Set session selected locale --> en
+2022-04-25 16:01:32,143 INFO e.p.a.i.c.a.ConfigApp [main] start config
+2022-04-25 16:01:32,175 INFO e.p.a.i.c.d.ConfigDataSource [main] Start config DataSource
+2022-04-25 16:01:32,191 INFO e.p.a.i.c.d.ConfigDataSource [main] Set userName - root
+2022-04-25 16:01:32,191 INFO e.p.a.i.c.d.ConfigDataSource [main] Set userPassword - root
+2022-04-25 16:01:33,038 INFO e.p.a.i.c.a.ConfigApp [main] set connection to db
+2022-04-25 16:01:34,512 INFO e.p.a.i.c.a.ConfigApp [main] update database
+2022-04-25 16:01:34,716 INFO e.p.a.i.c.a.ConfigPlaceholders [main] start configure placeholders
+2022-04-25 16:01:35,002 INFO e.p.a.i.c.a.ConfigServlet [main] start configure servlet
+2022-04-25 16:01:35,075 INFO e.p.a.i.c.s.ConfigServer [main] start creating server
+2022-04-25 16:01:35,193 INFO e.p.a.i.c.s.ConfigServer [main] Start configure encoding filter and security
+2022-04-25 16:01:35,196 INFO e.p.a.i.w.Server [main] Add filter --> SecurityFilter
+2022-04-25 16:01:35,196 INFO e.p.a.i.c.s.ConfigServer [main] Start configure encoding filter and security
+2022-04-25 16:01:35,196 INFO e.p.a.i.w.Server [main] Add filter --> EncodingFilter
+2022-04-25 16:01:35,196 INFO e.p.a.i.c.s.ConfigServer [main] start register servlet
+2022-04-25 16:01:35,206 INFO e.p.a.i.w.Server [main] Add servlet: servlet name --> baseServlet
+2022-04-25 16:01:35,206 INFO e.p.a.i.w.Server [main] Add servlet mapping: url --> /service/*
+2022-04-25 16:01:35,206 INFO e.p.a.i.c.s.ConfigServer [main] start register session listener
+2022-04-25 16:01:35,217 INFO e.p.a.i.w.Server [main] Set session listeners 
+2022-04-25 16:02:12,439 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-1] Session created
+2022-04-25 16:02:12,439 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-1] Set session locales --> [en, ru]
+2022-04-25 16:02:12,439 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-1] Set session selected locale --> en
+2022-04-25 16:03:50,393 INFO e.p.a.i.c.a.ConfigApp [main] start config
+2022-04-25 16:03:50,393 INFO e.p.a.i.c.d.ConfigDataSource [main] Start config DataSource
+2022-04-25 16:03:50,409 INFO e.p.a.i.c.d.ConfigDataSource [main] Set userName - root
+2022-04-25 16:03:50,409 INFO e.p.a.i.c.d.ConfigDataSource [main] Set userPassword - root
+2022-04-25 16:03:51,146 INFO e.p.a.i.c.a.ConfigApp [main] set connection to db
+2022-04-25 16:03:52,450 INFO e.p.a.i.c.a.ConfigApp [main] update database
+2022-04-25 16:03:52,624 INFO e.p.a.i.c.a.ConfigPlaceholders [main] start configure placeholders
+2022-04-25 16:03:52,653 INFO e.p.a.i.c.a.ConfigServlet [main] start configure servlet
+2022-04-25 16:03:52,653 INFO e.p.a.i.c.s.ConfigServer [main] start creating server
+2022-04-25 16:03:52,748 INFO e.p.a.i.c.s.ConfigServer [main] Start configure encoding filter and security
+2022-04-25 16:03:52,763 INFO e.p.a.i.w.Server [main] Add filter --> SecurityFilter
+2022-04-25 16:03:52,763 INFO e.p.a.i.c.s.ConfigServer [main] Start configure encoding filter and security
+2022-04-25 16:03:52,763 INFO e.p.a.i.w.Server [main] Add filter --> EncodingFilter
+2022-04-25 16:03:52,763 INFO e.p.a.i.c.s.ConfigServer [main] start register servlet
+2022-04-25 16:03:52,763 INFO e.p.a.i.w.Server [main] Add servlet: servlet name --> baseServlet
+2022-04-25 16:03:52,763 INFO e.p.a.i.w.Server [main] Add servlet mapping: url --> /service/*
+2022-04-25 16:03:52,763 INFO e.p.a.i.c.s.ConfigServer [main] start register session listener
+2022-04-25 16:03:52,763 INFO e.p.a.i.w.Server [main] Set session listeners 
+2022-04-25 16:04:19,837 ERROR e.p.a.i.w.BaseServlet [http-nio-8080-exec-1] null
+2022-04-25 16:04:19,942 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-1] Session created
+2022-04-25 16:04:19,950 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-1] Set session locales --> [en, ru]
+2022-04-25 16:04:19,950 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-1] Set session selected locale --> en
+2022-04-25 16:04:27,881 INFO e.p.a.l.c.UserController [http-nio-8080-exec-3] Set session selected locale --> ru
+2022-04-25 16:04:38,285 INFO e.p.a.l.c.UserController [http-nio-8080-exec-5] Set session selected locale --> en
+2022-04-25 16:04:44,193 INFO e.p.a.l.c.UserController [http-nio-8080-exec-7] Set session selected locale --> ru
+2022-04-25 16:05:28,856 INFO e.p.a.i.c.a.ConfigApp [main] start config
+2022-04-25 16:05:28,871 INFO e.p.a.i.c.d.ConfigDataSource [main] Start config DataSource
+2022-04-25 16:05:28,887 INFO e.p.a.i.c.d.ConfigDataSource [main] Set userName - root
+2022-04-25 16:05:28,887 INFO e.p.a.i.c.d.ConfigDataSource [main] Set userPassword - root
+2022-04-25 16:05:29,609 INFO e.p.a.i.c.a.ConfigApp [main] set connection to db
+2022-04-25 16:05:30,897 INFO e.p.a.i.c.a.ConfigApp [main] update database
+2022-04-25 16:05:31,059 INFO e.p.a.i.c.a.ConfigPlaceholders [main] start configure placeholders
+2022-04-25 16:05:31,069 INFO e.p.a.i.c.a.ConfigServlet [main] start configure servlet
+2022-04-25 16:05:31,085 INFO e.p.a.i.c.s.ConfigServer [main] start creating server
+2022-04-25 16:05:31,179 INFO e.p.a.i.c.s.ConfigServer [main] Start configure encoding filter and security
+2022-04-25 16:05:31,179 INFO e.p.a.i.w.Server [main] Add filter --> SecurityFilter
+2022-04-25 16:05:31,179 INFO e.p.a.i.c.s.ConfigServer [main] Start configure encoding filter and security
+2022-04-25 16:05:31,179 INFO e.p.a.i.w.Server [main] Add filter --> EncodingFilter
+2022-04-25 16:05:31,179 INFO e.p.a.i.c.s.ConfigServer [main] start register servlet
+2022-04-25 16:05:31,195 INFO e.p.a.i.w.Server [main] Add servlet: servlet name --> baseServlet
+2022-04-25 16:05:31,195 INFO e.p.a.i.w.Server [main] Add servlet mapping: url --> /service/*
+2022-04-25 16:05:31,195 INFO e.p.a.i.c.s.ConfigServer [main] start register session listener
+2022-04-25 16:05:31,195 INFO e.p.a.i.w.Server [main] Set session listeners 
+2022-04-25 16:05:38,741 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-1] Session created
+2022-04-25 16:05:38,741 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-1] Set session locales --> [en, ru]
+2022-04-25 16:05:38,741 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-1] Set session selected locale --> en
+2022-04-25 16:05:54,391 INFO e.p.a.i.c.a.ConfigApp [main] start config
+2022-04-25 16:05:54,406 INFO e.p.a.i.c.d.ConfigDataSource [main] Start config DataSource
+2022-04-25 16:05:54,422 INFO e.p.a.i.c.d.ConfigDataSource [main] Set userName - root
+2022-04-25 16:05:54,422 INFO e.p.a.i.c.d.ConfigDataSource [main] Set userPassword - root
+2022-04-25 16:05:55,097 INFO e.p.a.i.c.a.ConfigApp [main] set connection to db
+2022-04-25 16:05:56,380 INFO e.p.a.i.c.a.ConfigApp [main] update database
+2022-04-25 16:05:56,544 INFO e.p.a.i.c.a.ConfigPlaceholders [main] start configure placeholders
+2022-04-25 16:05:56,559 INFO e.p.a.i.c.a.ConfigServlet [main] start configure servlet
+2022-04-25 16:05:56,574 INFO e.p.a.i.c.s.ConfigServer [main] start creating server
+2022-04-25 16:05:56,684 INFO e.p.a.i.c.s.ConfigServer [main] Start configure encoding filter and security
+2022-04-25 16:05:56,684 INFO e.p.a.i.w.Server [main] Add filter --> SecurityFilter
+2022-04-25 16:05:56,684 INFO e.p.a.i.c.s.ConfigServer [main] Start configure encoding filter and security
+2022-04-25 16:05:56,684 INFO e.p.a.i.w.Server [main] Add filter --> EncodingFilter
+2022-04-25 16:05:56,684 INFO e.p.a.i.c.s.ConfigServer [main] start register servlet
+2022-04-25 16:05:56,684 INFO e.p.a.i.w.Server [main] Add servlet: servlet name --> baseServlet
+2022-04-25 16:05:56,684 INFO e.p.a.i.w.Server [main] Add servlet mapping: url --> /service/*
+2022-04-25 16:05:56,684 INFO e.p.a.i.c.s.ConfigServer [main] start register session listener
+2022-04-25 16:05:56,684 INFO e.p.a.i.w.Server [main] Set session listeners 
+2022-04-25 16:06:07,187 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-1] Session created
+2022-04-25 16:06:07,187 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-1] Set session locales --> [en, ru]
+2022-04-25 16:06:07,187 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-1] Set session selected locale --> en
+2022-04-25 16:08:41,094 INFO e.p.a.i.c.a.ConfigApp [main] start config
+2022-04-25 16:08:41,110 INFO e.p.a.i.c.d.ConfigDataSource [main] Start config DataSource
+2022-04-25 16:08:41,121 INFO e.p.a.i.c.d.ConfigDataSource [main] Set userName - root
+2022-04-25 16:08:41,121 INFO e.p.a.i.c.d.ConfigDataSource [main] Set userPassword - root
+2022-04-25 16:08:41,815 INFO e.p.a.i.c.a.ConfigApp [main] set connection to db
+2022-04-25 16:08:43,173 INFO e.p.a.i.c.a.ConfigApp [main] update database
+2022-04-25 16:08:43,335 INFO e.p.a.i.c.a.ConfigPlaceholders [main] start configure placeholders
+2022-04-25 16:08:43,350 INFO e.p.a.i.c.a.ConfigServlet [main] start configure servlet
+2022-04-25 16:08:43,366 INFO e.p.a.i.c.s.ConfigServer [main] start creating server
+2022-04-25 16:08:43,460 INFO e.p.a.i.c.s.ConfigServer [main] Start configure encoding filter and security
+2022-04-25 16:08:43,460 INFO e.p.a.i.w.Server [main] Add filter --> SecurityFilter
+2022-04-25 16:08:43,460 INFO e.p.a.i.c.s.ConfigServer [main] Start configure encoding filter and security
+2022-04-25 16:08:43,460 INFO e.p.a.i.w.Server [main] Add filter --> EncodingFilter
+2022-04-25 16:08:43,460 INFO e.p.a.i.c.s.ConfigServer [main] start register servlet
+2022-04-25 16:08:43,460 INFO e.p.a.i.w.Server [main] Add servlet: servlet name --> baseServlet
+2022-04-25 16:08:43,460 INFO e.p.a.i.w.Server [main] Add servlet mapping: url --> /service/*
+2022-04-25 16:08:43,460 INFO e.p.a.i.c.s.ConfigServer [main] start register session listener
+2022-04-25 16:08:43,460 INFO e.p.a.i.w.Server [main] Set session listeners 
+2022-04-25 16:08:49,201 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-1] Session created
+2022-04-25 16:08:49,201 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-1] Set session locales --> [en, ru]
+2022-04-25 16:08:49,201 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-1] Set session selected locale --> en
+2022-04-25 16:09:02,456 INFO e.p.a.l.c.UserController [http-nio-8080-exec-4] Set session selected locale --> ru
+2022-04-25 16:09:06,286 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-6] session destroyed
+2022-04-25 16:09:06,302 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-7] Session created
+2022-04-25 16:09:06,302 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-7] Set session locales --> [en, ru]
+2022-04-25 16:09:06,302 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-7] Set session selected locale --> en
+2022-04-25 16:44:15,409 INFO e.p.a.i.c.a.ConfigApp [main] start config
+2022-04-25 16:44:15,409 INFO e.p.a.i.c.d.ConfigDataSource [main] Start config DataSource
+2022-04-25 16:44:15,425 INFO e.p.a.i.c.d.ConfigDataSource [main] Set userName - root
+2022-04-25 16:44:15,425 INFO e.p.a.i.c.d.ConfigDataSource [main] Set userPassword - root
+2022-04-25 16:44:15,723 INFO e.p.a.i.c.a.ConfigApp [main] set connection to db
+2022-04-25 16:44:16,320 INFO e.p.a.i.c.a.ConfigApp [main] update database
+2022-04-25 16:44:16,398 INFO e.p.a.i.c.a.ConfigPlaceholders [main] start configure placeholders
+2022-04-25 16:44:16,414 INFO e.p.a.i.c.a.ConfigServlet [main] start configure servlet
+2022-04-25 16:44:16,414 INFO e.p.a.i.c.s.ConfigServer [main] start creating server
+2022-04-25 16:44:16,461 INFO e.p.a.i.c.s.ConfigServer [main] Start configure encoding filter and security
+2022-04-25 16:44:16,461 INFO e.p.a.i.w.Server [main] Add filter --> SecurityFilter
+2022-04-25 16:44:16,461 INFO e.p.a.i.c.s.ConfigServer [main] Start configure encoding filter and security
+2022-04-25 16:44:16,461 INFO e.p.a.i.w.Server [main] Add filter --> EncodingFilter
+2022-04-25 16:44:16,461 INFO e.p.a.i.c.s.ConfigServer [main] start register servlet
+2022-04-25 16:44:16,461 INFO e.p.a.i.w.Server [main] Add servlet: servlet name --> baseServlet
+2022-04-25 16:44:16,461 INFO e.p.a.i.w.Server [main] Add servlet mapping: url --> /service/*
+2022-04-25 16:44:16,461 INFO e.p.a.i.c.s.ConfigServer [main] start register session listener
+2022-04-25 16:44:16,461 INFO e.p.a.i.w.Server [main] Set session listeners 
+2022-04-25 16:44:23,573 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-1] Session created
+2022-04-25 16:44:23,573 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-1] Set session locales --> [en, ru]
+2022-04-25 16:44:23,573 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-1] Set session selected locale --> en
+2022-04-25 16:44:45,863 ERROR e.p.a.i.w.BaseServlet [http-nio-8080-exec-6] page not found: http://localhost:8080/tax-office/service/filterAllReports
+2022-04-25 16:45:39,244 ERROR e.p.a.i.w.BaseServlet [http-nio-8080-exec-8] page not found: http://localhost:8080/tax-office/service/filterAllReports
+2022-04-25 16:45:50,367 ERROR e.p.a.i.w.BaseServlet [http-nio-8080-exec-2] page not found: http://localhost:8080/tax-office/service/filterAllReports
+2022-04-25 16:47:00,790 ERROR e.p.a.i.w.BaseServlet [http-nio-8080-exec-6] null
+2022-04-25 16:49:29,297 INFO e.p.a.i.c.a.ConfigApp [main] start config
+2022-04-25 16:49:29,297 INFO e.p.a.i.c.d.ConfigDataSource [main] Start config DataSource
+2022-04-25 16:49:29,313 INFO e.p.a.i.c.d.ConfigDataSource [main] Set userName - root
+2022-04-25 16:49:29,313 INFO e.p.a.i.c.d.ConfigDataSource [main] Set userPassword - root
+2022-04-25 16:49:29,627 INFO e.p.a.i.c.a.ConfigApp [main] set connection to db
+2022-04-25 16:49:30,270 INFO e.p.a.i.c.a.ConfigApp [main] update database
+2022-04-25 16:49:30,380 INFO e.p.a.i.c.a.ConfigPlaceholders [main] start configure placeholders
+2022-04-25 16:49:34,393 INFO e.p.a.i.c.a.ConfigServlet [main] start configure servlet
+2022-04-25 16:49:34,409 INFO e.p.a.i.c.s.ConfigServer [main] start creating server
+2022-04-25 16:49:34,456 INFO e.p.a.i.c.s.ConfigServer [main] Start configure encoding filter and security
+2022-04-25 16:49:34,456 INFO e.p.a.i.w.Server [main] Add filter --> SecurityFilter
+2022-04-25 16:49:34,456 INFO e.p.a.i.c.s.ConfigServer [main] Start configure encoding filter and security
+2022-04-25 16:49:34,456 INFO e.p.a.i.w.Server [main] Add filter --> EncodingFilter
+2022-04-25 16:49:34,456 INFO e.p.a.i.c.s.ConfigServer [main] start register servlet
+2022-04-25 16:49:34,456 INFO e.p.a.i.w.Server [main] Add servlet: servlet name --> baseServlet
+2022-04-25 16:49:34,456 INFO e.p.a.i.w.Server [main] Add servlet mapping: url --> /service/*
+2022-04-25 16:49:34,456 INFO e.p.a.i.c.s.ConfigServer [main] start register session listener
+2022-04-25 16:49:34,456 INFO e.p.a.i.w.Server [main] Set session listeners 
+2022-04-25 16:49:41,404 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-2] Session created
+2022-04-25 16:49:41,404 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-2] Set session locales --> [en, ru]
+2022-04-25 16:49:41,404 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-2] Set session selected locale --> en
+2022-04-25 16:51:22,160 ERROR e.p.a.i.w.BaseServlet [http-nio-8080-exec-8] page not found: http://localhost:8080/tax-office/service/filterAllReports
+2022-04-25 16:52:20,477 INFO e.p.a.i.c.a.ConfigApp [main] start config
+2022-04-25 16:52:20,477 INFO e.p.a.i.c.d.ConfigDataSource [main] Start config DataSource
+2022-04-25 16:52:20,493 INFO e.p.a.i.c.d.ConfigDataSource [main] Set userName - root
+2022-04-25 16:52:20,493 INFO e.p.a.i.c.d.ConfigDataSource [main] Set userPassword - root
+2022-04-25 16:52:20,794 INFO e.p.a.i.c.a.ConfigApp [main] set connection to db
+2022-04-25 16:52:21,389 INFO e.p.a.i.c.a.ConfigApp [main] update database
+2022-04-25 16:52:21,456 INFO e.p.a.i.c.a.ConfigPlaceholders [main] start configure placeholders
+2022-04-25 16:52:21,472 INFO e.p.a.i.c.a.ConfigServlet [main] start configure servlet
+2022-04-25 16:52:21,472 INFO e.p.a.i.c.s.ConfigServer [main] start creating server
+2022-04-25 16:52:21,519 INFO e.p.a.i.c.s.ConfigServer [main] Start configure encoding filter and security
+2022-04-25 16:52:21,519 INFO e.p.a.i.w.Server [main] Add filter --> SecurityFilter
+2022-04-25 16:52:21,519 INFO e.p.a.i.c.s.ConfigServer [main] Start configure encoding filter and security
+2022-04-25 16:52:21,519 INFO e.p.a.i.w.Server [main] Add filter --> EncodingFilter
+2022-04-25 16:52:21,519 INFO e.p.a.i.c.s.ConfigServer [main] start register servlet
+2022-04-25 16:52:21,535 INFO e.p.a.i.w.Server [main] Add servlet: servlet name --> baseServlet
+2022-04-25 16:52:21,535 INFO e.p.a.i.w.Server [main] Add servlet mapping: url --> /service/*
+2022-04-25 16:52:21,535 INFO e.p.a.i.c.s.ConfigServer [main] start register session listener
+2022-04-25 16:52:21,535 INFO e.p.a.i.w.Server [main] Set session listeners 
+2022-04-25 16:52:28,080 INFO e.p.a.i.c.a.ConfigApp [main] start config
+2022-04-25 16:52:28,096 INFO e.p.a.i.c.d.ConfigDataSource [main] Start config DataSource
+2022-04-25 16:52:28,096 INFO e.p.a.i.c.d.ConfigDataSource [main] Set userName - root
+2022-04-25 16:52:28,096 INFO e.p.a.i.c.d.ConfigDataSource [main] Set userPassword - root
+2022-04-25 16:52:28,440 INFO e.p.a.i.c.a.ConfigApp [main] set connection to db
+2022-04-25 16:52:29,095 INFO e.p.a.i.c.a.ConfigApp [main] update database
+2022-04-25 16:52:29,178 INFO e.p.a.i.c.a.ConfigPlaceholders [main] start configure placeholders
+2022-04-25 16:52:29,178 INFO e.p.a.i.c.a.ConfigServlet [main] start configure servlet
+2022-04-25 16:52:29,194 INFO e.p.a.i.c.s.ConfigServer [main] start creating server
+2022-04-25 16:52:29,241 INFO e.p.a.i.c.s.ConfigServer [main] Start configure encoding filter and security
+2022-04-25 16:52:29,241 INFO e.p.a.i.w.Server [main] Add filter --> SecurityFilter
+2022-04-25 16:52:29,241 INFO e.p.a.i.c.s.ConfigServer [main] Start configure encoding filter and security
+2022-04-25 16:52:29,241 INFO e.p.a.i.w.Server [main] Add filter --> EncodingFilter
+2022-04-25 16:52:29,241 INFO e.p.a.i.c.s.ConfigServer [main] start register servlet
+2022-04-25 16:52:29,241 INFO e.p.a.i.w.Server [main] Add servlet: servlet name --> baseServlet
+2022-04-25 16:52:29,241 INFO e.p.a.i.w.Server [main] Add servlet mapping: url --> /service/*
+2022-04-25 16:52:29,241 INFO e.p.a.i.c.s.ConfigServer [main] start register session listener
+2022-04-25 16:52:29,241 INFO e.p.a.i.w.Server [main] Set session listeners 
+2022-04-25 16:52:32,489 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-2] Session created
+2022-04-25 16:52:32,490 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-2] Set session locales --> [en, ru]
+2022-04-25 16:52:32,490 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-2] Set session selected locale --> en
+2022-04-25 16:59:26,485 INFO e.p.a.i.c.a.ConfigApp [main] start config
+2022-04-25 16:59:26,485 INFO e.p.a.i.c.d.ConfigDataSource [main] Start config DataSource
+2022-04-25 16:59:26,485 INFO e.p.a.i.c.d.ConfigDataSource [main] Set userName - root
+2022-04-25 16:59:26,485 INFO e.p.a.i.c.d.ConfigDataSource [main] Set userPassword - root
+2022-04-25 16:59:26,799 INFO e.p.a.i.c.a.ConfigApp [main] set connection to db
+2022-04-25 16:59:27,442 INFO e.p.a.i.c.a.ConfigApp [main] update database
+2022-04-25 16:59:27,520 INFO e.p.a.i.c.a.ConfigPlaceholders [main] start configure placeholders
+2022-04-25 16:59:27,536 INFO e.p.a.i.c.a.ConfigServlet [main] start configure servlet
+2022-04-25 16:59:27,536 INFO e.p.a.i.c.s.ConfigServer [main] start creating server
+2022-04-25 16:59:27,583 INFO e.p.a.i.c.s.ConfigServer [main] Start configure encoding filter and security
+2022-04-25 16:59:27,583 INFO e.p.a.i.w.Server [main] Add filter --> SecurityFilter
+2022-04-25 16:59:27,583 INFO e.p.a.i.c.s.ConfigServer [main] Start configure encoding filter and security
+2022-04-25 16:59:27,583 INFO e.p.a.i.w.Server [main] Add filter --> EncodingFilter
+2022-04-25 16:59:27,583 INFO e.p.a.i.c.s.ConfigServer [main] start register servlet
+2022-04-25 16:59:27,599 INFO e.p.a.i.w.Server [main] Add servlet: servlet name --> baseServlet
+2022-04-25 16:59:27,599 INFO e.p.a.i.w.Server [main] Add servlet mapping: url --> /service/*
+2022-04-25 16:59:27,599 INFO e.p.a.i.c.s.ConfigServer [main] start register session listener
+2022-04-25 16:59:27,599 INFO e.p.a.i.w.Server [main] Set session listeners 
+2022-04-25 16:59:33,167 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-1] Session created
+2022-04-25 16:59:33,167 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-1] Set session locales --> [en, ru]
+2022-04-25 16:59:33,167 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-1] Set session selected locale --> en
+2022-04-25 16:59:53,250 ERROR e.p.a.i.w.BaseServlet [http-nio-8080-exec-9] null
+2022-04-25 17:01:00,360 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-7] session destroyed
+2022-04-25 17:01:00,363 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-8] Session created
+2022-04-25 17:01:00,363 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-8] Set session locales --> [en, ru]
+2022-04-25 17:01:00,364 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-8] Set session selected locale --> en
+2022-04-25 17:11:23,449 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-5] session destroyed
+2022-04-25 17:11:23,454 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-6] Session created
+2022-04-25 17:11:23,454 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-6] Set session locales --> [en, ru]
+2022-04-25 17:11:23,454 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-6] Set session selected locale --> en
+2022-04-25 17:11:32,649 ERROR e.p.a.i.w.BaseServlet [http-nio-8080-exec-9] null
+2022-04-25 17:11:36,287 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-10] session destroyed
+2022-04-25 17:11:36,290 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-1] Session created
+2022-04-25 17:11:36,290 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-1] Set session locales --> [en, ru]
+2022-04-25 17:11:36,290 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-1] Set session selected locale --> en
+2022-04-25 17:11:45,556 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-5] session destroyed
+2022-04-25 17:11:45,560 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-6] Session created
+2022-04-25 17:11:45,561 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-6] Set session locales --> [en, ru]
+2022-04-25 17:11:45,561 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-6] Set session selected locale --> en
+2022-04-25 17:12:24,482 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-4] session destroyed
+2022-04-25 17:12:24,486 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-5] Session created
+2022-04-25 17:12:24,486 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-5] Set session locales --> [en, ru]
+2022-04-25 17:12:24,486 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-5] Set session selected locale --> en
+2022-04-25 17:12:43,874 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-10] session destroyed
+2022-04-25 17:12:43,877 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-1] Session created
+2022-04-25 17:12:43,877 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-1] Set session locales --> [en, ru]
+2022-04-25 17:12:43,877 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-1] Set session selected locale --> en
+2022-04-25 17:12:53,517 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-6] session destroyed
+2022-04-25 17:12:53,520 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-7] Session created
+2022-04-25 17:12:53,520 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-7] Set session locales --> [en, ru]
+2022-04-25 17:12:53,520 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-7] Set session selected locale --> en
+2022-04-28 19:24:49,791 INFO e.p.a.i.c.a.ConfigApp [main] start config
+2022-04-28 19:24:49,824 INFO e.p.a.i.c.d.ConfigDataSource [main] Start config DataSource
+2022-04-28 19:24:49,841 INFO e.p.a.i.c.d.ConfigDataSource [main] Set userName - root
+2022-04-28 19:24:49,841 INFO e.p.a.i.c.d.ConfigDataSource [main] Set userPassword - root
+2022-04-28 19:24:50,779 INFO e.p.a.i.c.a.ConfigApp [main] set connection to db
+2022-04-28 19:24:52,320 INFO e.p.a.i.c.a.ConfigApp [main] update database
+2022-04-28 19:24:52,542 INFO e.p.a.i.c.a.ConfigPlaceholders [main] start configure placeholders
+2022-04-28 19:24:52,796 INFO e.p.a.i.c.a.ConfigServlet [main] start configure servlet
+2022-04-28 19:24:52,854 INFO e.p.a.i.c.s.ConfigServer [main] start creating server
+2022-04-28 19:24:52,969 INFO e.p.a.i.c.s.ConfigServer [main] Start configure encoding filter and security
+2022-04-28 19:24:52,978 INFO e.p.a.i.w.Server [main] Add filter --> SecurityFilter
+2022-04-28 19:24:52,978 INFO e.p.a.i.c.s.ConfigServer [main] Start configure encoding filter and security
+2022-04-28 19:24:52,978 INFO e.p.a.i.w.Server [main] Add filter --> EncodingFilter
+2022-04-28 19:24:52,978 INFO e.p.a.i.c.s.ConfigServer [main] start register servlet
+2022-04-28 19:24:52,978 INFO e.p.a.i.w.Server [main] Add servlet: servlet name --> baseServlet
+2022-04-28 19:24:52,978 INFO e.p.a.i.w.Server [main] Add servlet mapping: url --> /service/*
+2022-04-28 19:24:52,978 INFO e.p.a.i.c.s.ConfigServer [main] start register session listener
+2022-04-28 19:24:52,986 INFO e.p.a.i.w.Server [main] Set session listeners 
+2022-04-28 19:25:11,819 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-1] Session created
+2022-04-28 19:25:11,819 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-1] Set session locales --> [en, ru]
+2022-04-28 19:25:11,819 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-1] Set session selected locale --> en
+2022-04-28 19:41:05,122 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-1] Session created
+2022-04-28 19:41:05,122 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-1] Set session locales --> [en, ru]
+2022-04-28 19:41:05,122 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-1] Set session selected locale --> en
+2022-04-29 16:23:15,734 INFO e.p.a.l.c.ReportController [main] File report.xml has deleted successfully
+2022-04-29 16:40:11,779 INFO e.p.a.i.c.a.ConfigApp [main] start config
+2022-04-29 16:40:11,795 INFO e.p.a.i.c.d.ConfigDataSource [main] Start config DataSource
+2022-04-29 16:40:11,811 INFO e.p.a.i.c.d.ConfigDataSource [main] Set userName - root
+2022-04-29 16:40:11,811 INFO e.p.a.i.c.d.ConfigDataSource [main] Set userPassword - root
+2022-04-29 16:40:12,265 INFO e.p.a.i.c.a.ConfigApp [main] set connection to db
+2022-04-29 16:40:13,018 INFO e.p.a.i.c.a.ConfigApp [main] update database
+2022-04-29 16:40:13,128 INFO e.p.a.i.c.a.ConfigPlaceholders [main] start configure placeholders
+2022-04-29 16:40:13,238 INFO e.p.a.i.c.a.ConfigServlet [main] start configure servlet
+2022-04-29 16:40:13,270 INFO e.p.a.i.c.s.ConfigServer [main] start creating server
+2022-04-29 16:40:13,333 INFO e.p.a.i.c.s.ConfigServer [main] Start configure encoding filter and security
+2022-04-29 16:40:13,333 INFO e.p.a.i.w.Server [main] Add filter --> SecurityFilter
+2022-04-29 16:40:13,333 INFO e.p.a.i.c.s.ConfigServer [main] Start configure encoding filter and security
+2022-04-29 16:40:13,333 INFO e.p.a.i.w.Server [main] Add filter --> EncodingFilter
+2022-04-29 16:40:13,333 INFO e.p.a.i.c.s.ConfigServer [main] start register servlet
+2022-04-29 16:40:13,333 INFO e.p.a.i.w.Server [main] Add servlet: servlet name --> baseServlet
+2022-04-29 16:40:13,333 INFO e.p.a.i.w.Server [main] Add servlet mapping: url --> /service/*
+2022-04-29 16:40:13,333 INFO e.p.a.i.c.s.ConfigServer [main] start register session listener
+2022-04-29 16:40:13,348 INFO e.p.a.i.w.Server [main] Set session listeners 
+2022-04-29 16:40:17,972 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-1] Session created
+2022-04-29 16:40:17,972 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-1] Set session locales --> [en, ru]
+2022-04-29 16:40:17,972 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-1] Set session selected locale --> en
+2022-04-29 17:19:37,375 INFO e.p.a.l.c.ClientController [main] Client has registered successfully
+2022-04-29 17:19:37,391 INFO e.p.a.l.c.ClientController [main] Client has deleted successfully
+2022-04-29 17:19:37,516 INFO e.p.a.l.c.ReportController [main] File report.xml has deleted successfully
+2022-04-29 17:19:37,547 INFO e.p.a.l.c.ReportEditController [main] File report.xml has edited successfully
+2022-04-29 17:19:37,658 INFO e.p.a.l.c.ReportUploadController [main] File JsonFile.json has uploaded successfully!
+2022-04-29 17:19:37,674 INFO e.p.a.l.c.ReportUploadController [main] File XmlFile.xml has uploaded successfully!
+2022-04-29 17:19:37,689 INFO e.p.a.l.c.UserController [main] Set session selected locale --> en
+2022-05-06 19:34:58,190 INFO e.p.a.i.c.a.ConfigApp [main] start config
+2022-05-06 19:34:58,221 INFO e.p.a.i.c.d.ConfigDataSource [main] Start config DataSource
+2022-05-06 19:34:58,234 INFO e.p.a.i.c.d.ConfigDataSource [main] Set userName - root
+2022-05-06 19:34:58,234 INFO e.p.a.i.c.d.ConfigDataSource [main] Set userPassword - root
+2022-05-06 19:34:59,180 INFO e.p.a.i.c.a.ConfigApp [main] set connection to db
+2022-05-06 19:35:00,732 INFO e.p.a.i.c.a.ConfigApp [main] update database
+2022-05-06 19:35:00,945 INFO e.p.a.i.c.a.ConfigPlaceholders [main] start configure placeholders
+2022-05-06 19:35:01,158 INFO e.p.a.i.c.a.ConfigServlet [main] start configure servlet
+2022-05-06 19:35:01,221 INFO e.p.a.i.c.s.ConfigServer [main] start creating server
+2022-05-06 19:35:01,330 INFO e.p.a.i.c.s.ConfigServer [main] Start configure encoding filter and security
+2022-05-06 19:35:01,335 INFO e.p.a.i.w.Server [main] Add filter --> SecurityFilter
+2022-05-06 19:35:01,335 INFO e.p.a.i.c.s.ConfigServer [main] Start configure encoding filter and security
+2022-05-06 19:35:01,336 INFO e.p.a.i.w.Server [main] Add filter --> EncodingFilter
+2022-05-06 19:35:01,336 INFO e.p.a.i.c.s.ConfigServer [main] start register servlet
+2022-05-06 19:35:01,342 INFO e.p.a.i.w.Server [main] Add servlet: servlet name --> baseServlet
+2022-05-06 19:35:01,342 INFO e.p.a.i.w.Server [main] Add servlet mapping: url --> /service/*
+2022-05-06 19:35:01,342 INFO e.p.a.i.c.s.ConfigServer [main] start register session listener
+2022-05-06 19:35:01,351 INFO e.p.a.i.w.Server [main] Set session listeners 
+2022-05-06 19:35:54,204 INFO e.p.a.i.c.a.ConfigApp [main] start config
+2022-05-06 19:35:54,214 INFO e.p.a.i.c.d.ConfigDataSource [main] Start config DataSource
+2022-05-06 19:35:54,226 INFO e.p.a.i.c.d.ConfigDataSource [main] Set userName - root
+2022-05-06 19:35:54,227 INFO e.p.a.i.c.d.ConfigDataSource [main] Set userPassword - root
+2022-05-06 19:35:54,921 INFO e.p.a.i.c.a.ConfigApp [main] set connection to db
+2022-05-06 19:35:56,255 INFO e.p.a.i.c.a.ConfigApp [main] update database
+2022-05-06 19:35:56,425 INFO e.p.a.i.c.a.ConfigPlaceholders [main] start configure placeholders
+2022-05-06 19:35:56,449 INFO e.p.a.i.c.a.ConfigServlet [main] start configure servlet
+2022-05-06 19:35:56,458 INFO e.p.a.i.c.s.ConfigServer [main] start creating server
+2022-05-06 19:35:56,582 INFO e.p.a.i.c.s.ConfigServer [main] Start configure encoding filter and security
+2022-05-06 19:35:56,586 INFO e.p.a.i.w.Server [main] Add filter --> SecurityFilter
+2022-05-06 19:35:56,586 INFO e.p.a.i.c.s.ConfigServer [main] Start configure encoding filter and security
+2022-05-06 19:35:56,587 INFO e.p.a.i.w.Server [main] Add filter --> EncodingFilter
+2022-05-06 19:35:56,587 INFO e.p.a.i.c.s.ConfigServer [main] start register servlet
+2022-05-06 19:35:56,592 INFO e.p.a.i.w.Server [main] Add servlet: servlet name --> baseServlet
+2022-05-06 19:35:56,592 INFO e.p.a.i.w.Server [main] Add servlet mapping: url --> /service/*
+2022-05-06 19:35:56,592 INFO e.p.a.i.c.s.ConfigServer [main] start register session listener
+2022-05-06 19:35:56,594 INFO e.p.a.i.w.Server [main] Set session listeners 
+2022-05-06 19:36:08,340 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-1] Session created
+2022-05-06 19:36:08,341 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-1] Set session locales --> [en, ru]
+2022-05-06 19:36:08,342 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-1] Set session selected locale --> en
+2022-05-06 19:36:17,111 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-7] session destroyed
+2022-05-06 19:36:17,127 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-8] Session created
+2022-05-06 19:36:17,127 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-8] Set session locales --> [en, ru]
+2022-05-06 19:36:17,127 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-8] Set session selected locale --> en
+2022-05-06 19:40:28,161 INFO e.p.a.i.c.a.ConfigApp [main] start config
+2022-05-06 19:40:28,170 INFO e.p.a.i.c.d.ConfigDataSource [main] Start config DataSource
+2022-05-06 19:40:28,181 INFO e.p.a.i.c.d.ConfigDataSource [main] Set userName - root
+2022-05-06 19:40:28,181 INFO e.p.a.i.c.d.ConfigDataSource [main] Set userPassword - root
+2022-05-06 19:40:28,899 INFO e.p.a.i.c.a.ConfigApp [main] set connection to db
+2022-05-06 19:40:30,248 INFO e.p.a.i.c.a.ConfigApp [main] update database
+2022-05-06 19:40:30,426 INFO e.p.a.i.c.a.ConfigPlaceholders [main] start configure placeholders
+2022-05-06 19:40:30,449 INFO e.p.a.i.c.a.ConfigServlet [main] start configure servlet
+2022-05-06 19:40:30,458 INFO e.p.a.i.c.s.ConfigServer [main] start creating server
+2022-05-06 19:40:30,574 INFO e.p.a.i.c.s.ConfigServer [main] Start configure encoding filter and security
+2022-05-06 19:40:30,578 INFO e.p.a.i.w.Server [main] Add filter --> SecurityFilter
+2022-05-06 19:40:30,578 INFO e.p.a.i.c.s.ConfigServer [main] Start configure encoding filter and security
+2022-05-06 19:40:30,579 INFO e.p.a.i.w.Server [main] Add filter --> EncodingFilter
+2022-05-06 19:40:30,579 INFO e.p.a.i.c.s.ConfigServer [main] start register servlet
+2022-05-06 19:40:30,584 INFO e.p.a.i.w.Server [main] Add servlet: servlet name --> baseServlet
+2022-05-06 19:40:30,584 INFO e.p.a.i.w.Server [main] Add servlet mapping: url --> /service/*
+2022-05-06 19:40:30,584 INFO e.p.a.i.c.s.ConfigServer [main] start register session listener
+2022-05-06 19:40:30,585 INFO e.p.a.i.w.Server [main] Set session listeners 
+2022-05-06 19:40:40,697 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-1] Session created
+2022-05-06 19:40:40,699 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-1] Set session locales --> [en, ru]
+2022-05-06 19:40:40,700 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-1] Set session selected locale --> en
+2022-05-07 17:42:25,850 INFO e.p.a.i.c.a.ConfigApp [main] start config
+2022-05-07 17:42:25,866 INFO e.p.a.i.c.d.ConfigDataSource [main] Start config DataSource
+2022-05-07 17:42:25,871 INFO e.p.a.i.c.d.ConfigDataSource [main] Set userName - root
+2022-05-07 17:42:25,871 INFO e.p.a.i.c.d.ConfigDataSource [main] Set userPassword - root
+2022-05-07 17:42:26,253 INFO e.p.a.i.c.a.ConfigApp [main] set connection to db
+2022-05-07 17:42:26,932 INFO e.p.a.i.c.a.ConfigApp [main] update database
+2022-05-07 17:42:27,031 INFO e.p.a.i.c.a.ConfigPlaceholders [main] start configure placeholders
+2022-05-07 17:42:27,149 INFO e.p.a.i.c.a.ConfigServlet [main] start configure servlet
+2022-05-07 17:42:27,179 INFO e.p.a.i.c.s.ConfigServer [main] start creating server
+2022-05-07 17:42:27,228 INFO e.p.a.i.c.s.ConfigServer [main] Start configure encoding filter and security
+2022-05-07 17:42:27,230 INFO e.p.a.i.w.Server [main] Add filter --> SecurityFilter
+2022-05-07 17:42:27,230 INFO e.p.a.i.c.s.ConfigServer [main] Start configure encoding filter and security
+2022-05-07 17:42:27,230 INFO e.p.a.i.w.Server [main] Add filter --> EncodingFilter
+2022-05-07 17:42:27,230 INFO e.p.a.i.c.s.ConfigServer [main] start register servlet
+2022-05-07 17:42:27,233 INFO e.p.a.i.w.Server [main] Add servlet: servlet name --> baseServlet
+2022-05-07 17:42:27,233 INFO e.p.a.i.w.Server [main] Add servlet mapping: url --> /service/*
+2022-05-07 17:42:27,233 INFO e.p.a.i.c.s.ConfigServer [main] start register session listener
+2022-05-07 17:42:27,238 INFO e.p.a.i.w.Server [main] Set session listeners 
+2022-05-07 17:42:35,751 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-1] Session created
+2022-05-07 17:42:35,751 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-1] Set session locales --> [en, ru]
+2022-05-07 17:42:35,751 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-1] Set session selected locale --> en
+2022-05-07 17:42:40,029 INFO e.p.a.l.c.UserController [http-nio-8080-exec-2] Set session selected locale --> ru
+2022-05-08 14:41:38,460 INFO e.p.a.l.c.ReportController [main] File report.xml has deleted successfully
+2022-05-08 14:41:38,820 ERROR e.p.a.l.p.JsonParser [main] cannot parse json file
+com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException: Unrecognized field "qwerrq" (class epam.project.app.logic.entity.report.ReportParameters), not marked as ignorable (8 known properties: "month", "person", "income", "nationality", "year", "group", "quarter", "activity"])
+ at [Source: (File); line: 1, column: 111] (through reference chain: epam.project.app.logic.entity.report.ReportParameters["qwerrq"])
+	at com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException.from(UnrecognizedPropertyException.java:61) ~[jackson-databind-2.13.1.jar:2.13.1]
+	at com.fasterxml.jackson.databind.DeserializationContext.handleUnknownProperty(DeserializationContext.java:1127) ~[jackson-databind-2.13.1.jar:2.13.1]
+	at com.fasterxml.jackson.databind.deser.std.StdDeserializer.handleUnknownProperty(StdDeserializer.java:1989) ~[jackson-databind-2.13.1.jar:2.13.1]
+	at com.fasterxml.jackson.databind.deser.BeanDeserializerBase.handleUnknownProperty(BeanDeserializerBase.java:1700) ~[jackson-databind-2.13.1.jar:2.13.1]
+	at com.fasterxml.jackson.databind.deser.BeanDeserializerBase.handleUnknownVanilla(BeanDeserializerBase.java:1678) ~[jackson-databind-2.13.1.jar:2.13.1]
+	at com.fasterxml.jackson.databind.deser.BeanDeserializer.vanillaDeserialize(BeanDeserializer.java:319) ~[jackson-databind-2.13.1.jar:2.13.1]
+	at com.fasterxml.jackson.databind.deser.BeanDeserializer.deserialize(BeanDeserializer.java:176) ~[jackson-databind-2.13.1.jar:2.13.1]
+	at com.fasterxml.jackson.databind.deser.DefaultDeserializationContext.readRootValue(DefaultDeserializationContext.java:322) ~[jackson-databind-2.13.1.jar:2.13.1]
+	at com.fasterxml.jackson.databind.ObjectMapper._readMapAndClose(ObjectMapper.java:4674) ~[jackson-databind-2.13.1.jar:2.13.1]
+	at com.fasterxml.jackson.databind.ObjectMapper.readValue(ObjectMapper.java:3494) ~[jackson-databind-2.13.1.jar:2.13.1]
+	at epam.project.app.logic.parser.JsonParser.parse(JsonParser.java:21) ~[classes/:?]
+	at epam.project.app.logic.parser.JsonParserTest.parseWhenInvalidFile(JsonParserTest.java:35) ~[test-classes/:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:?]
+	at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:?]
+	at java.lang.reflect.Method.invoke(Method.java:566) ~[?:?]
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.internal.runners.statements.ExpectException.evaluate(ExpectException.java:19) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:115) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.vintage.engine.execution.RunnerExecutor.execute(RunnerExecutor.java:42) ~[junit-vintage-engine-5.8.2.jar:5.8.2]
+	at org.junit.vintage.engine.VintageTestEngine.executeAllChildren(VintageTestEngine.java:80) ~[junit-vintage-engine-5.8.2.jar:5.8.2]
+	at org.junit.vintage.engine.VintageTestEngine.execute(VintageTestEngine.java:72) ~[junit-vintage-engine-5.8.2.jar:5.8.2]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:107) ~[junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:88) ~[junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:54) ~[junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:67) [junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:52) [junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:114) [junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:86) [junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.DefaultLauncherSession$DelegatingLauncher.execute(DefaultLauncherSession.java:86) [junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.SessionPerRequestLauncher.execute(SessionPerRequestLauncher.java:53) [junit-platform-launcher-1.8.2.jar:1.8.2]
+	at com.intellij.junit5.JUnit5IdeaTestRunner.startRunnerWithArgs(JUnit5IdeaTestRunner.java:71) [junit5-rt.jar:?]
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater$1.execute(IdeaTestRunner.java:38) [junit-rt.jar:?]
+	at com.intellij.rt.execution.junit.TestsRepeater.repeat(TestsRepeater.java:11) [idea_rt.jar:?]
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:35) [junit-rt.jar:?]
+	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:235) [junit-rt.jar:?]
+	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:54) [junit-rt.jar:?]
+2022-05-08 14:41:38,964 INFO e.p.a.l.c.ReportEditController [main] File report.xml has edited successfully
+2022-05-08 14:41:38,996 INFO e.p.a.l.c.UserController [main] Set session selected locale --> en
+2022-05-08 14:41:39,028 ERROR e.p.a.l.b.JsonBuilder [main] cannot build json file
+java.io.FileNotFoundException:  (Системе не удается найти указанный путь)
+	at java.io.FileOutputStream.open0(Native Method) ~[?:?]
+	at java.io.FileOutputStream.open(FileOutputStream.java:298) ~[?:?]
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:237) ~[?:?]
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:126) ~[?:?]
+	at java.io.FileWriter.<init>(FileWriter.java:66) ~[?:?]
+	at epam.project.app.logic.builder.JsonBuilder.build(JsonBuilder.java:33) ~[classes/:?]
+	at epam.project.app.logic.builder.JsonBuilderTest.buildJsonThrowException(JsonBuilderTest.java:53) ~[test-classes/:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:?]
+	at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:?]
+	at java.lang.reflect.Method.invoke(Method.java:566) ~[?:?]
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.internal.runners.statements.ExpectException.evaluate(ExpectException.java:19) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:115) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.vintage.engine.execution.RunnerExecutor.execute(RunnerExecutor.java:42) ~[junit-vintage-engine-5.8.2.jar:5.8.2]
+	at org.junit.vintage.engine.VintageTestEngine.executeAllChildren(VintageTestEngine.java:80) ~[junit-vintage-engine-5.8.2.jar:5.8.2]
+	at org.junit.vintage.engine.VintageTestEngine.execute(VintageTestEngine.java:72) ~[junit-vintage-engine-5.8.2.jar:5.8.2]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:107) ~[junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:88) ~[junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:54) ~[junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:67) [junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:52) [junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:114) [junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:86) [junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.DefaultLauncherSession$DelegatingLauncher.execute(DefaultLauncherSession.java:86) [junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.SessionPerRequestLauncher.execute(SessionPerRequestLauncher.java:53) [junit-platform-launcher-1.8.2.jar:1.8.2]
+	at com.intellij.junit5.JUnit5IdeaTestRunner.startRunnerWithArgs(JUnit5IdeaTestRunner.java:71) [junit5-rt.jar:?]
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater$1.execute(IdeaTestRunner.java:38) [junit-rt.jar:?]
+	at com.intellij.rt.execution.junit.TestsRepeater.repeat(TestsRepeater.java:11) [idea_rt.jar:?]
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:35) [junit-rt.jar:?]
+	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:235) [junit-rt.jar:?]
+	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:54) [junit-rt.jar:?]
+2022-05-08 14:41:39,108 INFO e.p.a.l.c.ClientController [main] Client has registered successfully
+2022-05-08 14:41:39,108 INFO e.p.a.l.c.ClientController [main] Client has deleted successfully
+2022-05-08 14:41:39,989 ERROR e.p.a.l.r.ClientRepository [main] null
+2022-05-08 14:41:40,005 ERROR e.p.a.l.r.ClientRepository [main] null
+2022-05-08 14:41:40,189 INFO e.p.a.l.c.ReportUploadController [main] File JsonFile.json has uploaded successfully!
+2022-05-08 14:41:40,197 INFO e.p.a.l.c.ReportUploadController [main] File XmlFile.xml has uploaded successfully!
+2022-05-08 14:41:40,213 ERROR e.p.a.l.p.XmlParser [main] cannot parse xml file
+java.lang.NullPointerException: null
+	at epam.project.app.logic.parser.XmlParser.getTextContext(XmlParser.java:56) ~[classes/:?]
+	at epam.project.app.logic.parser.XmlParser.buildReportParameters(XmlParser.java:47) ~[classes/:?]
+	at epam.project.app.logic.parser.XmlParser.parse(XmlParser.java:32) ~[classes/:?]
+	at epam.project.app.logic.parser.XmlParserTest.parseWhenInvalidFile(XmlParserTest.java:35) ~[test-classes/:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:?]
+	at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:?]
+	at java.lang.reflect.Method.invoke(Method.java:566) ~[?:?]
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.internal.runners.statements.ExpectException.evaluate(ExpectException.java:19) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:115) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.vintage.engine.execution.RunnerExecutor.execute(RunnerExecutor.java:42) ~[junit-vintage-engine-5.8.2.jar:5.8.2]
+	at org.junit.vintage.engine.VintageTestEngine.executeAllChildren(VintageTestEngine.java:80) ~[junit-vintage-engine-5.8.2.jar:5.8.2]
+	at org.junit.vintage.engine.VintageTestEngine.execute(VintageTestEngine.java:72) ~[junit-vintage-engine-5.8.2.jar:5.8.2]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:107) ~[junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:88) ~[junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:54) ~[junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:67) [junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:52) [junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:114) [junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:86) [junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.DefaultLauncherSession$DelegatingLauncher.execute(DefaultLauncherSession.java:86) [junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.SessionPerRequestLauncher.execute(SessionPerRequestLauncher.java:53) [junit-platform-launcher-1.8.2.jar:1.8.2]
+	at com.intellij.junit5.JUnit5IdeaTestRunner.startRunnerWithArgs(JUnit5IdeaTestRunner.java:71) [junit5-rt.jar:?]
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater$1.execute(IdeaTestRunner.java:38) [junit-rt.jar:?]
+	at com.intellij.rt.execution.junit.TestsRepeater.repeat(TestsRepeater.java:11) [idea_rt.jar:?]
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:35) [junit-rt.jar:?]
+	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:235) [junit-rt.jar:?]
+	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:54) [junit-rt.jar:?]
+2022-05-08 14:41:40,397 ERROR e.p.a.l.b.XmlBuilder [main] cannot build xml file
+java.io.FileNotFoundException:  (Системе не удается найти указанный путь)
+	at java.io.FileOutputStream.open0(Native Method) ~[?:?]
+	at java.io.FileOutputStream.open(FileOutputStream.java:298) ~[?:?]
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:237) ~[?:?]
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:126) ~[?:?]
+	at epam.project.app.logic.builder.XmlBuilder.write(XmlBuilder.java:76) ~[classes/:?]
+	at epam.project.app.logic.builder.XmlBuilder.build(XmlBuilder.java:67) ~[classes/:?]
+	at epam.project.app.logic.builder.XmlBuilderTest.buildXmlThrowException(XmlBuilderTest.java:50) ~[test-classes/:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:?]
+	at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:?]
+	at java.lang.reflect.Method.invoke(Method.java:566) ~[?:?]
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.internal.runners.statements.ExpectException.evaluate(ExpectException.java:19) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:115) ~[junit-4.13.2.jar:4.13.2]
+	at org.junit.vintage.engine.execution.RunnerExecutor.execute(RunnerExecutor.java:42) ~[junit-vintage-engine-5.8.2.jar:5.8.2]
+	at org.junit.vintage.engine.VintageTestEngine.executeAllChildren(VintageTestEngine.java:80) ~[junit-vintage-engine-5.8.2.jar:5.8.2]
+	at org.junit.vintage.engine.VintageTestEngine.execute(VintageTestEngine.java:72) ~[junit-vintage-engine-5.8.2.jar:5.8.2]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:107) ~[junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:88) ~[junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:54) ~[junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:67) [junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:52) [junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:114) [junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:86) [junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.DefaultLauncherSession$DelegatingLauncher.execute(DefaultLauncherSession.java:86) [junit-platform-launcher-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.SessionPerRequestLauncher.execute(SessionPerRequestLauncher.java:53) [junit-platform-launcher-1.8.2.jar:1.8.2]
+	at com.intellij.junit5.JUnit5IdeaTestRunner.startRunnerWithArgs(JUnit5IdeaTestRunner.java:71) [junit5-rt.jar:?]
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater$1.execute(IdeaTestRunner.java:38) [junit-rt.jar:?]
+	at com.intellij.rt.execution.junit.TestsRepeater.repeat(TestsRepeater.java:11) [idea_rt.jar:?]
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:35) [junit-rt.jar:?]
+	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:235) [junit-rt.jar:?]
+	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:54) [junit-rt.jar:?]
+2022-05-09 13:48:48,841 INFO e.p.a.i.c.a.ConfigApp [main] start config
+2022-05-09 13:48:48,878 INFO e.p.a.i.c.d.ConfigDataSource [main] Start config DataSource
+2022-05-09 13:48:48,889 INFO e.p.a.i.c.d.ConfigDataSource [main] Set userName - root
+2022-05-09 13:48:48,890 INFO e.p.a.i.c.d.ConfigDataSource [main] Set userPassword - root
+2022-05-09 13:48:49,817 INFO e.p.a.i.c.a.ConfigApp [main] set connection to db
+2022-05-09 13:48:51,355 INFO e.p.a.i.c.a.ConfigApp [main] update database
+2022-05-09 13:48:51,593 INFO e.p.a.i.c.a.ConfigPlaceholders [main] start configure placeholders
+2022-05-09 13:48:51,818 INFO e.p.a.i.c.a.ConfigServlet [main] start configure servlet
+2022-05-09 13:48:51,899 INFO e.p.a.i.c.s.ConfigServer [main] start creating server
+2022-05-09 13:48:52,040 INFO e.p.a.i.c.s.ConfigServer [main] Start configure encoding filter and security
+2022-05-09 13:48:52,045 INFO e.p.a.i.w.Server [main] Add filter --> SecurityFilter
+2022-05-09 13:48:52,045 INFO e.p.a.i.c.s.ConfigServer [main] Start configure encoding filter and security
+2022-05-09 13:48:52,045 INFO e.p.a.i.w.Server [main] Add filter --> EncodingFilter
+2022-05-09 13:48:52,046 INFO e.p.a.i.c.s.ConfigServer [main] start register servlet
+2022-05-09 13:48:52,053 INFO e.p.a.i.w.Server [main] Add servlet: servlet name --> baseServlet
+2022-05-09 13:48:52,054 INFO e.p.a.i.w.Server [main] Add servlet mapping: url --> /service/*
+2022-05-09 13:48:52,054 INFO e.p.a.i.c.s.ConfigServer [main] start register session listener
+2022-05-09 13:48:52,063 INFO e.p.a.i.w.Server [main] Set session listeners 
+2022-05-09 13:49:52,988 INFO e.p.a.i.c.a.ConfigApp [main] start config
+2022-05-09 13:49:52,998 INFO e.p.a.i.c.d.ConfigDataSource [main] Start config DataSource
+2022-05-09 13:49:53,011 INFO e.p.a.i.c.d.ConfigDataSource [main] Set userName - root
+2022-05-09 13:49:53,011 INFO e.p.a.i.c.d.ConfigDataSource [main] Set userPassword - root
+2022-05-09 13:49:53,820 INFO e.p.a.i.c.a.ConfigApp [main] set connection to db
+2022-05-09 13:49:55,174 INFO e.p.a.i.c.a.ConfigApp [main] update database
+2022-05-09 13:49:55,349 INFO e.p.a.i.c.a.ConfigPlaceholders [main] start configure placeholders
+2022-05-09 13:49:55,374 INFO e.p.a.i.c.a.ConfigServlet [main] start configure servlet
+2022-05-09 13:49:55,388 INFO e.p.a.i.c.s.ConfigServer [main] start creating server
+2022-05-09 13:49:55,491 INFO e.p.a.i.c.s.ConfigServer [main] Start configure encoding filter and security
+2022-05-09 13:49:55,495 INFO e.p.a.i.w.Server [main] Add filter --> SecurityFilter
+2022-05-09 13:49:55,495 INFO e.p.a.i.c.s.ConfigServer [main] Start configure encoding filter and security
+2022-05-09 13:49:55,496 INFO e.p.a.i.w.Server [main] Add filter --> EncodingFilter
+2022-05-09 13:49:55,497 INFO e.p.a.i.c.s.ConfigServer [main] start register servlet
+2022-05-09 13:49:55,505 INFO e.p.a.i.w.Server [main] Add servlet: servlet name --> baseServlet
+2022-05-09 13:49:55,506 INFO e.p.a.i.w.Server [main] Add servlet mapping: url --> /service/*
+2022-05-09 13:49:55,506 INFO e.p.a.i.c.s.ConfigServer [main] start register session listener
+2022-05-09 13:49:55,511 INFO e.p.a.i.w.Server [main] Set session listeners 
+2022-05-09 13:50:06,899 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-1] Session created
+2022-05-09 13:50:06,900 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-1] Set session locales --> [en, ru]
+2022-05-09 13:50:06,900 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-1] Set session selected locale --> en
+2022-05-09 14:47:00,483 INFO e.p.a.i.c.a.ConfigApp [main] start config
+2022-05-09 14:47:00,483 INFO e.p.a.i.c.d.ConfigDataSource [main] Start config DataSource
+2022-05-09 14:47:00,483 INFO e.p.a.i.c.d.ConfigDataSource [main] Set userName - root
+2022-05-09 14:47:00,483 INFO e.p.a.i.c.d.ConfigDataSource [main] Set userPassword - root
+2022-05-09 14:47:00,797 INFO e.p.a.i.c.a.ConfigApp [main] set connection to db
+2022-05-09 14:47:01,403 INFO e.p.a.i.c.a.ConfigApp [main] update database
+2022-05-09 14:47:01,472 INFO e.p.a.i.c.a.ConfigPlaceholders [main] start configure placeholders
+2022-05-09 14:47:01,488 INFO e.p.a.i.c.a.ConfigServlet [main] start configure servlet
+2022-05-09 14:47:01,488 INFO e.p.a.i.c.s.ConfigServer [main] start creating server
+2022-05-09 14:47:01,535 INFO e.p.a.i.c.s.ConfigServer [main] Start configure encoding filter and security
+2022-05-09 14:47:01,535 INFO e.p.a.i.w.Server [main] Add filter --> SecurityFilter
+2022-05-09 14:47:01,535 INFO e.p.a.i.c.s.ConfigServer [main] Start configure encoding filter and security
+2022-05-09 14:47:01,535 INFO e.p.a.i.w.Server [main] Add filter --> EncodingFilter
+2022-05-09 14:47:01,535 INFO e.p.a.i.c.s.ConfigServer [main] start register servlet
+2022-05-09 14:47:01,535 INFO e.p.a.i.w.Server [main] Add servlet: servlet name --> baseServlet
+2022-05-09 14:47:01,535 INFO e.p.a.i.w.Server [main] Add servlet mapping: url --> /service/*
+2022-05-09 14:47:01,535 INFO e.p.a.i.c.s.ConfigServer [main] start register session listener
+2022-05-09 14:47:01,535 INFO e.p.a.i.w.Server [main] Set session listeners 
+2022-05-09 14:47:21,890 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-1] Session created
+2022-05-09 14:47:21,891 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-1] Set session locales --> [en, ru]
+2022-05-09 14:47:21,891 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-1] Set session selected locale --> en
+2022-05-09 14:48:15,020 INFO e.p.a.l.c.ReportEditController [http-nio-8080-exec-6] File testVaildJson.json has edited successfully
+2022-05-09 14:52:16,922 INFO e.p.a.l.c.ReportEditController [http-nio-8080-exec-3] File testVaildJson.json has edited successfully
+2022-05-09 14:52:48,033 INFO e.p.a.l.c.ReportEditController [http-nio-8080-exec-6] File testVaildJson.json has edited successfully
+2022-05-09 14:54:04,497 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-3] session destroyed
+2022-05-09 14:54:04,504 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-4] Session created
+2022-05-09 14:54:04,504 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-4] Set session locales --> [en, ru]
+2022-05-09 14:54:04,504 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-4] Set session selected locale --> en
+2022-05-09 14:54:36,913 INFO e.p.a.l.c.ClientController [http-nio-8080-exec-6] Client has registered successfully
+2022-05-09 14:59:29,388 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-1] session destroyed
+2022-05-09 14:59:29,393 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-3] Session created
+2022-05-09 14:59:29,393 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-3] Set session locales --> [en, ru]
+2022-05-09 14:59:29,393 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-3] Set session selected locale --> en
+2022-05-09 15:03:02,648 INFO e.p.a.l.c.ClientController [http-nio-8080-exec-7] Client has registered successfully
+2022-05-09 15:03:21,192 INFO e.p.a.l.c.ReportUploadController [http-nio-8080-exec-2] File valid.json has uploaded successfully!
+2022-05-09 15:03:24,389 INFO e.p.a.l.c.ReportController [http-nio-8080-exec-4] File valid.json has deleted successfully
+2022-05-09 15:03:26,741 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-9] session destroyed
+2022-05-09 15:03:26,745 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-10] Session created
+2022-05-09 15:03:26,745 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-10] Set session locales --> [en, ru]
+2022-05-09 15:03:26,745 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-10] Set session selected locale --> en
+2022-05-09 15:03:53,726 INFO e.p.a.l.c.ClientController [http-nio-8080-exec-4] Client has deleted successfully
+2022-05-09 15:04:12,324 INFO e.p.a.l.c.ClientController [http-nio-8080-exec-9] Client has deleted successfully
+2022-05-09 15:04:13,889 INFO e.p.a.l.c.ClientController [http-nio-8080-exec-2] Client has deleted successfully
+2022-05-09 15:04:24,648 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-5] session destroyed
+2022-05-09 15:04:24,651 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-6] Session created
+2022-05-09 15:04:24,651 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-6] Set session locales --> [en, ru]
+2022-05-09 15:04:24,651 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-6] Set session selected locale --> en
+2022-05-09 15:06:13,602 INFO e.p.a.i.c.a.ConfigApp [main] start config
+2022-05-09 15:06:13,602 INFO e.p.a.i.c.d.ConfigDataSource [main] Start config DataSource
+2022-05-09 15:06:13,602 INFO e.p.a.i.c.d.ConfigDataSource [main] Set userName - root
+2022-05-09 15:06:13,602 INFO e.p.a.i.c.d.ConfigDataSource [main] Set userPassword - root
+2022-05-09 15:06:13,962 INFO e.p.a.i.c.a.ConfigApp [main] set connection to db
+2022-05-09 15:06:14,559 INFO e.p.a.i.c.a.ConfigApp [main] update database
+2022-05-09 15:06:14,637 INFO e.p.a.i.c.a.ConfigPlaceholders [main] start configure placeholders
+2022-05-09 15:06:14,653 INFO e.p.a.i.c.a.ConfigServlet [main] start configure servlet
+2022-05-09 15:06:14,653 INFO e.p.a.i.c.s.ConfigServer [main] start creating server
+2022-05-09 15:06:14,700 INFO e.p.a.i.c.s.ConfigServer [main] Start configure encoding filter and security
+2022-05-09 15:06:14,700 INFO e.p.a.i.w.Server [main] Add filter --> SecurityFilter
+2022-05-09 15:06:14,700 INFO e.p.a.i.c.s.ConfigServer [main] Start configure encoding filter and security
+2022-05-09 15:06:14,700 INFO e.p.a.i.w.Server [main] Add filter --> EncodingFilter
+2022-05-09 15:06:14,700 INFO e.p.a.i.c.s.ConfigServer [main] start register servlet
+2022-05-09 15:06:14,700 INFO e.p.a.i.w.Server [main] Add servlet: servlet name --> baseServlet
+2022-05-09 15:06:14,700 INFO e.p.a.i.w.Server [main] Add servlet mapping: url --> /service/*
+2022-05-09 15:06:14,700 INFO e.p.a.i.c.s.ConfigServer [main] start register session listener
+2022-05-09 15:06:14,700 INFO e.p.a.i.w.Server [main] Set session listeners 
+2022-05-09 15:06:27,147 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-1] Session created
+2022-05-09 15:06:27,148 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-1] Set session locales --> [en, ru]
+2022-05-09 15:06:27,148 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-1] Set session selected locale --> en
+2022-05-09 15:07:11,066 INFO e.p.a.l.c.ClientController [http-nio-8080-exec-3] Client has registered successfully
+2022-05-09 15:07:18,225 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-7] session destroyed
+2022-05-09 15:07:18,229 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-8] Session created
+2022-05-09 15:07:18,229 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-8] Set session locales --> [en, ru]
+2022-05-09 15:07:18,229 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-8] Set session selected locale --> en
+2022-05-09 15:08:09,937 INFO e.p.a.l.c.ClientController [http-nio-8080-exec-5] Client has deleted successfully
+2022-05-09 15:08:10,587 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-7] session destroyed
+2022-05-09 15:08:10,590 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-8] Session created
+2022-05-09 15:08:10,590 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-8] Set session locales --> [en, ru]
+2022-05-09 15:08:10,590 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-8] Set session selected locale --> en

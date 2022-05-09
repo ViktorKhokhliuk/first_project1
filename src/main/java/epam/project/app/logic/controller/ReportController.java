@@ -84,9 +84,10 @@ public class ReportController {
         User user = (User) request.getSession(false).getAttribute("user");
         int page = Integer.parseInt(request.getParameter("page"));
         Map<String, String> parameters = new HashMap<>();
-        Enumeration<String> parameterNames = request.getParameterNames();
-        while (parameterNames.hasMoreElements()) {
-            String parameterName = parameterNames.nextElement();
+        //Enumeration<String> parameterNames = request.getParameterNames();
+        Iterator<String> iterator = request.getParameterNames().asIterator();
+        while (iterator.hasNext()) {
+            String parameterName = iterator.next();
             String parameter = request.getParameter(parameterName);
             modelAndView.addAttribute(parameterName, parameter);
             if (!parameter.equals("") && !parameterName.equals("clientLogin") && !parameterName.equals("page")) {
@@ -110,9 +111,10 @@ public class ReportController {
         int page = Integer.parseInt(request.getParameter("page"));
         ModelAndView modelAndView = new ModelAndView();
         Map<String, String> parameters = new HashMap<>();
-        Enumeration<String> parameterNames = request.getParameterNames();
-        while (parameterNames.hasMoreElements()) {
-            String parameterName = parameterNames.nextElement();
+        //Enumeration<String> parameterNames = request.getParameterNames();
+        Iterator<String> iterator = request.getParameterNames().asIterator();
+        while (iterator.hasNext()) {
+            String parameterName = iterator.next();
             String parameter = request.getParameter(parameterName);
             modelAndView.addAttribute(parameterName, parameter);
             if (!parameter.equals("") && !parameterName.equals("page")) {

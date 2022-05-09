@@ -73,8 +73,8 @@ public class ReportService {
         Map.Entry<String, Validating> stringValidatingEntry = validators
                 .entrySet()
                 .stream()
-                .filter(entry -> entry.getKey()
-                .equals(fileExtension)).findFirst()
+                .filter(entry -> entry.getKey().equals(fileExtension))
+                .findFirst()
                 .orElseThrow(() -> new ReportException("Please choose allowed file type: XML or JSON"));
 
         part.write(path);
@@ -92,27 +92,31 @@ public class ReportService {
     }
 
     public double getCountOfPageForAllClientReports(Long clientId) {
-        double countOfPage = reportRepository.getCountOfPageForAllClientReports(clientId);
-        return Math.ceil(countOfPage / 5);
+        double countOfField = reportRepository.getCountOfFieldForAllClientReports(clientId);
+        return getCountOfPage(countOfField);
     }
 
     public double getCountOfPageForFilterClientReports(Map<String, String> parameters) {
-        double countOfPage = reportRepository.getCountOfPageForFilterClientReports(parameters);
-        return Math.ceil(countOfPage / 5);
+        double countOfField = reportRepository.getCountOfFieldForFilterClientReports(parameters);
+        return getCountOfPage(countOfField);
     }
 
     public double getCountOfPageForAllReports() {
-        double countOfPage = reportRepository.getCountOfPageForAllReports();
-        return Math.ceil(countOfPage / 5);
+        double countOfField = reportRepository.getCountOfFieldForAllReports();
+        return getCountOfPage(countOfField);
     }
 
     public double getCountOfPageForFilterReports(Map<String, String> parameters) {
-        double countOfPage = reportRepository.getCountOfPageForFilterReports(parameters);
-        return Math.ceil(countOfPage / 5);
+        double countOfField = reportRepository.getCountOfFieldForFilterReports(parameters);
+        return getCountOfPage(countOfField);
     }
 
     private String getFileExtension(String path) {
         int index = path.lastIndexOf(".");
         return path.substring(index);
+    }
+
+    private double getCountOfPage(double countOfField) {
+        return Math.ceil(countOfField / 5);
     }
 }

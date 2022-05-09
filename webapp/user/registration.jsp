@@ -69,7 +69,7 @@
       <label for="login" class="col-sm-2 col-form-label"><lan:print message="login"/></label>
       <div class="col-sm-7">
        <input type="text" class="form-control" name="login"
-        required pattern = "[a-z_]{3,20}"
+        required pattern = "[a-z]{3,20}"
         placeholder = "<lan:print message="enter_login"/>"
         title="<lan:print message="login_pattern"/>">
       </div>

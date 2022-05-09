@@ -241,7 +241,7 @@ public class ReportRepository {
     }
 
     @SneakyThrows
-    public double getCountOfPageForAllReports() {
+    public double getCountOfFieldForAllReports() {
         try (Connection connection = dataSource.getConnection();
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(SELECT_COUNT_ALL_REPORTS)) {
@@ -252,7 +252,7 @@ public class ReportRepository {
     }
 
     @SneakyThrows
-    public double getCountOfPageForFilterReports(Map<String, String> parameters) {
+    public double getCountOfFieldForFilterReports(Map<String, String> parameters) {
         String sql = "select count(*) " + getSqlQueryAllReportsByParameter(parameters) + ";";
         try (Connection connection = dataSource.getConnection();
              Statement statement = connection.createStatement();
@@ -264,7 +264,7 @@ public class ReportRepository {
     }
 
     @SneakyThrows
-    public double getCountOfPageForAllClientReports(Long clientId) {
+    public double getCountOfFieldForAllClientReports(Long clientId) {
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(SELECT_COUNT_REPORTS_BY_CLIENT)) {
             preparedStatement.setLong(1, clientId);
@@ -277,7 +277,7 @@ public class ReportRepository {
     }
 
     @SneakyThrows
-    public double getCountOfPageForFilterClientReports(Map<String, String> parameters) {
+    public double getCountOfFieldForFilterClientReports(Map<String, String> parameters) {
         String sql = "select count(*) " + getSqlQueryClientReportsByParameter(parameters) + ";";
         try (Connection connection = dataSource.getConnection();
              Statement statement = connection.createStatement();

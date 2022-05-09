@@ -396,7 +396,7 @@ public class ReportRepositoryTest {
         when(resultSet.next()).thenReturn(true);
         when(resultSet.getDouble(1)).thenReturn(expected);
 
-        double result = reportRepository.getCountOfPageForAllReports();
+        double result = reportRepository.getCountOfFieldForAllReports();
         assertEquals(expected, result, 0.0);
 
         verify(connection).close();
@@ -415,7 +415,7 @@ public class ReportRepositoryTest {
         when(resultSet.next()).thenReturn(true);
         when(resultSet.getDouble(1)).thenReturn(expected);
 
-        double result = reportRepository.getCountOfPageForFilterReports(parameters);
+        double result = reportRepository.getCountOfFieldForFilterReports(parameters);
         assertEquals(expected, result, 0.0);
 
         verify(connection).close();
@@ -429,7 +429,7 @@ public class ReportRepositoryTest {
         when(resultSet.next()).thenReturn(true);
         when(resultSet.getDouble(1)).thenReturn(expected);
 
-        double result = reportRepository.getCountOfPageForAllClientReports(CLIENT_ID1);
+        double result = reportRepository.getCountOfFieldForAllClientReports(CLIENT_ID1);
         assertEquals(expected, result, 0.0);
 
         verify(connection).prepareStatement(SELECT_COUNT_REPORTS_BY_CLIENT);
@@ -448,7 +448,7 @@ public class ReportRepositoryTest {
         when(resultSet.next()).thenReturn(true);
         when(resultSet.getDouble(1)).thenReturn(expected);
 
-        double result = reportRepository.getCountOfPageForFilterClientReports(parameters);
+        double result = reportRepository.getCountOfFieldForFilterClientReports(parameters);
         assertEquals(expected, result, 0.0);
 
         verify(connection).close();
