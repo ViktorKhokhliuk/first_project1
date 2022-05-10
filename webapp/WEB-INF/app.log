@@ -9684,3 +9684,31 @@ java.io.FileNotFoundException:  (Системе не удается найти �
 2022-05-09 15:08:10,590 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-8] Session created
 2022-05-09 15:08:10,590 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-8] Set session locales --> [en, ru]
 2022-05-09 15:08:10,590 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-8] Set session selected locale --> en
+2022-05-09 17:17:43,908 INFO e.p.a.i.c.a.ConfigApp [main] start config
+2022-05-09 17:17:43,924 INFO e.p.a.i.c.d.ConfigDataSource [main] Start config DataSource
+2022-05-09 17:17:43,942 INFO e.p.a.i.c.d.ConfigDataSource [main] Set userName - root
+2022-05-09 17:17:43,942 INFO e.p.a.i.c.d.ConfigDataSource [main] Set userPassword - root
+2022-05-09 17:17:44,671 INFO e.p.a.i.c.a.ConfigApp [main] set connection to db
+2022-05-09 17:17:46,045 INFO e.p.a.i.c.a.ConfigApp [main] update database
+2022-05-09 17:17:46,210 INFO e.p.a.i.c.a.ConfigPlaceholders [main] start configure placeholders
+2022-05-09 17:17:46,226 INFO e.p.a.i.c.a.ConfigServlet [main] start configure servlet
+2022-05-09 17:17:46,245 INFO e.p.a.i.c.s.ConfigServer [main] start creating server
+2022-05-09 17:17:46,336 INFO e.p.a.i.c.s.ConfigServer [main] Start configure encoding filter and security
+2022-05-09 17:17:46,346 INFO e.p.a.i.w.Server [main] Add filter --> SecurityFilter
+2022-05-09 17:17:46,346 INFO e.p.a.i.c.s.ConfigServer [main] Start configure encoding filter and security
+2022-05-09 17:17:46,346 INFO e.p.a.i.w.Server [main] Add filter --> EncodingFilter
+2022-05-09 17:17:46,346 INFO e.p.a.i.c.s.ConfigServer [main] start register servlet
+2022-05-09 17:17:46,352 INFO e.p.a.i.w.Server [main] Add servlet: servlet name --> baseServlet
+2022-05-09 17:17:46,352 INFO e.p.a.i.w.Server [main] Add servlet mapping: url --> /service/*
+2022-05-09 17:17:46,352 INFO e.p.a.i.c.s.ConfigServer [main] start register session listener
+2022-05-09 17:17:46,352 INFO e.p.a.i.w.Server [main] Set session listeners 
+2022-05-09 17:18:13,438 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-1] Session created
+2022-05-09 17:18:13,438 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-1] Set session locales --> [en, ru]
+2022-05-09 17:18:13,438 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-1] Set session selected locale --> en
+2022-05-09 17:18:24,064 INFO e.p.a.l.c.UserController [http-nio-8080-exec-4] Set session selected locale --> ru
+2022-05-09 17:19:46,766 ERROR e.p.a.i.w.BaseServlet [http-nio-8080-exec-7] Unknown column 'client.w' in 'where clause'
+2022-05-09 17:19:53,048 INFO e.p.a.l.c.UserController [http-nio-8080-exec-10] Set session selected locale --> en
+2022-05-09 17:19:54,041 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-2] session destroyed
+2022-05-09 17:19:54,048 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-3] Session created
+2022-05-09 17:19:54,048 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-3] Set session locales --> [en, ru]
+2022-05-09 17:19:54,056 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-3] Set session selected locale --> en
