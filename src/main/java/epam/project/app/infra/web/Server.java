@@ -41,9 +41,10 @@ public class Server {
 
     @SneakyThrows
     public void start() {
-        tomcat.getServer();
+        //tomcat.getServer();
         tomcat.getConnector();
-        tomcat.getServer().start();
+        //tomcat.getServer().start();
+        tomcat.start();
         tomcat.getServer().await();
     }
 

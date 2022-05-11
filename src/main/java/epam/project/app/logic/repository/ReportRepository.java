@@ -26,7 +26,6 @@ public class ReportRepository {
     private static final String SELECT_ALL_REPORTS = "select * from report join client on report.clientId=client.id join user on client.id=user.id limit ?, 5;";
     private static final String SELECT_COUNT_ALL_REPORTS = "select count(*) from report join client on report.clientId=client.id join user on client.id=user.id;";
     private static final String SELECT_COUNT_REPORTS_BY_CLIENT = "select count(*) from report where clientId = ?;";
-    private static final String DATE = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 
     @SneakyThrows
     public List<Report> getClientReportsByFilterParameters(Map<String, String> parameters, int index) {
@@ -56,6 +55,7 @@ public class ReportRepository {
 
     @SneakyThrows
     public Optional<Report> insertReport(ReportCreateDto dto) {
+        String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(INSERT_REPORT, Statement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setString(1, dto.getTitle());
@@ -63,13 +63,13 @@ public class ReportRepository {
             preparedStatement.setLong(3, dto.getClientId());
             preparedStatement.setString(4, ReportStatus.SUBMITTED.getTitle());
             preparedStatement.setString(5, ReportInfo.PROCESS.getTitle());
-            preparedStatement.setString(6, DATE);
+            preparedStatement.setString(6, date);
             preparedStatement.setString(7, dto.getType());
             preparedStatement.execute();
             try (ResultSet resultSet = preparedStatement.getGeneratedKeys()) {
                 if (resultSet.next()) {
                     long id = resultSet.getLong(1);
-                    return Optional.of(new Report(id, dto.getTitle(), dto.getPath(), ReportStatus.SUBMITTED.getTitle(), ReportInfo.PROCESS.getTitle(), DATE, dto.getType(), dto.getClientId()));
+                    return Optional.of(new Report(id, dto.getTitle(), dto.getPath(), ReportStatus.SUBMITTED.getTitle(), ReportInfo.PROCESS.getTitle(), date, dto.getType(), dto.getClientId()));
                 }
             }
         }

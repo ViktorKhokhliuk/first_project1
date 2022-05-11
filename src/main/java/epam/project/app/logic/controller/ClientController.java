@@ -43,9 +43,10 @@ public class ClientController {
     public ModelAndView searchClientsByParameters(HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
         Map<String, String> parameters = new HashMap<>();
-        Enumeration<String> parameterNames = request.getParameterNames();
-        while (parameterNames.hasMoreElements()) {
-            String parameterName = parameterNames.nextElement();
+        //Enumeration<String> parameterNames = request.getParameterNames();
+        Iterator<String> iterator = request.getParameterNames().asIterator();
+        while (iterator.hasNext()) {
+            String parameterName = iterator.next();
             String parameter = request.getParameter(parameterName);
             modelAndView.addAttribute(parameterName, parameter);
             if (!parameter.equals("") && !parameterName.equals("page")) {

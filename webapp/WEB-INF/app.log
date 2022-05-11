@@ -9712,3 +9712,201 @@ java.io.FileNotFoundException:  (Системе не удается найти �
 2022-05-09 17:19:54,048 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-3] Session created
 2022-05-09 17:19:54,048 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-3] Set session locales --> [en, ru]
 2022-05-09 17:19:54,056 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-3] Set session selected locale --> en
+2022-05-10 21:34:33,194 INFO e.p.a.i.c.a.ConfigApp [main] start config
+2022-05-10 21:34:33,210 INFO e.p.a.i.c.d.ConfigDataSource [main] Start config DataSource
+2022-05-10 21:34:33,216 INFO e.p.a.i.c.d.ConfigDataSource [main] Set userName - root
+2022-05-10 21:34:33,216 INFO e.p.a.i.c.d.ConfigDataSource [main] Set userPassword - root
+2022-05-10 21:34:33,618 INFO e.p.a.i.c.a.ConfigApp [main] set connection to db
+2022-05-10 21:34:34,339 INFO e.p.a.i.c.a.ConfigApp [main] update database
+2022-05-10 21:34:34,443 INFO e.p.a.i.c.a.ConfigPlaceholders [main] start configure placeholders
+2022-05-10 21:34:34,562 INFO e.p.a.i.c.a.ConfigServlet [main] start configure servlet
+2022-05-10 21:34:34,595 INFO e.p.a.i.c.s.ConfigServer [main] start creating server
+2022-05-10 21:34:34,655 INFO e.p.a.i.c.s.ConfigServer [main] Start configure encoding filter and security
+2022-05-10 21:34:34,657 INFO e.p.a.i.w.Server [main] Add filter --> SecurityFilter
+2022-05-10 21:34:34,657 INFO e.p.a.i.c.s.ConfigServer [main] Start configure encoding filter and security
+2022-05-10 21:34:34,657 INFO e.p.a.i.w.Server [main] Add filter --> EncodingFilter
+2022-05-10 21:34:34,657 INFO e.p.a.i.c.s.ConfigServer [main] start register servlet
+2022-05-10 21:34:34,660 INFO e.p.a.i.w.Server [main] Add servlet: servlet name --> baseServlet
+2022-05-10 21:34:34,661 INFO e.p.a.i.w.Server [main] Add servlet mapping: url --> /service/*
+2022-05-10 21:34:34,661 INFO e.p.a.i.c.s.ConfigServer [main] start register session listener
+2022-05-10 21:34:34,666 INFO e.p.a.i.w.Server [main] Set session listeners 
+2022-05-10 21:34:40,832 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-1] Session created
+2022-05-10 21:34:40,833 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-1] Set session locales --> [en, ru]
+2022-05-10 21:34:40,833 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-1] Set session selected locale --> en
+2022-05-10 21:34:56,888 INFO e.p.a.l.c.ReportUploadController [http-nio-8080-exec-8] File valid.xml has uploaded successfully!
+2022-05-10 21:35:20,154 INFO e.p.a.l.c.UserController [http-nio-8080-exec-7] Set session selected locale --> ru
+2022-05-10 21:35:31,863 INFO e.p.a.l.c.UserController [http-nio-8080-exec-9] Set session selected locale --> en
+2022-05-10 21:35:39,969 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-1] session destroyed
+2022-05-10 21:35:39,974 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-2] Session created
+2022-05-10 21:35:39,974 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-2] Set session locales --> [en, ru]
+2022-05-10 21:35:39,974 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-2] Set session selected locale --> en
+2022-05-10 22:14:34,722 INFO e.p.a.i.c.a.ConfigApp [main] start config
+2022-05-10 22:14:34,722 INFO e.p.a.i.c.d.ConfigDataSource [main] Start config DataSource
+2022-05-10 22:14:34,722 INFO e.p.a.i.c.d.ConfigDataSource [main] Set userName - root
+2022-05-10 22:14:34,722 INFO e.p.a.i.c.d.ConfigDataSource [main] Set userPassword - root
+2022-05-10 22:14:35,043 INFO e.p.a.i.c.a.ConfigApp [main] set connection to db
+2022-05-10 22:14:35,653 INFO e.p.a.i.c.a.ConfigApp [main] update database
+2022-05-10 22:14:35,731 INFO e.p.a.i.c.a.ConfigPlaceholders [main] start configure placeholders
+2022-05-10 22:14:35,747 INFO e.p.a.i.c.a.ConfigServlet [main] start configure servlet
+2022-05-10 22:14:35,763 INFO e.p.a.i.c.s.ConfigServer [main] start creating server
+2022-05-10 22:14:35,810 INFO e.p.a.i.c.s.ConfigServer [main] Start configure encoding filter and security
+2022-05-10 22:14:35,810 INFO e.p.a.i.w.Server [main] Add filter --> SecurityFilter
+2022-05-10 22:14:35,810 INFO e.p.a.i.c.s.ConfigServer [main] Start configure encoding filter and security
+2022-05-10 22:14:35,810 INFO e.p.a.i.w.Server [main] Add filter --> EncodingFilter
+2022-05-10 22:14:35,810 INFO e.p.a.i.c.s.ConfigServer [main] start register servlet
+2022-05-10 22:14:35,810 INFO e.p.a.i.w.Server [main] Add servlet: servlet name --> baseServlet
+2022-05-10 22:14:35,810 INFO e.p.a.i.w.Server [main] Add servlet mapping: url --> /service/*
+2022-05-10 22:14:35,810 INFO e.p.a.i.c.s.ConfigServer [main] start register session listener
+2022-05-10 22:14:35,810 INFO e.p.a.i.w.Server [main] Set session listeners 
+2022-05-10 22:14:46,584 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-1] Session created
+2022-05-10 22:14:46,584 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-1] Set session locales --> [en, ru]
+2022-05-10 22:14:46,584 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-1] Set session selected locale --> en
+2022-05-10 22:14:55,266 INFO e.p.a.l.c.UserController [http-nio-8080-exec-4] Set session selected locale --> ru
+2022-05-10 22:14:56,948 INFO e.p.a.l.c.UserController [http-nio-8080-exec-6] Set session selected locale --> en
+2022-05-11 15:14:57,870 INFO e.p.a.i.c.a.ConfigApp [main] start config
+2022-05-11 15:14:57,901 INFO e.p.a.i.c.d.ConfigDataSource [main] Start config DataSource
+2022-05-11 15:14:57,917 INFO e.p.a.i.c.d.ConfigDataSource [main] Set userName - root
+2022-05-11 15:14:57,917 INFO e.p.a.i.c.d.ConfigDataSource [main] Set userPassword - root
+2022-05-11 15:14:58,764 INFO e.p.a.i.c.a.ConfigApp [main] set connection to db
+2022-05-11 15:15:00,248 INFO e.p.a.i.c.a.ConfigApp [main] update database
+2022-05-11 15:15:00,449 INFO e.p.a.i.c.a.ConfigPlaceholders [main] start configure placeholders
+2022-05-11 15:15:00,664 INFO e.p.a.i.c.a.ConfigServlet [main] start configure servlet
+2022-05-11 15:15:00,742 INFO e.p.a.i.c.s.ConfigServer [main] start creating server
+2022-05-11 15:15:00,853 INFO e.p.a.i.c.s.ConfigServer [main] Start configure encoding filter and security
+2022-05-11 15:15:00,853 INFO e.p.a.i.w.Server [main] Add filter --> SecurityFilter
+2022-05-11 15:15:00,853 INFO e.p.a.i.c.s.ConfigServer [main] Start configure encoding filter and security
+2022-05-11 15:15:00,853 INFO e.p.a.i.w.Server [main] Add filter --> EncodingFilter
+2022-05-11 15:15:00,853 INFO e.p.a.i.c.s.ConfigServer [main] start register servlet
+2022-05-11 15:15:00,868 INFO e.p.a.i.w.Server [main] Add servlet: servlet name --> baseServlet
+2022-05-11 15:15:00,868 INFO e.p.a.i.w.Server [main] Add servlet mapping: url --> /service/*
+2022-05-11 15:15:00,868 INFO e.p.a.i.c.s.ConfigServer [main] start register session listener
+2022-05-11 15:15:00,884 INFO e.p.a.i.w.Server [main] Set session listeners 
+2022-05-11 15:15:08,383 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-1] Session created
+2022-05-11 15:15:08,383 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-1] Set session locales --> [en, ru]
+2022-05-11 15:15:08,383 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-1] Set session selected locale --> en
+2022-05-11 15:15:49,387 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-8] session destroyed
+2022-05-11 15:15:49,403 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-9] Session created
+2022-05-11 15:15:49,403 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-9] Set session locales --> [en, ru]
+2022-05-11 15:15:49,403 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-9] Set session selected locale --> en
+2022-05-11 15:16:03,272 INFO e.p.a.l.c.ClientController [http-nio-8080-exec-1] Client has registered successfully
+2022-05-11 15:16:43,808 INFO e.p.a.l.c.ReportUploadController [http-nio-8080-exec-6] File valid.xml has uploaded successfully!
+2022-05-11 15:16:56,984 INFO e.p.a.l.c.ReportController [http-nio-8080-exec-9] File valid.xml has deleted successfully
+2022-05-11 15:17:25,098 INFO e.p.a.l.c.ReportUploadController [http-nio-8080-exec-4] File valid.json has uploaded successfully!
+2022-05-11 15:17:36,887 INFO e.p.a.l.c.ReportController [http-nio-8080-exec-7] File valid.json has deleted successfully
+2022-05-11 15:17:46,710 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-9] session destroyed
+2022-05-11 15:17:46,726 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-10] Session created
+2022-05-11 15:17:46,726 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-10] Set session locales --> [en, ru]
+2022-05-11 15:17:46,726 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-10] Set session selected locale --> en
+2022-05-11 15:17:58,082 INFO e.p.a.l.c.ClientController [http-nio-8080-exec-4] Client has deleted successfully
+2022-05-11 15:18:30,556 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-2] session destroyed
+2022-05-11 15:18:30,564 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-3] Session created
+2022-05-11 15:18:30,564 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-3] Set session locales --> [en, ru]
+2022-05-11 15:18:30,564 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-3] Set session selected locale --> en
+2022-05-11 15:32:09,474 INFO e.p.a.i.c.a.ConfigApp [main] start config
+2022-05-11 15:32:09,474 INFO e.p.a.i.c.d.ConfigDataSource [main] Start config DataSource
+2022-05-11 15:32:09,490 INFO e.p.a.i.c.d.ConfigDataSource [main] Set userName - root
+2022-05-11 15:32:09,490 INFO e.p.a.i.c.d.ConfigDataSource [main] Set userPassword - root
+2022-05-11 15:32:10,189 INFO e.p.a.i.c.a.ConfigApp [main] set connection to db
+2022-05-11 15:32:11,495 INFO e.p.a.i.c.a.ConfigApp [main] update database
+2022-05-11 15:32:11,656 INFO e.p.a.i.c.a.ConfigPlaceholders [main] start configure placeholders
+2022-05-11 15:32:11,672 INFO e.p.a.i.c.a.ConfigServlet [main] start configure servlet
+2022-05-11 15:32:11,688 INFO e.p.a.i.c.s.ConfigServer [main] start creating server
+2022-05-11 15:32:11,782 INFO e.p.a.i.c.s.ConfigServer [main] Start configure encoding filter and security
+2022-05-11 15:32:11,782 INFO e.p.a.i.w.Server [main] Add filter --> SecurityFilter
+2022-05-11 15:32:11,782 INFO e.p.a.i.c.s.ConfigServer [main] Start configure encoding filter and security
+2022-05-11 15:32:11,782 INFO e.p.a.i.w.Server [main] Add filter --> EncodingFilter
+2022-05-11 15:32:11,782 INFO e.p.a.i.c.s.ConfigServer [main] start register servlet
+2022-05-11 15:32:11,798 INFO e.p.a.i.w.Server [main] Add servlet: servlet name --> baseServlet
+2022-05-11 15:32:11,798 INFO e.p.a.i.w.Server [main] Add servlet mapping: url --> /service/*
+2022-05-11 15:32:11,798 INFO e.p.a.i.c.s.ConfigServer [main] start register session listener
+2022-05-11 15:32:11,798 INFO e.p.a.i.w.Server [main] Set session listeners 
+2022-05-11 15:32:15,107 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-1] Session created
+2022-05-11 15:32:15,107 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-1] Set session locales --> [en, ru]
+2022-05-11 15:32:15,107 INFO e.p.a.i.w.LocaleSessionListener [http-nio-8080-exec-1] Set session selected locale --> en
+2022-05-11 15:32:39,798 ERROR e.p.a.l.v.JsonValidator [http-nio-8080-exec-7] invalid json file
+com.fasterxml.jackson.core.io.JsonEOFException: Unexpected end-of-input in field name
+ at [Source: (File); line: 1, column: 109]
+	at com.fasterxml.jackson.core.base.ParserMinimalBase._reportInvalidEOF(ParserMinimalBase.java:682) ~[jackson-core-2.13.1.jar:2.13.1]
+	at com.fasterxml.jackson.core.json.UTF8StreamJsonParser.parseEscapedName(UTF8StreamJsonParser.java:2055) ~[jackson-core-2.13.1.jar:2.13.1]
+	at com.fasterxml.jackson.core.json.UTF8StreamJsonParser.slowParseName(UTF8StreamJsonParser.java:1962) ~[jackson-core-2.13.1.jar:2.13.1]
+	at com.fasterxml.jackson.core.json.UTF8StreamJsonParser._parseName(UTF8StreamJsonParser.java:1750) ~[jackson-core-2.13.1.jar:2.13.1]
+	at com.fasterxml.jackson.core.json.UTF8StreamJsonParser.nextFieldName(UTF8StreamJsonParser.java:1075) ~[jackson-core-2.13.1.jar:2.13.1]
+	at com.fasterxml.jackson.databind.deser.BeanDeserializer.vanillaDeserialize(BeanDeserializer.java:320) ~[jackson-databind-2.13.1.jar:2.13.1]
+	at com.fasterxml.jackson.databind.deser.BeanDeserializer.deserialize(BeanDeserializer.java:176) ~[jackson-databind-2.13.1.jar:2.13.1]
+	at com.fasterxml.jackson.databind.deser.DefaultDeserializationContext.readRootValue(DefaultDeserializationContext.java:322) ~[jackson-databind-2.13.1.jar:2.13.1]
+	at com.fasterxml.jackson.databind.ObjectMapper._readMapAndClose(ObjectMapper.java:4674) ~[jackson-databind-2.13.1.jar:2.13.1]
+	at com.fasterxml.jackson.databind.ObjectMapper.readValue(ObjectMapper.java:3494) ~[jackson-databind-2.13.1.jar:2.13.1]
+	at epam.project.app.logic.validator.JsonValidator.validate(JsonValidator.java:22) ~[classes/:?]
+	at epam.project.app.logic.service.ReportService.validateFile(ReportService.java:81) ~[classes/:?]
+	at epam.project.app.logic.controller.ReportUploadController.uploadFile(ReportUploadController.java:37) ~[classes/:?]
+	at epam.project.app.infra.web.DispatcherRequest.lambda$processingRequest$2(DispatcherRequest.java:19) ~[classes/:?]
+	at java.util.Optional.map(Optional.java:265) [?:?]
+	at epam.project.app.infra.web.DispatcherRequest.processingRequest(DispatcherRequest.java:19) [classes/:?]
+	at epam.project.app.infra.web.BaseServlet.service(BaseServlet.java:27) [classes/:?]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:777) [tomcat-embed-core-10.0.14.jar:5.0.0]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:223) [tomcat-embed-core-10.0.14.jar:10.0.14]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:158) [tomcat-embed-core-10.0.14.jar:10.0.14]
+	at epam.project.app.infra.web.encoding.EncodingFilter.doFilter(EncodingFilter.java:25) [classes/:?]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:185) [tomcat-embed-core-10.0.14.jar:10.0.14]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:158) [tomcat-embed-core-10.0.14.jar:10.0.14]
+	at epam.project.app.infra.web.SecurityFilter.doFilter(SecurityFilter.java:58) [classes/:?]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:185) [tomcat-embed-core-10.0.14.jar:10.0.14]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:158) [tomcat-embed-core-10.0.14.jar:10.0.14]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:197) [tomcat-embed-core-10.0.14.jar:10.0.14]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97) [tomcat-embed-core-10.0.14.jar:10.0.14]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:541) [tomcat-embed-core-10.0.14.jar:10.0.14]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:119) [tomcat-embed-core-10.0.14.jar:10.0.14]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92) [tomcat-embed-core-10.0.14.jar:10.0.14]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78) [tomcat-embed-core-10.0.14.jar:10.0.14]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:353) [tomcat-embed-core-10.0.14.jar:10.0.14]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:382) [tomcat-embed-core-10.0.14.jar:10.0.14]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65) [tomcat-embed-core-10.0.14.jar:10.0.14]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:872) [tomcat-embed-core-10.0.14.jar:10.0.14]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1705) [tomcat-embed-core-10.0.14.jar:10.0.14]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) [tomcat-embed-core-10.0.14.jar:10.0.14]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) [tomcat-embed-core-10.0.14.jar:10.0.14]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) [tomcat-embed-core-10.0.14.jar:10.0.14]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) [tomcat-embed-core-10.0.14.jar:10.0.14]
+	at java.lang.Thread.run(Thread.java:829) [?:?]
+2022-05-11 15:32:39,807 ERROR e.p.a.i.w.BaseServlet [http-nio-8080-exec-7] invalid file
+2022-05-11 15:33:01,809 INFO e.p.a.l.c.ReportUploadController [http-nio-8080-exec-8] File valid.xml has uploaded successfully!
+2022-05-11 15:35:12,398 ERROR e.p.a.l.p.JsonParser [http-nio-8080-exec-3] cannot parse json file
+java.io.FileNotFoundException: webapp\upload\id14\testVaildJson.json (Не удается найти указанный файл)
+	at java.io.FileInputStream.open0(Native Method) ~[?:?]
+	at java.io.FileInputStream.open(FileInputStream.java:219) ~[?:?]
+	at java.io.FileInputStream.<init>(FileInputStream.java:157) ~[?:?]
+	at com.fasterxml.jackson.core.JsonFactory.createParser(JsonFactory.java:1029) ~[jackson-core-2.13.1.jar:2.13.1]
+	at com.fasterxml.jackson.databind.ObjectMapper.readValue(ObjectMapper.java:3494) ~[jackson-databind-2.13.1.jar:2.13.1]
+	at epam.project.app.logic.parser.JsonParser.parse(JsonParser.java:21) ~[classes/:?]
+	at epam.project.app.logic.service.ReportService.getReportParameters(ReportService.java:86) ~[classes/:?]
+	at epam.project.app.logic.controller.ReportController.showReport(ReportController.java:141) ~[classes/:?]
+	at epam.project.app.infra.web.DispatcherRequest.lambda$processingRequest$2(DispatcherRequest.java:19) ~[classes/:?]
+	at java.util.Optional.map(Optional.java:265) [?:?]
+	at epam.project.app.infra.web.DispatcherRequest.processingRequest(DispatcherRequest.java:19) [classes/:?]
+	at epam.project.app.infra.web.BaseServlet.service(BaseServlet.java:27) [classes/:?]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:777) [tomcat-embed-core-10.0.14.jar:5.0.0]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:223) [tomcat-embed-core-10.0.14.jar:10.0.14]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:158) [tomcat-embed-core-10.0.14.jar:10.0.14]
+	at epam.project.app.infra.web.encoding.EncodingFilter.doFilter(EncodingFilter.java:25) [classes/:?]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:185) [tomcat-embed-core-10.0.14.jar:10.0.14]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:158) [tomcat-embed-core-10.0.14.jar:10.0.14]
+	at epam.project.app.infra.web.SecurityFilter.doFilter(SecurityFilter.java:58) [classes/:?]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:185) [tomcat-embed-core-10.0.14.jar:10.0.14]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:158) [tomcat-embed-core-10.0.14.jar:10.0.14]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:197) [tomcat-embed-core-10.0.14.jar:10.0.14]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97) [tomcat-embed-core-10.0.14.jar:10.0.14]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:541) [tomcat-embed-core-10.0.14.jar:10.0.14]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:119) [tomcat-embed-core-10.0.14.jar:10.0.14]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92) [tomcat-embed-core-10.0.14.jar:10.0.14]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78) [tomcat-embed-core-10.0.14.jar:10.0.14]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:353) [tomcat-embed-core-10.0.14.jar:10.0.14]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:382) [tomcat-embed-core-10.0.14.jar:10.0.14]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65) [tomcat-embed-core-10.0.14.jar:10.0.14]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:872) [tomcat-embed-core-10.0.14.jar:10.0.14]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1705) [tomcat-embed-core-10.0.14.jar:10.0.14]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) [tomcat-embed-core-10.0.14.jar:10.0.14]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) [tomcat-embed-core-10.0.14.jar:10.0.14]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) [tomcat-embed-core-10.0.14.jar:10.0.14]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) [tomcat-embed-core-10.0.14.jar:10.0.14]
+	at java.lang.Thread.run(Thread.java:829) [?:?]
+2022-05-11 15:35:12,398 ERROR e.p.a.i.w.BaseServlet [http-nio-8080-exec-3] cannot show report
